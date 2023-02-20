@@ -3,7 +3,8 @@
 
 namespace ya
 {
-	class SceneManager
+	//class Scene;
+	class SceneManager 
 	{
 	public:
 		static void Initalize();

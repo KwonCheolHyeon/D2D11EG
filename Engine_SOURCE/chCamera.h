@@ -56,7 +56,7 @@ namespace ch
 		float mFar;
 		float mScale;
 
-		//std::bitset<(UINT)eLayerType::End> mLayerMasks;
+		std::bitset<(UINT)eLayerType::End> mLayerMasks;
 		std::vector<GameObject*> mOpaqueGameObjects;//불투명
 		std::vector<GameObject*> mCutoutGameObjects; //불투명과 투명 사이
 		std::vector<GameObject*> mTransparentGameObjects; //투명 (그림자, 반사 같은 효과)

@@ -243,22 +243,22 @@ namespace ch::graphics
 	{
 		switch (stage)
 		{
-		case ya::graphics::eShaderStage::VS:
+		case ch::graphics::eShaderStage::VS:
 			mContext->VSSetConstantBuffers((UINT)type, 1, &buffer);
 			break;
-		case ya::graphics::eShaderStage::HS:
+		case ch::graphics::eShaderStage::HS:
 			mContext->HSSetConstantBuffers((UINT)type, 1, &buffer);
 			break;
-		case ya::graphics::eShaderStage::DS:
+		case ch::graphics::eShaderStage::DS:
 			mContext->DSSetConstantBuffers((UINT)type, 1, &buffer);
 			break;
-		case ya::graphics::eShaderStage::GS:
+		case ch::graphics::eShaderStage::GS:
 			mContext->GSSetConstantBuffers((UINT)type, 1, &buffer);
 			break;
-		case ya::graphics::eShaderStage::PS:
+		case ch::graphics::eShaderStage::PS:
 			mContext->PSSetConstantBuffers((UINT)type, 1, &buffer);
 			break;
-		case ya::graphics::eShaderStage::CS:
+		case ch::graphics::eShaderStage::CS:
 			mContext->CSSetConstantBuffers((UINT)type, 1, &buffer);
 			break;
 		default:
@@ -271,22 +271,22 @@ namespace ch::graphics
 	{
 		switch (stage)
 		{
-		case ya::graphics::eShaderStage::VS:
+		case ch::graphics::eShaderStage::VS:
 			mContext->VSSetShaderResources(slot, 1, ppShaderResourceViews);
 			break;
-		case ya::graphics::eShaderStage::HS:
+		case ch::graphics::eShaderStage::HS:
 			mContext->HSSetShaderResources(slot, 1, ppShaderResourceViews);
 			break;
-		case ya::graphics::eShaderStage::DS:
+		case ch::graphics::eShaderStage::DS:
 			mContext->DSSetShaderResources(slot, 1, ppShaderResourceViews);
 			break;
-		case ya::graphics::eShaderStage::GS:
+		case ch::graphics::eShaderStage::GS:
 			mContext->GSSetShaderResources(slot, 1, ppShaderResourceViews);
 			break;
-		case ya::graphics::eShaderStage::PS:
+		case ch::graphics::eShaderStage::PS:
 			mContext->PSSetShaderResources(slot, 1, ppShaderResourceViews);
 			break;
-		case ya::graphics::eShaderStage::CS:
+		case ch::graphics::eShaderStage::CS:
 			mContext->CSSetShaderResources(slot, 1, ppShaderResourceViews);
 			break;
 		default:
@@ -298,22 +298,22 @@ namespace ch::graphics
 	{
 		switch (stage)
 		{
-		case ya::graphics::eShaderStage::VS:
+		case ch::graphics::eShaderStage::VS:
 			mContext->VSSetSamplers(slot, NumSamplers, ppSamplers);
 			break;
-		case ya::graphics::eShaderStage::HS:
+		case ch::graphics::eShaderStage::HS:
 			mContext->HSSetSamplers(slot, NumSamplers, ppSamplers);
 			break;
-		case ya::graphics::eShaderStage::DS:
+		case ch::graphics::eShaderStage::DS:
 			mContext->DSSetSamplers(slot, NumSamplers, ppSamplers);
 			break;
-		case ya::graphics::eShaderStage::GS:
+		case ch::graphics::eShaderStage::GS:
 			mContext->GSSetSamplers(slot, NumSamplers, ppSamplers);
 			break;
-		case ya::graphics::eShaderStage::PS:
+		case ch::graphics::eShaderStage::PS:
 			mContext->PSSetSamplers(slot, NumSamplers, ppSamplers);
 			break;
-		case ya::graphics::eShaderStage::CS:
+		case ch::graphics::eShaderStage::CS:
 			mContext->CSSetSamplers(slot, NumSamplers, ppSamplers);
 			break;
 		default:

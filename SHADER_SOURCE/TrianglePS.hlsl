@@ -1,5 +1,4 @@
 #include "globals.hlsli"
-
 struct VSIn
 {
     float4 Pos : POSITION;
@@ -18,6 +17,8 @@ float4 main(VSOut In) : SV_Target
 {
     float4 color = (float) 0.0f;
     color = defaultTexture.Sample(anisotropicSampler, In.UV);
+    
+    //discard;
     
     return color;
 }

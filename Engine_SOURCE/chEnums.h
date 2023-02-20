@@ -11,6 +11,7 @@ namespace ch::enums
 		Monster,
 		Player,
 
+		UI,
 		End = 16,
 	};
 
