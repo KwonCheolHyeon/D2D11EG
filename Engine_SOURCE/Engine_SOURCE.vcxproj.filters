@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{a209e06a-0630-4d6e-b9dd-2b32c765b54d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{675b8e7e-1506-4592-b1c1-85e729cf0852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{127c915e-3e77-43ad-a263-ce9b8589fe38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{cb09cd99-ced5-4fd6-a2dd-c60365923bf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Level Interface">
+      <UniqueIdentifier>{3b75efb4-fc48-4646-b3bb-33f88906fffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{294ff0f7-171e-4996-9a34-4da5231f5d57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{01e35472-b550-44ff-8985-a37d836b33d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{dcb90891-0ebd-4d82-8653-27eba5832c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{d7c6ed95-4756-4990-9eb0-2bbb9e49c335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{b5c09be0-bc26-4903-b39f-4b026e069d0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Math">
+      <UniqueIdentifier>{38252c66-fedb-4997-a7c0-19d6f03b416b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Camera">
+      <UniqueIdentifier>{314ad4c1-5079-4691-9c19-fecd732fdc4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Renderer">
+      <UniqueIdentifier>{debf9f8c-2fd3-4881-a2f3-c67dba36a640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script">
+      <UniqueIdentifier>{c1564986-0591-4617-9866-089f0787abc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Transform">
+      <UniqueIdentifier>{dcf5e6c0-251d-484c-bc28-64eb5e411828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Manager">
+      <UniqueIdentifier>{75eda47e-7ecc-4cf7-b7ad-95ba0bcd61f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Material">
+      <UniqueIdentifier>{5eb6e8a3-5ce9-45e0-9167-809b025890db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{23b969e2-18be-4bc9-8713-316c8e46f737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{dd54afc4-8c12-43c0-a32a-3ce5a7e3d7cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{3c0afb29-6906-44ac-b076-f6addaaf0865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="기타">
+      <UniqueIdentifier>{2a78ee55-7b31-4abe-8000-4155008ad9cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Contents">
+      <UniqueIdentifier>{56c26b97-cd5a-4b2e-a3c1-22826c858fa2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="chMath.h">
+      <Filter>Common\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="chGraphicDevice_DX11.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonInclude.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="chApplication.h">
+      <Filter>High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>기타</Filter>
+    </ClInclude>
+    <ClInclude Include="chEngine.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="chEntity.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="chEnums.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="chCamera.h">
+      <Filter>Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="chMeshRenderer.h">
+      <Filter>Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="chSpriteRenderer.h">
+      <Filter>Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayerScript.h">
+      <Filter>Component\Script\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="chScript.h">
+      <Filter>Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="chCameraScript.h">
+      <Filter>Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="chTransform.h">
+      <Filter>Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="chComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="chGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="chGraphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="chInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="chTime.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="chLayer.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="chScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="chSceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="chConstantBuffer.h" />
+    <ClInclude Include="chRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="chResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="chResources.h">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="chMaterial.h">
+      <Filter>Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="chMesh.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="chShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="chTexture.h">
+      <Filter>Resource\Texture</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="chMath.cpp">
+      <Filter>Common\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="chGraphicDevice_DX11.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="chApplication.cpp">
+      <Filter>High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine_SOURCE.cpp">
+      <Filter>기타</Filter>
+    </ClCompile>
+    <ClCompile Include="chEntity.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="chCamera.cpp">
+      <Filter>Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="chMeshRenderer.cpp">
+      <Filter>Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="chSpriteRenderer.cpp">
+      <Filter>Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayerScript.cpp">
+      <Filter>Component\Script\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="chScript.cpp">
+      <Filter>Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="chCameraScript.cpp">
+      <Filter>Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="chTransform.cpp">
+      <Filter>Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="chComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="chGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="chInput.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="chTime.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="chLayer.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="chScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="chSceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="chConstantBuffer.cpp" />
+    <ClCompile Include="chRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="chResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="chResources.cpp">
+      <Filter>Resource\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="chMaterial.cpp">
+      <Filter>Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="chMesh.cpp">
+      <Filter>Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="chShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="chTexture.cpp">
+      <Filter>Resource\Texture</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="chMath.inl">
+      <Filter>Common\Math</Filter>
+    </None>
+  </ItemGroup>
+</Project>

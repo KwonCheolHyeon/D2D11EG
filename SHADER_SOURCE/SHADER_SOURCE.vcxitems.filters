@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="PS">
+      <UniqueIdentifier>{194cd44d-8136-4bb3-967f-646196d0c7c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VS">
+      <UniqueIdentifier>{8640e9da-0272-4cb9-bace-97630b16facb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="$(MSBuildThisFileDirectory)UserInterfacePS.hlsl">
+      <Filter>PS</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)UserInterfaceVS.hlsl">
+      <Filter>VS</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
