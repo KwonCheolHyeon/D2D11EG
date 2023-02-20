@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="chApplication.h" />
+    <ClInclude Include="chBaseRenderer.h" />
     <ClInclude Include="chCamera.h" />
     <ClInclude Include="chCameraScript.h" />
     <ClInclude Include="chComponent.h" />
@@ -185,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chApplication.cpp" />
+    <ClCompile Include="chBaseRenderer.cpp" />
     <ClCompile Include="chCamera.cpp" />
     <ClCompile Include="chCameraScript.cpp" />
     <ClCompile Include="chComponent.cpp" />

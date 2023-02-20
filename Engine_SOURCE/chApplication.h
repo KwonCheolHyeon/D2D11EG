@@ -2,7 +2,8 @@
 #include "chEngine.h"
 #include "chGraphics.h"
 #include "chGraphicDevice_DX11.h"
-namespace ch 
+
+namespace ch
 {
 	class Application
 	{
@@ -15,6 +16,7 @@ namespace ch
 		virtual void FixedUpdate();
 		virtual void Render();
 
+		// Running main engine loop
 		void Run();
 		void Release();
 
@@ -33,6 +35,4 @@ namespace ch
 		UINT mHeight;
 		UINT mWidth;
 	};
-
 }
-

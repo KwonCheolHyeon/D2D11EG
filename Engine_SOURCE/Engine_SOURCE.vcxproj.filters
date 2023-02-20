@@ -164,6 +164,7 @@
     <ClInclude Include="chTexture.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="chBaseRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -245,6 +246,7 @@
     <ClCompile Include="chTexture.cpp">
       <Filter>Resource\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="chBaseRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">
