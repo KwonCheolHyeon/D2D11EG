@@ -1,7 +1,7 @@
 #pragma once
 #include "chScene.h"
 
-namespace ya
+namespace ch
 {
 	//class Scene;
 	class SceneManager 

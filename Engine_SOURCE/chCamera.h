@@ -1,15 +1,13 @@
 #pragma once
-
 #include "chComponent.h"
-
-namespace ch 
+#include <bitset>
+namespace ch
 {
 	using namespace math;
-
-	class Camera :public Component
+	class Camera : public Component
 	{
-	public :
-		enum  eProjectionType
+	public:
+		enum eProjectionType
 		{
 			Perspective,//원근
 			Orthographic,//직교 투영
@@ -26,8 +24,8 @@ namespace ch
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
 
-		void CreateViewMatirx();
-		void CreatePrjectionMatrix();
+		void CreateViewMatrix();
+		void CreateProjectionMatrix();
 		void RegisterCameraInRenderer();
 
 		void TurnLayerMask(eLayerType layer, bool enable = true);
@@ -42,6 +40,7 @@ namespace ch
 		void renderCutout();
 		void renderTransparent();
 		void pushGameObjectToRenderingModes(GameObject* gameObj);
+
 	private:
 		static Matrix View;
 		static Matrix Projection;
@@ -57,14 +56,8 @@ namespace ch
 		float mScale;
 
 		std::bitset<(UINT)eLayerType::End> mLayerMasks;
-		std::vector<GameObject*> mOpaqueGameObjects;//불투명
-		std::vector<GameObject*> mCutoutGameObjects; //불투명과 투명 사이
-		std::vector<GameObject*> mTransparentGameObjects; //투명 (그림자, 반사 같은 효과)
-
-
-
+		std::vector<GameObject*> mOpaqueGameObjects; //불투명
+		std::vector<GameObject*> mCutoutGameObjects;
+		std::vector<GameObject*> mTransparentGameObjects;
 	};
-
 }
-
-

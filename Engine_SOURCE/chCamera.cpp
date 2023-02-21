@@ -189,13 +189,13 @@ namespace ch
 
 		switch (mode)
 		{
-		case ya::graphics::eRenderingMode::Opaque:
+		case ch::graphics::eRenderingMode::Opaque:
 			mOpaqueGameObjects.push_back(gameObj);
 			break;
-		case ya::graphics::eRenderingMode::CutOut:
+		case ch::graphics::eRenderingMode::CutOut:
 			mCutoutGameObjects.push_back(gameObj);
 			break;
-		case ya::graphics::eRenderingMode::Transparent:
+		case ch::graphics::eRenderingMode::Transparent:
 			mTransparentGameObjects.push_back(gameObj);
 			break;
 		default:
