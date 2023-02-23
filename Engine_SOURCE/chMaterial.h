@@ -1,5 +1,5 @@
 #pragma once
-#include "chResource.h";
+#include "chResource.h"
 #include "chShader.h"
 #include "chTexture.h"
 #include "chRenderer.h"

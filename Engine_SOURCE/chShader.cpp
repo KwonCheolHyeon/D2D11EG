@@ -44,6 +44,8 @@ namespace ch
 				, mVSBlob.GetAddressOf()
 				, mErrorBlob.GetAddressOf());
 
+			
+
 			GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
 				, mVSBlob->GetBufferSize()
 				, nullptr
@@ -55,6 +57,8 @@ namespace ch
 				, funcName.c_str(), "ps_5_0", 0, 0
 				, mPSBlob.GetAddressOf()
 				, mErrorBlob.GetAddressOf());
+
+		
 
 			GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
 				, mPSBlob->GetBufferSize()

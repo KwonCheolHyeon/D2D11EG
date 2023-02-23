@@ -2,7 +2,7 @@
 #include "CommonInclude.h"
 #include "chMath.h"
 #include "chGraphicDevice_DX11.h"
-		  
+		 
 #include "chMesh.h"
 #include "chShader.h"
 #include "chConstantBuffer.h"
@@ -35,6 +35,13 @@ namespace ch::renderer
 		Vector3 xyz;
 		Vector4 xyzw;
 		Matrix matrix;
+	};
+
+	CBUFFER(GridCB, CBSLOT_GRID)
+	{
+		Vector4 cameraPosition;
+		Vector2 cameraScale;
+		Vector2 resolution;
 	};
 
 

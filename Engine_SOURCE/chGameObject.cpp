@@ -1,12 +1,13 @@
 #include "chGameObject.h"
-
-
+#include "chTransform.h"
+		  
 namespace ch
 {
 	GameObject::GameObject()
 		: mState(eState::Active)
 	{
 		mComponents.resize((UINT)eComponentType::End);
+		AddComponent(new Transform());
 	}
 
 	GameObject::~GameObject()

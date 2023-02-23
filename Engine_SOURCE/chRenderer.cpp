@@ -2,20 +2,6 @@
 #include "chResources.h"
 #include "chMaterial.h"
 
-// 애니메이션
-// Sprite Renderer
-
-// Rasterrizer state
-// Depth Stencil state
-// Blend State
-
-// 셰이더 효과 
-
-// 툴 ( imgui )
-
-// 한달 일찍 게임만들면 // 2 ~ 3달 
-
-
 namespace ch::renderer
 {
 	Vertex vertexes[4] = {};
@@ -72,6 +58,13 @@ namespace ch::renderer
 			, uiShader->GetVSBlobBufferPointer()
 			, uiShader->GetVSBlobBufferSize()
 			, uiShader->GetInputLayoutAddressOf());
+
+		std::shared_ptr<Shader> gridShader = Resources::Find<Shader>(L"GridShader");
+		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
+			, gridShader->GetVSBlobBufferPointer()
+			, gridShader->GetVSBlobBufferSize()
+			, gridShader->GetInputLayoutAddressOf());
+
 #pragma endregion
 #pragma region sampler state
 		D3D11_SAMPLER_DESC samplerDesc = {};
@@ -231,6 +224,9 @@ namespace ch::renderer
 
 		constantBuffers[(UINT)eCBType::Material] = new ConstantBuffer(eCBType::Material);
 		constantBuffers[(UINT)eCBType::Material]->Create(sizeof(MaterialCB));
+
+		constantBuffers[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
+		constantBuffers[(UINT)eCBType::Grid]->Create(sizeof(GridCB));
 	}
 
 	void LoadShader()
@@ -255,6 +251,16 @@ namespace ch::renderer
 		uiShader->Create(eShaderStage::PS, L"UserInterfacePS.hlsl", "main");
 
 		Resources::Insert<Shader>(L"UIShader", uiShader);
+
+		// Grid Shader
+		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
+		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
+		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
+		gridShader->SetRSState(eRSType::SolidNone);
+		gridShader->SetDSState(eDSType::NoWrite);
+		gridShader->SetBSState(eBSType::AlphaBlend);
+
+		Resources::Insert<Shader>(L"GridShader", gridShader);
 	}
 
 	void LoadTexture()
@@ -292,6 +298,12 @@ namespace ch::renderer
 		uiMaterial->SetShader(uiShader);
 		uiMaterial->SetTexture(uiTexture);
 		Resources::Insert<Material>(L"UIMaterial", uiMaterial);
+
+		// Grid
+		std::shared_ptr<Shader> gridShader = Resources::Find<Shader>(L"GridShader");
+		std::shared_ptr<Material> gridMaterial = std::make_shared<Material>();
+		gridMaterial->SetShader(gridShader);
+		Resources::Insert<Material>(L"GridMaterial", gridMaterial);
 	}
 
 	void Initialize()

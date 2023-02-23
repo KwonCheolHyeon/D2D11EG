@@ -11,15 +11,28 @@ struct VSOut
     float4 Pos : SV_Position;
     float2 UV : TEXCOORD;
     
-    float2 WorldPos : SV_Position;
+    float2 WorldPos : POSITION;
 };
 
 float4 main(VSOut In) : SV_TARGET
 {
     float4 Out = float4(1.0f, 1.0f, 1.0f, 1.0f);
     
+    const int width = 100;
+    const int height = 100;
     
+    uint worldX = (int) In.WorldPos.x;
+    uint worldY = (int) In.WorldPos.y;
     
+    // ¼± µÎ²²
+    const float thickness = 1.0f;
     
-    return Out;
+    if (abs((worldX + 1) % width) <= thickness)
+        return Out;
+    
+    if (abs((worldY + 1) % height) <= thickness)
+        return Out;
+    
+    discard;
+    return float4(1.0f, 0.0f, 1.0f, 1.0f);
 }

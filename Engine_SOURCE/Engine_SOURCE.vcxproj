@@ -162,12 +162,14 @@
     <ClInclude Include="chGameObject.h" />
     <ClInclude Include="chGraphicDevice_DX11.h" />
     <ClInclude Include="chGraphics.h" />
+    <ClInclude Include="chGridScript.h" />
     <ClInclude Include="chInput.h" />
     <ClInclude Include="chLayer.h" />
     <ClInclude Include="chMaterial.h" />
     <ClInclude Include="chMath.h" />
     <ClInclude Include="chMesh.h" />
     <ClInclude Include="chMeshRenderer.h" />
+    <ClInclude Include="chObject.h" />
     <ClInclude Include="chPlayerScript.h" />
     <ClInclude Include="chRenderer.h" />
     <ClInclude Include="chResource.h" />
@@ -193,6 +195,7 @@
     <ClCompile Include="chConstantBuffer.cpp" />
     <ClCompile Include="chEntity.cpp" />
     <ClCompile Include="chGraphicDevice_DX11.cpp" />
+    <ClCompile Include="chGridScript.cpp" />
     <ClCompile Include="chInput.cpp" />
     <ClCompile Include="chLayer.cpp" />
     <ClCompile Include="chMaterial.cpp" />

@@ -165,6 +165,10 @@
       <Filter>Resource\Texture</Filter>
     </ClInclude>
     <ClInclude Include="chBaseRenderer.h" />
+    <ClInclude Include="chGridScript.h" />
+    <ClInclude Include="chObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -247,6 +251,7 @@
       <Filter>Resource\Texture</Filter>
     </ClCompile>
     <ClCompile Include="chBaseRenderer.cpp" />
+    <ClCompile Include="chGridScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">

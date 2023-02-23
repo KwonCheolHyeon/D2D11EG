@@ -8,6 +8,7 @@ namespace ch::enums
 	{
 		None = 0,
 		Camera,
+		Grid,
 		Monster,
 		Player,
 
@@ -26,6 +27,8 @@ namespace ch::enums
 		MeshRenerer,
 		SpriteRenderer,
 		UI,
+		FadeOut,
+		FadeIn,
 		Script,
 		End,
 	};
