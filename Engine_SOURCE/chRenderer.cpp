@@ -65,6 +65,12 @@ namespace ch::renderer
 			, gridShader->GetVSBlobBufferSize()
 			, gridShader->GetInputLayoutAddressOf());
 
+		std::shared_ptr<Shader> fadeShader = Resources::Find<Shader>(L"FadeEffectShader");
+		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
+			, fadeShader->GetVSBlobBufferPointer()
+			, fadeShader->GetVSBlobBufferSize()
+			, fadeShader->GetInputLayoutAddressOf());
+
 #pragma endregion
 #pragma region sampler state
 		D3D11_SAMPLER_DESC samplerDesc = {};
@@ -227,6 +233,9 @@ namespace ch::renderer
 
 		constantBuffers[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
 		constantBuffers[(UINT)eCBType::Grid]->Create(sizeof(GridCB));
+
+		constantBuffers[(UINT)eCBType::FadeEffect] = new ConstantBuffer(eCBType::FadeEffect);
+		constantBuffers[(UINT)eCBType::FadeEffect]->Create(sizeof(FadeEffectCB));
 	}
 
 	void LoadShader()
@@ -261,6 +270,13 @@ namespace ch::renderer
 		gridShader->SetBSState(eBSType::AlphaBlend);
 
 		Resources::Insert<Shader>(L"GridShader", gridShader);
+
+		// FadeEffect
+		std::shared_ptr<Shader> FadeEffectShader = std::make_shared<Shader>();
+		FadeEffectShader->Create(eShaderStage::VS, L"FadeEffectVS.hlsl", "main");
+		FadeEffectShader->Create(eShaderStage::PS, L"FadeEffectPS.hlsl", "main");
+
+		Resources::Insert<Shader>(L"FadeEffectShader", FadeEffectShader);
 	}
 
 	void LoadTexture()
@@ -268,6 +284,8 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"SmileTexture", L"Smile.png");
 		Resources::Load<Texture>(L"DefaultSprite", L"Light.png");
 		Resources::Load<Texture>(L"HPBarTexture", L"HPBar.png");
+
+		Resources::Load<Texture>(L"FadeEffectTexture", L"black.jpg");
 	}
 
 	void LoadMaterial()
@@ -304,6 +322,15 @@ namespace ch::renderer
 		std::shared_ptr<Material> gridMaterial = std::make_shared<Material>();
 		gridMaterial->SetShader(gridShader);
 		Resources::Insert<Material>(L"GridMaterial", gridMaterial);
+
+		// Fade ¿Ã∆Â∆Æ
+		std::shared_ptr <Texture> fadeTexture = Resources::Find<Texture>(L"FadeEffectTexture");
+		std::shared_ptr<Shader> fadeShader = Resources::Find<Shader>(L"FadeEffectShader");
+		std::shared_ptr<Material> fadeMaterial = std::make_shared<Material>();
+		fadeMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		fadeMaterial->SetShader(fadeShader);
+		fadeMaterial->SetTexture(fadeTexture);
+		Resources::Insert<Material>(L"FadeEffectMaterial", fadeMaterial);
 	}
 
 	void Initialize()

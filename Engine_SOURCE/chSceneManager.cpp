@@ -10,6 +10,7 @@
 #include "chSpriteRenderer.h"
 #include "chGridScript.h"
 #include "chObject.h"
+#include "chFadeEffect.h"
 
 namespace ch
 {
@@ -33,6 +34,7 @@ namespace ch
 		cameraComp->RegisterCameraInRenderer();
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
 		cameraObj->AddComponent<CameraScript>();
+
 
 		// UI Camera
 		GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
@@ -96,9 +98,27 @@ namespace ch
 		hpsr->SetMesh(hpmesh);
 		hpsr->SetMaterial(hpspriteMaterial);
 
-		//hpBar->Pause();
 
+		//fadeEffect
+		GameObject* fadeObj = object::Instantiate<GameObject>(eLayerType::FadeEffect);
+		fadeObj->SetName(L"FadeObj");
+
+		Transform* fadetr = fadeObj->GetComponent<Transform>();
+		fadetr->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+		fadetr->SetScale(Vector3(300.0f, 300.0f, 10.0f));
+
+		SpriteRenderer* fadesr = fadeObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> FadeObjMesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> FadeObjMaterial = Resources::Find<Material>(L"FadeEffectMaterial");
+		fadesr->SetMaterial(FadeObjMaterial);
+		fadesr->SetMesh(FadeObjMesh);
+		fadeObj->AddComponent<FadeEffect>();
+
+		//hpBar->Pause();
 		mActiveScene->Initalize();
+
+
+
 	}
 
 	void SceneManager::Update()

@@ -44,6 +44,13 @@ namespace ch::renderer
 		Vector2 resolution;
 	};
 
+	CBUFFER(FadeEffectCB, CBSLOT_FADEEFFECT)
+	{
+		Vector4 cameraPosition;
+		Vector2 cameraScale;
+		float alphaAmount;
+	};
+
 
 	extern Vertex vertexes[4];
 	extern ConstantBuffer* constantBuffers[];
@@ -59,7 +66,7 @@ namespace ch::renderer
 	void Release();
 
 	//Renderer
-
+	
 
 }
 

@@ -44,6 +44,7 @@ namespace ch::graphics
         case ch::graphics::eGPUParam::Matrix:
             mCB.matrix = *static_cast<Matrix*>(data);
             break;
+       
         default:
             break;
         }

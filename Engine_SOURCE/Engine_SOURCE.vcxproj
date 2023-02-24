@@ -159,6 +159,7 @@
     <ClInclude Include="chConstantBuffer.h" />
     <ClInclude Include="chEntity.h" />
     <ClInclude Include="chEnums.h" />
+    <ClInclude Include="chFadeEffect.h" />
     <ClInclude Include="chGameObject.h" />
     <ClInclude Include="chGraphicDevice_DX11.h" />
     <ClInclude Include="chGraphics.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="chComponent.cpp" />
     <ClCompile Include="chConstantBuffer.cpp" />
     <ClCompile Include="chEntity.cpp" />
+    <ClCompile Include="chFadeEffect.cpp" />
     <ClCompile Include="chGraphicDevice_DX11.cpp" />
     <ClCompile Include="chGridScript.cpp" />
     <ClCompile Include="chInput.cpp" />

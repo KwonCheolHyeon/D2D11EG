@@ -12,12 +12,25 @@ struct VSOut
     float4 Pos : SV_Position;
     float4 Color : COLOR;
     float2 UV : TEXCOORD;
+    // float2 WorldPos : POSITION;
+    
 };
 
 float4 main(VSOut In) : SV_Target
 {
     float4 color = (float) 0.0f;
-    color = defaultTexture.Sample(anisotropicSampler, In.UV);
     
+    color = defaultTexture.Sample(anisotropicSampler, In.UV);
+    color.w *= cbfData;    
     return color;
+    
+    
+    /*
+    float4 color = (float) 0.0f;
+    
+    color = defaultTexture.Sample(anisotropicSampler, In.UV);
+    color.w *= alpha;    
+    return color;
+    
+    */
 }

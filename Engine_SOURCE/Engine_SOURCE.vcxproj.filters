@@ -71,6 +71,9 @@
     <Filter Include="Component\Script\Contents">
       <UniqueIdentifier>{56c26b97-cd5a-4b2e-a3c1-22826c858fa2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\FadeEffect">
+      <UniqueIdentifier>{2a42bdce-4208-4235-944f-612acaf2a66b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -169,6 +172,12 @@
     <ClInclude Include="chObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="chFadeEffect.h">
+      <Filter>Component\FadeEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="chFadeObject.h">
+      <Filter>Component\FadeEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -252,6 +261,12 @@
     </ClCompile>
     <ClCompile Include="chBaseRenderer.cpp" />
     <ClCompile Include="chGridScript.cpp" />
+    <ClCompile Include="chFadeEffect.cpp">
+      <Filter>Component\FadeEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="chFadeObject.cpp">
+      <Filter>Component\FadeEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">

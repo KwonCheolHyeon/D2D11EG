@@ -23,6 +23,13 @@ cbuffer Grid : register(b2)
     float2 resolution;
 }
 
+cbuffer FadeEffect : register(b3)//내가 만든 효과
+{
+    float4 cameraPos;
+    float2 cameraSca;
+    float alphaAmount;
+};
+
 SamplerState pointSampler : register(s0);
 SamplerState linearSampler : register(s1);
 SamplerState anisotropicSampler : register(s2);
