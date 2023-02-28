@@ -172,6 +172,7 @@
     <ClInclude Include="chMeshRenderer.h" />
     <ClInclude Include="chObject.h" />
     <ClInclude Include="chPlayerScript.h" />
+    <ClInclude Include="chPlayScene.h" />
     <ClInclude Include="chRenderer.h" />
     <ClInclude Include="chResource.h" />
     <ClInclude Include="chResources.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="chShader.h" />
     <ClInclude Include="chTexture.h" />
     <ClInclude Include="chTime.h" />
+    <ClInclude Include="chTitleScene.h" />
     <ClInclude Include="chTransform.h" />
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
@@ -205,6 +207,7 @@
     <ClCompile Include="chMesh.cpp" />
     <ClCompile Include="chMeshRenderer.cpp" />
     <ClCompile Include="chPlayerScript.cpp" />
+    <ClCompile Include="chPlayScene.cpp" />
     <ClCompile Include="chRenderer.cpp" />
     <ClCompile Include="chResource.cpp" />
     <ClCompile Include="chResources.cpp" />
@@ -214,6 +217,7 @@
     <ClCompile Include="chShader.cpp" />
     <ClCompile Include="chTexture.cpp" />
     <ClCompile Include="chTime.cpp" />
+    <ClCompile Include="chTitleScene.cpp" />
     <ClCompile Include="chTransform.cpp" />
     <ClCompile Include="chGameObject.cpp" />
     <ClCompile Include="Engine_SOURCE.cpp" />

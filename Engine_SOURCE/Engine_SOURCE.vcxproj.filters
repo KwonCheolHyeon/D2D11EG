@@ -74,6 +74,21 @@
     <Filter Include="Component\FadeEffect">
       <UniqueIdentifier>{2a42bdce-4208-4235-944f-612acaf2a66b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Script">
+      <UniqueIdentifier>{783d47f2-a162-4ae8-af5a-728c7217ddec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Base">
+      <UniqueIdentifier>{b4a37c82-18fe-481f-b829-41bae9478c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Layer">
+      <UniqueIdentifier>{4efbcf6d-830f-4700-b53f-e553c9b004e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Manager">
+      <UniqueIdentifier>{d4ddaf26-8496-46fb-a846-65a1abc6011e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\PlayGameScenes">
+      <UniqueIdentifier>{c32528c7-3450-4147-a1f3-8e47457e63b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -136,16 +151,6 @@
     <ClInclude Include="chTime.h">
       <Filter>Time</Filter>
     </ClInclude>
-    <ClInclude Include="chLayer.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="chScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="chSceneManager.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="chConstantBuffer.h" />
     <ClInclude Include="chRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -167,16 +172,35 @@
     <ClInclude Include="chTexture.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="chBaseRenderer.h" />
-    <ClInclude Include="chGridScript.h" />
     <ClInclude Include="chObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="chFadeEffect.h">
       <Filter>Component\FadeEffect</Filter>
     </ClInclude>
-    <ClInclude Include="chFadeObject.h">
-      <Filter>Component\FadeEffect</Filter>
+    <ClInclude Include="chLayer.h">
+      <Filter>Scene\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="chSceneManager.h">
+      <Filter>Scene\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="chScene.h">
+      <Filter>Scene\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayScene.h">
+      <Filter>Scene\PlayGameScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="chTitleScene.h">
+      <Filter>Scene\PlayGameScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="chConstantBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="chBaseRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="chGridScript.h">
+      <Filter>Resource\Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -228,16 +252,6 @@
     <ClCompile Include="chTime.cpp">
       <Filter>Time</Filter>
     </ClCompile>
-    <ClCompile Include="chLayer.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="chScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="chSceneManager.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="chConstantBuffer.cpp" />
     <ClCompile Include="chRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -259,13 +273,32 @@
     <ClCompile Include="chTexture.cpp">
       <Filter>Resource\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="chBaseRenderer.cpp" />
-    <ClCompile Include="chGridScript.cpp" />
     <ClCompile Include="chFadeEffect.cpp">
       <Filter>Component\FadeEffect</Filter>
     </ClCompile>
-    <ClCompile Include="chFadeObject.cpp">
-      <Filter>Component\FadeEffect</Filter>
+    <ClCompile Include="chLayer.cpp">
+      <Filter>Scene\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="chSceneManager.cpp">
+      <Filter>Scene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="chScene.cpp">
+      <Filter>Scene\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayScene.cpp">
+      <Filter>Scene\PlayGameScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="chTitleScene.cpp">
+      <Filter>Scene\PlayGameScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="chConstantBuffer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="chBaseRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="chGridScript.cpp">
+      <Filter>Resource\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

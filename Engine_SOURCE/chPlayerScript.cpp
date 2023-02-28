@@ -33,6 +33,7 @@ namespace ch
 			Vector3 rot = tr->GetRotation();
 			rot.z += 10.0f * Time::DeltaTime();
 			tr->SetRotation(rot);
+			
 		}
 
 		/*Transform* tr = GetOwner()->GetComponent<Transform>();

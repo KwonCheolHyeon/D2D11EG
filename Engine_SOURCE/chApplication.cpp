@@ -16,7 +16,7 @@ namespace ch
 
 	Application::~Application()
 	{
-		SceneManager::Release();
+		
 	}
 
 	void Application::Initalize()
@@ -56,6 +56,10 @@ namespace ch
 
 		//graphicDevice->Render();
 		graphicDevice->Present();
+	}
+
+	void Application::Destroy()
+	{
 	}
 
 	// Running main engine loop

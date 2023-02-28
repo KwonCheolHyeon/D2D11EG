@@ -6,7 +6,6 @@
 namespace ch
 {
 	FadeEffect::FadeEffect()
-		//mCamera(nullptr)
 	{
 	
 	}
@@ -20,7 +19,7 @@ namespace ch
 		FadeIn = 5.0f;
 		FadeOut = 5.0f;
 		alpha = 1.0f;
-		//mCamera = renderer::cameras[0];
+		
 	}
 	void FadeEffect::Update()
 	{

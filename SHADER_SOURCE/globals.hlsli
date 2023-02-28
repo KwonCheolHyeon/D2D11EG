@@ -16,14 +16,14 @@ cbuffer MaterialData : register(b1)
     matrix cbmat;
 }
 
-cbuffer Grid : register(b2)
+cbuffer Grid : register(b2) 
 {
     float4 cameraPosition;
     float2 cameraScale;
     float2 resolution;
 }
 
-cbuffer FadeEffect : register(b3)//내가 만든 효과
+cbuffer FadeEffect : register(b3)//16버퍼
 {
     float4 cameraPos;
     float2 cameraSca;

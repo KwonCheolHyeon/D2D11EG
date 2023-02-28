@@ -70,10 +70,17 @@ namespace ch
 		void Death() { mState = eState::Dead; }
 		eState GetState() { return mState; }
 
+		bool IsDontDestroy() { return mbDontDestroy; }
+		void DontDestroy(bool enable) { mbDontDestroy = enable; }
+		eLayerType GetLayerType() { return mType; }
+		void SetLayerType(eLayerType type) { mType = type; }
+
 	private:
 		eState mState;
+		eLayerType mType;
 		std::vector<Component*> mComponents;
 		std::vector<Component*> mScripts;
+		bool mbDontDestroy;
 	};
 }
 

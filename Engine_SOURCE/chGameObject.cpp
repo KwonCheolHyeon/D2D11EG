@@ -1,10 +1,12 @@
 #include "chGameObject.h"
 #include "chTransform.h"
-		  
+
 namespace ch
 {
 	GameObject::GameObject()
 		: mState(eState::Active)
+		, mType(eLayerType::None)
+		, mbDontDestroy(false)
 	{
 		mComponents.resize((UINT)eComponentType::End);
 		AddComponent(new Transform());
