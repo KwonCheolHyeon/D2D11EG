@@ -4,7 +4,8 @@
 #include "framework.h"
 #include "EngineTT.h"
 #include "chApplication.h"
-
+#include "chSceneManager.h"
+#include "chEditor.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\Lib\\Engine_SOURCE.lib") 
@@ -22,6 +23,8 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 
 
 ch::Application application;
+ch::Editor editor;
+
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -70,9 +73,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             application.Run();
+            editor.Run();
+            application.Present();
         }
     }
-
+    ch::SceneManager::Release();
     application.Release();
     return (int)msg.wParam;
 }
@@ -129,6 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     application.SetWindow(hWnd, 1600, 900);
     application.Initalize();
+    editor.Initalize();
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 

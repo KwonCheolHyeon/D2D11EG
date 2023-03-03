@@ -114,4 +114,16 @@ namespace ch::graphics
 		Vector4,
 		Matrix,
 	};
+
+	struct DebugMesh
+	{
+		enums::eColliderType type;
+		math::Vector3 position;
+		math::Vector3 rotatation;
+		math::Vector3 scale;
+		float radius;
+		float duration;
+		float time;
+	};
+
 }

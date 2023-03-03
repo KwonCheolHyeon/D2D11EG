@@ -11,12 +11,29 @@
     <Filter Include="main">
       <UniqueIdentifier>{de5e04fe-559e-4f75-8b24-266c5a3d937c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Editor">
+      <UniqueIdentifier>{4902d164-367a-47c1-b007-f40ace5a9558}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EngineTT.h" />
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="targetver.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTT.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="chEditor.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Editor_SOURCE\chDebugObject.h" />
+    <ClInclude Include="..\Editor_SOURCE\chEditorObject.h" />
+    <ClInclude Include="..\Editor_SOURCE\chWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EngineTT.rc">
@@ -35,5 +52,11 @@
     <ClCompile Include="main.cpp">
       <Filter>main</Filter>
     </ClCompile>
+    <ClCompile Include="chEditor.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Editor_SOURCE\chDebugObject.cpp" />
+    <ClCompile Include="..\Editor_SOURCE\chEditorObject.cpp" />
+    <ClCompile Include="..\Editor_SOURCE\chWidget.cpp" />
   </ItemGroup>
 </Project>

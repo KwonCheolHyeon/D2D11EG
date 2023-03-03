@@ -19,9 +19,9 @@ namespace ch
 
 	void SceneManager::Initalize()
 	{
-		mScenes.resize((UINT)eSceneType::End);
+		mScenes.resize((UINT)eSceneType::End);//endscene만큼 할당
 
-		mScenes[(UINT)eSceneType::Tilte] = new TitleScene();
+		mScenes[(UINT)eSceneType::Tilte] = new TitleScene(); //scene추가 부분
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Tilte];

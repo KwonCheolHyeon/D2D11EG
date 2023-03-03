@@ -5,7 +5,7 @@
 #include <vector>
 #include <list>
 #include <map>
-//#include <bitset>
+#include <bitset>
 #include <set>
 
 #include <cmath>

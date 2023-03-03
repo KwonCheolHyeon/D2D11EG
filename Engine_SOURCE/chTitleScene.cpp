@@ -10,9 +10,12 @@
 #include "chSpriteRenderer.h"
 #include "chGridScript.h"
 #include "chObject.h"
+#include "chInput.h"
+
 namespace ch
 {
 	TitleScene::TitleScene()
+		:Scene(eSceneType::Tilte)
 	{
 	}
 	TitleScene::~TitleScene()
@@ -105,6 +108,10 @@ namespace ch
 	}
 	void TitleScene::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::N)) 
+		{
+			SceneManager::LoadScene(eSceneType::Play);
+		}
 		Scene::Update();
 	}
 	void TitleScene::FixedUpdate()

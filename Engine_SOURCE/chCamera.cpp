@@ -7,6 +7,7 @@
 #include "chSceneManager.h"
 #include "chMaterial.h"
 #include "chBaseRenderer.h"
+#include "chSceneManager.h"
 
 extern ch::Application application;
 
@@ -109,7 +110,8 @@ namespace ch
 
 	void Camera::RegisterCameraInRenderer()
 	{
-		renderer::cameras.push_back(this);
+		eSceneType type = SceneManager::GetActiveScene()->GetSceneType();
+		renderer::cameras[(UINT)type].push_back(this);
 	}
 
 	void Camera::TurnLayerMask(eLayerType layer, bool enable)

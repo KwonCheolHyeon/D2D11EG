@@ -155,6 +155,10 @@
     <ClInclude Include="chBaseRenderer.h" />
     <ClInclude Include="chCamera.h" />
     <ClInclude Include="chCameraScript.h" />
+    <ClInclude Include="chColider.h" />
+    <ClInclude Include="chColisionManager.h" />
+    <ClInclude Include="chCollider2D.h" />
+    <ClInclude Include="chCollider3D.h" />
     <ClInclude Include="chComponent.h" />
     <ClInclude Include="chConstantBuffer.h" />
     <ClInclude Include="chEntity.h" />
@@ -173,6 +177,7 @@
     <ClInclude Include="chObject.h" />
     <ClInclude Include="chPlayerScript.h" />
     <ClInclude Include="chPlayScene.h" />
+    <ClInclude Include="chPrefab.h" />
     <ClInclude Include="chRenderer.h" />
     <ClInclude Include="chResource.h" />
     <ClInclude Include="chResources.h" />
@@ -194,6 +199,10 @@
     <ClCompile Include="chBaseRenderer.cpp" />
     <ClCompile Include="chCamera.cpp" />
     <ClCompile Include="chCameraScript.cpp" />
+    <ClCompile Include="chColider.cpp" />
+    <ClCompile Include="chColisionManager.cpp" />
+    <ClCompile Include="chCollider2D.cpp" />
+    <ClCompile Include="chCollider3D.cpp" />
     <ClCompile Include="chComponent.cpp" />
     <ClCompile Include="chConstantBuffer.cpp" />
     <ClCompile Include="chEntity.cpp" />
@@ -208,6 +217,7 @@
     <ClCompile Include="chMeshRenderer.cpp" />
     <ClCompile Include="chPlayerScript.cpp" />
     <ClCompile Include="chPlayScene.cpp" />
+    <ClCompile Include="chPrefab.cpp" />
     <ClCompile Include="chRenderer.cpp" />
     <ClCompile Include="chResource.cpp" />
     <ClCompile Include="chResources.cpp" />

@@ -1,6 +1,6 @@
 #pragma once
 #include "chComponent.h"
-#include <bitset>
+
 namespace ch
 {
 	using namespace math;

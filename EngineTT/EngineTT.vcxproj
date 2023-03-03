@@ -132,12 +132,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Editor_SOURCE\chDebugObject.h" />
+    <ClInclude Include="..\Editor_SOURCE\chEditorObject.h" />
+    <ClInclude Include="..\Editor_SOURCE\chWidget.h" />
+    <ClInclude Include="chEditor.h" />
     <ClInclude Include="EngineTT.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Editor_SOURCE\chDebugObject.cpp" />
+    <ClCompile Include="..\Editor_SOURCE\chEditorObject.cpp" />
+    <ClCompile Include="..\Editor_SOURCE\chWidget.cpp" />
+    <ClCompile Include="chEditor.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -89,6 +89,15 @@
     <Filter Include="Scene\PlayGameScenes">
       <UniqueIdentifier>{c32528c7-3450-4147-a1f3-8e47457e63b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Collider">
+      <UniqueIdentifier>{4b0d9d8e-0e2b-4209-96df-53068abfd706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Collider\Manager">
+      <UniqueIdentifier>{04f2556d-08bc-40f1-89a0-efbce3ecb31d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Prefab">
+      <UniqueIdentifier>{bc2873d9-4bd3-4f12-ac5b-c51154bf728d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -202,6 +211,21 @@
     <ClInclude Include="chGridScript.h">
       <Filter>Resource\Script</Filter>
     </ClInclude>
+    <ClInclude Include="chColisionManager.h">
+      <Filter>Component\Collider\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="chColider.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="chPrefab.h">
+      <Filter>Resource\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="chCollider2D.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="chCollider3D.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -299,6 +323,21 @@
     </ClCompile>
     <ClCompile Include="chGridScript.cpp">
       <Filter>Resource\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="chColisionManager.cpp">
+      <Filter>Component\Collider\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="chColider.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="chPrefab.cpp">
+      <Filter>Resource\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="chCollider2D.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="chCollider3D.cpp">
+      <Filter>Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -55,7 +55,7 @@ namespace ch
 		renderer::Render();
 
 		//graphicDevice->Render();
-		graphicDevice->Present();
+		//graphicDevice->Present();
 	}
 
 	void Application::Destroy()
@@ -68,7 +68,14 @@ namespace ch
 		Update();
 		FixedUpdate();
 		Render();
+		Destroy();
 	}
+
+	void Application::Present()
+	{
+		graphicDevice->Present();
+	}
+
 
 	void Application::Release()
 	{

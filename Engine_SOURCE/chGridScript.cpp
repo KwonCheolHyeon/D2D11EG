@@ -4,6 +4,7 @@
 #include "chApplication.h"
 #include "chConstantBuffer.h"
 #include "chRenderer.h"
+#include "chSceneManager.h"
 
 extern ch::Application application;
 
@@ -23,7 +24,8 @@ namespace ch
 
 	void GridScript::Initalize()
 	{
-		mCamera = renderer::cameras[0];
+		eSceneType type = SceneManager::GetActiveScene()->GetSceneType();
+		mCamera = renderer::cameras[(UINT)type][0];
 	}
 
 	void GridScript::Update()
