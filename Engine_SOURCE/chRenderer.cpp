@@ -12,25 +12,26 @@ namespace ch::renderer
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthstencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
+	Camera* mainCamera = nullptr;
 	std::vector<Camera*> cameras[(UINT)eSceneType::End];
 	std::vector<DebugMesh> debugMeshes;
 
 	void LoadMesh() 
 	{
 		//RECT
-		vertexes[0].pos = Vector4(-0.5f, 0.5f, 0.5f, 1.0f);
+		vertexes[0].pos = Vector4(-0.5f, 0.5f, 0.0f, 1.0f);
 		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
 		vertexes[0].uv = Vector2(0.f, 0.f);
 
-		vertexes[1].pos = Vector4(0.5f, 0.5f, 0.5f, 1.0f);
+		vertexes[1].pos = Vector4(0.5f, 0.5f, 0.0f, 1.0f);
 		vertexes[1].color = Vector4(1.f, 1.f, 1.f, 1.f);
 		vertexes[1].uv = Vector2(1.0f, 0.0f);
 
-		vertexes[2].pos = Vector4(0.5f, -0.5f, 0.5f, 1.0f);
+		vertexes[2].pos = Vector4(0.5f, -0.5f, 0.0f, 1.0f);
 		vertexes[2].color = Vector4(1.f, 0.f, 0.f, 1.f);
 		vertexes[2].uv = Vector2(1.0f, 1.0f);
 
-		vertexes[3].pos = Vector4(-0.5f, -0.5f, 0.5f, 1.0f);
+		vertexes[3].pos = Vector4(-0.5f, -0.5f, 0.0f, 1.0f);
 		vertexes[3].color = Vector4(0.f, 0.f, 1.f, 1.f);
 		vertexes[3].uv = Vector2(0.0f, 1.0f);
 
@@ -43,22 +44,46 @@ namespace ch::renderer
 		indexes.push_back(0);
 		indexes.push_back(1);
 		indexes.push_back(2);
-
 		indexes.push_back(0);
+
 		indexes.push_back(2);
 		indexes.push_back(3);
+		indexes.push_back(0);
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
+
+		// 
+		vertexes[0].pos = Vector4(-0.5f, 0.5f, -0.00001f, 1.0f);
+		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
+		vertexes[0].uv = Vector2(0.f, 0.f);
+
+		vertexes[1].pos = Vector4(0.5f, 0.5f, -0.00001, 1.0f);
+		vertexes[1].color = Vector4(1.f, 1.f, 1.f, 1.f);
+		vertexes[1].uv = Vector2(1.0f, 0.0f);
+
+		vertexes[2].pos = Vector4(0.5f, -0.5f, -0.00001, 1.0f);
+		vertexes[2].color = Vector4(1.f, 0.f, 0.f, 1.f);
+		vertexes[2].uv = Vector2(1.0f, 1.0f);
+
+		vertexes[3].pos = Vector4(-0.5f, -0.5f, -0.00001, 1.0f);
+		vertexes[3].color = Vector4(0.f, 0.f, 1.f, 1.f);
+		vertexes[3].uv = Vector2(0.0f, 1.0f);
+
+		// Crate Mesh
+		std::shared_ptr<Mesh> debugmesh = std::make_shared<Mesh>();
+		Resources::Insert<Mesh>(L"DebugRectMesh", debugmesh);
+		debugmesh->CreateVertexBuffer(vertexes, 4);
+		debugmesh->CreateIndexBuffer(indexes.data(), indexes.size());
 
 		// Circle Mesh
 		std::vector<Vertex> circleVtxes;
 		Vertex center = {};
-		center.pos = Vector4(0.0f, 0.0f, 0.0f, 1.0f);
+		center.pos = Vector4(0.0f, 0.0f, -0.00001f, 1.0f);
 		center.color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
 		center.uv = Vector2::Zero;
 
 		circleVtxes.push_back(center);
 
-		int iSlice = 40;
+		int iSlice = 80;
 		float fRadius = 0.5f;
 		float fTheta = XM_2PI / (float)iSlice;
 
@@ -70,7 +95,7 @@ namespace ch::renderer
 			(
 				fRadius * cosf(fTheta * (float)i)
 				, fRadius * sinf(fTheta * (float)i)
-				, 0.0f, 1.0f
+				, -0.00001f, 1.0f
 			);
 			vtx.color = center.color;
 

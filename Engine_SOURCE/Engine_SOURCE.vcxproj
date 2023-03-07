@@ -156,7 +156,7 @@
     <ClInclude Include="chCamera.h" />
     <ClInclude Include="chCameraScript.h" />
     <ClInclude Include="chColider.h" />
-    <ClInclude Include="chColisionManager.h" />
+    <ClInclude Include="chCollisionManager.h" />
     <ClInclude Include="chCollider2D.h" />
     <ClInclude Include="chCollider3D.h" />
     <ClInclude Include="chComponent.h" />
@@ -174,7 +174,9 @@
     <ClInclude Include="chMath.h" />
     <ClInclude Include="chMesh.h" />
     <ClInclude Include="chMeshRenderer.h" />
+    <ClInclude Include="chMonster.h" />
     <ClInclude Include="chObject.h" />
+    <ClInclude Include="chPlayer.h" />
     <ClInclude Include="chPlayerScript.h" />
     <ClInclude Include="chPlayScene.h" />
     <ClInclude Include="chPrefab.h" />
@@ -200,7 +202,7 @@
     <ClCompile Include="chCamera.cpp" />
     <ClCompile Include="chCameraScript.cpp" />
     <ClCompile Include="chColider.cpp" />
-    <ClCompile Include="chColisionManager.cpp" />
+    <ClCompile Include="chCollisionManager.cpp" />
     <ClCompile Include="chCollider2D.cpp" />
     <ClCompile Include="chCollider3D.cpp" />
     <ClCompile Include="chComponent.cpp" />
@@ -215,6 +217,8 @@
     <ClCompile Include="chMath.cpp" />
     <ClCompile Include="chMesh.cpp" />
     <ClCompile Include="chMeshRenderer.cpp" />
+    <ClCompile Include="chMonster.cpp" />
+    <ClCompile Include="chPlayer.cpp" />
     <ClCompile Include="chPlayerScript.cpp" />
     <ClCompile Include="chPlayScene.cpp" />
     <ClCompile Include="chPrefab.cpp" />

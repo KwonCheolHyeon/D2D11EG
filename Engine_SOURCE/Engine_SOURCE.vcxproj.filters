@@ -98,6 +98,12 @@
     <Filter Include="Resource\Prefab">
       <UniqueIdentifier>{bc2873d9-4bd3-4f12-ac5b-c51154bf728d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{932f4a06-4b00-443a-adf4-5cf865ab6b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster">
+      <UniqueIdentifier>{1c8c68b8-b180-4ef4-b668-27f8358888ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -211,7 +217,7 @@
     <ClInclude Include="chGridScript.h">
       <Filter>Resource\Script</Filter>
     </ClInclude>
-    <ClInclude Include="chColisionManager.h">
+    <ClInclude Include="chCollisionManager.h">
       <Filter>Component\Collider\Manager</Filter>
     </ClInclude>
     <ClInclude Include="chColider.h">
@@ -225,6 +231,12 @@
     </ClInclude>
     <ClInclude Include="chCollider3D.h">
       <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayer.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="chMonster.h">
+      <Filter>GameObject\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -324,7 +336,7 @@
     <ClCompile Include="chGridScript.cpp">
       <Filter>Resource\Script</Filter>
     </ClCompile>
-    <ClCompile Include="chColisionManager.cpp">
+    <ClCompile Include="chCollisionManager.cpp">
       <Filter>Component\Collider\Manager</Filter>
     </ClCompile>
     <ClCompile Include="chColider.cpp">
@@ -338,6 +350,12 @@
     </ClCompile>
     <ClCompile Include="chCollider3D.cpp">
       <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayer.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="chMonster.cpp">
+      <Filter>GameObject\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

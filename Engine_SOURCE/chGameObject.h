@@ -36,7 +36,7 @@ namespace ch
 			}
 			else
 			{
-				mScripts.push_back(comp);
+				mScripts.push_back(dynamic_cast<Script*>(comp));
 				comp->SetOwner(this);
 			}
 
@@ -58,6 +58,7 @@ namespace ch
 
 			return nullptr;
 		}
+		const std::vector<Script*>& GetScripts() { return mScripts; }
 
 		bool IsDead()
 		{
@@ -75,12 +76,15 @@ namespace ch
 		eLayerType GetLayerType() { return mType; }
 		void SetLayerType(eLayerType type) { mType = type; }
 
+	protected:
+		std::vector<Component*> mComponents;
+
 	private:
 		eState mState;
 		eLayerType mType;
-		std::vector<Component*> mComponents;
-		std::vector<Component*> mScripts;
+		std::vector<Script*> mScripts;
 		bool mbDontDestroy;
+		//Scene* mScene;
 	};
 }
 

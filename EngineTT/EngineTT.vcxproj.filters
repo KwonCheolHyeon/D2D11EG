@@ -31,9 +31,9 @@
     <ClInclude Include="chEditor.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="..\Editor_SOURCE\chDebugObject.h" />
-    <ClInclude Include="..\Editor_SOURCE\chEditorObject.h" />
-    <ClInclude Include="..\Editor_SOURCE\chWidget.h" />
+    <ClInclude Include="chDebugObject.h" />
+    <ClInclude Include="chEditorObject.h" />
+    <ClInclude Include="chWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EngineTT.rc">
@@ -55,8 +55,8 @@
     <ClCompile Include="chEditor.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\Editor_SOURCE\chDebugObject.cpp" />
-    <ClCompile Include="..\Editor_SOURCE\chEditorObject.cpp" />
-    <ClCompile Include="..\Editor_SOURCE\chWidget.cpp" />
+    <ClCompile Include="chDebugObject.cpp" />
+    <ClCompile Include="chEditorObject.cpp" />
+    <ClCompile Include="chWidget.cpp" />
   </ItemGroup>
 </Project>

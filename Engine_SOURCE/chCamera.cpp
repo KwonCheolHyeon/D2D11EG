@@ -34,7 +34,7 @@ namespace ch
 	void Camera::Initalize()
 	{
 
-		//RegisterCameraInRenderer();
+		RegisterCameraInRenderer();
 	}
 
 	void Camera::Update()

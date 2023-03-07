@@ -74,4 +74,10 @@ namespace ch
 
 		return gameObjects;
 	}
+
+	const std::vector<GameObject*>& Scene::GetGameObjects(const eLayerType type)
+	{
+		return mLayers[(UINT)type].GetGameObjects();
+	}
+
 }

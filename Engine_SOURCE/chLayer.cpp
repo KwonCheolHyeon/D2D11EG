@@ -1,5 +1,6 @@
 #include "chLayer.h"
-
+#include "chRenderer.h"
+#include "chTransform.h"
 
 namespace ch
 {
@@ -47,6 +48,8 @@ namespace ch
 		{
 			if (obj == nullptr)
 				continue;
+			if (obj->GetState() != GameObject::eState::Active)
+				continue;
 
 			obj->FixedUpdate();
 		}
@@ -74,7 +77,7 @@ namespace ch
 
 			if (deleteIter != deleteObjects.end())
 			{
-				mGameObjects.erase(iter);
+				iter = mGameObjects.erase(iter);
 			}
 			else
 			{
@@ -95,6 +98,8 @@ namespace ch
 		for (GameObject* obj : mGameObjects)
 		{
 			if (obj == nullptr)
+				continue;
+			if (obj->GetState() != GameObject::eState::Active)
 				continue;
 
 			obj->Render();
