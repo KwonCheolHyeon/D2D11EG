@@ -158,14 +158,14 @@ namespace ch
 
 			float leftRadius = left->GetSize().x / 2.0f;
 			float rightRadius = right->GetSize().x / 2.0f;
-			int a = 0;
+			
 
-			if (distance > leftRadius  + rightRadius )
+			if (distance <= leftRadius  + rightRadius )
 			{
-				return false;
+				return true;
 			}
 
-			return true;
+			return false;
 		}
 
 
