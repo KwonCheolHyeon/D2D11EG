@@ -14,6 +14,7 @@
 #include "chCollider2D.h"
 #include "chPlayer.h"
 #include "chMonster.h"
+#include "chCollisionManager.h"
 
 namespace ch
 {
@@ -67,27 +68,49 @@ namespace ch
 		//sr->SetMaterial(spriteMaterial);
 		//sr->SetMesh(mesh);
 
+		//SMILE RECT
+		{
+			Player* obj = object::Instantiate<Player>(eLayerType::Player);
+			obj->SetName(L"SMILE");
+			Transform* tr = obj->GetComponent<Transform>();
+			tr->SetPosition(Vector3(0.0f, 0.0f, 5.0f));
+			//tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2));
+			//tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+			Collider2D* collider = obj->AddComponent<Collider2D>();
+			collider->SetType(eColliderType::Circle);
+			
+			//collider->SetCenter(Vector2(0.2f, 0.2f));
+			//collider->SetSize(Vector2(1.5f, 1.5f));
 
-
+			SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
+			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"RectMaterial");
+			mr->SetMaterial(mateiral);
+			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			mr->SetMesh(mesh);
+			obj->AddComponent<PlayerScript>();
+			object::DontDestroyOnLoad(obj);
+		}
 
 		//SMILE RECT
-		GameObject* obj = object::Instantiate<GameObject>(eLayerType::Player);
-		obj->SetName(L"SMILE");
-		Transform* tr = obj->GetComponent<Transform>();
-		tr->SetPosition(Vector3(0.0f, 0.0f, 5.0f));
-		//tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2));
-		//tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
-		Collider2D* collider = obj->AddComponent<Collider2D>();
-		collider->SetType(eColliderType::Rect);
+		{
+			Player* obj = object::Instantiate<Player>(eLayerType::Monster);
+			obj->SetName(L"SMILE");
+			Transform* tr = obj->GetComponent<Transform>();
+			tr->SetPosition(Vector3(2.0f, 0.0f, 5.0f));
+			tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2 / 2.0f));
+			//tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+			Collider2D* collider = obj->AddComponent<Collider2D>();
+			collider->SetType(eColliderType::Circle);
+			//collider->SetCenter(Vector2(0.2f, 0.2f));
+			//collider->SetSize(Vector2(1.5f, 1.5f));
 
-		MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
-		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"RectMaterial");
-		mr->SetMaterial(mateiral);
-		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
-		mr->SetMesh(mesh);
-		obj->AddComponent<PlayerScript>();
-		object::DontDestroyOnLoad(obj);
-
+			SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
+			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"RectMaterial");
+			mr->SetMaterial(mateiral);
+			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			mr->SetMesh(mesh);
+			object::DontDestroyOnLoad(obj);
+		}
 
 		////SMILE RECT CHild
 		//GameObject* child = object::Instantiate<GameObject>(eLayerType::Player);
@@ -115,6 +138,8 @@ namespace ch
 		//std::shared_ptr<Material> hpspriteMaterial = Resources::Find<Material>(L"UIMaterial");
 		//hpsr->SetMesh(hpmesh);
 		//hpsr->SetMaterial(hpspriteMaterial);
+
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Monster, true);
 
 		Scene::Initalize();
 	}

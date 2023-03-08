@@ -147,9 +147,88 @@ namespace ch
 
 	bool CollisionManager::Intersect(Collider2D* left, Collider2D* right)
 	{
+		
+		if (left->GetType() == eColliderType::Circle || right->GetType() == eColliderType::Circle)
+		{
+			Vector3 leftPos = left->GetPosition();
+			Vector3 rightPos = right->GetPosition();
+
+			Vector3 distanceVec = leftPos - rightPos;
+			float distance = distanceVec.Magnitude();
+
+			float leftRadius = left->GetSize().x / 2.0f;
+			float rightRadius = right->GetSize().x / 2.0f;
+			int a = 0;
+
+			if (distance > leftRadius  + rightRadius )
+			{
+				return false;
+			}
+
+			return true;
+		}
 
 
+		static const Vector3 arrLocalPos[4] = 
+		{
+			Vector3{-0.5f, 0.5f, 0.0f},
+			Vector3{0.5f, 0.5f, 0.0f},
+			Vector3{0.5f, -0.5f, 0.0f},
+			Vector3{-0.5f, -0.5f, 0.0f}		
+		};
+		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
+		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
+
+		Matrix leftMat = leftTr->GetWolrdMatrix();
+		Matrix rightMat = rightTr->GetWolrdMatrix();
+
+		Vector3 Axis[4] = {};
+		Axis[0] = Vector3::Transform(arrLocalPos[1], leftMat);
+		Axis[1] = Vector3::Transform(arrLocalPos[3], leftMat);
+		Axis[2] = Vector3::Transform(arrLocalPos[1], rightMat);
+		Axis[3] = Vector3::Transform(arrLocalPos[3], rightMat);
+
+		Axis[0] -= Vector3::Transform(arrLocalPos[0], leftMat);
+		Axis[1] -= Vector3::Transform(arrLocalPos[0], leftMat);
+		Axis[2] -= Vector3::Transform(arrLocalPos[0], rightMat);
+		Axis[3] -= Vector3::Transform(arrLocalPos[0], rightMat);
+
+		for (size_t i = 0; i < 4; i++)
+		{
+			Axis[i].z = 0.0f;
+		}
+
+		Vector3 vc = left->GetPosition() - right->GetPosition();
+		vc.z = 0.0f;
+
+		Vector3 centerDir = vc;
+
+
+		for (size_t i = 0; i < 4; i++)
+		{
+			Vector3 vA = Axis[i];
+			vA.Normalize();
+
+			float projDist = 0.0f;
+			for (size_t j = 0; j < 4; j++)
+			{
+				projDist += fabsf(Axis[j].Dot(vA) / 2.0f);
+			}
+
+			if (projDist < fabsf(centerDir.Dot(vA)))//dot º¤ÅÍ ³»Àû °è»ê ÇÔ¼ö
+			{
+				return false;
+			}
+		}
+
+		// ¼÷Á¦ Circle vs Cirlce
 
 		return true;
+	}
+
+	float CollisionManager::Magnitude(Vector3 left) const
+	{
+		
+		return std::sqrt(left.x * left.x + left.y * left.y + left.z * left.z);
 	}
 }

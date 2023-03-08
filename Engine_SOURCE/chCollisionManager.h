@@ -29,6 +29,9 @@ namespace ch
 		static void ColliderCollision(Collider2D* left, Collider2D* right);
 		static bool Intersect(Collider2D* left, Collider2D* right);
 
+		float Magnitude(Vector3) const;
+		
+
 	private:
 		static std::bitset<(UINT)eLayerType::End> mLayerCollisionMatrix[(UINT)eLayerType::End];
 		static std::map<UINT64, bool> mCollisionMap;

@@ -32,6 +32,8 @@ namespace ch
 		Vector3 Right() { return mRight; }
 		Vector3 Up() { return mUp; }
 
+		Matrix& GetWolrdMatrix() { return mWorld; }
+
 	private:
 		Transform* mParent;
 		Vector3 mFoward;

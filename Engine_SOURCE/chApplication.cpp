@@ -4,6 +4,7 @@
 #include "chInput.h"
 #include "chSceneManager.h"
 #include "chResources.h"
+#include "chCollisionManager.h"
 
 namespace ch
 {
@@ -23,7 +24,7 @@ namespace ch
 	{
 		Time::Initialize();
 		Input::Initialize();
-
+		CollisionManager::Initialize();
 		renderer::Initialize();
 		SceneManager::Initalize();
 	}
@@ -34,13 +35,14 @@ namespace ch
 	{
 		Time::Update();
 		Input::Update();
-
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 
 	// GPU update
 	void Application::FixedUpdate()
 	{
+		CollisionManager::FixedUpdate();
 		SceneManager::FixedUpdate();
 	}
 

@@ -5,6 +5,7 @@
 
 namespace ch
 {
+	UINT Collider2D::ColliderNumber = 0;
 	Collider2D::Collider2D()
 		: Component(eComponentType::Collider)
 		, mType(eColliderType::None)
@@ -12,8 +13,9 @@ namespace ch
 		, mSize(Vector2::One)
 		, mCenter(Vector2::Zero)
 		, mbTrigger(false)
+		, mID(0)
 	{
-
+		mID = ColliderNumber++;
 	}
 
 	Collider2D::~Collider2D()
@@ -33,12 +35,15 @@ namespace ch
 	{
 		Vector3 scale = mTransform->GetScale();
 		scale *= Vector3(mSize.x, mSize.y, 1.0f);
-
+		
 		Vector3 rotation = mTransform->GetRotation();
 
 		Vector3 position = mTransform->GetPosition();
-		Vector3 colliderPos = position + Vector3(mCenter.x, mCenter.y, 0.0f);
+		
 
+		Vector3 colliderPos = position + Vector3(mCenter.x, mCenter.y, 0.0f);
+		SetPosition(colliderPos);
+		
 		Matrix scaleMatrix = Matrix::CreateScale(scale);
 		Matrix rotationMatrix;
 		rotationMatrix = Matrix::CreateRotationX(rotation.x);
@@ -59,6 +64,7 @@ namespace ch
 
 		renderer::debugMeshes.push_back(meshAttribute);
 
+		
 
 	}
 
