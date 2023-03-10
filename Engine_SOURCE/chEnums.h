@@ -13,13 +13,12 @@ namespace ch::enums
 	{
 		None = 0,
 		Camera,
-		
+		BackGround,
 		Grid,
 		Monster,
 		Player,
 
 		UI,
-		FadeEffect,
 		End = 16,
 	};
 
@@ -33,7 +32,9 @@ namespace ch::enums
 		//Collider2,
 		MeshRenerer,
 		SpriteRenderer,
+		Animator,
 		UI,
+		//FadeOut,FadeIn
 		Script,
 		End,
 	};
@@ -62,5 +63,11 @@ namespace ch::enums
 		Sphere,
 		End,
 	};
+
+	//struct Ray
+	//{
+	//	Vector3 origin;
+	//	Vector3 dest;
+	//};
 
 }

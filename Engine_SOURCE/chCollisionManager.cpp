@@ -226,9 +226,5 @@ namespace ch
 		return true;
 	}
 
-	float CollisionManager::Magnitude(Vector3 left) const
-	{
-		
-		return std::sqrt(left.x * left.x + left.y * left.y + left.z * left.z);
-	}
+	
 }

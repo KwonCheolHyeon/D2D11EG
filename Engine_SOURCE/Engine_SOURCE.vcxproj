@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="chAnimation.h" />
+    <ClInclude Include="chAnimator.h" />
     <ClInclude Include="chApplication.h" />
     <ClInclude Include="chBaseRenderer.h" />
     <ClInclude Include="chCamera.h" />
@@ -195,8 +197,11 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="chEngine.h" />
     <ClInclude Include="chSpriteRenderer.h" />
+    <ClInclude Include="mainPlayer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="chAnimation.cpp" />
+    <ClCompile Include="chAnimator.cpp" />
     <ClCompile Include="chApplication.cpp" />
     <ClCompile Include="chBaseRenderer.cpp" />
     <ClCompile Include="chCamera.cpp" />
@@ -236,6 +241,7 @@
     <ClCompile Include="chGameObject.cpp" />
     <ClCompile Include="Engine_SOURCE.cpp" />
     <ClCompile Include="chSpriteRenderer.cpp" />
+    <ClCompile Include="mainPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl" />

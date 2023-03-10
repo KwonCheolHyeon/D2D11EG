@@ -18,7 +18,7 @@ namespace ch
 
 	Camera::Camera()
 		: Component(eComponentType::Camera)
-		, mType(eProjectionType::Perspective)
+		, mType(eProjectionType::Orthographic)
 		, mAspectRatio(1.0f)
 		, mNear(1.0f)
 		, mFar(1000.0f)
@@ -85,14 +85,16 @@ namespace ch
 
 	void Camera::CreateProjectionMatrix()
 	{
+		
 		RECT winRect;
 		GetClientRect(application.GetHwnd(), &winRect);
-
+		
 		float width = (winRect.right - winRect.left) * mScale;
 		float height = (winRect.bottom - winRect.top) * mScale;
 		mAspectRatio = width / height;
-
-		if (mType == eProjectionType::Perspective)
+	
+		
+		if (mType == eProjectionType::Perspective)//원근 3d
 		{
 			mProjection = Matrix::CreatePerspectiveFieldOfViewLH
 			(
@@ -102,10 +104,11 @@ namespace ch
 				, mFar
 			);
 		}
-		else
+		else//직교 2d
 		{
 			mProjection = Matrix::CreateOrthographicLH(width / 100.0f, height / 100.0f, mNear, mFar);
 		}
+
 	}
 
 	void Camera::RegisterCameraInRenderer()

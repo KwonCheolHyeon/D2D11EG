@@ -104,6 +104,9 @@
     <Filter Include="GameObject\Monster">
       <UniqueIdentifier>{1c8c68b8-b180-4ef4-b668-27f8358888ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\GunChar">
+      <UniqueIdentifier>{5194c325-018c-4d19-a309-76f8864f31b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -181,9 +184,6 @@
     <ClInclude Include="chMesh.h">
       <Filter>Resource\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="chShader.h">
-      <Filter>Resource\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="chTexture.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
@@ -238,6 +238,12 @@
     <ClInclude Include="chMonster.h">
       <Filter>GameObject\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="chAnimation.h" />
+    <ClInclude Include="chAnimator.h" />
+    <ClInclude Include="chShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="mainPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -357,6 +363,9 @@
     <ClCompile Include="chMonster.cpp">
       <Filter>GameObject\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="chAnimation.cpp" />
+    <ClCompile Include="chAnimator.cpp" />
+    <ClCompile Include="mainPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">

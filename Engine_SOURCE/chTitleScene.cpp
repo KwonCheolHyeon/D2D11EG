@@ -15,7 +15,7 @@
 #include "chPlayer.h"
 #include "chMonster.h"
 #include "chCollisionManager.h"
-
+#include "mainPlayer.h"
 namespace ch
 {
 	TitleScene::TitleScene()
@@ -35,39 +35,7 @@ namespace ch
 		cameraObj->AddComponent<CameraScript>();
 		mainCamera = cameraComp;
 
-		//renderer::cameras[0] = cameraComp;
-
-		// UI Camera
-		//GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
-		//Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
-		//cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
-		//cameraUIComp->DisableLayerMasks();
-		//cameraUIComp->TurnLayerMask(eLayerType::UI, true);
-
-		//// Grid Object
-		//GameObject* gridObject = object::Instantiate<GameObject>(eLayerType::None);
-		//MeshRenderer* gridMr = gridObject->AddComponent<MeshRenderer>();
-		//gridMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//gridMr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
-		//GridScript* gridScript = gridObject->AddComponent<GridScript>();
-		//gridScript->SetCamera(cameraComp);
-
-
-
-
-		// Light Object
-		//GameObject* spriteObj = object::Instantiate<GameObject>(eLayerType::Player);
-		//spriteObj->SetName(L"LIGHT");
-		//Transform* spriteTr = spriteObj->GetComponent<Transform>();
-		//spriteTr->SetPosition(Vector3(0.0f, 0.0f, 10.0f));
-		//spriteTr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
-
-		//SpriteRenderer* sr = spriteObj->AddComponent<SpriteRenderer>();
-		//std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
-		//std::shared_ptr<Material> spriteMaterial = Resources::Find<Material>(L"SpriteMaterial");
-		//sr->SetMaterial(spriteMaterial);
-		//sr->SetMesh(mesh);
-
+		
 		//SMILE RECT
 		{
 			Player* obj = object::Instantiate<Player>(eLayerType::Player);
@@ -88,7 +56,7 @@ namespace ch
 			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 			mr->SetMesh(mesh);
 			obj->AddComponent<PlayerScript>();
-			object::DontDestroyOnLoad(obj);
+			//object::DontDestroyOnLoad(obj);
 		}
 
 		//SMILE RECT
@@ -109,35 +77,40 @@ namespace ch
 			mr->SetMaterial(mateiral);
 			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 			mr->SetMesh(mesh);
-			object::DontDestroyOnLoad(obj);
+			//object::DontDestroyOnLoad(obj);
 		}
 
-		////SMILE RECT CHild
-		//GameObject* child = object::Instantiate<GameObject>(eLayerType::Player);
-		//child->SetName(L"SMILE");
-		//Transform* childTr = child->GetComponent<Transform>();
-		//childTr->SetPosition(Vector3(2.0f, 0.0f, 11.0f));
-		//childTr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
-		//childTr->SetParent(tr);
+	
+		
+		{//player
+			GameObject* standObj = object::Instantiate<GameObject>(eLayerType::Player);
+			standObj->SetName(L"Player");
+			Transform* standTr = standObj->GetComponent<Transform>();
+			standTr->SetPosition(Vector3(1.0f, 0.8f, 1.7f));
+			standTr->SetScale(Vector3(0.2f, 0.2f, 1.0f));
 
-		//MeshRenderer* childMr = child->AddComponent<MeshRenderer>();
-		//std::shared_ptr<Material> childmateiral = Resources::Find<Material>(L"RectMaterial");
-		//childMr->SetMaterial(childmateiral);
-		//childMr->SetMesh(mesh);
+			SpriteRenderer* standsr = standObj->AddComponent<SpriteRenderer>();
+			std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");
+			std::shared_ptr<Material> standmaterial = Resources::Find<Material>(L"pIdleMaterial");
+			standsr->SetMaterial(standmaterial);
+			standsr->SetMesh(standmesh);
 
-		//// HPBAR
-		//GameObject* hpBar = object::Instantiate<GameObject>(eLayerType::Player);
-		//hpBar->SetName(L"HPBAR");
-		//Transform* hpBarTR = hpBar->GetComponent<Transform>();
-		//hpBarTR->SetPosition(Vector3(-5.0f, 3.0f, 12.0f));
-		//hpBarTR->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+			standObj->AddComponent<mainPlayer>();
+		}
 
-		//SpriteRenderer* hpsr = hpBar->AddComponent<SpriteRenderer>();
-		//hpBar->AddComponent(hpsr);
-		//std::shared_ptr<Mesh> hpmesh = Resources::Find<Mesh>(L"RectMesh");
-		//std::shared_ptr<Material> hpspriteMaterial = Resources::Find<Material>(L"UIMaterial");
-		//hpsr->SetMesh(hpmesh);
-		//hpsr->SetMaterial(hpspriteMaterial);
+		{
+			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround);
+			back->SetName(L"BG");
+			Transform* backTr = back->GetComponent<Transform>();
+			backTr->SetPosition(Vector3(1.0f, 1.1f, 1.7f));
+			backTr->SetScale(Vector3(10.0f, 10.0f, 1.0f));
+
+			SpriteRenderer* backSR = back->AddComponent<SpriteRenderer>();
+			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
+			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
+			backSR->SetMaterial(backmaterial);
+			backSR->SetMesh(backmesh);
+		}
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Monster, true);
 

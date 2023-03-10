@@ -16,6 +16,7 @@
 #define CBSLOT_MATERIAL 1
 #define CBSLOT_GRID 2
 #define CBSLOT_FADEEFFECT 3
+#define CBSLOT_ANIMATION 3
 
 namespace ch::graphics
 {
@@ -102,6 +103,7 @@ namespace ch::graphics
 		Material,
 		Grid,
 		FadeEffect,//내가 만든거
+		Animation,
 		End,
 	};
 

@@ -23,7 +23,17 @@ cbuffer Grid : register(b2)
     float2 resolution;
 }
 
-cbuffer FadeEffect : register(b3)//16버퍼
+cbuffer Animation : register(b3)
+{
+    float2 leftTop;
+    float2 size;
+    float2 offset;
+    float2 atlasSize;
+
+    uint used;
+}
+
+cbuffer FadeEffect : register(b4) //16버퍼
 {
     float4 cameraPos;
     float2 cameraSca;

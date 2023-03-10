@@ -325,6 +325,9 @@ namespace ch::renderer
 
 		constantBuffers[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
 		constantBuffers[(UINT)eCBType::Grid]->Create(sizeof(GridCB));
+
+		constantBuffers[(UINT)eCBType::Animation] = new ConstantBuffer(eCBType::Animation);
+		constantBuffers[(UINT)eCBType::Animation]->Create(sizeof(AnimationCB));
 	}
 
 	void LoadShader()
@@ -385,11 +388,43 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"DefaultSprite", L"Light.png");
 		Resources::Load<Texture>(L"HPBarTexture", L"HPBar.png");
 
+
 		Resources::Load<Texture>(L"FadeEffectTexture", L"black.jpg");
+
+		//player
+		Resources::Load<Texture>(L"PlayerIdle", L"idle01.png");
+		Resources::Load<Texture>(L"PlayerIdleRight", L"idleR01.png");
+		Resources::Load<Texture>(L"PlayerIdleLeft", L"idleL01.png");
+
+		//bg
+		Resources::Load<Texture>(L"FloatSprite", L"battleField.png");
 	}
 
 	void LoadMaterial()
 	{
+
+		
+		{// player
+
+			std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"PlayerIdle");
+			std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+			std::shared_ptr<Material> material = std::make_shared<Material>();
+			material->SetRenderingMode(eRenderingMode::Transparent);
+			material->SetShader(shader);
+			material->SetTexture(texture);
+			Resources::Insert<Material>(L"pIdleMaterial", material);
+			
+		}
+
+		{//float
+			std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"FloatSprite");
+			std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+			std::shared_ptr<Material> material = std::make_shared<Material>();
+			material->SetRenderingMode(eRenderingMode::Transparent);
+			material->SetShader(shader);
+			material->SetTexture(texture);
+			Resources::Insert<Material>(L"floatMaterial", material);
+		}
 
 		// Default
 		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"SmileTexture");
@@ -437,6 +472,7 @@ namespace ch::renderer
 		std::shared_ptr<Material> debugMaterial = std::make_shared<Material>();
 		debugMaterial->SetShader(debugShader);
 		Resources::Insert<Material>(L"DebugMaterial", debugMaterial);
+
 	}
 
 	void Initialize()

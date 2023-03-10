@@ -14,6 +14,7 @@ namespace ch
 		, mCenter(Vector2::Zero)
 		, mbTrigger(false)
 		, mID(0)
+		, mRadius(0.0f)
 	{
 		mID = ColliderNumber++;
 	}
@@ -25,11 +26,12 @@ namespace ch
 	void Collider2D::Initalize()
 	{
 		mTransform = GetOwner()->GetComponent<Transform>();
+
 		{//콜라이더 position 초기 설정
 			Vector3 position = mTransform->GetPosition();
 			Vector3 colliderPos = position + Vector3(mCenter.x, mCenter.y, 0.0f);
 			SetPosition(colliderPos);
-		}
+		}//콜라이더 position 초기 설정
 	}
 
 	void Collider2D::Update()
