@@ -10,6 +10,7 @@
 #include "chResources.h"
 #include "chSpriteRenderer.h"
 #include "mainPlayer.h"
+#include "chPlayerSprite.h"
 
 namespace ch
 {
@@ -25,8 +26,6 @@ namespace ch
 
 	void PlayScene::Initalize()
 	{
-
-	
 		
 		Scene::Initalize();
 	}
@@ -36,7 +35,7 @@ namespace ch
 
 		if (Input::GetKeyDown(eKeyCode::N))
 		{
-			SceneManager::LoadScene(eSceneType::Tilte);
+			SceneManager::LoadScene(eSceneType::Main);
 		}
 
 		Scene::Update();
@@ -54,6 +53,8 @@ namespace ch
 
 	void PlayScene::OnEnter()
 	{
+		Scene::OnEnter();
+
 		{ //Main Camera 
 			GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
 			Camera* cameraComp = cameraObj->AddComponent<Camera>();
@@ -70,13 +71,13 @@ namespace ch
 			cameraUIComp->DisableLayerMasks();
 			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		}
-
 		{//player
-			GameObject* standObj = object::Instantiate<GameObject>(eLayerType::Player);
+			PlayerSprite* standObj = object::Instantiate<PlayerSprite>(eLayerType::Player);
 			standObj->SetName(L"Player");
 			Transform* standTr = standObj->GetComponent<Transform>();
-			standTr->SetPosition(Vector3(1.0f, 0.8f, 1.7f));
-			standTr->SetScale(Vector3(0.2f, 0.2f, 1.0f));
+			standTr->SetPosition(Vector3(0.5f, 0.5f, 1.7f));
+			standTr->SetScale(Vector3(0.3f, 0.5f, 1.0f));
+			
 
 			SpriteRenderer* standsr = standObj->AddComponent<SpriteRenderer>();
 			std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");
@@ -85,26 +86,37 @@ namespace ch
 			standsr->SetMesh(standmesh);
 
 			standObj->AddComponent<mainPlayer>();
+
+
 		}
 
 		{//back ground
-			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround);
+			GameObject* back = object::Instantiate<GameObject>(eLayerType::Monster, this);
 			back->SetName(L"BG");
 			Transform* backTr = back->GetComponent<Transform>();
-			backTr->SetPosition(Vector3(1.0f, 1.1f, 1.7f));
-			backTr->SetScale(Vector3(10.0f, 10.0f, 1.0f));
+			backTr->SetPosition(Vector3(1.0f, 1.1f, 0.1f));
+			backTr->SetScale(Vector3(15.0f, 15.0f, 0.1f));
 
 			SpriteRenderer* backSR = back->AddComponent<SpriteRenderer>();
 			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
 			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
 			backSR->SetMaterial(backmaterial);
 			backSR->SetMesh(backmesh);
-						
+
+			psGo.push_back(back);
 		}
+	
 	}
 
 	void PlayScene::OnExit()
 	{
+		Scene::OnExit();
+
+	}
+
+	void PlayScene::LoadResources()
+	{
+		Scene::LoadResources();
 	}
 
 }

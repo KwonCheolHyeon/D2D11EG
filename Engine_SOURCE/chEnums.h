@@ -5,6 +5,7 @@ namespace ch::enums
 	enum class eSceneType
 	{
 		Tilte,
+		Main,
 		Play,
 		End,
 	};
@@ -61,6 +62,14 @@ namespace ch::enums
 		Circle,
 		Box,
 		Sphere,
+		End,
+	};
+
+	enum class eAnimationType
+	{
+		None,
+		SecondDimension,
+		ThirdDimension,
 		End,
 	};
 

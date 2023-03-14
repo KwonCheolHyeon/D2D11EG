@@ -49,6 +49,7 @@ namespace ch
 	}
 	void Scene::OnEnter()
 	{
+
 	}
 	void Scene::OnExit()
 	{

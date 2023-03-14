@@ -58,7 +58,7 @@ namespace ch::renderer
 		Vector2 offset;
 		Vector2 atlasSize;
 
-		UINT used;
+		UINT type;
 	};
 
 

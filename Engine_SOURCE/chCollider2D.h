@@ -37,6 +37,7 @@ namespace ch
 		Vector2 GetCenter() { return mCenter; }
 		Vector2 GetSize() { return mSize; }
 		eColliderType GetType() { return mType; }
+
 		float GetRadius(Vector2 size) { return size.x * 0.5f; }
 	private:
 		static UINT ColliderNumber;

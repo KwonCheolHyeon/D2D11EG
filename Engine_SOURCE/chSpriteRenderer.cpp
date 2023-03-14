@@ -1,7 +1,7 @@
 #include "chSpriteRenderer.h"
 #include "chGameObject.h"
 #include "chTransform.h"
-
+#include "chAnimator.h"
 namespace ch
 {
 	SpriteRenderer::SpriteRenderer()
@@ -32,8 +32,13 @@ namespace ch
 		GetMaterial()->Bind();
 		GetMesh()->BindBuffer();
 
-		GetMesh()->Render();
+		Animator* animator = GetOwner()->GetComponent<Animator>();
+		if (animator)
+		{
+			animator->Binds();
+		}
 
+		GetMesh()->Render();
 		GetMaterial()->Clear();
 	}
 

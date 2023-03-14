@@ -391,6 +391,18 @@ namespace ch::renderer
 
 		Resources::Load<Texture>(L"FadeEffectTexture", L"black.jpg");
 
+		//main menu
+		Resources::Load<Texture>(L"mainBG", L"enterthe\\mainmenu\\BackGround.png");
+		Resources::Load<Texture>(L"mainMenu", L"enterthe\\mainmenu\\main_menu.png");
+
+		//UI
+		Resources::Load<Texture>(L"Fullheart", L"enterthe\\UI\\hp\\FullHeart.png");
+		Resources::Load<Texture>(L"HalfHeart", L"enterthe\\UI\\hp\\HalfHeart.png");
+		Resources::Load<Texture>(L"NoHeart", L"enterthe\\UI\\hp\\NoHeart.png");
+
+		// UI\\CrossHead
+		Resources::Load<Texture>(L"Crosshead", L"enterthe\\UI\\crossHead\\crosshair.png");
+
 		//player
 		Resources::Load<Texture>(L"PlayerIdle", L"idle01.png");
 		Resources::Load<Texture>(L"PlayerIdleRight", L"idleR01.png");
@@ -398,12 +410,37 @@ namespace ch::renderer
 
 		//bg
 		Resources::Load<Texture>(L"FloatSprite", L"battleField.png");
+
+
 	}
 
 	void LoadMaterial()
 	{
-
 		
+		{//mainmenu
+			{//background
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"mainBG");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(texture);
+				Resources::Insert<Material>(L"mainBgMaterial", material);
+
+			}
+
+			{//mainmenu 
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"mainMenu");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(texture);
+				Resources::Insert<Material>(L"mainMenuMaterial", material);
+			}
+		}
+		
+
 		{// player
 
 			std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"PlayerIdle");
@@ -416,7 +453,7 @@ namespace ch::renderer
 			
 		}
 
-		{//float
+		{//battleScenen
 			std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"FloatSprite");
 			std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
 			std::shared_ptr<Material> material = std::make_shared<Material>();
@@ -425,6 +462,10 @@ namespace ch::renderer
 			material->SetTexture(texture);
 			Resources::Insert<Material>(L"floatMaterial", material);
 		}
+
+
+
+
 
 		// Default
 		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"SmileTexture");

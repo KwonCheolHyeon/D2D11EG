@@ -11,6 +11,7 @@
 #include "chGridScript.h"
 #include "chTitleScene.h"
 #include "chPlayScene.h"
+#include "chMainMenu.h"
 
 namespace ch
 {
@@ -22,6 +23,7 @@ namespace ch
 		mScenes.resize((UINT)eSceneType::End);//endscene만큼 할당
 
 		mScenes[(UINT)eSceneType::Tilte] = new TitleScene(); //scene추가 부분
+		mScenes[(UINT)eSceneType::Main] = new MainMenu();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Tilte];

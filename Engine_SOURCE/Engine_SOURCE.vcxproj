@@ -172,6 +172,7 @@
     <ClInclude Include="chGridScript.h" />
     <ClInclude Include="chInput.h" />
     <ClInclude Include="chLayer.h" />
+    <ClInclude Include="chMainMenu.h" />
     <ClInclude Include="chMaterial.h" />
     <ClInclude Include="chMath.h" />
     <ClInclude Include="chMesh.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="chObject.h" />
     <ClInclude Include="chPlayer.h" />
     <ClInclude Include="chPlayerScript.h" />
+    <ClInclude Include="chPlayerSprite.h" />
     <ClInclude Include="chPlayScene.h" />
     <ClInclude Include="chPrefab.h" />
     <ClInclude Include="chRenderer.h" />
@@ -218,6 +220,7 @@
     <ClCompile Include="chGridScript.cpp" />
     <ClCompile Include="chInput.cpp" />
     <ClCompile Include="chLayer.cpp" />
+    <ClCompile Include="chMainMenu.cpp" />
     <ClCompile Include="chMaterial.cpp" />
     <ClCompile Include="chMath.cpp" />
     <ClCompile Include="chMesh.cpp" />
@@ -225,6 +228,7 @@
     <ClCompile Include="chMonster.cpp" />
     <ClCompile Include="chPlayer.cpp" />
     <ClCompile Include="chPlayerScript.cpp" />
+    <ClCompile Include="chPlayerSprite.cpp" />
     <ClCompile Include="chPlayScene.cpp" />
     <ClCompile Include="chPrefab.cpp" />
     <ClCompile Include="chRenderer.cpp" />

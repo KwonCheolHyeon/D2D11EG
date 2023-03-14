@@ -1,5 +1,6 @@
 #pragma once
 #include "chScene.h"
+#include <vector>
 namespace ch
 {
 	class PlayScene : public Scene
@@ -17,6 +18,10 @@ namespace ch
 		virtual void OnExit() override;
 
 	private:
+		virtual void LoadResources() override;
+		std::vector<GameObject*> psGo;
+		/*std::vector<Transform*> psTrR;
+		std::vector<SpriteRenderer*> psSr;*/
 	};
 }
 

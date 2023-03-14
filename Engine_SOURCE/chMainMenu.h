@@ -1,14 +1,14 @@
-#pragma once
+	#pragma once
 #include "chScene.h"
 
 
-namespace ch 
+namespace ch
 {
-	class TitleScene : public Scene
+	class MainMenu : public Scene
 	{
 	public:
-		TitleScene();
-		virtual ~TitleScene();
+		MainMenu();
+		virtual ~MainMenu();
 
 		virtual void Initalize() override;
 		virtual void Update() override;

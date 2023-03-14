@@ -243,7 +243,15 @@
     <ClInclude Include="chShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="mainPlayer.h" />
+    <ClInclude Include="mainPlayer.h">
+      <Filter>GameObject\GunChar</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayerSprite.h">
+      <Filter>GameObject\GunChar</Filter>
+    </ClInclude>
+    <ClInclude Include="chMainMenu.h">
+      <Filter>Scene\PlayGameScenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -365,7 +373,15 @@
     </ClCompile>
     <ClCompile Include="chAnimation.cpp" />
     <ClCompile Include="chAnimator.cpp" />
-    <ClCompile Include="mainPlayer.cpp" />
+    <ClCompile Include="mainPlayer.cpp">
+      <Filter>GameObject\GunChar</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayerSprite.cpp">
+      <Filter>GameObject\GunChar</Filter>
+    </ClCompile>
+    <ClCompile Include="chMainMenu.cpp">
+      <Filter>Scene\PlayGameScenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">

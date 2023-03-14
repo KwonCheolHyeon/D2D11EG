@@ -56,7 +56,7 @@ namespace ch
 
 	bool Animator::Create(const std::wstring& name, std::shared_ptr<Texture> atlas
 		, Vector2 leftTop, Vector2 size, Vector2 offset
-		, UINT columnLegth, UINT spriteLegth, float duration)
+		, UINT spriteLegth, float duration)
 	{
 		if (atlas == nullptr)
 			return false;
@@ -67,7 +67,7 @@ namespace ch
 
 		animation = new Animation();
 		animation->Create(name, atlas, leftTop
-			, size, offset, columnLegth
+			, size, offset
 			, spriteLegth, duration);
 
 
@@ -98,7 +98,7 @@ namespace ch
 
 		return iter->second;
 	}
-	void Animator::Play(std::wstring& name, bool loop)
+	void Animator::Play(const std::wstring& name, bool loop)
 	{
 		Animation* prevAnimation = mActiveAnimation;
 		Events* events = FindEvents(prevAnimation->AnimationName());

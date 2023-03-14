@@ -18,7 +18,9 @@ namespace ch
 
 	void Player::Update()
 	{
-		GameObject::Update();
+		//GameObject::Update();
+		//head->update();
+		//body->update();
 	}
 
 	void Player::FixedUpdate()
