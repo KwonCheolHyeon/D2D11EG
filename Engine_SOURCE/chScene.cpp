@@ -49,10 +49,20 @@ namespace ch
 	}
 	void Scene::OnEnter()
 	{
-
+		Initalize();
 	}
 	void Scene::OnExit()
 	{
+		if (mDeleteObj)
+		{
+			for (Layer& layer : mLayers)
+			{
+				layer.DelteOBJ();
+			}
+			mDeleteObj = false;
+		}
+
+		Destroy();
 	}
 	void Scene::AddGameObject(GameObject* gameObj, const eLayerType type)
 	{

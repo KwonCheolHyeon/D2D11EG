@@ -249,7 +249,7 @@
     <ClInclude Include="chPlayerSprite.h">
       <Filter>GameObject\GunChar</Filter>
     </ClInclude>
-    <ClInclude Include="chMainMenu.h">
+    <ClInclude Include="chMainMenuScene.h">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -379,7 +379,7 @@
     <ClCompile Include="chPlayerSprite.cpp">
       <Filter>GameObject\GunChar</Filter>
     </ClCompile>
-    <ClCompile Include="chMainMenu.cpp">
+    <ClCompile Include="chMainMenuScene.cpp">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClCompile>
   </ItemGroup>

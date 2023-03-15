@@ -124,4 +124,75 @@ namespace ch
 			comp->SetOwner(this);
 		}
 	}
+	void GameObject::SetPos(Vector3 _Value)
+	{
+		if (nullptr != GetComponent<Transform>())
+		{
+			GetComponent<Transform>()->SetPosition(_Value);
+		}
+	}
+	void GameObject::SetScale(Vector3 _Value)
+	{
+		if (nullptr != GetComponent<Transform>())
+		{
+			GetComponent<Transform>()->SetScale(_Value);
+		}
+		if (nullptr != GetComponent<SpriteRenderer>())
+		{
+			GetComponent<SpriteRenderer>()->ChangeSize();
+		}
+		if (nullptr != GetComponent<MeshRenderer>())
+		{
+			GetComponent<MeshRenderer>()->ChangeSize();
+		}
+	}
+	void GameObject::SetRotation(Vector3 _Value)
+	{
+	}
+	Vector3 GameObject::GetPos()
+	{
+		return Vector3();
+	}
+	Vector3 GameObject::GetScale()
+	{
+		return Vector3();
+	}
+	Vector3 GameObject::GetRotation()
+	{
+		return Vector3();
+	}
+	void GameObject::SetMaterial(std::shared_ptr<Material> _Material)
+	{
+		if (nullptr != GetComponent<SpriteRenderer>())
+		{
+			GetComponent<SpriteRenderer>()->SetMaterial(_Material);
+		}
+	}
+
+	void GameObject::SetMesh(std::shared_ptr<Mesh> _Mesh)
+	{
+		if (nullptr != GetComponent<SpriteRenderer>())
+		{
+			GetComponent<SpriteRenderer>()->SetMesh(_Mesh);
+		}
+	}
+	void GameObject::Flip()
+	{
+		BaseRenderer* baseRenderer = GetComponent<BaseRenderer>();
+		if (baseRenderer)
+		{
+			std::shared_ptr<Material> mtrl = baseRenderer->GetMaterial();
+			if (mtrl)
+			{
+
+#define INVERSE -1
+#define NORMAL 1
+
+
+				int isInverse = mbIsLeft ? INVERSE : NORMAL;
+
+				mtrl->SetData(eGPUParam::Int, &isInverse);
+			}
+		}
+	}
 }

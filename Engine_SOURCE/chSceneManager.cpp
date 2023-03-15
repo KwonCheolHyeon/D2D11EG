@@ -11,7 +11,7 @@
 #include "chGridScript.h"
 #include "chTitleScene.h"
 #include "chPlayScene.h"
-#include "chMainMenu.h"
+#include "chMainMenuScene.h"
 
 namespace ch
 {
@@ -26,12 +26,9 @@ namespace ch
 		mScenes[(UINT)eSceneType::Main] = new MainMenu();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 
-		mActiveScene = mScenes[(UINT)eSceneType::Tilte];
+		mActiveScene = mScenes[(UINT)eSceneType::Main];
 
-		for (Scene* scene : mScenes)
-		{
-			scene->Initalize();
-		}
+		mActiveScene->Initalize();
 	}
 
 	void SceneManager::Update()
@@ -66,7 +63,7 @@ namespace ch
 	{
 		if (mActiveScene)
 			mActiveScene->OnExit();
-
+		
 		// 바뀔때 dontDestory 오브젝트는 다음씬으로 같이 넘겨줘야한다.
 		std::vector<GameObject*> gameObjs
 			= mActiveScene->GetDontDestroyGameObjects();
@@ -78,6 +75,7 @@ namespace ch
 			mActiveScene->AddGameObject(obj, type);
 		}
 
-		mActiveScene->OnEnter();
+		if (mActiveScene)
+			mActiveScene->OnEnter();
 	}
 }

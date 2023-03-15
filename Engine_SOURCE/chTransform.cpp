@@ -23,8 +23,7 @@ namespace ch
 
 	void Transform::Initalize()
 	{
-		//cos(180);
-		SetScale(Vector3::One);
+		
 	}
 
 	void Transform::Update()

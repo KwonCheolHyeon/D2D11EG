@@ -93,6 +93,16 @@ namespace ch
 		}
 	}
 
+	void Layer::DelteOBJ()
+	{
+
+		for (GameObject* Obj : mGameObjects)
+		{
+			if (!Obj->IsDontDestroy())
+				Obj->Death();
+		}
+	}
+
 	void Layer::Render()
 	{
 		for (GameObject* obj : mGameObjects)

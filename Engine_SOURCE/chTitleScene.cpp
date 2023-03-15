@@ -38,44 +38,16 @@ namespace ch
 		mainCamera = cameraComp;
 
 		{ //Camera UI
-		/*	GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
+			GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
 			Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
-			cameraUIComp->SetProjectionType(Camera::eProjectionType::Perspective);
+			cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 			cameraUIComp->DisableLayerMasks();
-			cameraUIComp->TurnLayerMask(eLayerType::UI, true);*/
+			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		}
 			
-		//{//player
-		//	GameObject* standObj = object::Instantiate<GameObject>(eLayerType::Player);
-		//	standObj->SetName(L"Player");
-		//	Transform* standTr = standObj->GetComponent<Transform>();
-		//	standTr->SetPosition(Vector3(1.0f, 0.8f, 1.7f));
-		//	standTr->SetScale(Vector3(0.2f, 0.2f, 1.0f));
+	
 
-		//	SpriteRenderer* standsr = standObj->AddComponent<SpriteRenderer>();
-		//	std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");
-		//	std::shared_ptr<Material> standmaterial = Resources::Find<Material>(L"pIdleMaterial");
-		//	standsr->SetMaterial(standmaterial);
-		//	standsr->SetMesh(standmesh);
-
-		//	standObj->AddComponent<mainPlayer>();
-		//}
-
-		//{
-		//	GameObject* back = object::Instantiate<GameObject>(eLayerType::Monster,this);
-		//	back->SetName(L"BG");
-		//	Transform* backTr = back->GetComponent<Transform>();
-		//	backTr->SetPosition(Vector3(1.0f, 1.0f, 1.0f));
-		//	backTr->SetScale(Vector3(10.0f, 10.0f, 1.0f));
-
-		//	SpriteRenderer* backSR = back->AddComponent<SpriteRenderer>();
-		//	std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
-		//	std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
-		//	backSR->SetMaterial(backmaterial);
-		//	backSR->SetMesh(backmesh);
-		//}
-
-		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Monster, true);
+		//CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Monster, true);
 
 		Scene::Initalize();
 	}
@@ -83,7 +55,7 @@ namespace ch
 	{
 		if (Input::GetKeyDown(eKeyCode::N)) 
 		{
-			SceneManager::LoadScene(eSceneType::Play);
+			SceneManager::LoadScene(eSceneType::Main);
 		}
 		Scene::Update();
 	}

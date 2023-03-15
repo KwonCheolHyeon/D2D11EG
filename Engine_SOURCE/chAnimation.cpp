@@ -18,10 +18,10 @@ namespace ch
 	{
 	}
 
-	void Animation::Update()
+	UINT Animation::Update()
 	{
 		if (mbComplete)
-			return;
+			return -1;
 
 		// 시간 체크
 		mTime += Time::DeltaTime();
@@ -31,14 +31,16 @@ namespace ch
 		{
 			mTime = 0.0f;
 			++mIndex;
-
-			//
 			if (mSpriteSheet.size() <= mIndex)
 			{
 				mbComplete = true;
 				mIndex = mSpriteSheet.size() - 1;
 			}
+
+			return mIndex;
 		}
+
+		return -1;
 	}
 
 	void Animation::FixedUpdate()
@@ -101,6 +103,14 @@ namespace ch
 
 	void Animation::Clear()
 	{
+		Texture::Clear(12);
+
+		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Animation];
+		renderer::AnimationCB info = {};
+		info.type = (UINT)eAnimationType::None;
+
+		cb->Bind(&info);
+		cb->SetPipline(eShaderStage::PS);
 	}
 
 }

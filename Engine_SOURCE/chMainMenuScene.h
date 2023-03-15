@@ -22,7 +22,8 @@ namespace ch
 		virtual void LoadResources() override;
 
 	private:
-
+		GameObject* chCamera;
+		GameObject* chUiCamera;
 	};
 
 

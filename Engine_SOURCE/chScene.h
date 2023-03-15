@@ -33,5 +33,9 @@ namespace ch
 	private:
 		std::vector<Layer> mLayers;
 		eSceneType mType;
+
+		std::vector<GameObject*> mDeadObjects;
+
+		bool mDeleteObj;
 	};
 }
