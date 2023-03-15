@@ -172,6 +172,7 @@
     <ClInclude Include="chGridScript.h" />
     <ClInclude Include="chInput.h" />
     <ClInclude Include="chLayer.h" />
+    <ClInclude Include="chLight.h" />
     <ClInclude Include="chMainMenuScene.h" />
     <ClInclude Include="chMaterial.h" />
     <ClInclude Include="chMath.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="chGridScript.cpp" />
     <ClCompile Include="chInput.cpp" />
     <ClCompile Include="chLayer.cpp" />
+    <ClCompile Include="chLight.cpp" />
     <ClCompile Include="chMainMenuScene.cpp" />
     <ClCompile Include="chMaterial.cpp" />
     <ClCompile Include="chMath.cpp" />

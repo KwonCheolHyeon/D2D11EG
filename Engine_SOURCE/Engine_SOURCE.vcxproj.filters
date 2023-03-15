@@ -252,6 +252,7 @@
     <ClInclude Include="chMainMenuScene.h">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClInclude>
+    <ClInclude Include="chLight.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -382,6 +383,7 @@
     <ClCompile Include="chMainMenuScene.cpp">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClCompile>
+    <ClCompile Include="chLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">
