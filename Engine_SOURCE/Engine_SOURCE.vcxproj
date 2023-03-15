@@ -192,6 +192,7 @@
     <ClInclude Include="chSceneManager.h" />
     <ClInclude Include="chScript.h" />
     <ClInclude Include="chShader.h" />
+    <ClInclude Include="chStructedBuffer.h" />
     <ClInclude Include="chTexture.h" />
     <ClInclude Include="chTime.h" />
     <ClInclude Include="chTitleScene.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="chSceneManager.cpp" />
     <ClCompile Include="chScript.cpp" />
     <ClCompile Include="chShader.cpp" />
+    <ClCompile Include="chStructedBuffer.cpp" />
     <ClCompile Include="chTexture.cpp" />
     <ClCompile Include="chTime.cpp" />
     <ClCompile Include="chTitleScene.cpp" />

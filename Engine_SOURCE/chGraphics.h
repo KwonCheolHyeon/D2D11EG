@@ -18,6 +18,7 @@
 #define CBSLOT_FADEEFFECT 3
 #define CBSLOT_ANIMATION 3
 
+using namespace ch::math;
 namespace ch::graphics
 {
 	enum class ValidationMode
@@ -117,6 +118,12 @@ namespace ch::graphics
 		Matrix,
 	};
 
+	enum class eSRVType
+	{
+		None,
+		End,
+	};
+
 	struct DebugMesh
 	{
 		enums::eColliderType type;
@@ -128,4 +135,18 @@ namespace ch::graphics
 		float time;
 	};
 
+	struct LightAttribute
+	{
+		Vector4 diffuse;
+		Vector4 specular;
+		Vector4 ambient;
+		Vector4 emissive;
+		Vector4 position;
+		Vector4 direction;
+
+		enums::eLightType type;
+		float radius;
+		float angle;
+		int padding;
+	};
 }

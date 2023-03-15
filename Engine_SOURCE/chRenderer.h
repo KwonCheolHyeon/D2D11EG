@@ -7,6 +7,7 @@
 #include "chShader.h"
 #include "chConstantBuffer.h"
 #include "chCamera.h"
+#include "chLight.h"
 
 using namespace ch::math;
 using namespace ch::graphics;
@@ -72,6 +73,7 @@ namespace ch::renderer
 
 	extern std::vector<Camera*> cameras[];
 	extern std::vector<DebugMesh> debugMeshes;
+	extern std::vector<LightAttribute> lights;
 
 	void Initialize();
 	void Render();

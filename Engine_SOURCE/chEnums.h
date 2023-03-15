@@ -34,6 +34,7 @@ namespace ch::enums
 		MeshRenerer,
 		SpriteRenderer,
 		Animator,
+		Light,
 		UI,
 		//FadeOut,FadeIn
 		Script,
@@ -70,6 +71,14 @@ namespace ch::enums
 		None,
 		SecondDimension,
 		ThirdDimension,
+		End,
+	};
+
+	enum class eLightType
+	{
+		Directional,
+		Point,
+		Spot,
 		End,
 	};
 

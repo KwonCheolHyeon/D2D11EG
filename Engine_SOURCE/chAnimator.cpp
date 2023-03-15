@@ -46,8 +46,7 @@ namespace ch
 		}
 
 		UINT spriteIndex = mActiveAnimation->Update();
-		if (spriteIndex != -1 &&
-			events->mEvents[spriteIndex].mEvent)
+		if (spriteIndex != -1 && events->mEvents[spriteIndex].mEvent)
 		{
 			events->mEvents[spriteIndex].mEvent();
 		}

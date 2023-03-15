@@ -51,12 +51,12 @@ namespace ch
 		{
 			Player* obj = object::Instantiate<Player>(eLayerType::Player);
 			obj->SetName(L"Zelda");
-			Transform* tr = obj->GetComponent<Transform>();
+			/*Transform* tr = obj->GetComponent<Transform>();
 			tr->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
-			//tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2));
+			tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2));
 			tr->SetScale(Vector3(0.3f, 0.2f, 1.0f));
 			Collider2D* collider = obj->AddComponent<Collider2D>();
-			collider->SetType(eColliderType::Rect);
+			collider->SetType(eColliderType::Rect);*/
 			//collider->SetCenter(Vector2(0.2f, 0.2f));
 			//collider->SetSize(Vector2(1.5f, 1.5f));
 			
