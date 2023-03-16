@@ -18,9 +18,6 @@ namespace ch
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
-	public:
-		virtual void LoadResources() override;
-
 	private:
 		GameObject* chCamera;
 		GameObject* chUiCamera;

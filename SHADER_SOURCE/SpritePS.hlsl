@@ -19,7 +19,7 @@ struct VSOut
 float4 main(VSOut In) : SV_Target
 {
     float4 color = (float) 0.0f;
-    
+   
     //color.a += time;
     
     if (animationType == 1) // 2D

@@ -27,15 +27,11 @@ namespace ch
 		std::vector<GameObject*> GetDontDestroyGameObjects();
 		const std::vector<GameObject*>& GetGameObjects(const eLayerType type);
 
-	public:
-		virtual void LoadResources() {};
-
+		void SceneCheck();
 	private:
 		std::vector<Layer> mLayers;
 		eSceneType mType;
-
-		std::vector<GameObject*> mDeadObjects;
-
-		bool mDeleteObj;
+		
+		
 	};
 }

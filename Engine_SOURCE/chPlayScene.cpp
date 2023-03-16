@@ -43,7 +43,7 @@ namespace ch
 			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		}
 		{//player
-			GameObject* standObj = object::Instantiate<GameObject>(eLayerType::Player);
+			/*GameObject* standObj = object::Instantiate<GameObject>(eLayerType::Player);
 			standObj->SetName(L"Player");
 			Transform* standTr = standObj->GetComponent<Transform>();
 			standTr->SetPosition(Vector3(0.5f, 0.5f, 2.0f));
@@ -57,7 +57,7 @@ namespace ch
 			standsr->SetMaterial(standmaterial);
 			standsr->SetMesh(standmesh);
 
-			standObj->AddComponent<mainPlayer>();
+			standObj->AddComponent<mainPlayer>();*/
 		}
 
 
@@ -73,9 +73,8 @@ namespace ch
 			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
 			backSR->SetMaterial(backmaterial);
 			backSR->SetMesh(backmesh);
-
-			psGo.push_back(back);
 		}
+
 		Scene::Initalize();
 	}
 
@@ -112,9 +111,6 @@ namespace ch
 
 	}
 
-	void PlayScene::LoadResources()
-	{
-		Scene::LoadResources();
-	}
+
 
 }

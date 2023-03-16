@@ -106,7 +106,7 @@ namespace ch
 		}
 		else//Á÷±³ 2d
 		{
-			mProjection = Matrix::CreateOrthographicLH(width / 300.0f, height / 300.0f, mNear, mFar);
+			mProjection = Matrix::CreateOrthographicLH(width / 100.0f, height / 100.0f, mNear, mFar);
 		}
 
 	}

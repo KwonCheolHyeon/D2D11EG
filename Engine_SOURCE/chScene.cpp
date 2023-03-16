@@ -7,6 +7,7 @@ namespace ch
 		: mType(type)
 	{
 		mLayers.resize((UINT)eLayerType::End);
+		
 	}
 	Scene::~Scene()
 	{
@@ -53,16 +54,7 @@ namespace ch
 	}
 	void Scene::OnExit()
 	{
-		if (mDeleteObj)
-		{
-			for (Layer& layer : mLayers)
-			{
-				layer.DelteOBJ();
-			}
-			mDeleteObj = false;
-		}
-
-		Destroy();
+		
 	}
 	void Scene::AddGameObject(GameObject* gameObj, const eLayerType type)
 	{
@@ -85,10 +77,14 @@ namespace ch
 
 		return gameObjects;
 	}
-
 	const std::vector<GameObject*>& Scene::GetGameObjects(const eLayerType type)
 	{
 		return mLayers[(UINT)type].GetGameObjects();
 	}
 
+	void Scene::SceneCheck()
+	{
+
+
+	}
 }

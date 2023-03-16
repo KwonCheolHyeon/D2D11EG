@@ -21,17 +21,8 @@ namespace ch
 		std::shared_ptr<Mesh> GetMesh() { return mMesh; }
 		std::shared_ptr <Material> GetMaterial() { return mMaterial; }
 
-		void ChangeSize() { mbIsChanged = true; }
 	private:
 		std::shared_ptr <Mesh> mMesh;
 		std::shared_ptr <Material> mMaterial;
-
-		float mWidthRatio;
-		float mHeightRatio;
-
-		bool mbIsChanged;
-		bool mbIsAnim;
-
-		Vector2 mSpriteSize;
 	};
 }

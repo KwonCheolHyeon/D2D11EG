@@ -42,15 +42,13 @@ namespace ch
 	{
 		Vector3 scale = mTransform->GetScale();
 		scale *= Vector3(mSize.x, mSize.y, 1.0f);
-		
+
 		Vector3 rotation = mTransform->GetRotation();
 
 		Vector3 position = mTransform->GetPosition();
-		
-
 		Vector3 colliderPos = position + Vector3(mCenter.x, mCenter.y, 0.0f);
-		SetPosition(colliderPos);
-		
+		mPosition = colliderPos;
+
 		Matrix scaleMatrix = Matrix::CreateScale(scale);
 		Matrix rotationMatrix;
 		rotationMatrix = Matrix::CreateRotationX(rotation.x);
@@ -64,15 +62,12 @@ namespace ch
 
 		DebugMesh meshAttribute = {};
 		meshAttribute.position = Vector3(colliderPos.x, colliderPos.y, colliderPos.z);
-		meshAttribute.radius = mSize.x;
+		meshAttribute.radius = mRadius;
 		meshAttribute.rotatation = rotation;
 		meshAttribute.scale = scale;
 		meshAttribute.type = mType;
 
 		renderer::debugMeshes.push_back(meshAttribute);
-
-		
-
 	}
 
 	void Collider2D::Render()

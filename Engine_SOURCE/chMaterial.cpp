@@ -1,4 +1,5 @@
 #include "chMaterial.h"
+#include "chResources.h"
 
 namespace ch::graphics
 {
@@ -7,6 +8,13 @@ namespace ch::graphics
         , mMode(eRenderingMode::Opaque)
     {
 
+    }
+    Material::Material(std::wstring _TextureName, std::wstring _ShaderName)
+        : Resource(eResourceType::Material)
+        , mMode(eRenderingMode::Transparent)
+    {
+        mTexture = Resources::Find<Texture>(_TextureName);
+        mShader = Resources::Find<Shader>(_ShaderName);
     }
 
     Material::~Material()

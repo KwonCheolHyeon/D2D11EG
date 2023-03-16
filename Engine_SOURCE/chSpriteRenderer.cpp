@@ -15,17 +15,17 @@ namespace ch
 
 	void SpriteRenderer::Initalize()
 	{
-		BaseRenderer::Initalize();
+		
 	}
 
 	void SpriteRenderer::Update()
 	{
-		BaseRenderer::Update();
+		
 	}
 
 	void SpriteRenderer::FixedUpdate()
 	{
-		BaseRenderer::FixedUpdate();
+		
 	}
 
 	void SpriteRenderer::Render()
@@ -33,23 +33,21 @@ namespace ch
 		GetOwner()->GetComponent<Transform>()->SetConstantBuffer();
 
 		GetMaterial()->Bind();
-
 		GetMesh()->BindBuffer();
 
 		Animator* animator = GetOwner()->GetComponent<Animator>();
-
 		if (animator)
+		{
 			animator->Binds();
-
+		}
 
 		GetMesh()->Render();
-
 		GetMaterial()->Clear();
 
 		if (animator)
+		{
 			animator->Clear();
-
-		//BaseRenderer::Render();
+		}
 	}
 
 }

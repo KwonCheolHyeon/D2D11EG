@@ -46,10 +46,12 @@ namespace ch
 		}
 
 		UINT spriteIndex = mActiveAnimation->Update();
-		if (spriteIndex != -1 && events->mEvents[spriteIndex].mEvent)
+		if (spriteIndex != -1 &&
+			events->mEvents[spriteIndex].mEvent)
 		{
 			events->mEvents[spriteIndex].mEvent();
 		}
+
 	}
 	void Animator::FixedUpdate()
 	{
@@ -79,6 +81,7 @@ namespace ch
 		Events* events = new Events();
 		events->mEvents.resize(spriteLegth);
 		mEvents.insert(std::make_pair(name, events));
+
 	}
 
 	Animation* Animator::FindAnimation(const std::wstring& name)

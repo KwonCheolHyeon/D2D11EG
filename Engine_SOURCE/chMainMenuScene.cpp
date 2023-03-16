@@ -49,25 +49,31 @@ namespace ch
 			cameraComp->TurnLayerMask(eLayerType::UI, true);
 		}
 		{
-			Player* obj = object::Instantiate<Player>(eLayerType::Player);
-			obj->SetName(L"Zelda");
-			/*Transform* tr = obj->GetComponent<Transform>();
-			tr->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
-			tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2));
-			tr->SetScale(Vector3(0.3f, 0.2f, 1.0f));
-			Collider2D* collider = obj->AddComponent<Collider2D>();
-			collider->SetType(eColliderType::Rect);*/
-			//collider->SetCenter(Vector2(0.2f, 0.2f));
-			//collider->SetSize(Vector2(1.5f, 1.5f));
-			
+			//Player* obj = object::Instantiate<Player>(eLayerType::Player);
+			//obj->SetName(L"Zelda");
+			//Transform* tr = obj->GetComponent<Transform>();
+			//tr->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
+			////tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2));
+			////tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+			//Collider2D* collider = obj->AddComponent<Collider2D>();
+			//collider->SetType(eColliderType::Rect);
+			////collider->SetCenter(Vector2(0.2f, 0.2f));
+			////collider->SetSize(Vector2(1.5f, 1.5f));
+			//Animator* animator = obj->AddComponent<Animator>();
+			//std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Zelda", L"Zelda.png");
+			//animator->Create(L"Idle", texture, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), Vector2::Zero, 3, 0.1f);
+			//animator->Create(L"MoveDown", texture, Vector2(0.0f, 520.0f), Vector2(120.0f, 130.0f), Vector2::Zero, 8, 0.1f);
 
-			/*SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
-			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"SpriteMaterial");
-			mr->SetMaterial(mateiral);
-			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
-			mr->SetMesh(mesh);*/
-			obj->AddComponent<PlayerScript>();
-			//object::DontDestroyOnLoad(obj);
+			//animator->Play(L"Idle", true);
+
+			//SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
+			//std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"SpriteMaterial");
+			//mr->SetMaterial(mateiral);
+			//std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			//mr->SetMesh(mesh);
+			//obj->AddComponent<PlayerScript>();
+			////object::DontDestroyOnLoad(obj);
+			
 		}
 	
 		{//mainmenu
@@ -117,16 +123,12 @@ namespace ch
 		Scene::Render();
 	}
 	void MainMenu::OnEnter()
-	{
-		
+	{		
 		Scene::OnEnter();
 	}
 	void MainMenu::OnExit()
 	{
 		Scene::OnExit();
 	}
-	void MainMenu::LoadResources()
-	{
-		Scene::OnExit();
-	}
+	
 }

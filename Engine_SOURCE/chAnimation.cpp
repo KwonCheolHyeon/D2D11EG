@@ -1,6 +1,7 @@
 #include "chAnimation.h"
 #include "chTime.h"
 #include "chRenderer.h"
+
 namespace ch
 {
 	Animation::Animation()
@@ -45,6 +46,7 @@ namespace ch
 
 	void Animation::FixedUpdate()
 	{
+
 	}
 
 	void Animation::Render()
@@ -75,6 +77,7 @@ namespace ch
 
 			mSpriteSheet.push_back(sprite);
 		}
+
 	}
 
 	void Animation::BindShader()
@@ -103,6 +106,7 @@ namespace ch
 
 	void Animation::Clear()
 	{
+		//Texture clear
 		Texture::Clear(12);
 
 		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Animation];

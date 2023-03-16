@@ -55,7 +55,7 @@ namespace ch
 
 		//SceneManager::Render();
 		renderer::Render();
-
+		CollisionManager::Render();
 		//graphicDevice->Render();
 		//graphicDevice->Present();
 	}
@@ -77,7 +77,6 @@ namespace ch
 	{
 		graphicDevice->Present();
 	}
-
 
 	void Application::Release()
 	{

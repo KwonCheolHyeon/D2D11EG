@@ -4,6 +4,20 @@
 
 namespace ch
 {
+	// z값 정렬 작성중
+	//static bool CompareGameObjectByZAxis(GameObject* a, GameObject* b)
+	//{
+	//	Transform* aTr = a->GetComponent<Transform>();
+	//	Transform* bTr = b->GetComponent<Transform>();
+
+	//	if (aTr->GetPosition().z <= bTr->GetPosition().z)
+	//	{
+	//		return true;
+	//	}
+
+	//	return false;
+	//}
+
 	Layer::Layer()
 	{
 	}
@@ -37,6 +51,8 @@ namespace ch
 		{
 			if (obj == nullptr)
 				continue;
+			if (obj->GetState() != GameObject::eState::Active)
+				continue;
 
 			obj->Update();
 		}
@@ -52,6 +68,23 @@ namespace ch
 				continue;
 
 			obj->FixedUpdate();
+		}
+
+		// sort z axis
+		//std::vector<GameObject*> mGameObjects;
+		//std::sort(mGameObjects.begin(), mGameObjects.end(), CompareGameObjectByZAxis);
+	}
+
+	void Layer::Render()
+	{
+		for (GameObject* obj : mGameObjects)
+		{
+			if (obj == nullptr)
+				continue;
+			if (obj->GetState() != GameObject::eState::Active)
+				continue;
+
+			obj->Render();
 		}
 	}
 
@@ -93,29 +126,6 @@ namespace ch
 		}
 	}
 
-	void Layer::DelteOBJ()
-	{
-
-		for (GameObject* Obj : mGameObjects)
-		{
-			if (!Obj->IsDontDestroy())
-				Obj->Death();
-		}
-	}
-
-	void Layer::Render()
-	{
-		for (GameObject* obj : mGameObjects)
-		{
-			if (obj == nullptr)
-				continue;
-			if (obj->GetState() != GameObject::eState::Active)
-				continue;
-
-			obj->Render();
-		}
-	}
-
 	void Layer::AddGameObject(GameObject* gameObject)
 	{
 		if (gameObject == nullptr)
@@ -123,7 +133,6 @@ namespace ch
 
 		mGameObjects.push_back(gameObject);
 	}
-
 	std::vector<GameObject*> Layer::GetDontDestroyGameObjects()
 	{
 		std::vector<GameObject*> donts;
@@ -134,7 +143,7 @@ namespace ch
 			if ((*iter)->IsDontDestroy() == true)
 			{
 				donts.push_back((*iter));
-				mGameObjects.erase(iter);
+				iter = mGameObjects.erase(iter);
 			}
 			else
 			{

@@ -2,12 +2,7 @@
 #include "chComponent.h"
 #include "chScript.h"
 #include "chEntity.h"
-#include "chMesh.h"
 #include "chTransform.h"
-#include "chSpriteRenderer.h"
-#include "chMeshRenderer.h"
-#include "chComponent.h"
-
 namespace ch
 {
 	class GameObject : public Entity
@@ -65,17 +60,6 @@ namespace ch
 		}
 		const std::vector<Script*>& GetScripts() { return mScripts; }
 
-		void SetPos(Vector3 _Value);
-		void SetScale(Vector3 _Value);
-		void SetRotation(Vector3 _Value);
-
-		Vector3 GetPos();
-		Vector3 GetScale();
-		Vector3 GetRotation();
-
-		void SetMaterial(std::shared_ptr<Material> _Material);
-		void SetMesh(std::shared_ptr<Mesh> _Mesh);
-
 		bool IsDead()
 		{
 			if (mState == eState::Dead)
@@ -92,7 +76,6 @@ namespace ch
 		eLayerType GetLayerType() { return mType; }
 		void SetLayerType(eLayerType type) { mType = type; }
 
-		void Flip();
 	protected:
 		std::vector<Component*> mComponents;
 
@@ -102,7 +85,6 @@ namespace ch
 		std::vector<Script*> mScripts;
 		bool mbDontDestroy;
 		//Scene* mScene;
-		bool mbIsLeft;
 	};
 }
 

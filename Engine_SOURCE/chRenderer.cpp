@@ -17,7 +17,7 @@ namespace ch::renderer
 	std::vector<DebugMesh> debugMeshes;
 	std::vector<LightAttribute> lights;
 
-	void LoadMesh() 
+	void LoadMesh()
 	{
 		//RECT
 		vertexes[0].pos = Vector4(-0.5f, 0.5f, 0.0f, 1.0f);
@@ -168,11 +168,6 @@ namespace ch::renderer
 			, gridShader->GetVSBlobBufferSize()
 			, gridShader->GetInputLayoutAddressOf());
 
-		std::shared_ptr<Shader> fadeShader = Resources::Find<Shader>(L"FadeEffectShader");
-		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
-			, fadeShader->GetVSBlobBufferPointer()
-			, fadeShader->GetVSBlobBufferSize()
-			, fadeShader->GetInputLayoutAddressOf());
 
 		std::shared_ptr<Shader> debugShader = Resources::Find<Shader>(L"DebugShader");
 		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
@@ -364,13 +359,6 @@ namespace ch::renderer
 
 		Resources::Insert<Shader>(L"GridShader", gridShader);
 
-		// FadeEffect
-		std::shared_ptr<Shader> FadeEffectShader = std::make_shared<Shader>();
-		FadeEffectShader->Create(eShaderStage::VS, L"FadeEffectVS.hlsl", "main");
-		FadeEffectShader->Create(eShaderStage::PS, L"FadeEffectPS.hlsl", "main");
-
-		Resources::Insert<Shader>(L"FadeEffectShader", FadeEffectShader);
-
 		// Debug Shader
 		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
 		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
@@ -412,7 +400,8 @@ namespace ch::renderer
 		//bg
 		Resources::Load<Texture>(L"FloatSprite", L"battleField.png");
 
-
+		//zelda
+		Resources::Load<Texture>(L"ZeldaSprite", L"Zelda.png");
 	}
 
 	void LoadMaterial()
@@ -512,6 +501,7 @@ namespace ch::renderer
 		// Debug
 		std::shared_ptr<Shader> debugShader = Resources::Find<Shader>(L"DebugShader");
 		std::shared_ptr<Material> debugMaterial = std::make_shared<Material>();
+		debugMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		debugMaterial->SetShader(debugShader);
 		Resources::Insert<Material>(L"DebugMaterial", debugMaterial);
 
