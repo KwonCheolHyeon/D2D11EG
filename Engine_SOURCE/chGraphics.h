@@ -15,10 +15,11 @@
 #define CBSLOT_TRANSFORM 0
 #define CBSLOT_MATERIAL 1
 #define CBSLOT_GRID 2
-#define CBSLOT_FADEEFFECT 3
 #define CBSLOT_ANIMATION 3
+#define CBSLOT_NUMBEROFLIGHT 4
 
 using namespace ch::math;
+
 namespace ch::graphics
 {
 	enum class ValidationMode
@@ -103,8 +104,8 @@ namespace ch::graphics
 		Transform,
 		Material,
 		Grid,
-		FadeEffect,//내가 만든거
 		Animation,
+		Light,
 		End,
 	};
 
@@ -130,6 +131,7 @@ namespace ch::graphics
 		math::Vector3 position;
 		math::Vector3 rotatation;
 		math::Vector3 scale;
+
 		float radius;
 		float duration;
 		float time;
@@ -140,7 +142,7 @@ namespace ch::graphics
 		Vector4 diffuse;
 		Vector4 specular;
 		Vector4 ambient;
-		Vector4 emissive;
+
 		Vector4 position;
 		Vector4 direction;
 

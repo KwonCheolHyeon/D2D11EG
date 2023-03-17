@@ -2,12 +2,13 @@
 #include "CommonInclude.h"
 #include "chMath.h"
 #include "chGraphicDevice_DX11.h"
-		 
+		  
 #include "chMesh.h"
 #include "chShader.h"
 #include "chConstantBuffer.h"
 #include "chCamera.h"
 #include "chLight.h"
+#include "chStructedBuffer.h"
 
 using namespace ch::math;
 using namespace ch::graphics;
@@ -45,13 +46,6 @@ namespace ch::renderer
 		Vector2 resolution;
 	};
 
-	CBUFFER(FadeEffectCB, CBSLOT_FADEEFFECT)
-	{
-		Vector4 cameraPosition;
-		Vector2 cameraScale;
-		float alphaAmount;
-	};
-
 	CBUFFER(AnimationCB, CBSLOT_ANIMATION)
 	{
 		Vector2 leftTop;
@@ -60,6 +54,12 @@ namespace ch::renderer
 		Vector2 atlasSize;
 
 		UINT type;
+	};
+
+	//CBSLOT_NUMBEROFLIGHT
+	CBUFFER(LightCB, CBSLOT_NUMBEROFLIGHT)
+	{
+		UINT numberOfLight;
 	};
 
 
@@ -74,13 +74,15 @@ namespace ch::renderer
 	extern std::vector<Camera*> cameras[];
 	extern std::vector<DebugMesh> debugMeshes;
 	extern std::vector<LightAttribute> lights;
+	extern StructedBuffer* lightsBuffer;
 
 	void Initialize();
 	void Render();
 	void Release();
 
 	//Renderer
-	
+	void PushLightAttribute(LightAttribute lightAttribute);
+	void BindLights();
 
 }
 

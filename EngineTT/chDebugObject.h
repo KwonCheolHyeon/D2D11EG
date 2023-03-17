@@ -1,6 +1,5 @@
 #pragma once
-#include "..\Engine_SOURCE\chGameObject.h"
-
+#include "chGameObject.h"
 
 namespace ch
 {

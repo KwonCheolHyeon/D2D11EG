@@ -26,7 +26,7 @@ namespace ch
 		mScenes[(UINT)eSceneType::Main] = new MainMenu();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 
-		mActiveScene = mScenes[(UINT)eSceneType::Tilte];
+		mActiveScene = mScenes[(UINT)eSceneType::Main];
 
 		mActiveScene->Initalize();
 		

@@ -2,9 +2,8 @@
 #include "chComponent.h"
 #include "chTransform.h"
 
-namespace ch 
+namespace ch
 {
-
 	class Collider2D : public Component
 	{
 	public:
@@ -29,16 +28,11 @@ namespace ch
 		void SetCenter(Vector2 center) { mCenter = center; }
 		void SetRadius(float radius) { mRadius = radius; }
 		bool IsTriiger() { return mbTrigger; }
-		void SetPosition(Vector3 position) { mPosition = position; }
-
 		UINT GetID() { return mID; }
 		Vector3 GetPosition() { return mPosition; }
-				
-		Vector2 GetCenter() { return mCenter; }
 		Vector2 GetSize() { return mSize; }
-		eColliderType GetType() { return mType; }
 
-		float GetRadius(Vector2 size) { return size.x * 0.5f; }
+		eColliderType GetType() { return mType; }
 	private:
 		static UINT ColliderNumber;
 		UINT mID;
@@ -51,7 +45,4 @@ namespace ch
 		float mRadius;
 		bool mbTrigger;
 	};
-
-	
 }
-

@@ -42,22 +42,10 @@ namespace ch
 			cameraUIComp->DisableLayerMasks();
 			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		}
-		{//player
-			/*GameObject* standObj = object::Instantiate<GameObject>(eLayerType::Player);
-			standObj->SetName(L"Player");
-			Transform* standTr = standObj->GetComponent<Transform>();
-			standTr->SetPosition(Vector3(0.5f, 0.5f, 2.0f));
-			standTr->SetScale(Vector3(0.3f, 0.5f, 0.1f));
-			Collider2D* collider = standObj->AddComponent<Collider2D>();
-			collider->SetType(eColliderType::Rect);
+		{
 
-			SpriteRenderer* standsr = standObj->AddComponent<SpriteRenderer>();
-			std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");
-			std::shared_ptr<Material> standmaterial = Resources::Find<Material>(L"pIdleMaterial");
-			standsr->SetMaterial(standmaterial);
-			standsr->SetMesh(standmesh);
 
-			standObj->AddComponent<mainPlayer>();*/
+
 		}
 
 

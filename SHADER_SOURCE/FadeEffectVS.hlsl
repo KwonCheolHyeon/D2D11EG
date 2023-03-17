@@ -13,7 +13,6 @@ struct VSOut
     float4 Color : COLOR;
     float2 UV : TEXCOORD;
   
-    //float2 WorldPos : POSITION;
 };
 
 VSOut main(VSIn In)
@@ -30,15 +29,5 @@ VSOut main(VSIn In)
     
     return Out;
     
-    /*
-    float2 worldPos = float2(0.0f, 0.0f);
-    worldPos.x = In.Pos.x * cameraScale.x * resolution.x + cameraPosition.x;
-    worldPos.y = In.Pos.y * cameraScale.y * resolution.y + cameraPosition.y;
-
-    Out.Color = In.Color;
-    Out.UV = In.UV;
-    Out.WorldPos = worldPos;
-    
-    return Out;
-    */
+   
 }

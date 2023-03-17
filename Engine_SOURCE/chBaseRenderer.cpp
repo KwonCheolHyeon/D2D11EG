@@ -1,11 +1,11 @@
 #include "chBaseRenderer.h"
-#include "chTexture.h"
-#include "chTransform.h"
-#include "chGameObject.h"
-#include "chResources.h"
+
 
 namespace ch
 {
+
+
+
 	BaseRenderer::BaseRenderer(eComponentType type)
 		: Component(type)
 	{
@@ -30,5 +30,5 @@ namespace ch
 	void BaseRenderer::Render()
 	{
 	}
-	
+
 }

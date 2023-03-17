@@ -39,6 +39,7 @@ namespace ch
 
 	void Camera::Update()
 	{
+
 	}
 
 	void Camera::FixedUpdate()
@@ -85,16 +86,14 @@ namespace ch
 
 	void Camera::CreateProjectionMatrix()
 	{
-		
 		RECT winRect;
 		GetClientRect(application.GetHwnd(), &winRect);
-		
+
 		float width = (winRect.right - winRect.left) * mScale;
 		float height = (winRect.bottom - winRect.top) * mScale;
 		mAspectRatio = width / height;
-	
-		
-		if (mType == eProjectionType::Perspective)//원근 3d
+
+		if (mType == eProjectionType::Perspective)
 		{
 			mProjection = Matrix::CreatePerspectiveFieldOfViewLH
 			(
@@ -104,11 +103,10 @@ namespace ch
 				, mFar
 			);
 		}
-		else//직교 2d
+		else
 		{
 			mProjection = Matrix::CreateOrthographicLH(width / 100.0f, height / 100.0f, mNear, mFar);
 		}
-
 	}
 
 	void Camera::RegisterCameraInRenderer()

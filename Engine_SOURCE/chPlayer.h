@@ -3,8 +3,6 @@
 
 namespace ch
 {
-	class Animator;
-	class Image;
 	class Player : public GameObject
 	{
 	public:
@@ -17,7 +15,7 @@ namespace ch
 		virtual void Render();
 
 	private:
-		Animator* mAnimator;
-		Transform* mTr;
+		//GameObject* head;
+		//GameObject* body;
 	};
 }

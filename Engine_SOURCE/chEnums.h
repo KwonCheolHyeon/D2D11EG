@@ -14,8 +14,8 @@ namespace ch::enums
 	{
 		None = 0,
 		Camera,
-		BackGround,
 		Grid,
+		BackGround,
 		Monster,
 		Player,
 

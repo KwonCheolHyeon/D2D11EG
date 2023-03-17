@@ -2,7 +2,8 @@
 #include "chComponent.h"
 #include "chGraphics.h"
 
-namespace ch 
+
+namespace ch
 {
 	class Light : public Component
 	{
@@ -14,6 +15,7 @@ namespace ch
 		virtual void Update() override;
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
+
 		graphics::LightAttribute GetLightAttribute() { return mAttribute; }
 
 		void SetDiffuse(Vector4 diffuse) { mAttribute.diffuse = diffuse; }
@@ -22,14 +24,11 @@ namespace ch
 		void SetRadius(float radius) { mAttribute.radius = radius; }
 		void SetAngle(float angle) { mAttribute.angle = angle; }
 		Vector4 GetDiffuse() { mAttribute.diffuse; }
-		eLightType GetType() { return mAttribute.type; }
+		eLightType GetType() { return (eLightType)mAttribute.type; }
 		float GetRadius() { mAttribute.radius; }
 		float GetAngle() { mAttribute.angle; }
 
 	private:
 		graphics::LightAttribute mAttribute;
-
 	};
 }
-
-

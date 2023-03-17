@@ -154,8 +154,8 @@ namespace ch
 			Vector3 rightPos = right->GetPosition();
 
 			Vector3 distanceVec = leftPos - rightPos;
-			float distance = distanceVec.Magnitude();
-
+			//float distance = distanceVec.Magnitude(); //¹Ù²ãÁà¾ßÇÔ 
+			float distance = 1.f;
 			float leftRadius = left->GetSize().x / 2.0f;
 			float rightRadius = right->GetSize().x / 2.0f;
 			

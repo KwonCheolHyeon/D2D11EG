@@ -9,6 +9,7 @@ struct VSIn
 struct VSOut
 {
     float4 Pos : SV_Position;
+    float3 WorldPos : POSITION;
     float4 Color : COLOR;
     float2 UV : TEXCOORD;
 };
@@ -19,7 +20,7 @@ struct VSOut
 float4 main(VSOut In) : SV_Target
 {
     float4 color = (float) 0.0f;
-   
+    
     //color.a += time;
     
     if (animationType == 1) // 2D
@@ -39,6 +40,8 @@ float4 main(VSOut In) : SV_Target
         color = defaultTexture.Sample(anisotropicSampler, In.UV);
     }
     
+   //spritePs이부분 추가하면 오류
+    //global에서도 light부분 추가하면 오류
     //color = defaultTexture.Sample(anisotropicSampler, In.UV);
     return color;
 }

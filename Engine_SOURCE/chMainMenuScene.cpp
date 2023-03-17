@@ -38,6 +38,7 @@ namespace ch
 			Camera* cameraComp = chCamera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			chCamera->AddComponent<CameraScript>();
+			
 			mainCamera = cameraComp;
 		}
 		{
@@ -49,31 +50,8 @@ namespace ch
 			cameraComp->TurnLayerMask(eLayerType::UI, true);
 		}
 		{
-			//Player* obj = object::Instantiate<Player>(eLayerType::Player);
-			//obj->SetName(L"Zelda");
-			//Transform* tr = obj->GetComponent<Transform>();
-			//tr->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
-			////tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2));
-			////tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
-			//Collider2D* collider = obj->AddComponent<Collider2D>();
-			//collider->SetType(eColliderType::Rect);
-			////collider->SetCenter(Vector2(0.2f, 0.2f));
-			////collider->SetSize(Vector2(1.5f, 1.5f));
-			//Animator* animator = obj->AddComponent<Animator>();
-			//std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Zelda", L"Zelda.png");
-			//animator->Create(L"Idle", texture, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), Vector2::Zero, 3, 0.1f);
-			//animator->Create(L"MoveDown", texture, Vector2(0.0f, 520.0f), Vector2(120.0f, 130.0f), Vector2::Zero, 8, 0.1f);
-
-			//animator->Play(L"Idle", true);
-
-			//SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
-			//std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"SpriteMaterial");
-			//mr->SetMaterial(mateiral);
-			//std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
-			//mr->SetMesh(mesh);
-			//obj->AddComponent<PlayerScript>();
-			////object::DontDestroyOnLoad(obj);
 			
+
 		}
 	
 		{//mainmenu
@@ -82,7 +60,7 @@ namespace ch
 				rightObj->SetName(L"mainmenuBG");
 				Transform* rightObjTr = rightObj->GetComponent<Transform>();
 				rightObjTr->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
-				rightObjTr->SetScale(Vector3(10.0f, 10.0f, 2.0f));
+				rightObjTr->SetScale(Vector3(30.0f, 30.0f, 0.1f));
 
 				SpriteRenderer* rightsr = rightObj->AddComponent<SpriteRenderer>();
 				std::shared_ptr<Material> titlerightmaterial = Resources::Find<Material>(L"mainBgMaterial");
@@ -94,8 +72,8 @@ namespace ch
 				GameObject* rightObj = object::Instantiate<GameObject>(eLayerType::BackGround);
 				rightObj->SetName(L"mainmenu");
 				Transform* rightObjTr = rightObj->GetComponent<Transform>();
-				rightObjTr->SetPosition(Vector3(1.0f, 1.0f, 1.7f));
-				rightObjTr->SetScale(Vector3(5.3f, 3.0f, 2.0f));
+				rightObjTr->SetPosition(Vector3(1.0f, 1.1f, 0.2f));
+				rightObjTr->SetScale(Vector3(17.0f, 9.0f, 0.2f));
 
 				SpriteRenderer* rightsr = rightObj->AddComponent<SpriteRenderer>();
 				std::shared_ptr<Material> titlerightmaterial = Resources::Find<Material>(L"mainMenuMaterial");

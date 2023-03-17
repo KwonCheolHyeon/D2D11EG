@@ -95,12 +95,6 @@ namespace ch::math
     // 2D vector
     struct Vector2 : public XMFLOAT2
     {
-        //내가 만든거
-        float Magnitude() const
-        {
-            return std::sqrt(x * x + y * y);
-        }
-
         Vector2() noexcept : XMFLOAT2(0.f, 0.f) {}
         constexpr explicit Vector2(float ix) noexcept : XMFLOAT2(ix, ix) {}
         constexpr Vector2(float ix, float iy) noexcept : XMFLOAT2(ix, iy) {}
@@ -214,12 +208,6 @@ namespace ch::math
     // 3D vector
     struct Vector3 : public XMFLOAT3
     {
-        //내가 만든거
-        float Magnitude() const
-        {
-            return std::sqrt(x * x + y * y + z * z);
-        }
-
         Vector3() noexcept : XMFLOAT3(0.f, 0.f, 0.f) {}
         constexpr explicit Vector3(float ix) noexcept : XMFLOAT3(ix, ix, ix) {}
         constexpr Vector3(float ix, float iy, float iz) noexcept : XMFLOAT3(ix, iy, iz) {}

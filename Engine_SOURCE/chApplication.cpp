@@ -17,7 +17,7 @@ namespace ch
 
 	Application::~Application()
 	{
-		
+
 	}
 
 	void Application::Initalize()
@@ -58,10 +58,13 @@ namespace ch
 		CollisionManager::Render();
 		//graphicDevice->Render();
 		//graphicDevice->Present();
+
+
 	}
 
 	void Application::Destroy()
 	{
+
 	}
 
 	// Running main engine loop

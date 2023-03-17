@@ -17,6 +17,9 @@
 #include "chCollisionManager.h"
 #include "mainPlayer.h"
 #include "chAnimator.h"
+#include "chLight.h"
+
+
 
 namespace ch
 {
@@ -29,6 +32,23 @@ namespace ch
 	}
 	void TitleScene::Initalize()
 	{
+		{
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
+			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
+			Light* lightComp = directionalLight->AddComponent<Light>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+
+		{
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
+			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(3.0f, 0.0f, 0.0f));
+			Light* lightComp = directionalLight->AddComponent<Light>();
+			lightComp->SetType(eLightType::Point);
+			lightComp->SetRadius(10.0f);
+			lightComp->SetDiffuse(Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+		}
+
 		// Main Camera Game Object
 		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera);
 		Camera* cameraComp = cameraObj->AddComponent<Camera>();
@@ -64,7 +84,7 @@ namespace ch
 			animator->Create(L"MoveDown", texture, Vector2(0.0f, 520.0f), Vector2(120.0f, 130.0f), Vector2::Zero, 8, 0.1f);
 
 			animator->Play(L"Idle", true);
-			int a = 0;
+			
 			
 
 			SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
@@ -73,9 +93,8 @@ namespace ch
 			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 			mr->SetMesh(mesh);
 			obj->AddComponent<PlayerScript>();
-			object::DontDestroyOnLoad(obj);
-
 			
+						
 		}
 
 		//SMILE RECT
@@ -98,7 +117,7 @@ namespace ch
 			mr->SetMaterial(mateiral);
 			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 			mr->SetMesh(mesh);
-			object::DontDestroyOnLoad(obj);
+			
 		}
 
 		//CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Monster, true);

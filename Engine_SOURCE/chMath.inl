@@ -20,6 +20,8 @@ using namespace ch::math;
 //------------------------------------------------------------------------------
 // Rectangle operations
 //------------------------------------------------------------------------------
+//namespace ya::math
+
 inline Vector2 Rectangle::Location() const noexcept
 {
     return Vector2(float(x), float(y));
@@ -47,7 +49,8 @@ inline void Rectangle::Inflate(long horizAmount, long vertAmount) noexcept
 // Static functions
 //------------------------------------------------------------------------------
 
-inline Rectangle Rectangle::Intersect(const Rectangle& ra, const Rectangle& rb) noexcept
+
+inline ch::math::Rectangle Rectangle::Intersect(const Rectangle& ra, const Rectangle& rb) noexcept
 {
     const long righta = ra.x + ra.width;
     const long rightb = rb.x + rb.width;
@@ -109,7 +112,7 @@ inline RECT Rectangle::Intersect(const RECT& rcta, const RECT& rctb) noexcept
     return result;
 }
 
-inline Rectangle Rectangle::Union(const Rectangle& ra, const Rectangle& rb) noexcept
+inline ch::math::Rectangle Rectangle::Union(const Rectangle& ra, const Rectangle& rb) noexcept
 {
     const long righta = ra.x + ra.width;
     const long rightb = rb.x + rb.width;

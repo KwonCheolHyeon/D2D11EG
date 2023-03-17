@@ -1,17 +1,10 @@
 #include "chPlayer.h"
-#include "chPlayerScript.h"
-#include "chSpriteRenderer.h"
-#include "chAnimator.h"
-#include "chResources.h"
-#include "chMesh.h"
-#include "chTransform.h"
-#include "chInput.h"
-#include "chTime.h"
+
+
 namespace ch
 {
 	Player::Player()
 	{
-		
 	}
 
 	Player::~Player()
@@ -25,8 +18,9 @@ namespace ch
 
 	void Player::Update()
 	{
-	
 		GameObject::Update();
+		//head->update();
+		//body->update();
 
 	}
 

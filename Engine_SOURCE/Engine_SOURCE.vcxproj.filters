@@ -107,6 +107,9 @@
     <Filter Include="GameObject\GunChar">
       <UniqueIdentifier>{5194c325-018c-4d19-a309-76f8864f31b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Animator">
+      <UniqueIdentifier>{a14fb13f-ec29-486c-abee-e1fa09575136}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -141,9 +144,6 @@
     </ClInclude>
     <ClInclude Include="chSpriteRenderer.h">
       <Filter>Component\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="chPlayerScript.h">
-      <Filter>Component\Script\Contents</Filter>
     </ClInclude>
     <ClInclude Include="chScript.h">
       <Filter>Component\Script</Filter>
@@ -232,14 +232,6 @@
     <ClInclude Include="chCollider3D.h">
       <Filter>Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="chPlayer.h">
-      <Filter>GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="chMonster.h">
-      <Filter>GameObject\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="chAnimation.h" />
-    <ClInclude Include="chAnimator.h" />
     <ClInclude Include="chShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
@@ -254,6 +246,21 @@
     </ClInclude>
     <ClInclude Include="chLight.h" />
     <ClInclude Include="chStructedBuffer.h" />
+    <ClInclude Include="chAnimation.h">
+      <Filter>Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="chAnimator.h">
+      <Filter>Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayer.h">
+      <Filter>Component\Script\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="chMonster.h">
+      <Filter>Component\Script\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayerScript.h">
+      <Filter>Component\Script\Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -279,9 +286,6 @@
     </ClCompile>
     <ClCompile Include="chSpriteRenderer.cpp">
       <Filter>Component\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="chPlayerScript.cpp">
-      <Filter>Component\Script\Contents</Filter>
     </ClCompile>
     <ClCompile Include="chScript.cpp">
       <Filter>Component\Script</Filter>
@@ -367,14 +371,6 @@
     <ClCompile Include="chCollider3D.cpp">
       <Filter>Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="chPlayer.cpp">
-      <Filter>GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="chMonster.cpp">
-      <Filter>GameObject\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="chAnimation.cpp" />
-    <ClCompile Include="chAnimator.cpp" />
     <ClCompile Include="mainPlayer.cpp">
       <Filter>GameObject\GunChar</Filter>
     </ClCompile>
@@ -386,6 +382,21 @@
     </ClCompile>
     <ClCompile Include="chLight.cpp" />
     <ClCompile Include="chStructedBuffer.cpp" />
+    <ClCompile Include="chAnimation.cpp">
+      <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="chAnimator.cpp">
+      <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayer.cpp">
+      <Filter>Component\Script\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="chMonster.cpp">
+      <Filter>Component\Script\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayerScript.cpp">
+      <Filter>Component\Script\Contents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">

@@ -33,9 +33,16 @@ cbuffer Animation : register(b3)
     uint animationType;
 }
 
+cbuffer NumberOfLight : register(b4)
+{
+    uint numberOfLight;
+}
+
 SamplerState pointSampler : register(s0);
 SamplerState linearSampler : register(s1);
 SamplerState anisotropicSampler : register(s2);
+
+StructuredBuffer<LightAttribute> lightAttributes : register(t13);
 
 Texture2D defaultTexture : register(t0);
 //Texture2D defaultTexture2 : register(t1);
@@ -44,4 +51,3 @@ Texture2D defaultTexture : register(t0);
 //Atlas texture
 Texture2D atlasTexture : register(t12);
 
-StructuredBuffer<LightAttribute> lightAttributes : register(t13);

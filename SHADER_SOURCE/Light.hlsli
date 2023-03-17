@@ -17,6 +17,16 @@ struct LightAttribute
     float radius;
     float angle;
     int padding;
-    
-    //
 };
+
+//Vector4 diffuse;
+//Vector4 specular;
+//Vector4 ambient;
+//Vector4 position;
+//Vector4 direction;
+
+//enums::eLightType type;
+//float radius;
+//float angle;
+//int padding;
+
