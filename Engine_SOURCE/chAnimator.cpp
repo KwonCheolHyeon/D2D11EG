@@ -1,5 +1,5 @@
 #include "chAnimator.h"
-
+#include "chTime.h"
 
 namespace ch
 {
@@ -9,6 +9,7 @@ namespace ch
 		, mEvents{}
 		, mActiveAnimation(nullptr)
 		, mbLoop(false)
+		
 	{
 
 	}
@@ -41,7 +42,7 @@ namespace ch
 			if (events)
 				events->mCompleteEvent();
 
-			if (mbLoop)
+			if (mbLoop)  
 				mActiveAnimation->Reset();
 		}
 
@@ -60,6 +61,7 @@ namespace ch
 	{
 	}
 
+	
 	bool Animator::Create(const std::wstring& name, std::shared_ptr<Texture> atlas
 		, Vector2 leftTop, Vector2 size, Vector2 offset
 		, UINT spriteLegth, float duration)
@@ -168,4 +170,8 @@ namespace ch
 
 		return events->mEvents[index].mEvent;
 	}
+
+
+	
+	
 }

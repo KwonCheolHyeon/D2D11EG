@@ -208,6 +208,7 @@ namespace ch::math
     // 3D vector
     struct Vector3 : public XMFLOAT3
     {
+       
         Vector3() noexcept : XMFLOAT3(0.f, 0.f, 0.f) {}
         constexpr explicit Vector3(float ix) noexcept : XMFLOAT3(ix, ix, ix) {}
         constexpr Vector3(float ix, float iy, float iz) noexcept : XMFLOAT3(ix, iy, iz) {}

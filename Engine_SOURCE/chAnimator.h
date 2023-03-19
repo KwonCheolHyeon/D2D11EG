@@ -2,6 +2,7 @@
 #include "chComponent.h"
 #include "chAnimation.h"
 
+#include "chTime.h"
 namespace ch
 {
 	class Animator : public Component
@@ -38,7 +39,7 @@ namespace ch
 		virtual void Update() override;
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
-
+		
 		bool Create(const std::wstring& name, std::shared_ptr<Texture> atlas
 			, Vector2 leftTop, Vector2 size, Vector2 offset
 			, UINT spriteLegth, float duration);
@@ -55,11 +56,18 @@ namespace ch
 		std::function<void()>& GetEndEvent(const std::wstring& name);
 		std::function<void()>& GetEvent(const std::wstring& name, UINT index);
 
+	public ://필요해서 추가
+		
+
+
 	private:
 
 		std::map<std::wstring, Animation*> mAnimations;
 		std::map<std::wstring, Events*> mEvents;
 		Animation* mActiveAnimation;
 		bool mbLoop;
+
+	
+		
 	};
 }

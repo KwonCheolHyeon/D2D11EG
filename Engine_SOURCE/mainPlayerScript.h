@@ -7,6 +7,8 @@ namespace ch
     {
         Front,
         Back,
+        Left,
+        Right,
         Dodge,
         Attack,
         Reload,
