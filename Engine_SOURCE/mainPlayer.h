@@ -1,26 +1,25 @@
 #pragma once
 #include "chGameObject.h"
-#include "chScript.h"
+#include "chAnimator.h"
 
 namespace ch
 {
-	class MeshRenderer;
-	class mainPlayer : public Script
+	class mainPlayer : public GameObject
 	{
 	public:
 		mainPlayer();
 		virtual ~mainPlayer();
 
-		virtual void Initialize();
+		virtual void Initalize();
 		virtual void Update();
+		virtual void FixedUpdate();
 		virtual void Render();
 
-		virtual void OnCollisionEnter(Collider2D* collider) override;
-		virtual void OnCollisionStay(Collider2D* collider) override;
-		virtual void OnCollisionExit(Collider2D* collider) override;
 
 	private:
-		MeshRenderer* mMr;
+		Transform* pTr;
+		Collider2D* pCollider;
+		Animator* pAnimator;
 	};
 }
 

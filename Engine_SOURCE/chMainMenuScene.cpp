@@ -49,10 +49,6 @@ namespace ch
 			cameraComp->DisableLayerMasks();
 			cameraComp->TurnLayerMask(eLayerType::UI, true);
 		}
-		{
-			
-
-		}
 	
 		{//mainmenu
 			{//bg

@@ -1,83 +1,122 @@
 #include "mainPlayer.h"
-#include "chTransform.h"
-#include "chGameObject.h"
-#include "chInput.h"
-#include "chTime.h"
-#include "chFadeEffect.h"
-#include "chMeshRenderer.h"
-#include "chMaterial.h"
-#include "chMesh.h"
+#include "mainPlayerScript.h"
 #include "chResources.h"
-#include "chPlayerScript.h"
-#include "chTransform.h"
-
-
+#include "chAnimator.h"
+#include "chSpriteRenderer.h"
+#include "chInput.h"
 namespace ch
 {
 	mainPlayer::mainPlayer()
-		: Script()
 	{
+		SetLayerType(eLayerType::Player);
+		this->AddComponent<mainPlayerScript>();
+
+		GameObject* playerOBJ = dynamic_cast<GameObject*>(this);
+
+		{///애니메이터
+			pAnimator = playerOBJ->AddComponent<Animator>();
+			{//기본상태
+				{//정면
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"IdleFront", L"enterthe/character/idle/idleFront.png");
+					pAnimator->Create(L"P_IdleFront", texture, Vector2(0.0f, 0.0f), Vector2(18.0f, 20.0f), Vector2::Zero, 4, 0.1f);
+				}
+				{//우측
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"IdleRight", L"enterthe/character/idle/idleRight.png");
+					pAnimator->Create(L"P_IdleRight", texture, Vector2(0.0f, 0.0f), Vector2(18.0f, 20.0f), Vector2::Zero, 4, 0.1f);
+				}
+				{//좌측
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"IdleLeft", L"enterthe/character/idle/idleLeft.png");
+					pAnimator->Create(L"P_IdleLeft", texture, Vector2(0.0f, 0.0f), Vector2(18.0f, 20.0f), Vector2::Zero, 4, 0.1f);
+				}
+				{//뒤
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"IdleBack", L"enterthe/character/idle/idleBack.png");
+					pAnimator->Create(L"P_IdleBack", texture, Vector2(0.0f, 0.0f), Vector2(18.0f, 20.0f), Vector2::Zero, 4, 0.1f);
+				}
+				{//뒤우측
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"IdleBackRight", L"enterthe/character/idle/idleBackRight.png");
+					pAnimator->Create(L"P_IdleBackRight", texture, Vector2(0.0f, 0.0f), Vector2(18.0f, 20.0f), Vector2::Zero, 4, 0.1f);
+				}
+				{//뒤좌측
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"IdleBackLeft", L"enterthe/character/idle/idleBackLeft.png");
+					pAnimator->Create(L"P_IdleBackLeft", texture, Vector2(0.0f, 0.0f), Vector2(18.0f, 20.0f), Vector2::Zero, 4, 0.1f);
+				}		
+			}
+			{//walking
+				{//정면
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"WalkingFront", L"enterthe/character/walking/walkingFront.png");
+					pAnimator->Create(L"P_WalkingFront", texture, Vector2(0.0f, 0.0f), Vector2(17.0f, 23.0f), Vector2::Zero, 6, 0.1f);
+				}
+				{//우측
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"WalkingRight", L"enterthe/character/walking/walkingRight.png");
+					pAnimator->Create(L"P_WalkingRight", texture, Vector2(0.0f, 0.0f), Vector2(18.0f, 23.0f), Vector2::Zero, 6, 0.1f);
+				}
+				{//좌측
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"WalkingLeft", L"enterthe/character/walking/walkingLeft.png");
+					pAnimator->Create(L"P_WalkingLeft", texture, Vector2(0.0f, 0.0f), Vector2(18.0f, 23.0f), Vector2::Zero, 6, 0.1f);
+				}
+				{//뒤
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"WalkingBack", L"enterthe/character/walking/walkingBack.png");
+					pAnimator->Create(L"P_WalkingBack", texture, Vector2(0.0f, 0.0f), Vector2(18.0f, 23.0f), Vector2::Zero, 6, 0.1f);
+				}
+				{//뒤우측
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"WalkingBackRight", L"enterthe/character/walking/walkingBackRight.png");
+					pAnimator->Create(L"P_WalkingBackRight", texture, Vector2(0.0f, 0.0f), Vector2(20.0f, 23.0f), Vector2::Zero, 6, 0.1f);
+				}
+				{//뒤좌측
+					std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"WalkingBackLeft", L"enterthe/character/walking/walkingBackLeft.png");
+					pAnimator->Create(L"P_WalkingBackLeft", texture, Vector2(0.0f, 0.0f), Vector2(20.0f, 23.0f), Vector2::Zero, 6, 0.1f);
+				}
+			
+			}
+
+
+			pAnimator->Play(L"P_IdleFront", true);
+
+		}
+
+		SpriteRenderer* sprite = playerOBJ->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pIdleMaterial");
+		sprite->SetMaterial(mateiral);
+		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+		sprite->SetMesh(mesh);
+		
+		pTr = playerOBJ->AddComponent<Transform>();
+		pTr->SetScale(Vector3(5.3f, 5.6f, 1.0f));
+		
+
+		pCollider = playerOBJ->AddComponent<Collider2D>();
+		pCollider->SetName(L"playerCollider");
+		pCollider->SetType(eColliderType::Rect);
+		pCollider->SetSize(Vector2(0.08f, 0.1f));
+
+		playerOBJ->AddComponent<mainPlayerScript>();
 	}
 
 	mainPlayer::~mainPlayer()
 	{
 	}
 
-	void mainPlayer::Initialize()
+	void mainPlayer::Initalize()
 	{
-	
+		GameObject::Initalize();
 	}
 
 	void mainPlayer::Update()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
 		
-		
+		GameObject::Update();
+	}
 
-		if (Input::GetKey(eKeyCode::RIGHT))
-		{
-		
-			Vector3 pos = tr->GetPosition();
-			pos.x += 6.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		if (Input::GetKey(eKeyCode::LEFT))
-		{
-			Vector3 pos = tr->GetPosition();
-			pos.x -= 6.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-
-		if (Input::GetKey(eKeyCode::DOWN))
-		{
-			Vector3 pos = tr->GetPosition();
-			pos.y -= 6.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		if (Input::GetKey(eKeyCode::UP))
-		{
-			Vector3 pos = tr->GetPosition();
-			pos.y += 6.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-
-	
+	void mainPlayer::FixedUpdate()
+	{
+		GameObject::FixedUpdate();
 	}
 
 	void mainPlayer::Render()
 	{
+		GameObject::Render();
 	}
 
-	void mainPlayer::OnCollisionEnter(Collider2D* collider)
-	{
-	}
 
-	void mainPlayer::OnCollisionStay(Collider2D* collider)
-	{
-	}
-
-	void mainPlayer::OnCollisionExit(Collider2D* collider)
-	{
-	}
 
 }

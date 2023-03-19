@@ -98,17 +98,20 @@
     <Filter Include="Resource\Prefab">
       <UniqueIdentifier>{bc2873d9-4bd3-4f12-ac5b-c51154bf728d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Player">
-      <UniqueIdentifier>{932f4a06-4b00-443a-adf4-5cf865ab6b0b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Monster">
-      <UniqueIdentifier>{1c8c68b8-b180-4ef4-b668-27f8358888ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\GunChar">
       <UniqueIdentifier>{5194c325-018c-4d19-a309-76f8864f31b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Component\Animator">
       <UniqueIdentifier>{a14fb13f-ec29-486c-abee-e1fa09575136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\chScript">
+      <UniqueIdentifier>{e8b8d462-f454-4bd9-8765-64ef5265ad26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\chPlayer">
+      <UniqueIdentifier>{932f4a06-4b00-443a-adf4-5cf865ab6b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\chMonster">
+      <UniqueIdentifier>{1c8c68b8-b180-4ef4-b668-27f8358888ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +264,9 @@
     <ClInclude Include="chPlayerScript.h">
       <Filter>Component\Script\Contents</Filter>
     </ClInclude>
+    <ClInclude Include="mainPlayerScript.h">
+      <Filter>GameObject\GunChar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -396,6 +402,9 @@
     </ClCompile>
     <ClCompile Include="chPlayerScript.cpp">
       <Filter>Component\Script\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="mainPlayerScript.cpp">
+      <Filter>GameObject\GunChar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

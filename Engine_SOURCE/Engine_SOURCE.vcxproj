@@ -202,6 +202,7 @@
     <ClInclude Include="chEngine.h" />
     <ClInclude Include="chSpriteRenderer.h" />
     <ClInclude Include="mainPlayer.h" />
+    <ClInclude Include="mainPlayerScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chAnimation.cpp" />
@@ -250,6 +251,7 @@
     <ClCompile Include="Engine_SOURCE.cpp" />
     <ClCompile Include="chSpriteRenderer.cpp" />
     <ClCompile Include="mainPlayer.cpp" />
+    <ClCompile Include="mainPlayerScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl" />
