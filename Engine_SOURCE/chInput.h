@@ -55,7 +55,7 @@ namespace ch
 			return mKeys[static_cast<UINT>(keyCode)].eState;
 		}
 
-		static __forceinline math::Vector2 GetMousPosition()
+		static __forceinline math::Vector3 GetMousPosition()
 		{
 			return mMousPosition;
 		}
@@ -81,6 +81,6 @@ namespace ch
 
 	private:
 		static std::vector<Key> mKeys;
-		static math::Vector2 mMousPosition;
+		static math::Vector3 mMousPosition;
 	};
 }

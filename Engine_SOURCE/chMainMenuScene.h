@@ -21,6 +21,7 @@ namespace ch
 	private:
 		GameObject* chCamera;
 		GameObject* chUiCamera;
+		GameObject* chUiCursor;
 	};
 
 

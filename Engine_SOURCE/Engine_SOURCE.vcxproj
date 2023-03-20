@@ -179,6 +179,7 @@
     <ClInclude Include="chMesh.h" />
     <ClInclude Include="chMeshRenderer.h" />
     <ClInclude Include="chMonster.h" />
+    <ClInclude Include="chMouseCursorScript.h" />
     <ClInclude Include="chObject.h" />
     <ClInclude Include="chPlayer.h" />
     <ClInclude Include="chPlayerScript.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="chMesh.cpp" />
     <ClCompile Include="chMeshRenderer.cpp" />
     <ClCompile Include="chMonster.cpp" />
+    <ClCompile Include="chMouseCursorScript.cpp" />
     <ClCompile Include="chPlayer.cpp" />
     <ClCompile Include="chPlayerScript.cpp" />
     <ClCompile Include="chPlayerSprite.cpp" />

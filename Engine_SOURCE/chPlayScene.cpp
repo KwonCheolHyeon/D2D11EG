@@ -9,12 +9,14 @@
 #include "chResources.h"
 #include "chSpriteRenderer.h"
 #include "mainPlayer.h"
+#include "chMouseCursorScript.h"
 
 
 namespace ch
 {
 	PlayScene::PlayScene()
 		: Scene(eSceneType::Play)
+		, chUiCursor(nullptr)
 	{
 
 	}
@@ -41,11 +43,29 @@ namespace ch
 			cameraUIComp->DisableLayerMasks();
 			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		}
-		{
+		{//플레이어
 			mainPlayer* player = object::Instantiate<mainPlayer>(eLayerType::Player);
 			player->SetName(L"Player");
 
+		}
+		{//UI
+			chUiCursor = object::Instantiate<GameObject>(eLayerType::UI);
+			chUiCursor->SetName(L"MouseCursor");
 
+			chUiCursor->AddComponent<MouseCursorScript>();
+			chUiCursorTR = chUiCursor->GetComponent<Transform>();
+			chUiCursorTR->SetPosition(Input::GetMousPosition());
+			chUiCursorTR->SetScale(Vector3(0.5f, 0.5f, 1.f));
+
+			SpriteRenderer* hpsr = chUiCursor->AddComponent<SpriteRenderer>();
+			chUiCursor->AddComponent(hpsr);
+			std::shared_ptr<Mesh> hpmesh = Resources::Find<Mesh>(L"RectMesh");
+			std::shared_ptr<Material> hpspritematerial = Resources::Find<Material>(L"crossHairMaterial");
+			hpsr->SetMesh(hpmesh);
+			hpsr->SetMaterial(hpspritematerial);
+
+			
+			
 		}
 
 
@@ -68,6 +88,7 @@ namespace ch
 
 	void PlayScene::Update()
 	{
+		
 
 		if (Input::GetKeyDown(eKeyCode::N))
 		{

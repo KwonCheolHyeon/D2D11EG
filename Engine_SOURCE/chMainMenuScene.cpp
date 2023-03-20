@@ -42,12 +42,18 @@ namespace ch
 			mainCamera = cameraComp;
 		}
 		{
-			// ui 카메라
-			chUiCamera = object::Instantiate<GameObject>(eLayerType::Camera);
-			Camera* cameraComp = chUiCamera->AddComponent<Camera>();
-			cameraComp->SetProjectionType(Camera::eProjectionType::Perspective);
-			cameraComp->DisableLayerMasks();
-			cameraComp->TurnLayerMask(eLayerType::UI, true);
+			{
+				// ui 카메라
+				chUiCamera = object::Instantiate<GameObject>(eLayerType::Camera);
+				Camera* cameraComp = chUiCamera->AddComponent<Camera>();
+				cameraComp->SetProjectionType(Camera::eProjectionType::Perspective);
+				cameraComp->DisableLayerMasks();
+				cameraComp->TurnLayerMask(eLayerType::UI, true);
+			}
+
+			{
+			
+			}
 		}
 	
 		{//mainmenu

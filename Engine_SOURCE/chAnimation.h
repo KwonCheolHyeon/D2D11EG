@@ -46,6 +46,9 @@ namespace ch
 		bool IsComplete() { return mbComplete; }
 		std::wstring& AnimationName() { return mAnimationName; }
 
+		// mCurrentFrame 멤버 변수 추가
+		UINT mCurrentFrame;
+
 	private:
 		class Animator* mAnimator;
 		std::wstring mAnimationName;

@@ -410,6 +410,13 @@ namespace ch::renderer
 
 		//zelda
 		Resources::Load<Texture>(L"ZeldaSprite", L"Zelda.png");
+
+		//UI
+		Resources::Load<Texture>(L"CrossHairSprite", L"enterthe\\UI\\crossHair\\crosshair.png");
+
+		//UITest
+		Resources::Load<Texture>(L"CircleSprite", L"enterthe\\circle.png");
+
 	}
 
 	void LoadMaterial()
@@ -461,6 +468,19 @@ namespace ch::renderer
 			Resources::Insert<Material>(L"floatMaterial", material);
 		}
 
+		{//UI
+
+			{//CrossHair
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"CrossHairSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(uiTexture);
+				Resources::Insert<Material>(L"crossHairMaterial", uiMaterial);
+			}
+		}
+
 		// Default
 		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"SmileTexture");
 		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"RectShader");
@@ -486,6 +506,17 @@ namespace ch::renderer
 		uiMaterial->SetShader(uiShader);
 		uiMaterial->SetTexture(uiTexture);
 		Resources::Insert<Material>(L"UIMaterial", uiMaterial);
+
+		{
+			// UI
+			std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"CircleSprite");
+			std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+			std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+			uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			uiMaterial->SetShader(uiShader);
+			uiMaterial->SetTexture(uiTexture);
+			Resources::Insert<Material>(L"CircleMaterial", uiMaterial);
+		}
 
 		// Grid
 		std::shared_ptr<Shader> gridShader = Resources::Find<Shader>(L"GridShader");

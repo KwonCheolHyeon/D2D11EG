@@ -6,7 +6,7 @@ extern ch::Application application;
 namespace ch
 {
 	std::vector<Input::Key> Input::mKeys;
-	math::Vector2 Input::mMousPosition;
+	math::Vector3 Input::mMousPosition; //VECTOR2에서 3로변경
 	int ASCII[(UINT)eKeyCode::END] =
 	{
 		//Alphabet
@@ -79,6 +79,7 @@ namespace ch
 			ScreenToClient(application.GetHwnd(), &mousePos);
 			mMousPosition.x = mousePos.x;
 			mMousPosition.y = mousePos.y;
+			mMousPosition.z = 1.0f;
 		}
 		else
 		{

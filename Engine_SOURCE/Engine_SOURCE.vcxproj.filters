@@ -113,6 +113,9 @@
     <Filter Include="GameObject\chMonster">
       <UniqueIdentifier>{1c8c68b8-b180-4ef4-b668-27f8358888ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UI">
+      <UniqueIdentifier>{d743dfe3-9319-49ba-8bfd-1e068768e3e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -267,6 +270,9 @@
     <ClInclude Include="mainPlayerScript.h">
       <Filter>GameObject\GunChar</Filter>
     </ClInclude>
+    <ClInclude Include="chMouseCursorScript.h">
+      <Filter>GameObject\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -405,6 +411,9 @@
     </ClCompile>
     <ClCompile Include="mainPlayerScript.cpp">
       <Filter>GameObject\GunChar</Filter>
+    </ClCompile>
+    <ClCompile Include="chMouseCursorScript.cpp">
+      <Filter>GameObject\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

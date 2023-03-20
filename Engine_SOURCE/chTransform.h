@@ -21,11 +21,13 @@ namespace ch
 		Transform* GetParent() { return mParent; }
 
 		void SetPosition(Vector3 position) { mPosition = position; };
+		
 		void SetRotation(Vector3 rotation) { mRotation = rotation; };
 		void SetScale(Vector3 scale) { mScale = scale; };
 
 
 		Vector3 GetPosition() { return mPosition; };
+		
 		Vector3 GetRotation() { return mRotation; };
 		Vector3 GetScale() { return mScale; };
 		
@@ -41,6 +43,7 @@ namespace ch
 		Vector3 mRight;
 		Vector3 mUp;
 		Vector3 mPosition;
+	
 		Vector3 mRotation;
 		Vector3 mScale;
 		Matrix mWorld;
