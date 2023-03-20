@@ -28,7 +28,7 @@ namespace ch
 	void PlayScene::Initalize()
 	{
 		{ //Main Camera 
-			GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera);
+			GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
 			Camera* cameraComp = cameraObj->AddComponent<Camera>();
 			//cameraComp->RegisterCameraInRenderer();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
@@ -37,19 +37,19 @@ namespace ch
 		}
 
 		{ //Camera UI
-			GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
+			GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
 			Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
 			cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 			cameraUIComp->DisableLayerMasks();
 			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		}
 		{//플레이어
-			mainPlayer* player = object::Instantiate<mainPlayer>(eLayerType::Player);
+			mainPlayer* player = object::Instantiate<mainPlayer>(eLayerType::Player, this);
 			player->SetName(L"Player");
 
 		}
 		{//UI
-			chUiCursor = object::Instantiate<GameObject>(eLayerType::UI);
+			chUiCursor = object::Instantiate<GameObject>(eLayerType::UI, this);
 			chUiCursor->SetName(L"MouseCursor");
 
 			chUiCursor->AddComponent<MouseCursorScript>();
@@ -88,7 +88,6 @@ namespace ch
 
 	void PlayScene::Update()
 	{
-		
 
 		if (Input::GetKeyDown(eKeyCode::N))
 		{

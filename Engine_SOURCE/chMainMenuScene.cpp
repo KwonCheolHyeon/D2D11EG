@@ -44,7 +44,7 @@ namespace ch
 		{
 			{
 				// ui Ä«¸Þ¶ó
-				chUiCamera = object::Instantiate<GameObject>(eLayerType::Camera);
+				chUiCamera = object::Instantiate<GameObject>(eLayerType::Camera, this);
 				Camera* cameraComp = chUiCamera->AddComponent<Camera>();
 				cameraComp->SetProjectionType(Camera::eProjectionType::Perspective);
 				cameraComp->DisableLayerMasks();
@@ -58,7 +58,7 @@ namespace ch
 	
 		{//mainmenu
 			{//bg
-				GameObject* rightObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+				GameObject* rightObj = object::Instantiate<GameObject>(eLayerType::BackGround, this);
 				rightObj->SetName(L"mainmenuBG");
 				Transform* rightObjTr = rightObj->GetComponent<Transform>();
 				rightObjTr->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
@@ -71,7 +71,7 @@ namespace ch
 			}
 
 			{//mainmenu
-				GameObject* rightObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+				GameObject* rightObj = object::Instantiate<GameObject>(eLayerType::BackGround, this);
 				rightObj->SetName(L"mainmenu");
 				Transform* rightObjTr = rightObj->GetComponent<Transform>();
 				rightObjTr->SetPosition(Vector3(1.0f, 1.1f, 0.2f));

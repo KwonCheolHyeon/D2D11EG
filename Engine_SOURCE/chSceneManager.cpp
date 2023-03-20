@@ -28,7 +28,13 @@ namespace ch
 
 		mActiveScene = mScenes[(UINT)eSceneType::Play];
 
-		mActiveScene->Initalize();
+		for (Scene* scene : mScenes)
+		{
+			if (scene == nullptr)
+				return;
+
+			scene->Initalize();
+		}
 		
 	}
 

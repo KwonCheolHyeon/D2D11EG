@@ -193,6 +193,7 @@ namespace ch
 						transform->SetPosition(pos);
 
 						elapsedTime += Time::DeltaTime();
+						
 					}
 				
 				}

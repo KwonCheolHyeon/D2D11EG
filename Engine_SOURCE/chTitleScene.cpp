@@ -33,7 +33,7 @@ namespace ch
 	void TitleScene::Initalize()
 	{
 		{
-			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player,this);
 			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
 			Light* lightComp = directionalLight->AddComponent<Light>();
 			lightComp->SetType(eLightType::Directional);
@@ -41,7 +41,7 @@ namespace ch
 		}
 
 		{
-			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player,this);
 			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(3.0f, 0.0f, 0.0f));
 			Light* lightComp = directionalLight->AddComponent<Light>();
 			lightComp->SetType(eLightType::Point);
@@ -50,7 +50,7 @@ namespace ch
 		}
 
 		// Main Camera Game Object
-		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera);
+		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
 		Camera* cameraComp = cameraObj->AddComponent<Camera>();
 		//cameraComp->RegisterCameraInRenderer();
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
@@ -58,7 +58,7 @@ namespace ch
 		mainCamera = cameraComp;
 
 		{ //Camera UI
-			GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
+			GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
 			Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
 			cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 			cameraUIComp->DisableLayerMasks();
@@ -67,7 +67,7 @@ namespace ch
 			
 		//SMILE RECT
 		{
-			Player* obj = object::Instantiate<Player>(eLayerType::Player);
+			Player* obj = object::Instantiate<Player>(eLayerType::Player, this);
 			obj->SetName(L"Zelda");
 			Transform* tr = obj->GetComponent<Transform>();
 			tr->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
@@ -99,7 +99,7 @@ namespace ch
 
 		//SMILE RECT
 		{
-			Player* obj = object::Instantiate<Player>(eLayerType::Player);
+			Player* obj = object::Instantiate<Player>(eLayerType::Player, this);
 			obj->SetName(L"SMILE");
 			Transform* tr = obj->GetComponent<Transform>();
 			tr->SetPosition(Vector3(2.0f, 0.0f, 5.0f));

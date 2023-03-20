@@ -78,7 +78,7 @@ namespace ch
 			GetCursorPos(&mousePos);
 			ScreenToClient(application.GetHwnd(), &mousePos);
 			mMousPosition.x = mousePos.x;
-			mMousPosition.y = mousePos.y;
+			mMousPosition.y = mousePos.y * -1.0f;
 			mMousPosition.z = 1.0f;
 		}
 		else

@@ -50,7 +50,7 @@ namespace ch
 	}
 	void Scene::OnEnter()
 	{
-		Initalize();
+		
 	}
 	void Scene::OnExit()
 	{
