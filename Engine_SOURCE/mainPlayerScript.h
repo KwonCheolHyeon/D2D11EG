@@ -9,6 +9,8 @@ namespace ch
         Back,
         Left,
         Right,
+        Walking,
+        Idle,
         Dodge,
         Attack,
         Reload,
@@ -37,11 +39,13 @@ namespace ch
         virtual void OnTrigger(Collider2D* oppo);
         virtual void OnTriggerExit(Collider2D* oppo);
 
-
+        void IdleState();
     private:
       
 
         std::bitset<static_cast<UINT>(ePlayerState::End)> mState;
+        Animator* animator;
+
 
     };
 }

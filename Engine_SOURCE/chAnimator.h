@@ -56,8 +56,8 @@ namespace ch
 		std::function<void()>& GetEndEvent(const std::wstring& name);
 		std::function<void()>& GetEvent(const std::wstring& name, UINT index);
 
-	public ://필요해서 추가
-		//UINT currentFrame = mActiveAnimation->mCurrentFrame;
+	public :
+		
 
 
 	private:

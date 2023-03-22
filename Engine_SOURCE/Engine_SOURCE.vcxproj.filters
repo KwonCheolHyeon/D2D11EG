@@ -273,6 +273,7 @@
     <ClInclude Include="chMouseCursorScript.h">
       <Filter>GameObject\UI</Filter>
     </ClInclude>
+    <ClInclude Include="chRigidbody.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -415,6 +416,7 @@
     <ClCompile Include="chMouseCursorScript.cpp">
       <Filter>GameObject\UI</Filter>
     </ClCompile>
+    <ClCompile Include="chRigidbody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">

@@ -140,6 +140,7 @@
     <ClInclude Include="chWidget.h" />
     <ClInclude Include="EngineTT.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="memoeyLeak.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

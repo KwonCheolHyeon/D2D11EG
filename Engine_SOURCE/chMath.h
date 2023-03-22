@@ -208,7 +208,7 @@ namespace ch::math
     // 3D vector
     struct Vector3 : public XMFLOAT3
     {
-       
+
         Vector3() noexcept : XMFLOAT3(0.f, 0.f, 0.f) {}
         constexpr explicit Vector3(float ix) noexcept : XMFLOAT3(ix, ix, ix) {}
         constexpr Vector3(float ix, float iy, float iz) noexcept : XMFLOAT3(ix, iy, iz) {}
@@ -237,9 +237,68 @@ namespace ch::math
         Vector3& operator*= (float S) noexcept;
         Vector3& operator/= (float S) noexcept;
 
+
+        //Vector3 * float
+        Vector3 operator*(const float& value)
+        {
+            Vector3 temp;
+            temp.x = x * value;
+            temp.y = y * value;
+            temp.z = z * value;
+
+            return temp;
+        }
+        //Vector3 + Vector3
+        Vector3 operator+(const Vector3& other)
+        {
+            Vector3 temp;
+            temp.x = x + other.x;
+            temp.y = y + other.y;
+            temp.z = z + other.z;
+            return temp;
+        }
+        //Vector3 - Vector3
+        Vector3 operator-(const Vector3& other)
+        {
+            Vector3 temp;
+            temp.x = x - other.x;
+            temp.y = y - other.y;
+            temp.z = z - other.z;
+
+            return temp;
+        }
+        //
+        bool operator ==(const Vector3& other)
+        {
+            return (x == other.x && y == other.y && z == other.z);
+        }
+        
+        void clear()
+        {
+            x = 0.0f;
+            y = 0.0f;
+            z = 0.0f;
+        }
+
+        //
+        Vector3& Normalizes()
+        {
+            float length = Length();
+            x /= length;
+            y /= length;
+            z /= length;
+
+            return *this;
+        }
+        
+        
+
+
         // Unary operators
         Vector3 operator+ () const noexcept { return *this; }
         Vector3 operator- () const noexcept;
+
+
 
         // Vector operations
         bool InBounds(const Vector3& Bounds) const noexcept;

@@ -44,6 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>true</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -51,6 +52,7 @@
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>true</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -189,6 +191,7 @@
     <ClInclude Include="chRenderer.h" />
     <ClInclude Include="chResource.h" />
     <ClInclude Include="chResources.h" />
+    <ClInclude Include="chRigidbody.h" />
     <ClInclude Include="chScene.h" />
     <ClInclude Include="chSceneManager.h" />
     <ClInclude Include="chScript.h" />
@@ -240,6 +243,7 @@
     <ClCompile Include="chRenderer.cpp" />
     <ClCompile Include="chResource.cpp" />
     <ClCompile Include="chResources.cpp" />
+    <ClCompile Include="chRigidbody.cpp" />
     <ClCompile Include="chScene.cpp" />
     <ClCompile Include="chSceneManager.cpp" />
     <ClCompile Include="chScript.cpp" />

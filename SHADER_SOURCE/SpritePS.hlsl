@@ -40,6 +40,13 @@ float4 main(VSOut In) : SV_Target
         color = defaultTexture.Sample(anisotropicSampler, In.UV);
     }
     
+    LightColor lightColor = (LightColor) 0.0f;
+    for (int i = 0; i < numberOfLight; i++)
+    {
+        CalculateLight(lightColor, In.WorldPos.xyz, i);
+    }
+    
+    color *= lightColor.diffuse;
    //spritePs이부분 추가하면 오류
     //global에서도 light부분 추가하면 오류
     //color = defaultTexture.Sample(anisotropicSampler, In.UV);

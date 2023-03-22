@@ -34,6 +34,7 @@
     <ClInclude Include="chDebugObject.h" />
     <ClInclude Include="chEditorObject.h" />
     <ClInclude Include="chWidget.h" />
+    <ClInclude Include="memoeyLeak.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EngineTT.rc">

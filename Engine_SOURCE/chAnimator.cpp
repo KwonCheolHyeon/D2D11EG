@@ -171,7 +171,4 @@ namespace ch
 		return events->mEvents[index].mEvent;
 	}
 
-
-	
-	
 }

@@ -30,6 +30,7 @@ namespace ch::enums
 		Camera,
 		Mesh,
 		Collider,
+		Rigidbody,
 		//Collider2,
 		MeshRenerer,
 		SpriteRenderer,

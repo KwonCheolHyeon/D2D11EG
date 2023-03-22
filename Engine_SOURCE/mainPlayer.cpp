@@ -4,6 +4,7 @@
 #include "chAnimator.h"
 #include "chSpriteRenderer.h"
 #include "chInput.h"
+#include "chRigidbody.h"
 namespace ch
 {
 	mainPlayer::mainPlayer()
@@ -110,7 +111,7 @@ namespace ch
 		sprite->SetMesh(mesh);
 		
 		pTr = playerOBJ->AddComponent<Transform>();
-		pTr->SetScale(Vector3(5.3f, 5.6f, 1.0f));
+		pTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
 		
 
 		pCollider = playerOBJ->AddComponent<Collider2D>();
@@ -118,6 +119,7 @@ namespace ch
 		pCollider->SetType(eColliderType::Rect);
 		pCollider->SetSize(Vector2(0.08f, 0.1f));
 
+		playerOBJ->AddComponent<Rigidbody>();
 		playerOBJ->AddComponent<mainPlayerScript>();
 	}
 
