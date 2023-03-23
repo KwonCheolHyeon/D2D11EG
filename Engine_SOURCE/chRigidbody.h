@@ -28,6 +28,8 @@ namespace ch
 		// 힘과 마찰력을 이용한 이동
 		float mMass;
 		float mFriction;
+		//float mDamping;//감쇄 속도
+
 		//float mMoveFriction;
 		Vector3 mForce;
 		Vector3 mVelocity;

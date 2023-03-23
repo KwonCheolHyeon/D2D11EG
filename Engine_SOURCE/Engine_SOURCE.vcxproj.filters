@@ -274,6 +274,8 @@
       <Filter>GameObject\UI</Filter>
     </ClInclude>
     <ClInclude Include="chRigidbody.h" />
+    <ClInclude Include="chComputeShader.h" />
+    <ClInclude Include="chPaintShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -417,6 +419,8 @@
       <Filter>GameObject\UI</Filter>
     </ClCompile>
     <ClCompile Include="chRigidbody.cpp" />
+    <ClCompile Include="chComputeShader.cpp" />
+    <ClCompile Include="chPaintShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">

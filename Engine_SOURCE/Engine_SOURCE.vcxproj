@@ -164,6 +164,7 @@
     <ClInclude Include="chCollider2D.h" />
     <ClInclude Include="chCollider3D.h" />
     <ClInclude Include="chComponent.h" />
+    <ClInclude Include="chComputeShader.h" />
     <ClInclude Include="chConstantBuffer.h" />
     <ClInclude Include="chEntity.h" />
     <ClInclude Include="chEnums.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="chMonster.h" />
     <ClInclude Include="chMouseCursorScript.h" />
     <ClInclude Include="chObject.h" />
+    <ClInclude Include="chPaintShader.h" />
     <ClInclude Include="chPlayer.h" />
     <ClInclude Include="chPlayerScript.h" />
     <ClInclude Include="chPlayerSprite.h" />
@@ -220,6 +222,7 @@
     <ClCompile Include="chCollider2D.cpp" />
     <ClCompile Include="chCollider3D.cpp" />
     <ClCompile Include="chComponent.cpp" />
+    <ClCompile Include="chComputeShader.cpp" />
     <ClCompile Include="chConstantBuffer.cpp" />
     <ClCompile Include="chEntity.cpp" />
     <ClCompile Include="chFadeEffect.cpp" />
@@ -235,6 +238,7 @@
     <ClCompile Include="chMeshRenderer.cpp" />
     <ClCompile Include="chMonster.cpp" />
     <ClCompile Include="chMouseCursorScript.cpp" />
+    <ClCompile Include="chPaintShader.cpp" />
     <ClCompile Include="chPlayer.cpp" />
     <ClCompile Include="chPlayerScript.cpp" />
     <ClCompile Include="chPlayerSprite.cpp" />

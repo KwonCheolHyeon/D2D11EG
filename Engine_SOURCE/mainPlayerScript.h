@@ -9,7 +9,11 @@ namespace ch
         Back,
         Left,
         Right,
-        Walking,
+        FrontRight,
+        FrontLeft,
+        BackRight,
+        BackLeft,
+        Walking,//walking idle dodge묶어서 
         Idle,
         Dodge,
         Attack,
@@ -38,8 +42,15 @@ namespace ch
         virtual void OnTriggerEnter(Collider2D* oppo);
         virtual void OnTrigger(Collider2D* oppo);
         virtual void OnTriggerExit(Collider2D* oppo);
+    public://행동 
+        void chWalking();
+        void chState();
 
+
+    public : //애니메이션 상태
         void IdleState();
+        void WalkingState();
+        void DodgeState();
     private:
       
 

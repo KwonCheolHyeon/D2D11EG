@@ -6,13 +6,14 @@ namespace ch
 	Rigidbody::Rigidbody()
 		: Component(eComponentType::Rigidbody)
 		, mMass(1.0f)
-		, mFriction(150.0f)
+		, mFriction(10.0f)
 	{
 		mLimitVelocity.x = 200.f;
 		mLimitVelocity.y = 200.f;
 		mLimitVelocity.z = 200.f;
-		mbGround = false;
-		mGravity = Vector3(0.0f, 0.0f,100.0f);
+		mbGround = true;
+		mGravity = Vector3(0.0f, 0.0f,1.0f);
+		
 	}
 
 	Rigidbody::~Rigidbody()
@@ -32,7 +33,7 @@ namespace ch
 	{
 		mAccelation = mForce / mMass;
 		mVelocity += mAccelation * Time::DeltaTime();
-
+		
 		if (mbGround)
 		{
 			// 땅위에 있을때
@@ -89,7 +90,7 @@ namespace ch
 		Vector3 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
 		pos = pos + mVelocity * Time::DeltaTime();
 		GetOwner()->GetComponent<Transform>()->SetPosition(pos);
-		mForce.clear();
+		mForce.clear(); //clear() ==  x = 0.0f, y=0.0f, z = 1.0f;
 	}
 
 	void Rigidbody::Render()

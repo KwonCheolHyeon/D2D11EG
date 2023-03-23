@@ -7,6 +7,9 @@
     <Filter Include="VS">
       <UniqueIdentifier>{8640e9da-0272-4cb9-bace-97630b16facb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CS">
+      <UniqueIdentifier>{5cb32ab5-c691-467e-b02e-815483d4016c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)UserInterfacePS.hlsl">
@@ -44,6 +47,9 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)DebugVS.hlsl">
       <Filter>VS</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)PaintCS.hlsl">
+      <Filter>CS</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
