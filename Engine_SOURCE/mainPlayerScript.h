@@ -9,10 +9,6 @@ namespace ch
         Back,
         Left,
         Right,
-        FrontRight,
-        FrontLeft,
-        BackRight,
-        BackLeft,
         Walking,//walking idle dodge묶어서 
         Idle,
         Dodge,
@@ -44,19 +40,22 @@ namespace ch
         virtual void OnTriggerExit(Collider2D* oppo);
     public://행동 
         void chWalking();
+        bool chCheckDirectionKey();//방향키를 눌렀는지 확인
         void chState();
 
+        void chDodging();//구르기 움직임
 
     public : //애니메이션 상태
         void IdleState();
         void WalkingState();
-        void DodgeState();
+        void DodgeState();//구르기 애니메이션
     private:
       
 
         std::bitset<static_cast<UINT>(ePlayerState::End)> mState;
         Animator* animator;
-
+        Rigidbody* rigidi;
+        bool keyLock = true;
 
     };
 }

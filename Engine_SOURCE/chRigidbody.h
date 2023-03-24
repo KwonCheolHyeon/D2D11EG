@@ -17,7 +17,7 @@ namespace ch
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
 
-		void AddForce(Vector3 force);
+		void AddForce(Vector3 force) { mForce += force; }
 		void SetMass(float mass) { mMass = mass; }
 		void SetGround(bool isGround) { mbGround = isGround; }
 		Vector3 GetVelocity() { return mVelocity; }
@@ -26,19 +26,25 @@ namespace ch
 	
 	private:
 		// 힘과 마찰력을 이용한 이동
-		float mMass;
-		float mFriction;
+		float mMass; //무게
+		float mFriction; //마찰
 		//float mDamping;//감쇄 속도
 
 		//float mMoveFriction;
-		Vector3 mForce;
-		Vector3 mVelocity;
-		Vector3 mAccelation;
+		Vector3 mForce; //크기, 방향
+		Vector3 mVelocity; //속도(속력 + 방향)
+		Vector3 mAccelation; //가속도
 
 		// 중력 이용한 점프
 		Vector3 mGravity;
 		bool mbGround;
-		Vector3 mLimitVelocity;
+		float mLimitVelocity;
+
+	private:
+		
+
+	private:
+		void objectMove();
 	};
 
 }

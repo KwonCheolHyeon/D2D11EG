@@ -14,10 +14,6 @@ namespace ch
 		mState[(UINT)ePlayerState::Back] = false;
 		mState[(UINT)ePlayerState::Left] = false;
 		mState[(UINT)ePlayerState::Right] = false;
-		mState[(UINT)ePlayerState::FrontRight] = false;
-		mState[(UINT)ePlayerState::FrontLeft] = false;
-		mState[(UINT)ePlayerState::BackRight] = false;
-		mState[(UINT)ePlayerState::BackLeft] = false;
 		mState[(UINT)ePlayerState::Walking] = false;
 		mState[(UINT)ePlayerState::Idle] = true;
 		mState[(UINT)ePlayerState::Dodge] = false;
@@ -36,258 +32,70 @@ namespace ch
 	{
 		Transform* transform = GetOwner()->GetComponent<Transform>();
 		animator = GetOwner()->GetComponent<Animator>();
-		Rigidbody* rigidi = GetOwner()->GetComponent<Rigidbody>();
-		Vector3 pos = transform->GetPosition();
+		rigidi = GetOwner()->GetComponent<Rigidbody>();
 		
-
-		chWalking();
-
-
-
-
-		/*
-		{//													이동
-			{
-			
-				{//위
-					if (Input::GetKeyDown(eKeyCode::UP))
-					{
-						animator->Play(L"P_WalkingBack");
-						mState[(UINT)ePlayerState::Front] = false;
-						mState[(UINT)ePlayerState::Back] = true;
-						mState[(UINT)ePlayerState::Left] = false;
-						mState[(UINT)ePlayerState::Right] = false;
-
-					}
-					if (Input::GetKey(eKeyCode::UP))
-					{
-						
-						pos.y += 1.0f * Time::DeltaTime();
-						
-					}
-					if (Input::GetKeyUp(eKeyCode::UP))
-					{
-						animator->Play(L"P_IdleBack", true);
-					}
-				}
-				{//아래
-					if (Input::GetKeyDown(eKeyCode::DOWN))
-					{
-						animator->Play(L"P_WalkingFront");
-						mState[(UINT)ePlayerState::Back] = false;
-						mState[(UINT)ePlayerState::Front] = true;
-						mState[(UINT)ePlayerState::Left] = false;
-						mState[(UINT)ePlayerState::Right] = false;
-					}
-					if (Input::GetKey(eKeyCode::DOWN))
-					{
-						//Vector3 pos = transform->GetPosition();
-						pos.y -= 1.0f * Time::DeltaTime();
-						//transform->SetPosition(pos);
-					}
-					if (Input::GetKeyUp(eKeyCode::DOWN))
-					{
-						animator->Play(L"P_IdleFront", true);
-					}
-				}
-				{//좌측			
-					if (mState[(UINT)ePlayerState::Back] == true)
-					{
-						if (Input::GetKeyDown(eKeyCode::LEFT))
-						{
-							animator->Play(L"P_WalkingBackLeft");
-							mState[(UINT)ePlayerState::Left] = true;
-							mState[(UINT)ePlayerState::Right] = false;
-						}
-						if (Input::GetKey(eKeyCode::LEFT))
-						{
-							
-							pos.x -= 1.0f * Time::DeltaTime();
-							
-						}
-						if (Input::GetKeyUp(eKeyCode::LEFT))
-						{
-							animator->Play(L"P_IdleBackLeft", true);
-						}
-					}
-					else if (mState[(UINT)ePlayerState::Front] = true)
-					{
-						if (Input::GetKeyDown(eKeyCode::LEFT))
-						{
-							animator->Play(L"P_WalkingLeft");
-							mState[(UINT)ePlayerState::Left] = true;
-							mState[(UINT)ePlayerState::Right] = false;
-						}
-						if (Input::GetKey(eKeyCode::LEFT))
-						{
-							
-							pos.x -= 1.0f * Time::DeltaTime();
-							
-						}
-						if (Input::GetKeyUp(eKeyCode::LEFT))
-						{
-							animator->Play(L"P_IdleLeft", true);
-						}
-					}
-				}
-				{//우측			
-					if (mState[(UINT)ePlayerState::Back] == true)
-					{
-						if (Input::GetKeyDown(eKeyCode::RIGHT))
-						{
-							animator->Play(L"P_WalkingBackRight");
-							mState[(UINT)ePlayerState::Left] = false;
-							mState[(UINT)ePlayerState::Right] = true;
-						}
-						if (Input::GetKey(eKeyCode::RIGHT))
-						{
-							
-							pos.x += 1.0f * Time::DeltaTime();
-							
-						}
-						if (Input::GetKeyUp(eKeyCode::RIGHT))
-						{
-							animator->Play(L"P_IdleBackRight", true);
-						}
-					}
-					else if (mState[(UINT)ePlayerState::Front] = true)
-					{
-						if (Input::GetKeyDown(eKeyCode::RIGHT))
-						{
-							animator->Play(L"P_WalkingRight");
-							mState[(UINT)ePlayerState::Left] = false;
-							mState[(UINT)ePlayerState::Right] = true;
-						}
-						if (Input::GetKey(eKeyCode::RIGHT))
-						{
-							
-							pos.x += 1.0f * Time::DeltaTime();
-						
-						}
-						if (Input::GetKeyUp(eKeyCode::RIGHT))
-						{
-							animator->Play(L"P_IdleRight", true);
-						}
-					}
-				}
-				/*
-				{//위 + 오른쪽
-					if (Input::GetKeyDown(eKeyCode::UP) && Input::GetKeyDown(eKeyCode::RIGHT))
-					{
-						animator->Play(L"P_WalkingBackRight");
-						mState[(UINT)ePlayerState::BackRight] = true;
-					}
-					if (Input::GetKey(eKeyCode::UP) && Input::GetKey(eKeyCode::RIGHT))
-					{
-						Vector3 pos = transform->GetPosition();
-						pos += Vector3(0.2f, 0.2f, 0.0f) * Time::DeltaTime();
-						transform->SetPosition(pos);
-					}
-					if (Input::GetKeyUp(eKeyCode::UP) && Input::GetKeyUp(eKeyCode::RIGHT))
-					{
-						animator->Play(L"P_IdleBackRight", true);
-					}
-				}
-				{//위 + 왼쪽
-					if (Input::GetKeyDown(eKeyCode::UP) && Input::GetKeyDown(eKeyCode::LEFT))
-					{
-						animator->Play(L"P_WalkingLeft");
-						mState[(UINT)ePlayerState::BackLeft] = true;
-					}
-					if (Input::GetKey(eKeyCode::UP) && Input::GetKey(eKeyCode::LEFT))
-					{
-						Vector3 pos = transform->GetPosition();
-						pos += Vector3(-0.2f, 0.2f, 0.0f) * Time::DeltaTime();
-						transform->SetPosition(pos);
-					}
-					if (Input::GetKeyUp(eKeyCode::UP) && Input::GetKeyUp(eKeyCode::LEFT))
-					{
-						animator->Play(L"P_IdleBackLeft", true);
-					}
-				}
-				{//아래 + 왼쪽
-					if (Input::GetKeyDown(eKeyCode::DOWN) && Input::GetKeyDown(eKeyCode::LEFT))
-					{
-						animator->Play(L"P_WalkingBackLeft");
-						mState[(UINT)ePlayerState::BackLeft] = true;
-					}
-					if (Input::GetKey(eKeyCode::DOWN) && Input::GetKey(eKeyCode::LEFT))
-					{
-						Vector3 pos = transform->GetPosition();
-						pos += Vector3(-0.2f, -0.2f, 0.0f) * Time::DeltaTime();
-						transform->SetPosition(pos);
-					}
-					if (Input::GetKeyUp(eKeyCode::DOWN) && Input::GetKeyUp(eKeyCode::LEFT))
-					{
-						animator->Play(L"P_IdleLeft", true);
-					}
-				}
-				{//아래 + 오른쪽
-					if (Input::GetKeyDown(eKeyCode::DOWN) && Input::GetKeyDown(eKeyCode::RIGHT))
-					{
-						animator->Play(L"P_WalkingRight");
-						mState[(UINT)ePlayerState::BackRight] = true;
-					}
-					if (Input::GetKey(eKeyCode::DOWN) && Input::GetKey(eKeyCode::RIGHT))
-					{
-						Vector3 pos = transform->GetPosition();
-						pos += Vector3(0.2f, -0.2f, 0.0f) * Time::DeltaTime();
-						transform->SetPosition(pos);
-					}
-					if (Input::GetKeyUp(eKeyCode::DOWN) && Input::GetKeyUp(eKeyCode::RIGHT))
-					{
-						animator->Play(L"P_IdleRight", true);
-					}
-				}
-				
-				transform->SetPosition(pos);
-			}
+		if (mState[(UINT)ePlayerState::Dodge] == false) 
+		{
+			Vector3 pos = transform->GetPosition();
+			chCheckDirectionKey();
+			chState();
+			chWalking();
 		}
-		*/
+		
 		{//															구르기 
 			if (Input::GetKeyDown(eKeyCode::RBTN))
 			{
+			
 				mState[(UINT)ePlayerState::Dodge] = true;
 
 				if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Right] == true)
 				{
 					animator->Play(L"P_DodgeRight", false);
-					rigidi->AddForce(Vector3(200.f, -200.0f, 0.0f));
+					
 					animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::IdleState, this);
 				}
 				else if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Left] == true) 
 				{
 					animator->Play(L"P_DodgeLeft", false);
-					rigidi->AddForce(Vector3(-200.f, -200.0f, 0.0f));
+					
 					animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::IdleState, this);
 				}
-				else if (mState[(UINT)ePlayerState::Front] == true)
-				{
-					animator->Play(L"P_DodgeFront", false);
-
-					rigidi->AddForce(Vector3(0.f, -200.0f, 0.0f));
-					animator->GetCompleteEvent(L"P_DodgeFront") = std::bind(&mainPlayerScript::IdleState, this);
-				}
+				
 				else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 				{
 					animator->Play(L"P_DodgeBackRight", false);
-					rigidi->AddForce(Vector3(200.f, 200.0f, 0.0f));
+					
 					animator->GetCompleteEvent(L"P_DodgeBackRight") = std::bind(&mainPlayerScript::IdleState, this);
 
 				}
 				else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 				{
 					animator->Play(L"P_DodgeBackLeft", false);
-					rigidi->AddForce(Vector3(-200.f, 200.0f, 0.0f));
+					
 					animator->GetCompleteEvent(L"P_DodgeBackLeft") = std::bind(&mainPlayerScript::IdleState, this);
+				}
+				else if (mState[(UINT)ePlayerState::Front] == true)
+				{
+					animator->Play(L"P_DodgeFront", false);
+					animator->GetCompleteEvent(L"P_DodgeFront") = std::bind(&mainPlayerScript::IdleState, this);
 				}
 				else if (mState[(UINT)ePlayerState::Back] == true)
 				{
 					animator->Play(L"P_DodgeBack", false);
-					rigidi->AddForce(Vector3(0.f, 200.0f, 0.0f));
 					animator->GetCompleteEvent(L"P_DodgeBack") = std::bind(&mainPlayerScript::IdleState, this);
 				}
+				else if (mState[(UINT)ePlayerState::Left] == true)
+				{
+					animator->Play(L"P_DodgeLeft", false);
+					animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::IdleState, this);
+				}
+				else if (mState[(UINT)ePlayerState::Right] == true)
+				{
+					animator->Play(L"P_DodgeRight", false);
+					animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::IdleState, this);
+				}
 
+				chDodging();
 			}
 		}
 	}
@@ -315,223 +123,212 @@ namespace ch
 	void mainPlayerScript::OnTriggerExit(Collider2D* oppo)
 	{
 	}
-	void mainPlayerScript::chWalking()
+	//chWalking : 캐릭터 이동
+	void mainPlayerScript::chWalking() //								움직임 함수
 	{
 		Transform* transform = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = transform->GetPosition();
-
 		Vector3 direction = Vector3::Zero;
-		{//움직임
+		{//														움직임
 
 			//					위
-			if (Input::GetKeyDown(eKeyCode::UP))
-			{
-				mState[(UINT)ePlayerState::Back] = true;
-				mState[(UINT)ePlayerState::Walking] = true;
-
-				mState[(UINT)ePlayerState::Front] = false;
-				mState[(UINT)ePlayerState::Left] = false;
-				mState[(UINT)ePlayerState::Right] = false;
-
-				if (direction == Vector3::Left) {
-					mState[(UINT)ePlayerState::Left] = true;
-				}
-				else if (direction == Vector3::Right) {
-					mState[(UINT)ePlayerState::Right] = true;
-				}
-				else {
-					mState[(UINT)ePlayerState::Left] = false;
-					mState[(UINT)ePlayerState::Right] = false;
-				}
-
-				chState();
-			}
 			if (Input::GetKey(eKeyCode::UP))
 			{
 				direction += Vector3::Up;
 			}
-			if (Input::GetKeyUp(eKeyCode::UP))
-			{
-				mState[(UINT)ePlayerState::Walking] = false;
-				mState[(UINT)ePlayerState::Idle] = true;
-				chState();
-			}
-
-
 			//					아래
-			if (Input::GetKeyDown(eKeyCode::DOWN))
+			if (Input::GetKey(eKeyCode::DOWN)) 
 			{
-				mState[(UINT)ePlayerState::Front] = true;
-				mState[(UINT)ePlayerState::Walking] = true;
-
-				mState[(UINT)ePlayerState::Back] = false;
-				mState[(UINT)ePlayerState::Left] = false;
-				mState[(UINT)ePlayerState::Right] = false;
-
-				if (direction == Vector3::Left) {
-					mState[(UINT)ePlayerState::Left] = true;
-				}
-				else if (direction == Vector3::Right) {
-					mState[(UINT)ePlayerState::Right] = true;
-				}
-				else {
-					mState[(UINT)ePlayerState::Left] = false;
-					mState[(UINT)ePlayerState::Right] = false;
-				}
-
-				chState();
-
-			}
-			if (Input::GetKey(eKeyCode::DOWN)) {
 				direction += Vector3::Down;
 			}
-			if (Input::GetKeyUp(eKeyCode::DOWN))
+			//					왼쪽
+			if (Input::GetKey(eKeyCode::LEFT)) 
 			{
-				mState[(UINT)ePlayerState::Walking] = false;
-				mState[(UINT)ePlayerState::Idle] = true;
-				chState();
-			}
-
-
-			if (Input::GetKeyDown(eKeyCode::LEFT))
-			{
-				mState[(UINT)ePlayerState::Left] = true;
-				mState[(UINT)ePlayerState::Walking] = true;
-
-				mState[(UINT)ePlayerState::Back] = false;
-				mState[(UINT)ePlayerState::Front] = false;
-				mState[(UINT)ePlayerState::Right] = false;
-
-				if (direction == Vector3::Up) {
-					mState[(UINT)ePlayerState::Back] = true;
-				}
-				else if (direction == Vector3::Down) {
-					mState[(UINT)ePlayerState::Front] = true;
-				}
-				else {
-					mState[(UINT)ePlayerState::Back] = false;
-					mState[(UINT)ePlayerState::Front] = false;
-				}
-				chState();
-			}
-			if (Input::GetKey(eKeyCode::LEFT)) {
 				direction += Vector3::Left;
-
 			}
-			if (Input::GetKeyUp(eKeyCode::LEFT))
+			//					오른쪽
+			if (Input::GetKey(eKeyCode::RIGHT)) 
 			{
-				mState[(UINT)ePlayerState::Walking] = false;
-				mState[(UINT)ePlayerState::Idle] = true;
-				chState();
-			}
-
-
-
-			if (Input::GetKeyDown(eKeyCode::RIGHT))
-			{
-				mState[(UINT)ePlayerState::Right] = true;
-				mState[(UINT)ePlayerState::Walking] = true;
-
-				mState[(UINT)ePlayerState::Back] = false;
-				mState[(UINT)ePlayerState::Front] = false;
-				mState[(UINT)ePlayerState::Left] = false;
-
-				if (direction == Vector3::Up) {
-					mState[(UINT)ePlayerState::Back] = true;
-				}
-				else if (direction == Vector3::Down) {
-					mState[(UINT)ePlayerState::Front] = true;
-				}
-				else {
-					mState[(UINT)ePlayerState::Back] = false;
-					mState[(UINT)ePlayerState::Front] = false;
-				}
-				chState();
-			}
-			if (Input::GetKey(eKeyCode::RIGHT)) {
 				direction += Vector3::Right;
 			}
-			if (Input::GetKeyUp(eKeyCode::RIGHT))
+			//			대각선 방향 움직일때
+			if (direction != Vector3::Zero && direction != Vector3::Up && direction != Vector3::Down &&
+				direction != Vector3::Left && direction != Vector3::Right) 
 			{
-				mState[(UINT)ePlayerState::Walking] = false;
-				mState[(UINT)ePlayerState::Idle] = true;
-				chState();
+				direction.Normalize();
 			}
-		}
 
-		if (direction != Vector3::Zero && direction != Vector3::Up && direction != Vector3::Down &&
-			direction != Vector3::Left && direction != Vector3::Right) {
-			direction.Normalize();
+			pos += direction * 1.0f * Time::DeltaTime();
+			transform->SetPosition(pos);
 		}
-		
-		// Move the character based on the direction
-		pos += direction * 1.0f * Time::DeltaTime();
-		transform->SetPosition(pos);
 	}
+
+	//
+	bool mainPlayerScript::chCheckDirectionKey()
+	{//												상하좌우를 하나라도 누르고 있을때 true  혹시나 오류가 있으면 GetKeyDown추가 해주기
+		if ( Input::GetKey(eKeyCode::RIGHT) == true  || Input::GetKey(eKeyCode::LEFT) == true || Input::GetKey(eKeyCode::UP) == true || Input::GetKey(eKeyCode::DOWN) == true) 
+		{
+			mState[(UINT)ePlayerState::Walking] = true;
+			mState[(UINT)ePlayerState::Idle] = false;
+			return true;
+		}
+		else 
+		{
+			mState[(UINT)ePlayerState::Idle] = true;
+			mState[(UINT)ePlayerState::Walking] = false;
+			return false;
+		}
+	}
+
+	//chState : 캐릭터 상태 체크후 애니메이션 실행
 	void mainPlayerScript::chState()
 	{
-		if (mState[(UINT)ePlayerState::Idle] == true) {
-			if (mState[(UINT)ePlayerState::Front] == true)
-			{
-				animator->Play(L"P_IdleFront");
-			}
-			else if (mState[(UINT)ePlayerState::Back] == true)
-			{
-				animator->Play(L"P_IdleBack");
-			}
-			else if (mState[(UINT)ePlayerState::Left] == true)
-			{
-				animator->Play(L"P_IdleLeft");
-			}
-			else if (mState[(UINT)ePlayerState::Right] == true)
-			{
-				animator->Play(L"P_IdleRight");
-			}
-		}
-		
-		if (mState[(UINT)ePlayerState::Walking] == true) 
+		if(Input::GetKeyDown(eKeyCode::UP)) 
 		{
-			if (mState[(UINT)ePlayerState::Front] == true)
+			mState[(UINT)ePlayerState::Back] = true;
+			mState[(UINT)ePlayerState::Front] = false;
+			if (Input::GetKey(eKeyCode::LEFT))
 			{
-				animator->Play(L"P_WalkingFront");
+				mState[(UINT)ePlayerState::Left] = true;
+				mState[(UINT)ePlayerState::Right] = false;
 			}
-			if (mState[(UINT)ePlayerState::Back] == true)
+			else if(Input::GetKey(eKeyCode::RIGHT))
 			{
-				animator->Play(L"P_WalkingBack");
+				mState[(UINT)ePlayerState::Left] = false;
+				mState[(UINT)ePlayerState::Right] = true;
 			}
-			if (mState[(UINT)ePlayerState::Left] == true)
+			else if (((Input::GetKeyDown(eKeyCode::LEFT) == true || Input::GetKey(eKeyCode::LEFT) == true) && (Input::GetKeyDown(eKeyCode::RIGHT) == true || Input::GetKey(eKeyCode::RIGHT) == true) )!= true)
 			{
-				if (mState[(UINT)ePlayerState::Front] == true) 
-				{
-					animator->Play(L"P_WalkingLeft");
-				}
-				else if (mState[(UINT)ePlayerState::Back] == true) 
-				{
-					animator->Play(L"P_WalkingBackLeft");
-				}
-				else 
-				{
-					animator->Play(L"P_WalkingLeft");
-				}
+				mState[(UINT)ePlayerState::Left] = false;
+				mState[(UINT)ePlayerState::Right] = false;
 			}
-			else if (mState[(UINT)ePlayerState::Right] == true)
+			//walking애니메이션 실행
+			WalkingState();
+		}
+		if (Input::GetKeyUp(eKeyCode::UP))
+		{
+			if(chCheckDirectionKey()== false)		//다른키가 눌러져 있지 않은 상태라면
 			{
-				if (mState[(UINT)ePlayerState::Front] == true)
-				{
-					animator->Play(L"P_WalkingRight");
-				}
-				else if (mState[(UINT)ePlayerState::Back] == true)
-				{
-					animator->Play(L"P_WalkingBackRight");
-				}
-				else
-				{
-					animator->Play(L"P_WalkingRight");
-				}
+				//idle로 변경
+				IdleState();
 			}
-		
+			else 
+			{
+				//walking상태 유지 //다른 키가 눌려져 있으면 그 키로 변경 
+				WalkingState();
+			}
 		}
 
+		if (Input::GetKeyDown(eKeyCode::DOWN))
+		{
+			mState[(UINT)ePlayerState::Back] = false;
+			mState[(UINT)ePlayerState::Front] = true;
+			if (Input::GetKey(eKeyCode::LEFT))
+			{
+				mState[(UINT)ePlayerState::Left] = true;
+				mState[(UINT)ePlayerState::Right] = false;
+			}
+			else if (Input::GetKey(eKeyCode::RIGHT))
+			{
+				mState[(UINT)ePlayerState::Left] = false;
+				mState[(UINT)ePlayerState::Right] = true;
+			}
+			else if (((Input::GetKeyDown(eKeyCode::LEFT) == true || Input::GetKey(eKeyCode::LEFT) == true) && (Input::GetKeyDown(eKeyCode::RIGHT) == true || Input::GetKey(eKeyCode::RIGHT) == true)) != true)
+			{
+				mState[(UINT)ePlayerState::Left] = false;
+				mState[(UINT)ePlayerState::Right] = false;
+			}
+			//walking애니메이션 실행
+			WalkingState();
+		}
+		if (Input::GetKeyUp(eKeyCode::DOWN))
+		{
+			if (chCheckDirectionKey() == false)		//다른키가 눌러져 있지 않은 상태라면
+			{
+				//idle로 변경
+				IdleState();
+			}
+			else									//다른키가 눌려져 있는 상태
+			{
+				//walking상태 유지 //다른 키가 눌려져 있으면 그 키로 변경 
+				WalkingState();
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mState[(UINT)ePlayerState::Left] = true;
+			mState[(UINT)ePlayerState::Right] = false;
+
+			if (Input::GetKey(eKeyCode::UP))
+			{
+				mState[(UINT)ePlayerState::Back] = true;
+				mState[(UINT)ePlayerState::Front] = false;
+			}
+			else if (Input::GetKey(eKeyCode::DOWN))
+			{
+				mState[(UINT)ePlayerState::Back] = false;
+				mState[(UINT)ePlayerState::Front] = true;
+			}
+			else if(Input::GetKeyUp(eKeyCode::DOWN) == true && Input::GetKeyUp(eKeyCode::UP) == true)
+			{
+				mState[(UINT)ePlayerState::Back] = false;
+				mState[(UINT)ePlayerState::Front] = false;
+			}
+			
+			//walking애니메이션 실행
+
+			WalkingState();
+		}
+		if (Input::GetKeyUp(eKeyCode::LEFT))
+		{
+			if (chCheckDirectionKey() == false)		//다른키가 눌러져 있지 않은 상태라면
+			{
+				//idle로 변경
+				IdleState();
+			}
+			else									//다른키가 눌려져 있는 상태
+			{
+				//walking상태 유지 //다른 키가 눌려져 있으면 그 키로 변경 
+				WalkingState();
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mState[(UINT)ePlayerState::Left] = false;
+			mState[(UINT)ePlayerState::Right] = true;
+			if (Input::GetKey(eKeyCode::UP))
+			{
+				mState[(UINT)ePlayerState::Back] = true;
+				mState[(UINT)ePlayerState::Front] = false;
+			}
+			else if (Input::GetKey(eKeyCode::DOWN))
+			{
+				mState[(UINT)ePlayerState::Back] = false;
+				mState[(UINT)ePlayerState::Front] = true;
+			}
+			else if(Input::GetKeyUp(eKeyCode::DOWN)==true && Input::GetKeyUp(eKeyCode::UP)==true)
+			{
+				mState[(UINT)ePlayerState::Back] = false;
+				mState[(UINT)ePlayerState::Front] = false;
+			}
+			//walking애니메이션 실행
+			WalkingState();
+		}
+		if (Input::GetKeyUp(eKeyCode::RIGHT))
+		{
+			if (chCheckDirectionKey() == false)		//다른키가 눌러져 있지 않은 상태라면
+			{
+				//idle로 변경
+				IdleState();
+			}
+			else									//다른키가 눌려져 있는 상태
+			{
+				//walking상태 유지 //다른 키가 눌려져 있으면 그 키로 변경 
+				WalkingState();
+			}
+		}
 	}
 	void mainPlayerScript::IdleState()
 	{
@@ -543,7 +340,7 @@ namespace ch
 		{
 			animator->Play(L"P_IdleLeft", true);
 		}
-		else if (mState[(UINT)ePlayerState::Front] == true) 
+		else if (mState[(UINT)ePlayerState::Front] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
 		{
 			animator->Play(L"P_IdleFront", true);
 		}
@@ -555,12 +352,109 @@ namespace ch
 		{
 			animator->Play(L"P_IdleBackLeft", true);
 		}
-		else if (mState[(UINT)ePlayerState::Back] == true)
+		else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
 		{
 			animator->Play(L"P_IdleBack", true);
 		}
 
 		mState[(UINT)ePlayerState::Dodge] = false;
 	}
+	void mainPlayerScript::WalkingState()
+	{
+		if ( (Input::GetKeyDown(eKeyCode::UP) == true || Input::GetKey(eKeyCode::UP) == true) && (Input::GetKeyDown(eKeyCode::LEFT) == true || Input::GetKey(eKeyCode::LEFT) == true))
+		{
+			animator->Play(L"P_WalkingBackLeft", true);
+		}
+		else if ((Input::GetKeyDown(eKeyCode::UP) == true || Input::GetKey(eKeyCode::UP) == true) && (Input::GetKeyDown(eKeyCode::RIGHT) == true || Input::GetKey(eKeyCode::RIGHT) == true))
+		{
+			animator->Play(L"P_WalkingBackRight", true);
+		}
+		else if ((Input::GetKeyDown(eKeyCode::DOWN) == true || Input::GetKey(eKeyCode::DOWN) == true) && (Input::GetKeyDown(eKeyCode::LEFT) == true || Input::GetKey(eKeyCode::LEFT) == true))
+		{
+			animator->Play(L"P_WalkingLeft", true);
+		}
+		else if ((Input::GetKeyDown(eKeyCode::DOWN) == true || Input::GetKey(eKeyCode::DOWN) == true) && (Input::GetKeyDown(eKeyCode::RIGHT) == true || Input::GetKey(eKeyCode::RIGHT) == true))
+		{
+			animator->Play(L"P_WalkingRight", true);
+		}
+		else if ((Input::GetKeyDown(eKeyCode::UP) == true || Input::GetKey(eKeyCode::UP) == true))
+		{
+			animator->Play(L"P_WalkingBack", true);
+		}
+		else if ((Input::GetKeyDown(eKeyCode::DOWN) == true || Input::GetKey(eKeyCode::DOWN) == true))
+		{
+			animator->Play(L"P_WalkingFront", true);
+		}
+		else if ((Input::GetKeyDown(eKeyCode::LEFT) == true || Input::GetKey(eKeyCode::LEFT) == true))
+		{
+			if (mState[(UINT)ePlayerState::Back] == true) 
+			{
+				animator->Play(L"P_WalkingBackLeft", true);
+			}
+			else if (mState[(UINT)ePlayerState::Front] == true) 
+			{
+				animator->Play(L"P_WalkingLeft", true);
+			}
+		}
+		else if ((Input::GetKeyDown(eKeyCode::RIGHT) == true || Input::GetKey(eKeyCode::RIGHT) == true))
+		{
+			if (mState[(UINT)ePlayerState::Back] == true)
+			{
+				animator->Play(L"P_WalkingRight", true);
+			}
+			else if (mState[(UINT)ePlayerState::Front] == true)
+			{
+				animator->Play(L"P_WalkingRight", true);
+			}
+		}
+
+	}
+	//걷기, 기본 행동 
+	// 
+	// 
+	//구르기 관련
+	void mainPlayerScript::chDodging()
+	{
+		if ( (Input::GetKeyDown(eKeyCode::UP) || Input::GetKey(eKeyCode::UP) ) && (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKey(eKeyCode::LEFT)) ) 
+		{
+			rigidi->AddForce(Vector3(-2000.f, 2000.0f, 0.0f));
+		}
+		else if ((Input::GetKeyDown(eKeyCode::UP) || Input::GetKey(eKeyCode::UP)) && (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKey(eKeyCode::RIGHT))) 
+		{
+			rigidi->AddForce(Vector3(2000.f, 2000.0f, 0.0f));
+		}
+		else if ((Input::GetKeyDown(eKeyCode::DOWN) || Input::GetKey(eKeyCode::DOWN)) && (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKey(eKeyCode::RIGHT)))
+		{
+			rigidi->AddForce(Vector3(2000.f, -2000.0f, 0.0f));
+		}
+		else if ((Input::GetKeyDown(eKeyCode::DOWN) || Input::GetKey(eKeyCode::DOWN)) && (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKey(eKeyCode::LEFT)))
+		{
+			rigidi->AddForce(Vector3(-2000.f, -2000.0f, 0.0f));
+		}
+		else if ( Input::GetKeyDown(eKeyCode::DOWN) || Input::GetKey(eKeyCode::DOWN) )
+		{
+			rigidi->AddForce(Vector3(0.f, -2000.0f, 0.0f));
+		}
+		else if ( Input::GetKeyDown(eKeyCode::UP) || Input::GetKey(eKeyCode::UP) )
+		{
+			rigidi->AddForce(Vector3(0.f, 2000.0f, 0.0f));
+		}
+		else if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKey(eKeyCode::LEFT))
+		{
+			rigidi->AddForce(Vector3(-2000.f, 0.0f, 0.0f));
+		}
+		else if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKey(eKeyCode::RIGHT))
+		{
+			rigidi->AddForce(Vector3(2000.f, 0.0f, 0.0f));
+		}
+	}
+	void mainPlayerScript::DodgeState()
+	{
+
+	}
+	
+
+
+
 }
 
