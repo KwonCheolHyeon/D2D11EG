@@ -41,22 +41,27 @@ namespace ch
     public://행동 
         void chWalking();
         bool chCheckDirectionKey();//방향키를 눌렀는지 확인
+        bool chCheckDirectionKeyDoge();//닷지 용
         void chState();
-
         void chDodging();//구르기 움직임
 
     public : //애니메이션 상태
         void IdleState();
         void WalkingState();
         void DodgeState();//구르기 애니메이션
-        void afterDodge();
-    private:
-      
+        void afterDodge();//dodge후 
+        void allowDodge();
 
+
+    private:
         std::bitset<static_cast<UINT>(ePlayerState::End)> mState;
         Animator* animator;
         Rigidbody* rigidi;
+        Transform* transform;
+        Vector3 pos;
         bool keyLock = true;
+
+       
 
     };
 }

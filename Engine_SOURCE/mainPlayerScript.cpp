@@ -27,31 +27,31 @@ namespace ch
 	void mainPlayerScript::Initalize()
 	{
 
+		transform = GetOwner()->GetComponent<Transform>();
+
 	}
 	void mainPlayerScript::Update()
 	{
-		Transform* transform = GetOwner()->GetComponent<Transform>();
 		animator = GetOwner()->GetComponent<Animator>();
 		rigidi = GetOwner()->GetComponent<Rigidbody>();
 		
 		if (mState[(UINT)ePlayerState::Dodge] == false) 
-		{
-			Vector3 pos = transform->GetPosition();
+		{ //							걷기 함수
+			
 			chCheckDirectionKey();
 			chState();
 			chWalking();
 		}
-		
-		{//															구르기 
-			if (Input::GetKeyDown(eKeyCode::RBTN))
-			{
-				mState[(UINT)ePlayerState::Dodge] = true;
-				DodgeState();
-				chDodging();
-				
-				
-			}
+		//								구르기 
+		if (Input::GetKeyDown(eKeyCode::RBTN) && mState[(UINT)ePlayerState::Dodge] == false)
+		{
+			mState[(UINT)ePlayerState::Dodge] = true;
+			DodgeState();
+			chDodging();
+
+
 		}
+		
 	}
 	void mainPlayerScript::FixedUpdate()
 	{
@@ -80,7 +80,7 @@ namespace ch
 	//chWalking : 캐릭터 이동
 	void mainPlayerScript::chWalking() //								움직임 함수
 	{
-		Transform* transform = GetOwner()->GetComponent<Transform>();
+		
 		Vector3 pos = transform->GetPosition();
 		Vector3 direction = Vector3::Zero;
 		{//														움직임
@@ -132,6 +132,26 @@ namespace ch
 			mState[(UINT)ePlayerState::Walking] = false;
 			return false;
 		}
+	}
+
+	bool mainPlayerScript::chCheckDirectionKeyDoge()
+	{
+		if (Input::GetKey(eKeyCode::RIGHT) == true || Input::GetKey(eKeyCode::LEFT) == true || Input::GetKey(eKeyCode::UP) == true || Input::GetKey(eKeyCode::DOWN) == true)
+		{
+			
+			allowDodge();
+
+			return true;
+		}
+		else 
+		{
+	
+			IdleState();
+
+
+			return false;
+		}
+		
 	}
 
 	//chState : 캐릭터 상태 체크후 애니메이션 실행
@@ -354,7 +374,7 @@ namespace ch
 		{
 			if (mState[(UINT)ePlayerState::Back] == true)
 			{
-				animator->Play(L"P_WalkingRight", true);
+				animator->Play(L"P_WalkingBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Front] == true)
 			{
@@ -458,11 +478,11 @@ namespace ch
 			mState[(UINT)ePlayerState::Right] = false;
 			if (mState[(UINT)ePlayerState::Back] == true)
 			{
-				animator->Play(L"P_DodgeBackLeft", true);
+				animator->Play(L"P_DodgeBackLeft", false);
 			}
 			else if (mState[(UINT)ePlayerState::Front] == true)
 			{
-				animator->Play(L"P_DodgeLeft", true);
+				animator->Play(L"P_DodgeLeft", false);
 			}
 		}
 		else if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKey(eKeyCode::RIGHT))
@@ -472,26 +492,36 @@ namespace ch
 
 			if (mState[(UINT)ePlayerState::Back] == true)
 			{
-				animator->Play(L"P_DodgeBackRight", true);
+				animator->Play(L"P_DodgeBackRight", false);
 			}
 			else if (mState[(UINT)ePlayerState::Front] == true)
 			{
-				animator->Play(L"P_DodgeRight", true);
+				animator->Play(L"P_DodgeRight", false);
 			}
 		}
 		afterDodge();
+
+	
 	}
 
 	void mainPlayerScript::afterDodge()
 	{
-		animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::IdleState, this);
-		animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::IdleState, this);
-		animator->GetCompleteEvent(L"P_DodgeBackRight") = std::bind(&mainPlayerScript::IdleState, this);
-		animator->GetCompleteEvent(L"P_DodgeBackLeft") = std::bind(&mainPlayerScript::IdleState, this);
-		animator->GetCompleteEvent(L"P_DodgeFront") = std::bind(&mainPlayerScript::IdleState, this);
-		animator->GetCompleteEvent(L"P_DodgeBack") = std::bind(&mainPlayerScript::IdleState, this);
-		animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::IdleState, this);
-		animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::IdleState, this);
+		animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeBackRight") = std::bind(&mainPlayerScript::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeBackLeft") = std::bind(&mainPlayerScript::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeFront") = std::bind(&mainPlayerScript::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeBack") = std::bind(&mainPlayerScript::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::chCheckDirectionKeyDoge, this);
+	
+	}
+
+	void mainPlayerScript::allowDodge()
+	{
+		mState[(UINT)ePlayerState::Dodge] = false;
+		WalkingState();
+
 	}
 	
 
