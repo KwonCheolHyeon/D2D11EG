@@ -49,6 +49,7 @@ namespace ch
         void IdleState();
         void WalkingState();
         void DodgeState();//구르기 애니메이션
+        void afterDodge();
     private:
       
 

@@ -18,7 +18,7 @@
 #include "mainPlayer.h"
 #include "chAnimator.h"
 #include "chLight.h"
-
+#include "chPaintShader.h"
 
 
 namespace ch
@@ -32,6 +32,13 @@ namespace ch
 	}
 	void TitleScene::Initalize()
 	{
+		//paint shader
+		std::shared_ptr<PaintShader> paintShader = Resources::Find<PaintShader>(L"PaintShader");
+		//L"SmileTexture"
+		std::shared_ptr<Texture> paintTex = Resources::Find<Texture>(L"PaintTexture");
+		paintShader->SetTarget(paintTex);
+		paintShader->OnExcute();
+
 		{
 			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player,this);
 			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));

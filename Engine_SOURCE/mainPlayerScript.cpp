@@ -45,57 +45,11 @@ namespace ch
 		{//															±¸¸£±â 
 			if (Input::GetKeyDown(eKeyCode::RBTN))
 			{
-			
 				mState[(UINT)ePlayerState::Dodge] = true;
-
-				if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Right] == true)
-				{
-					animator->Play(L"P_DodgeRight", false);
-					
-					animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::IdleState, this);
-				}
-				else if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Left] == true) 
-				{
-					animator->Play(L"P_DodgeLeft", false);
-					
-					animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::IdleState, this);
-				}
-				
-				else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
-				{
-					animator->Play(L"P_DodgeBackRight", false);
-					
-					animator->GetCompleteEvent(L"P_DodgeBackRight") = std::bind(&mainPlayerScript::IdleState, this);
-
-				}
-				else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
-				{
-					animator->Play(L"P_DodgeBackLeft", false);
-					
-					animator->GetCompleteEvent(L"P_DodgeBackLeft") = std::bind(&mainPlayerScript::IdleState, this);
-				}
-				else if (mState[(UINT)ePlayerState::Front] == true)
-				{
-					animator->Play(L"P_DodgeFront", false);
-					animator->GetCompleteEvent(L"P_DodgeFront") = std::bind(&mainPlayerScript::IdleState, this);
-				}
-				else if (mState[(UINT)ePlayerState::Back] == true)
-				{
-					animator->Play(L"P_DodgeBack", false);
-					animator->GetCompleteEvent(L"P_DodgeBack") = std::bind(&mainPlayerScript::IdleState, this);
-				}
-				else if (mState[(UINT)ePlayerState::Left] == true)
-				{
-					animator->Play(L"P_DodgeLeft", false);
-					animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::IdleState, this);
-				}
-				else if (mState[(UINT)ePlayerState::Right] == true)
-				{
-					animator->Play(L"P_DodgeRight", false);
-					animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::IdleState, this);
-				}
-
+				DodgeState();
 				chDodging();
+				
+				
 			}
 		}
 	}
@@ -450,7 +404,94 @@ namespace ch
 	}
 	void mainPlayerScript::DodgeState()
 	{
+		if ((Input::GetKeyDown(eKeyCode::UP) || Input::GetKey(eKeyCode::UP)) && (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKey(eKeyCode::LEFT)))
+		{
+			animator->Play(L"P_DodgeBackLeft", false);
+			mState[(UINT)ePlayerState::Front] = false;
+			mState[(UINT)ePlayerState::Back] = true;
+			mState[(UINT)ePlayerState::Left] = true;
+			mState[(UINT)ePlayerState::Right] = false;
+		}
+		else if ((Input::GetKeyDown(eKeyCode::UP) || Input::GetKey(eKeyCode::UP)) && (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKey(eKeyCode::RIGHT)))
+		{
+			animator->Play(L"P_DodgeBackRight", false);
+			mState[(UINT)ePlayerState::Front] = false;
+			mState[(UINT)ePlayerState::Back] = true;
+			mState[(UINT)ePlayerState::Left] = false;
+			mState[(UINT)ePlayerState::Right] = true;
+		}
+		else if ((Input::GetKeyDown(eKeyCode::DOWN) || Input::GetKey(eKeyCode::DOWN)) && (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKey(eKeyCode::RIGHT)))
+		{
+			animator->Play(L"P_DodgeRight", false);
+			mState[(UINT)ePlayerState::Front] = true;
+			mState[(UINT)ePlayerState::Back] = false;
+			mState[(UINT)ePlayerState::Left] = false;
+			mState[(UINT)ePlayerState::Right] = true;
+		}
+		else if ((Input::GetKeyDown(eKeyCode::DOWN) || Input::GetKey(eKeyCode::DOWN)) && (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKey(eKeyCode::LEFT)))
+		{
+			animator->Play(L"P_DodgeLeft", false);
+			mState[(UINT)ePlayerState::Front] = true;
+			mState[(UINT)ePlayerState::Back] = false;
+			mState[(UINT)ePlayerState::Left] = true;
+			mState[(UINT)ePlayerState::Right] = false;
+		}
+		else if (Input::GetKeyDown(eKeyCode::DOWN) || Input::GetKey(eKeyCode::DOWN))
+		{
+			animator->Play(L"P_DodgeFront", false);
+			mState[(UINT)ePlayerState::Front] = true;
+			mState[(UINT)ePlayerState::Back] = false;
+			mState[(UINT)ePlayerState::Left] = false;
+			mState[(UINT)ePlayerState::Right] = false;
+		}
+		else if (Input::GetKeyDown(eKeyCode::UP) || Input::GetKey(eKeyCode::UP))
+		{
+			animator->Play(L"P_DodgeBack", false);
+			mState[(UINT)ePlayerState::Front] = false;
+			mState[(UINT)ePlayerState::Back] = true;
+			mState[(UINT)ePlayerState::Left] = false;
+			mState[(UINT)ePlayerState::Right] = false;
+		}
+		else if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKey(eKeyCode::LEFT))
+		{
+			mState[(UINT)ePlayerState::Left] = true;
+			mState[(UINT)ePlayerState::Right] = false;
+			if (mState[(UINT)ePlayerState::Back] == true)
+			{
+				animator->Play(L"P_DodgeBackLeft", true);
+			}
+			else if (mState[(UINT)ePlayerState::Front] == true)
+			{
+				animator->Play(L"P_DodgeLeft", true);
+			}
+		}
+		else if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKey(eKeyCode::RIGHT))
+		{
+			mState[(UINT)ePlayerState::Left] = false;
+			mState[(UINT)ePlayerState::Right] = true;
 
+			if (mState[(UINT)ePlayerState::Back] == true)
+			{
+				animator->Play(L"P_DodgeBackRight", true);
+			}
+			else if (mState[(UINT)ePlayerState::Front] == true)
+			{
+				animator->Play(L"P_DodgeRight", true);
+			}
+		}
+		afterDodge();
+	}
+
+	void mainPlayerScript::afterDodge()
+	{
+		animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::IdleState, this);
+		animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::IdleState, this);
+		animator->GetCompleteEvent(L"P_DodgeBackRight") = std::bind(&mainPlayerScript::IdleState, this);
+		animator->GetCompleteEvent(L"P_DodgeBackLeft") = std::bind(&mainPlayerScript::IdleState, this);
+		animator->GetCompleteEvent(L"P_DodgeFront") = std::bind(&mainPlayerScript::IdleState, this);
+		animator->GetCompleteEvent(L"P_DodgeBack") = std::bind(&mainPlayerScript::IdleState, this);
+		animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&mainPlayerScript::IdleState, this);
+		animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&mainPlayerScript::IdleState, this);
 	}
 	
 

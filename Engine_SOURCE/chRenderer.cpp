@@ -2,6 +2,7 @@
 #include "chResources.h"
 #include "chMaterial.h"
 #include "chSceneManager.h"
+#include "chPaintShader.h"
 
 namespace ch::renderer
 {
@@ -377,6 +378,11 @@ namespace ch::renderer
 		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
 		Resources::Insert<Shader>(L"DebugShader", debugShader);
+
+		//페이트 쉐이더
+		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
+		paintShader->Create(L"PaintCS.hlsl", "main");
+		Resources::Insert<PaintShader>(L"PaintShader", paintShader);
 	}
 
 	void LoadTexture()
@@ -384,7 +390,11 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"SmileTexture", L"Smile.png");
 		Resources::Load<Texture>(L"DefaultSprite", L"Light.png");
 		Resources::Load<Texture>(L"HPBarTexture", L"HPBar.png");
-
+		//Create
+		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
+		uavTexture->Create(1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE
+			| D3D11_BIND_UNORDERED_ACCESS);
+		Resources::Insert<Texture>(L"PaintTexture", uavTexture);
 
 		Resources::Load<Texture>(L"FadeEffectTexture", L"black.jpg");
 
@@ -482,7 +492,7 @@ namespace ch::renderer
 		}
 
 		// Default
-		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"SmileTexture");
+		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"PaintTexture");
 		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"RectShader");
 		std::shared_ptr<Material> material = std::make_shared<Material>();
 		material->SetShader(shader);
