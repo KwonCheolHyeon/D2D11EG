@@ -31,6 +31,8 @@ namespace ch
 			delete scrComp;
 			scrComp = nullptr;
 		}
+
+	
 	}
 
 	void GameObject::Initalize()

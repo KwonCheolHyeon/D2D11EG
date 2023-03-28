@@ -27,6 +27,7 @@ namespace ch
 
 	void PlayScene::Initalize()
 	{
+	
 
 		{
 			{

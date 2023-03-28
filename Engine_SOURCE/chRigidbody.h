@@ -23,6 +23,8 @@ namespace ch
 		Vector3 GetVelocity() { return mVelocity; }
 		void SetVelocity(Vector3 velocity) { mVelocity = velocity; }
 
+	public:
+		static bool dodgeForceReset;//구르기때 힘 초기화 함수
 	
 	private:
 		// 힘과 마찰력을 이용한 이동
@@ -41,7 +43,7 @@ namespace ch
 		float mLimitVelocity;
 
 	private:
-		
+		float mForceResetTimer;
 
 	private:
 		void objectMove();

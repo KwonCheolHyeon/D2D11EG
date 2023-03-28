@@ -4,6 +4,7 @@
 #include "chConstantBuffer.h"
 #include "chMesh.h"
 #include "chTexture.h"
+#include "chResources.h"
 
 extern ch::Application application;
 
@@ -87,14 +88,8 @@ namespace ch::graphics
 		mDepthStencilBufferTexture = std::make_shared<Texture>();
 		mDepthStencilBufferTexture->Create(1600, 900, DXGI_FORMAT_D24_UNORM_S8_UINT, D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL);
 
-		// Depth Stencil Buffer
-		if (!CreateTexture(&depthBuffer, mDepthStencilBufferTexture->GetTexture().GetAddressOf()))
-			return;
+		
 
-		// Depth Stencil Buffer View
-		if (FAILED(mDevice->CreateDepthStencilView
-		(mDepthStencilBufferTexture->GetTexture().Get(), nullptr, mDepthStencilBufferTexture->GetDSV().GetAddressOf())))
-			return;
 
 		RECT winRect;
 		GetClientRect(application.GetHwnd(), &winRect);
@@ -439,6 +434,12 @@ namespace ch::graphics
 	{
 		mContext->DrawIndexed(indexCount, StartIndexLocation, BaseVertexLocation);
 	}
+
+	void GraphicDevice_DX11::DrawIndexedInstanced(UINT IndexCountPerInstance, UINT InstanceCount, UINT StartIndexLocation, INT BaseVertexLocation, UINT StartInstanceLocation)
+	{
+		mContext->DrawIndexedInstanced(IndexCountPerInstance, InstanceCount, StartIndexLocation, BaseVertexLocation, StartInstanceLocation);
+	}
+
 
 	void GraphicDevice_DX11::Present()
 	{

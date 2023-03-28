@@ -17,8 +17,8 @@ namespace ch::enums
 		Grid,
 		BackGround,
 		Monster,
-		Player,
-
+		Player, 
+		Particle,
 		UI,
 		End = 16,
 	};
@@ -35,6 +35,7 @@ namespace ch::enums
 		MeshRenerer,
 		SpriteRenderer,
 		Animator,
+		ParticleSystem,
 		Light,
 		UI,
 		//FadeOut,FadeIn

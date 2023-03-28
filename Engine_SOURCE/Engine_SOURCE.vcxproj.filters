@@ -276,6 +276,7 @@
     <ClInclude Include="chRigidbody.h" />
     <ClInclude Include="chComputeShader.h" />
     <ClInclude Include="chPaintShader.h" />
+    <ClInclude Include="chParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -421,6 +422,7 @@
     <ClCompile Include="chRigidbody.cpp" />
     <ClCompile Include="chComputeShader.cpp" />
     <ClCompile Include="chPaintShader.cpp" />
+    <ClCompile Include="chParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">

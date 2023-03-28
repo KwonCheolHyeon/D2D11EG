@@ -124,6 +124,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -185,6 +186,7 @@
     <ClInclude Include="chMouseCursorScript.h" />
     <ClInclude Include="chObject.h" />
     <ClInclude Include="chPaintShader.h" />
+    <ClInclude Include="chParticleSystem.h" />
     <ClInclude Include="chPlayer.h" />
     <ClInclude Include="chPlayerScript.h" />
     <ClInclude Include="chPlayerSprite.h" />
@@ -239,6 +241,7 @@
     <ClCompile Include="chMonster.cpp" />
     <ClCompile Include="chMouseCursorScript.cpp" />
     <ClCompile Include="chPaintShader.cpp" />
+    <ClCompile Include="chParticleSystem.cpp" />
     <ClCompile Include="chPlayer.cpp" />
     <ClCompile Include="chPlayerScript.cpp" />
     <ClCompile Include="chPlayerSprite.cpp" />
