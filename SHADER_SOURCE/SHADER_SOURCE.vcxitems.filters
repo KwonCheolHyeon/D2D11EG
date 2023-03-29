@@ -10,6 +10,9 @@
     <Filter Include="CS">
       <UniqueIdentifier>{5cb32ab5-c691-467e-b02e-815483d4016c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GS">
+      <UniqueIdentifier>{9aad4520-8061-405a-ab5d-44e81a34f106}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)UserInterfacePS.hlsl">
@@ -56,6 +59,9 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)ParticleVS.hlsl">
       <Filter>VS</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)ParticleGS.hlsl">
+      <Filter>GS</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

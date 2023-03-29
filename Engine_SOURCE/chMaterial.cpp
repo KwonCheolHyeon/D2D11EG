@@ -9,13 +9,6 @@ namespace ch::graphics
     {
 
     }
-    Material::Material(std::wstring _TextureName, std::wstring _ShaderName)
-        : Resource(eResourceType::Material)
-        , mMode(eRenderingMode::Transparent)
-    {
-        mTexture = Resources::Find<Texture>(_TextureName);
-        mShader = Resources::Find<Shader>(_ShaderName);
-    }
 
     Material::~Material()
     {
@@ -61,12 +54,23 @@ namespace ch::graphics
 
     void Material::Bind()
     {
-        if (mTexture)
-            mTexture->BindShader(eShaderStage::PS, 0);
+        for (size_t i = 0; i < (UINT)eTextureSlot::End; i++)
+        {
+            if (mTexture[i] == nullptr)
+                continue;
+
+            mTexture[i]->BindShaderResource(eShaderStage::VS, i);
+            mTexture[i]->BindShaderResource(eShaderStage::HS, i);
+            mTexture[i]->BindShaderResource(eShaderStage::DS, i);
+            mTexture[i]->BindShaderResource(eShaderStage::GS, i);
+            mTexture[i]->BindShaderResource(eShaderStage::PS, i);
+            mTexture[i]->BindShaderResource(eShaderStage::CS, i);
+        }
 
         ConstantBuffer* pCB = renderer::constantBuffers[(UINT)eCBType::Material];
         pCB->SetData(&mCB);
         pCB->Bind(eShaderStage::VS);
+        pCB->Bind(eShaderStage::GS);
         pCB->Bind(eShaderStage::PS);
 
         mShader->Binds();
@@ -74,6 +78,12 @@ namespace ch::graphics
 
     void Material::Clear()
     {
-        mTexture->Clear();
+        for (size_t i = 0; i < (UINT)eTextureSlot::End; i++)
+        {
+            if (mTexture[i] == nullptr)
+                continue;
+
+            mTexture[i]->Clear();
+        }
     }
 }

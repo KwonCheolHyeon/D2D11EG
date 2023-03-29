@@ -402,14 +402,15 @@ namespace ch::renderer
 		paintShader->Create(L"PaintCS.hlsl", "main");
 		Resources::Insert<PaintShader>(L"PaintShader", paintShader);
 
-		// Debug Shader
+		// Particle Shader
 		std::shared_ptr<Shader> particleShader = std::make_shared<Shader>();
 		particleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
+		particleShader->Create(eShaderStage::GS, L"ParticleGS.hlsl", "main");
 		particleShader->Create(eShaderStage::PS, L"ParticlePS.hlsl", "main");
 		particleShader->SetRSState(eRSType::SolidNone);
 		particleShader->SetDSState(eDSType::NoWrite);
 		particleShader->SetBSState(eBSType::AlphaBlend);
-
+		particleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 		Resources::Insert<Shader>(L"ParticleShader", particleShader);
 
 	}
@@ -419,6 +420,9 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"SmileTexture", L"Smile.png");
 		Resources::Load<Texture>(L"DefaultSprite", L"Light.png");
 		Resources::Load<Texture>(L"HPBarTexture", L"HPBar.png");
+		Resources::Load<Texture>(L"CartoonSmoke", L"particle\\CartoonSmoke.png");
+
+
 		//Create
 		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
 		uavTexture->Create(1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE
@@ -468,7 +472,7 @@ namespace ch::renderer
 				std::shared_ptr<Material> material = std::make_shared<Material>();
 				material->SetRenderingMode(eRenderingMode::Transparent);
 				material->SetShader(shader);
-				material->SetTexture(texture);
+				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"mainBgMaterial", material);
 
 			}
@@ -479,7 +483,7 @@ namespace ch::renderer
 				std::shared_ptr<Material> material = std::make_shared<Material>();
 				material->SetRenderingMode(eRenderingMode::Transparent);
 				material->SetShader(shader);
-				material->SetTexture(texture);
+				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"mainMenuMaterial", material);
 			}
 		}
@@ -492,7 +496,7 @@ namespace ch::renderer
 			std::shared_ptr<Material> material = std::make_shared<Material>();
 			material->SetRenderingMode(eRenderingMode::Transparent);
 			material->SetShader(shader);
-			material->SetTexture(texture);
+			material->SetTexture(eTextureSlot::T0, texture);
 			Resources::Insert<Material>(L"pIdleMaterial", material);
 			
 		}
@@ -503,7 +507,7 @@ namespace ch::renderer
 			std::shared_ptr<Material> material = std::make_shared<Material>();
 			material->SetRenderingMode(eRenderingMode::Transparent);
 			material->SetShader(shader);
-			material->SetTexture(texture);
+			material->SetTexture(eTextureSlot::T0, texture);
 			Resources::Insert<Material>(L"floatMaterial", material);
 		}
 
@@ -515,7 +519,7 @@ namespace ch::renderer
 				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
 				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
 				uiMaterial->SetShader(uiShader);
-				uiMaterial->SetTexture(uiTexture);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
 				Resources::Insert<Material>(L"crossHairMaterial", uiMaterial);
 			}
 		}
@@ -525,7 +529,7 @@ namespace ch::renderer
 		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"RectShader");
 		std::shared_ptr<Material> material = std::make_shared<Material>();
 		material->SetShader(shader);
-		material->SetTexture(texture);
+		material->SetTexture(eTextureSlot::T0, texture);
 		Resources::Insert<Material>(L"RectMaterial", material);
 
 		// Sprite
@@ -534,7 +538,7 @@ namespace ch::renderer
 		std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
 		spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		spriteMaterial->SetShader(spriteShader);
-		spriteMaterial->SetTexture(spriteTexture);
+		spriteMaterial->SetTexture(eTextureSlot::T0, spriteTexture);
 		Resources::Insert<Material>(L"SpriteMaterial", spriteMaterial);
 
 		// UI
@@ -543,7 +547,7 @@ namespace ch::renderer
 		std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
 		uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		uiMaterial->SetShader(uiShader);
-		uiMaterial->SetTexture(uiTexture);
+		uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
 		Resources::Insert<Material>(L"UIMaterial", uiMaterial);
 
 		{
@@ -553,7 +557,7 @@ namespace ch::renderer
 			std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
 			uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
 			uiMaterial->SetShader(uiShader);
-			uiMaterial->SetTexture(uiTexture);
+			uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
 			Resources::Insert<Material>(L"CircleMaterial", uiMaterial);
 		}
 
@@ -563,14 +567,14 @@ namespace ch::renderer
 		gridMaterial->SetShader(gridShader);
 		Resources::Insert<Material>(L"GridMaterial", gridMaterial);
 
-		// Fade ¿Ã∆Â∆Æ
-		std::shared_ptr <Texture> fadeTexture = Resources::Find<Texture>(L"FadeEffectTexture");
-		std::shared_ptr<Shader> fadeShader = Resources::Find<Shader>(L"FadeEffectShader");
-		std::shared_ptr<Material> fadeMaterial = std::make_shared<Material>();
-		fadeMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		fadeMaterial->SetShader(fadeShader);
-		fadeMaterial->SetTexture(fadeTexture);
-		Resources::Insert<Material>(L"FadeEffectMaterial", fadeMaterial);
+		//// Fade ¿Ã∆Â∆Æ
+		//std::shared_ptr <Texture> fadeTexture = Resources::Find<Texture>(L"FadeEffectTexture");
+		//std::shared_ptr<Shader> fadeShader = Resources::Find<Shader>(L"FadeEffectShader");
+		//std::shared_ptr<Material> fadeMaterial = std::make_shared<Material>();
+		//fadeMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		//fadeMaterial->SetShader(fadeShader);
+		//fadeMaterial->SetTexture(fadeTexture);
+		//Resources::Insert<Material>(L"FadeEffectMaterial", fadeMaterial);
 
 		// Debug
 		std::shared_ptr<Shader> debugShader = Resources::Find<Shader>(L"DebugShader");
