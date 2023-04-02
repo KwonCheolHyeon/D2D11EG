@@ -15,11 +15,14 @@ namespace ch
 		virtual void FixedUpdate();
 		virtual void Render();
 
-
+		
+		
 	private:
+		GameObject* pHand;
 		Transform* pTr;
 		Collider2D* pCollider;
 		Animator* pAnimator;
+		
 	};
 }
 

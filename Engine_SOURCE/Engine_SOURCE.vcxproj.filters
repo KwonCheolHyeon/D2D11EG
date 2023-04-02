@@ -116,6 +116,24 @@
     <Filter Include="GameObject\UI">
       <UniqueIdentifier>{d743dfe3-9319-49ba-8bfd-1e068768e3e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\RigidiBody">
+      <UniqueIdentifier>{302182e7-574e-4c2c-8694-a2601bd0ff86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Light">
+      <UniqueIdentifier>{96fac7da-fcf4-4aba-96b7-daf57132bc03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader\CS">
+      <UniqueIdentifier>{4a7078c8-dbf8-4eca-9682-556001b968af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader\CS\Base">
+      <UniqueIdentifier>{9c029854-d49b-43d6-9b2e-5cfd2f89dd19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Buffer">
+      <UniqueIdentifier>{a2bd15e5-eb60-4c20-8e97-b6035cfe22ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\chPlayer\Hand">
+      <UniqueIdentifier>{22cec039-a2cb-4eb8-94f8-ec905d677696}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -214,9 +232,6 @@
     <ClInclude Include="chTitleScene.h">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClInclude>
-    <ClInclude Include="chConstantBuffer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="chBaseRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -244,14 +259,9 @@
     <ClInclude Include="mainPlayer.h">
       <Filter>GameObject\GunChar</Filter>
     </ClInclude>
-    <ClInclude Include="chPlayerSprite.h">
-      <Filter>GameObject\GunChar</Filter>
-    </ClInclude>
     <ClInclude Include="chMainMenuScene.h">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClInclude>
-    <ClInclude Include="chLight.h" />
-    <ClInclude Include="chStructedBuffer.h" />
     <ClInclude Include="chAnimation.h">
       <Filter>Component\Animator</Filter>
     </ClInclude>
@@ -273,10 +283,37 @@
     <ClInclude Include="chMouseCursorScript.h">
       <Filter>GameObject\UI</Filter>
     </ClInclude>
-    <ClInclude Include="chRigidbody.h" />
-    <ClInclude Include="chComputeShader.h" />
-    <ClInclude Include="chPaintShader.h" />
     <ClInclude Include="chParticleSystem.h" />
+    <ClInclude Include="chRigidbody.h">
+      <Filter>Component\RigidiBody</Filter>
+    </ClInclude>
+    <ClInclude Include="chLight.h">
+      <Filter>Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="chComputeShader.h">
+      <Filter>Resource\Shader\CS\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="chPaintShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="chParticleShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="chConstantBuffer.h">
+      <Filter>Graphics\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="chStructedBuffer.h">
+      <Filter>Graphics\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayerScr.h">
+      <Filter>GameObject\chPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayerHand.h">
+      <Filter>GameObject\chPlayer\Hand</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayerHandScr.h">
+      <Filter>GameObject\chPlayer\Hand</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -363,9 +400,6 @@
     <ClCompile Include="chTitleScene.cpp">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClCompile>
-    <ClCompile Include="chConstantBuffer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="chBaseRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -390,14 +424,9 @@
     <ClCompile Include="mainPlayer.cpp">
       <Filter>GameObject\GunChar</Filter>
     </ClCompile>
-    <ClCompile Include="chPlayerSprite.cpp">
-      <Filter>GameObject\GunChar</Filter>
-    </ClCompile>
     <ClCompile Include="chMainMenuScene.cpp">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClCompile>
-    <ClCompile Include="chLight.cpp" />
-    <ClCompile Include="chStructedBuffer.cpp" />
     <ClCompile Include="chAnimation.cpp">
       <Filter>Component\Animator</Filter>
     </ClCompile>
@@ -419,10 +448,37 @@
     <ClCompile Include="chMouseCursorScript.cpp">
       <Filter>GameObject\UI</Filter>
     </ClCompile>
-    <ClCompile Include="chRigidbody.cpp" />
-    <ClCompile Include="chComputeShader.cpp" />
-    <ClCompile Include="chPaintShader.cpp" />
     <ClCompile Include="chParticleSystem.cpp" />
+    <ClCompile Include="chRigidbody.cpp">
+      <Filter>Component\RigidiBody</Filter>
+    </ClCompile>
+    <ClCompile Include="chLight.cpp">
+      <Filter>Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="chComputeShader.cpp">
+      <Filter>Resource\Shader\CS\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="chPaintShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="chParticleShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="chConstantBuffer.cpp">
+      <Filter>Graphics\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="chStructedBuffer.cpp">
+      <Filter>Graphics\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayerScr.cpp">
+      <Filter>GameObject\chPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayerHand.cpp">
+      <Filter>GameObject\chPlayer\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayerHandScr.cpp">
+      <Filter>GameObject\chPlayer\Hand</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">

@@ -1,0 +1,29 @@
+#pragma once
+#include "chGameObject.h"
+
+namespace ch 
+{
+	class PlayerHand : public GameObject
+	{
+	public:
+		PlayerHand();
+		virtual ~PlayerHand();
+
+		virtual void Initalize();
+		virtual void Update();
+		virtual void FixedUpdate();
+		virtual void Render();
+
+		void SetPlayer(GameObject* _player) { player = _player; }
+		
+		void handPosition();
+	private:
+		Transform* phandTr;
+		GameObject* player;
+
+	private:
+		float handDistance;
+	};
+}
+
+

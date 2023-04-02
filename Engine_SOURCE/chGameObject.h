@@ -2,7 +2,7 @@
 #include "chComponent.h"
 #include "chScript.h"
 #include "chEntity.h"
-
+#include "chMeshRenderer.h"
 namespace ch
 {
 	class GameObject : public Entity
@@ -94,6 +94,24 @@ namespace ch
 		eLayerType GetLayerType() { return mType; }
 		void SetLayerType(eLayerType type) { mType = type; }
 
+	public:
+		void SetPos(Vector3 _Value);
+		//void SetScale(Vector3 _Value);
+		void SetRotation(Vector3 _Value);
+
+		Vector3 GetPos();
+		//Vector3 GetScale();
+		Vector3 GetRotation();
+
+	public:
+		void SetLeft() { mbIsLeft = true; }
+		void SetRight() { mbIsLeft = false; }
+		void Flip();
+
+	
+	private:
+		bool mbIsLeft;//flip¿ë
+		
 	protected:
 		std::vector<Component*> mComponents;
 
@@ -103,6 +121,10 @@ namespace ch
 		std::vector<Script*> mScripts;
 		bool mbDontDestroy;
 		//Scene* mScene;
+
+
+		
+		
 	};
 }
 

@@ -71,6 +71,7 @@ namespace ch
 
 			script->Update();
 		}
+		Flip();
 	}
 
 	void GameObject::FixedUpdate()
@@ -125,5 +126,42 @@ namespace ch
 			mScripts.push_back(dynamic_cast<Script*>(comp));
 			comp->SetOwner(this);
 		}
+	}
+	void GameObject::SetPos(Vector3 _Value)
+	{
+		if (nullptr != GetComponent<Transform>())
+		{
+			GetComponent<Transform>()->SetPosition(_Value);
+		}
+	}
+	
+	void GameObject::SetRotation(Vector3 _Value)
+	{
+		if (nullptr != GetComponent<Transform>())
+		{
+			GetComponent<Transform>()->SetRotation(_Value);
+		}
+	}
+	Vector3 GameObject::GetPos()
+	{
+		return GetComponent<Transform>()->GetPosition();
+	}
+
+	Vector3 GameObject::GetRotation()
+	{
+		return GetComponent<Transform>()->GetRotation();
+	}
+	void GameObject::Flip()
+	{
+		if (mbIsLeft == false) //오른쪽
+		{
+			GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.f, 0.f));
+
+		}
+		else if (mbIsLeft == true) // 왼쪽
+		{
+			GetComponent<Transform>()->SetRotation(Vector3(0.0f, 180.f, 0.f));//y축 기준으로 180도 회전  
+		}
+
 	}
 }

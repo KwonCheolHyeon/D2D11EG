@@ -23,8 +23,15 @@ namespace ch
 		, mNear(1.0f)
 		, mFar(1000.0f)
 		, mScale(1.0f)
+		, mTargetOJ(nullptr)
+		, mCamSpeed(1.f)
+		, mCamDir(Vector3::Zero)
+		, mFarDist(0.f)
+		, mTime(0.3f)
+		, mSmooth(false)
 	{
 		EnableLayerMasks();
+	
 	}
 
 	Camera::~Camera()
@@ -33,13 +40,13 @@ namespace ch
 
 	void Camera::Initalize()
 	{
-
+		
 		RegisterCameraInRenderer();
 	}
 
 	void Camera::Update()
 	{
-
+		
 	}
 
 	void Camera::FixedUpdate()
@@ -119,6 +126,8 @@ namespace ch
 	{
 		mLayerMasks.set((UINT)layer, enable);
 	}
+
+	
 
 	void Camera::sortGameObjects()
 	{

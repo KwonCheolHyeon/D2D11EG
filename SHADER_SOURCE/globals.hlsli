@@ -43,6 +43,8 @@ cbuffer NumberOfLight : register(b4)
 cbuffer ParicleSystem : register(b5)
 {
     float4 paricleColor;
+    uint elementCount;
+    float deltaTime;
 }
 
 SamplerState pointSampler : register(s0);

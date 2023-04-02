@@ -22,7 +22,7 @@ namespace ch
 
 		void SetPosition(Vector3 position) { mPosition = position; };
 		
-		void SetRotation(Vector3 rotation) { mRotation = rotation; };
+		void SetRotation(Vector3 degree) { mRotation = degree; };
 		void SetScale(Vector3 scale) { mScale = scale; };
 
 
@@ -33,9 +33,12 @@ namespace ch
 		
 		Vector3 Foward() { return mFoward; }
 		Vector3 Right() { return mRight; }
+
 		Vector3 Up() { return mUp; }
 
 		Matrix& GetWolrdMatrix() { return mWorld; }
+
+		
 
 	private:
 		Transform* mParent;

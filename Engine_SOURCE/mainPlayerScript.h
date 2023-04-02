@@ -15,7 +15,7 @@ namespace ch
         Attack,
         Reload,
         Fall,
-
+        Weapone,
         End,
     };
 
@@ -52,6 +52,8 @@ namespace ch
         void afterDodge();//dodgeÈÄ 
         void allowDodge();
 
+        void WeaponeIdleState();
+        void WeaponeWalkingState();
 
     private:
         std::bitset<static_cast<UINT>(ePlayerState::End)> mState;

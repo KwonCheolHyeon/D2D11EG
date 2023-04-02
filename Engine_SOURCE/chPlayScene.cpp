@@ -10,7 +10,7 @@
 #include "chSpriteRenderer.h"
 #include "mainPlayer.h"
 #include "chMouseCursorScript.h"
-
+#include "chPlayerHand.h"
 
 namespace ch
 {
@@ -50,11 +50,11 @@ namespace ch
 		
 		}
 		{ //Main Camera 
-			GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
-			Camera* cameraComp = cameraObj->AddComponent<Camera>();
+			chCameraOBJ = object::Instantiate<GameObject>(eLayerType::Camera, this);
+			Camera* cameraComp = chCameraOBJ->AddComponent<Camera>();
 			//cameraComp->RegisterCameraInRenderer();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			cameraObj->AddComponent<CameraScript>();
+			chCameraOBJ->AddComponent<CameraScript>();
 			mainCamera = cameraComp;
 		}
 
@@ -66,15 +66,21 @@ namespace ch
 			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		}
 		{//플레이어
-			mainPlayer* player = object::Instantiate<mainPlayer>(eLayerType::Player, this);
+			player = object::Instantiate<mainPlayer>(eLayerType::Player, this);
 			player->SetName(L"Player");
 
+			PlayerHand* hand = object::Instantiate<PlayerHand>(eLayerType::Hand, this);
+			hand->SetName(L"PHand");
+			hand->SetPlayer(player);
+
 		}
-		{//UI
+
+		//UI
+		{
 			chUiCursor = object::Instantiate<GameObject>(eLayerType::UI, this);
 			chUiCursor->SetName(L"MouseCursor");
 
-			chUiCursor->AddComponent<MouseCursorScript>();
+			chUiCursor->AddComponent<MouseCursorScript>()->SetTarget(player);
 			chUiCursorTR = chUiCursor->GetComponent<Transform>();
 			chUiCursorTR->SetPosition(Input::GetMousPosition());
 			chUiCursorTR->SetScale(Vector3(0.5f, 0.5f, 1.f));
@@ -87,12 +93,15 @@ namespace ch
 			hpsr->SetMaterial(hpspritematerial);
 
 			
-			
 		}
 
+		
+
+		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
+		
 
 		{//back ground
-			/*GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
+			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
 			back->SetName(L"BG");
 			Transform* backTr = back->GetComponent<Transform>();
 			backTr->SetPosition(Vector3(1.0f, 1.1f, 0.1f));
@@ -102,7 +111,7 @@ namespace ch
 			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
 			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
 			backSR->SetMaterial(backmaterial);
-			backSR->SetMesh(backmesh);*/
+			backSR->SetMesh(backmesh);
 		}
 
 		Scene::Initalize();

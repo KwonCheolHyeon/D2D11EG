@@ -20,11 +20,9 @@ namespace ch
 	}
 	void MouseCursorScript::Update()
 	{
-		mPos = mTrans->GetPosition();
-
 		mPos = Input::GetMousPosition();
 
-		mTrans->SetPosition(mPos/100.f + Vector3(-7.0f, 5.3f, 0.0f));
+		mTrans->SetPosition(mPos/100.f );
 	}
 	void MouseCursorScript::FixedUpdate()
 	{

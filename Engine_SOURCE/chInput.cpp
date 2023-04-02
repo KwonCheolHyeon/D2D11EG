@@ -1,12 +1,14 @@
 #include "chInput.h"
 #include "chApplication.h"
-
+#include "chCamera.h"
 
 extern ch::Application application;
 namespace ch
 {
 	std::vector<Input::Key> Input::mKeys;
-	math::Vector3 Input::mMousPosition; //VECTOR2에서 3로변경
+	math::Vector3 Input::mMousPosition; 
+	float Input::mWinWidthCenter;
+	float Input::mWinHeightCenter;
 	int ASCII[(UINT)eKeyCode::END] =
 	{
 		//Alphabet
@@ -42,6 +44,10 @@ namespace ch
 
 			mKeys.push_back(key);
 		}
+		RECT winRect = {};
+		GetClientRect(application.GetHwnd(), &winRect);
+		mWinWidthCenter = ((float)winRect.right - (float)winRect.left) / 2.0f;
+		mWinHeightCenter = ((float)winRect.bottom - (float)winRect.top) / 2.0f;
 	}
 
 	void Input::Update()
@@ -77,8 +83,8 @@ namespace ch
 			POINT mousePos = {};
 			GetCursorPos(&mousePos);
 			ScreenToClient(application.GetHwnd(), &mousePos);
-			mMousPosition.x = mousePos.x;
-			mMousPosition.y = mousePos.y * -1.0f;
+			mMousPosition.x = ((float)mousePos.x - mWinWidthCenter);
+			mMousPosition.y = -((float)mousePos.y - mWinHeightCenter);
 			mMousPosition.z = 1.0f;
 		}
 		else
@@ -94,5 +100,15 @@ namespace ch
 			}
 		}
 
+	}
+
+	void Input::Render(HDC hdc)
+	{
+		HWND hWnd = application.GetHwnd();
+
+		wchar_t szFloat[50] = {};
+		swprintf_s(szFloat, 50, L"X : %f | Y : %f", mMousPosition.x, mMousPosition.y);
+
+		SetWindowText(hWnd, szFloat);
 	}
 }

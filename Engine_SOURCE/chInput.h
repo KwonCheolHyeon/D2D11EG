@@ -49,6 +49,7 @@ namespace ch
 
 		static void Initialize();
 		static void Update();
+		static void Render(HDC hdc);
 
 		static __forceinline eKeyState GetKeyState(eKeyCode keyCode)
 		{
@@ -58,6 +59,11 @@ namespace ch
 		static __forceinline math::Vector3 GetMousPosition()
 		{
 			return mMousPosition;
+		}
+
+		static __forceinline void SetMousPosition(const math::Vector3& newPos)
+		{
+			mMousPosition = newPos;
 		}
 
 		static __forceinline bool GetKey(eKeyCode keyCode)
@@ -75,6 +81,8 @@ namespace ch
 			return mKeys[static_cast<UINT>(keyCode)].eState == eKeyState::UP;
 		}
 
+		
+
 	private:
 		Input() = delete;
 		~Input() = delete;
@@ -82,5 +90,7 @@ namespace ch
 	private:
 		static std::vector<Key> mKeys;
 		static math::Vector3 mMousPosition;
+		static float mWinWidthCenter;
+		static float mWinHeightCenter;
 	};
 }

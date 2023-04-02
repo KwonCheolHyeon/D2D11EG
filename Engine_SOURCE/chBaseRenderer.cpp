@@ -4,8 +4,6 @@
 namespace ch
 {
 
-
-
 	BaseRenderer::BaseRenderer(eComponentType type)
 		: Component(type)
 	{

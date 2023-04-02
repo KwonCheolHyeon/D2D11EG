@@ -39,6 +39,11 @@ namespace ch
 		Matrix& GetViewMatrix() { return mView; }
 		Matrix& GetProjectionMatrix() { return mProjection; }
 
+		void SetTarget(GameObject* _Target) { mTargetOJ = _Target; }
+		GameObject* GetTarget() const { return mTargetOJ; }
+
+	
+
 	private:
 		void sortGameObjects();
 		void renderOpaque();
@@ -64,5 +69,19 @@ namespace ch
 		std::vector<GameObject*> mOpaqueGameObjects; //∫“≈ı∏Ì
 		std::vector<GameObject*> mCutoutGameObjects;
 		std::vector<GameObject*> mTransparentGameObjects;
+
+		
+	public:
+		GameObject* mTargetOJ;//
+		Vector3		mCamDir;
+
+		float		mFarDist;
+
+		float		mCamSpeed;
+		float		mTime;
+
+		bool		mSmooth;
+
+		
 	};
 }

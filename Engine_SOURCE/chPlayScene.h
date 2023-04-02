@@ -17,8 +17,10 @@ namespace ch
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 	private:
+		GameObject* chCameraOBJ;
 		GameObject* chUiCursor;
 		Transform* chUiCursorTR;
+		GameObject* player;
 		
 	};
 }

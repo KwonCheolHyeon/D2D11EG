@@ -12,11 +12,11 @@ namespace ch
 		,mForce(Vector3::Zero)
 		,mAccelation(Vector3::Zero)
 		,mVelocity(Vector3::Zero)
-		, mFriction(20.0f)
+		, mFriction(15.0f)
 	{
 		mLimitVelocity = 5.0f;
 		mbGround = true;
-		mGravity = Vector3(0.0f, 0.0f,0.0f);
+		mGravity = Vector3(0.0f, 0.0f,0.1f);
 		mForceResetTimer = 0.0f;
 	}
 
@@ -57,7 +57,7 @@ namespace ch
 			mVelocity += mAccelation * Time::DeltaTime();
 		}
 
-
+		// Apply friction to velocity
 		if (mVelocity != Vector3::Zero)
 		{
 			Vector3 FricDir = -mVelocity;
@@ -67,7 +67,7 @@ namespace ch
 
 			if (mVelocity.Length() <= Friction.Length())
 			{
-				mVelocity = Vector3(0.f, 0.f, 0.f);
+				mVelocity = Vector3::Zero; // stop the object immediately
 			}
 			else
 			{
@@ -108,7 +108,7 @@ namespace ch
 
 			Vector3 Pos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-			Pos += mVelocity * Time::DeltaTime() * 1.5;
+			Pos += mVelocity * Time::DeltaTime();
 
 			GetOwner()->GetComponent<Transform>()->SetPosition(Pos);
 		}

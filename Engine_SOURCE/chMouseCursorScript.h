@@ -14,12 +14,14 @@ namespace ch
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
 
+		void SetTarget(GameObject* _target) { tar = _target; }
 
 	private:
 		Transform* mTrans;
 		Vector3 mPos;
 		Vector3 mRot;
-
+		GameObject* tar;
+	
 	};
 
 

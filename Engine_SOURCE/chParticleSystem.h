@@ -1,5 +1,6 @@
 #pragma once
 #include "chBaseRenderer.h"
+#include "chParticleShader.h"
 
 namespace ch
 {
@@ -14,9 +15,9 @@ namespace ch
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
 
-
 	private:
 		class StructedBuffer* mBuffer;
+		std::shared_ptr<graphics::ParticleShader> mCS;
 
 		UINT mCount;
 		Vector4 mStartSize;

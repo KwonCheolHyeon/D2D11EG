@@ -350,7 +350,7 @@ namespace ch::renderer
 
 		//Structed buffer
 		lightsBuffer = new StructedBuffer();
-		lightsBuffer->Create(sizeof(LightAttribute), 128, eSRVType::None, nullptr);
+		lightsBuffer->Create(sizeof(LightAttribute), 128, eSRVType::SRV, nullptr);
 	}
 
 	void LoadShader()
@@ -366,7 +366,7 @@ namespace ch::renderer
 		std::shared_ptr<Shader> spriteShader = std::make_shared<Shader>();
 		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
-
+		spriteShader->SetRSState(eRSType::SolidNone);
 		Resources::Insert<Shader>(L"SpriteShader", spriteShader);
 
 		// UI
@@ -448,6 +448,9 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"PlayerIdleRight", L"idleR01.png");
 		Resources::Load<Texture>(L"PlayerIdleLeft", L"idleL01.png");
 
+		//playerHand
+		Resources::Load<Texture>(L"PlayerHand", L"enterthe\\character\\hand.png");
+
 		//bg
 		Resources::Load<Texture>(L"FloatSprite", L"battleField.png");
 
@@ -500,6 +503,19 @@ namespace ch::renderer
 			Resources::Insert<Material>(L"pIdleMaterial", material);
 			
 		}
+
+		{//playerHand
+
+			std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"PlayerHand");
+			std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+			std::shared_ptr<Material> material = std::make_shared<Material>();
+			material->SetRenderingMode(eRenderingMode::Transparent);
+			material->SetShader(shader);
+			material->SetTexture(eTextureSlot::T0, texture);
+			Resources::Insert<Material>(L"pHandMaterial", material);
+
+		}
+
 
 		{//battleScenen
 			std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"FloatSprite");
@@ -640,8 +656,8 @@ namespace ch::renderer
 	void BindLights()
 	{
 		lightsBuffer->SetData(lights.data(), lights.size());
-		lightsBuffer->Bind(eShaderStage::VS, 13);
-		lightsBuffer->Bind(eShaderStage::PS, 13);
+		lightsBuffer->BindSRV(eShaderStage::VS, 13);
+		lightsBuffer->BindSRV(eShaderStage::PS, 13);
 
 		renderer::LightCB trCb = {};
 		trCb.numberOfLight = lights.size();

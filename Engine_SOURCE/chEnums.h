@@ -18,6 +18,7 @@ namespace ch::enums
 		BackGround,
 		Monster,
 		Player, 
+		Hand,
 		Particle,
 		UI,
 		End = 16,
