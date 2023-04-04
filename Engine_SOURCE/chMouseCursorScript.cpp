@@ -22,7 +22,7 @@ namespace ch
 	{
 		mPos = Input::GetMousPosition();
 
-		mTrans->SetPosition(mPos/100.f );
+		mTrans->SetPosition(mPos/100.f + Vector3(1.f,1.f,0.f));
 	}
 	void MouseCursorScript::FixedUpdate()
 	{

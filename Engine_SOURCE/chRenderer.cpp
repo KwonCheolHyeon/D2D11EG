@@ -451,6 +451,9 @@ namespace ch::renderer
 		//playerHand
 		Resources::Load<Texture>(L"PlayerHand", L"enterthe\\character\\hand.png");
 
+		//무기
+		Resources::Load<Texture>(L"W_pistol", L"enterthe\\Waepone\\PistolFolder\\pistol_Idle.png");
+
 		//bg
 		Resources::Load<Texture>(L"FloatSprite", L"battleField.png");
 
@@ -515,7 +518,17 @@ namespace ch::renderer
 			Resources::Insert<Material>(L"pHandMaterial", material);
 
 		}
-
+		{ //무기
+			{
+				std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"W_pistol");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"W_pistol_Material", material);
+			}
+		}
 
 		{//battleScenen
 			std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"FloatSprite");

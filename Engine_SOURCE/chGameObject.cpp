@@ -71,7 +71,11 @@ namespace ch
 
 			script->Update();
 		}
+		if (mbIsLeft != prevIsLeft) 
+		{
+		
 		Flip();
+		}
 	}
 
 	void GameObject::FixedUpdate()
@@ -153,6 +157,7 @@ namespace ch
 	}
 	void GameObject::Flip()
 	{
+		prevIsLeft = mbIsLeft;
 		if (mbIsLeft == false) //¿À¸¥ÂÊ
 		{
 			GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.f, 0.f));
@@ -164,4 +169,5 @@ namespace ch
 		}
 
 	}
+	
 }

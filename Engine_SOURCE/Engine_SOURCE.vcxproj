@@ -171,9 +171,11 @@
     <ClInclude Include="chEnums.h" />
     <ClInclude Include="chFadeEffect.h" />
     <ClInclude Include="chGameObject.h" />
+    <ClInclude Include="chGenericAnimator.h" />
     <ClInclude Include="chGraphicDevice_DX11.h" />
     <ClInclude Include="chGraphics.h" />
     <ClInclude Include="chGridScript.h" />
+    <ClInclude Include="chGun.h" />
     <ClInclude Include="chInput.h" />
     <ClInclude Include="chLayer.h" />
     <ClInclude Include="chLight.h" />
@@ -188,6 +190,7 @@
     <ClInclude Include="chPaintShader.h" />
     <ClInclude Include="chParticleShader.h" />
     <ClInclude Include="chParticleSystem.h" />
+    <ClInclude Include="chPistol.h" />
     <ClInclude Include="chPlayer.h" />
     <ClInclude Include="chPlayerHandScr.h" />
     <ClInclude Include="chPlayerScr.h" />
@@ -231,8 +234,10 @@
     <ClCompile Include="chConstantBuffer.cpp" />
     <ClCompile Include="chEntity.cpp" />
     <ClCompile Include="chFadeEffect.cpp" />
+    <ClCompile Include="chGenericAnimator.cpp" />
     <ClCompile Include="chGraphicDevice_DX11.cpp" />
     <ClCompile Include="chGridScript.cpp" />
+    <ClCompile Include="chGun.cpp" />
     <ClCompile Include="chInput.cpp" />
     <ClCompile Include="chLayer.cpp" />
     <ClCompile Include="chLight.cpp" />
@@ -246,6 +251,7 @@
     <ClCompile Include="chPaintShader.cpp" />
     <ClCompile Include="chParticleShader.cpp" />
     <ClCompile Include="chParticleSystem.cpp" />
+    <ClCompile Include="chPistol.cpp" />
     <ClCompile Include="chPlayer.cpp" />
     <ClCompile Include="chPlayerHandScr.cpp" />
     <ClCompile Include="chPlayerScr.cpp" />

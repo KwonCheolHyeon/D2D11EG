@@ -5,10 +5,13 @@
 #include "chAnimator.h"
 #include "chGameObject.h"
 #include "chRigidbody.h"
-
+#include "chGenericAnimator.h"
+#include "chPistol.h"
+#include "chObject.h"
 
 namespace ch 
 {
+
 	PlayerScr::PlayerScr()
 	{
 		mState[(UINT)ePlayerState::Front] = true;
@@ -28,7 +31,6 @@ namespace ch
 
 
 		C2Mangle = 0.f;
-		
 	}
 	PlayerScr::~PlayerScr()
 	{
@@ -39,23 +41,45 @@ namespace ch
 		mousePositon = Vector3::Zero;
 		transform = GetOwner()->GetComponent<Transform>();
 		animator = GetOwner()->GetComponent<Animator>();
+		canDodge = true;
 	}
 	void PlayerScr::Update()
 	{
+		GenericAnimator.Update(Time::DeltaTime());
 		mousePos();//마우스 위치
-		playerLookMouse();
-		chCheckDirectionKey();
-		if (mState[(UINT)ePlayerState::Dodge] == false && mState[(UINT)ePlayerState::Walking] == true &&mState[(UINT)ePlayerState::Idle] == false)
-		{ //							걷기 함수
-			chWalkAni();
-			chWalking();
-		}
-		if (mState[(UINT)ePlayerState::Idle] == true && mState[(UINT)ePlayerState::Walking] == false && mState[(UINT)ePlayerState::Dodge] == false)
+		
+		if (mState[(UINT)ePlayerState::Dodge] == false) 
 		{
-			chIdleAni();
+			
+			chCheckDirectionKey();
+			playerLookMouse();
+
+			chState();
+			chWalking();
+			
+			if (chCheckDirectionKey() == false)
+			{
+				chIdleAni();
+			}
+		}
+		if (canDodge == true) {
+			if (Input::GetKeyDown(eKeyCode::RBTN) && chCheckDirectionKey()== true)
+			{
+				GetOwner()->setNoHand();
+				canDodge = false;
+				mState[(UINT)ePlayerState::Dodge] = true;
+				chDodging();
+				chDodgeAni();
+			}
 		}
 
-	
+
+		if (Input::GetKey(eKeyCode::G) )
+		{
+			Vector3 rot = transform->GetRotation();
+			rot.z += 10.0f * Time::DeltaTime();
+			transform->SetRotation(rot);
+		}
 
 	}
 	void PlayerScr::FixedUpdate()
@@ -86,9 +110,7 @@ namespace ch
 	}
 	
 #pragma endregion
-	
-
-
+	#pragma region 행동
 	void PlayerScr::chWalking()
 	{
 		Vector3 pos = transform->GetPosition();
@@ -125,15 +147,53 @@ namespace ch
 			transform->SetPosition(pos);
 		}
 	}
+	void PlayerScr::chDodging()
+	{
+		Vector3 dodgepos;
+		if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A)))
+		{
+			dodgepos =  Vector3(-2.f, 2.0f, 0.0f);
+		}
+		else if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && (Input::GetKeyDown(eKeyCode::D) || Input::GetKey(eKeyCode::D)))
+		{
+			dodgepos = Vector3(2.f, 2.0f, 0.0f);
+		}
+		else if ((Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S)) && (Input::GetKeyDown(eKeyCode::D) || Input::GetKey(eKeyCode::D)))
+		{
+			dodgepos = Vector3(2.f, -2.0f, 0.0f);
+		}
+		else if ((Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S)) && (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A)))
+		{
+			dodgepos = Vector3(-2.f, -2.0f, 0.0f);
+		}
+		else if (Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S))
+		{
+			dodgepos = Vector3(0.f, -2.0f, 0.0f);
+		}
+		else if (Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W))
+		{
+			dodgepos = Vector3(0.f, 2.0f, 0.0f);
+		}
+		else if (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A))
+		{
+			dodgepos = Vector3(-2.f, 0.0f, 0.0f);
+		}
+		else if (Input::GetKeyDown(eKeyCode::D) || Input::GetKey(eKeyCode::D))
+		{
+			dodgepos = Vector3(2.f, 0.0f, 0.0f);
+		}
 
-	void PlayerScr::mousePos()
+		GenAnimate(dodgepos);
+	}
+	#pragma endregion
+	void PlayerScr::mousePos()//마우스와 캐릭터 사이의 각도를 계산해주는 함수
 	{
 		Vector3 mousePos = Input::GetMousPosition();
 
 		mousePositon = (mousePos / 100.f);
 
-		CharterPosition = this->GetOwner()->GetComponent<Transform>()->GetPosition();//현재 문제 카메라가 이동하면 캐릭터 기준이기 때문에 다른 결과가 나옴 나중에 카메라가 따라가면 캐릭터가 아닌 카메라 기준으로 맞춰야함
-		mousePositon += CharterPosition;
+		CharterPosition = this->GetOwner()->GetComponent<Transform>()->GetPosition();
+		mousePositon += CharterPosition;//마우스 위치가 화면에 고정되어 있으므로 캐릭터가 이동한 위치 만큼 더해줌
 		float aaa = atan2(mousePositon.y - CharterPosition.y, mousePositon.x - CharterPosition.x);
 		C2Mangle = fmodf((aaa * (180.0f / XM_PI) + 360.0f), 360.0f);// C2Mangle 360각
 	}
@@ -152,10 +212,24 @@ namespace ch
 			return false;
 		}
 	}
+	bool PlayerScr::chCheckDirectionKeyDoge()
+	{
+		if (Input::GetKey(eKeyCode::D) == true || Input::GetKey(eKeyCode::A) == true || Input::GetKey(eKeyCode::W) == true || Input::GetKey(eKeyCode::S) == true)
+		{
+			allowDodge();
+			return true;
+		}
+		else
+		{
+			afterDodgeIdleAni();
+			return false;
+		}
+	}
 	void PlayerScr::chIdleAni()
 	{
-		if (mPrevState != mState)
+		if (compareState())
 		{
+			GetOwner()->setHand();
 			if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Right] == true)
 			{
 				animator->Play(L"P_WIdleRight", true);
@@ -170,10 +244,12 @@ namespace ch
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 			{
+				GetOwner()->setNoHand();
 				animator->Play(L"P_WIdleBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 			{
+				GetOwner()->setNoHand();
 				animator->Play(L"P_WIdleBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
@@ -183,10 +259,42 @@ namespace ch
 		}
 		
 	}
+	void PlayerScr::afterDodgeIdleAni()
+	{
+		GetOwner()->setHand();
+		if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Right] == true)
+		{
+			animator->Play(L"P_WIdleRight", true);
+		}
+		else if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Left] == true)
+		{
+			animator->Play(L"P_WIdleRight", true);
+		}
+		else if (mState[(UINT)ePlayerState::Front] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
+		{
+			animator->Play(L"P_WIdleFront", true);
+		}
+		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
+		{
+			GetOwner()->setNoHand();
+			animator->Play(L"P_WIdleBackRight", true);
+		}
+		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
+		{
+			GetOwner()->setNoHand();
+			animator->Play(L"P_WIdleBackRight", true);
+		}
+		else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
+		{
+			animator->Play(L"P_WIdleBack", true);
+		}
+		canDodge = true;
+	}
 	void PlayerScr::chWalkAni()
 	{
-		if (mPrevState != mState)
+		if (compareState())
 		{
+			GetOwner()->setHand();
 			if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Right] == true)
 			{
 				animator->Play(L"P_WWalkingRight", true);
@@ -201,57 +309,149 @@ namespace ch
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 			{
+				GetOwner()->setNoHand();
 				animator->Play(L"P_WWalkingBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 			{
+				GetOwner()->setNoHand();
 				animator->Play(L"P_WWalkingBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
 			{
 				animator->Play(L"P_WWalkingBack", true);
 			}
+			canDodge = true;
 		}
+	}
+
+	void PlayerScr::afterDodgeWalkAni()
+	{
+		GetOwner()->setHand();
+		if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Right] == true)
+		{
+			animator->Play(L"P_WWalkingRight", true);
+		}
+		else if (mState[(UINT)ePlayerState::Front] == true && mState[(UINT)ePlayerState::Left] == true)
+		{
+			animator->Play(L"P_WWalkingRight", true);
+		}
+		else if (mState[(UINT)ePlayerState::Front] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
+		{
+			animator->Play(L"P_WWalkingFront", true);
+		}
+		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
+		{
+			GetOwner()->setNoHand();
+			animator->Play(L"P_WWalkingBackRight", true);
+		}
+		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
+		{
+			GetOwner()->setNoHand();
+			animator->Play(L"P_WWalkingBackRight", true);
+		}
+		else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
+		{
+			animator->Play(L"P_WWalkingBack", true);
+		}
+		canDodge = true;
+	}
+
+	void PlayerScr::chDodgeAni()
+	{
+		if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A)))
+		{
+			GetOwner()->SetLeft();
+			animator->Play(L"P_DodgeBackRight", false);
+
+		}
+		else if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && (Input::GetKeyDown(eKeyCode::D) || Input::GetKey(eKeyCode::D)))
+		{
+			GetOwner()->SetRight();
+			animator->Play(L"P_DodgeBackRight", false);
+
+		}
+		else if ((Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S)) && (Input::GetKeyDown(eKeyCode::D) || Input::GetKey(eKeyCode::D)))
+		{
+			GetOwner()->SetRight();
+			animator->Play(L"P_DodgeRight", false);
+
+		}
+		else if ((Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S)) && (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A)))
+		{
+			GetOwner()->SetLeft();
+			animator->Play(L"P_DodgeRight", false);
+
+		}
+		else if (Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S))
+		{
+			animator->Play(L"P_DodgeFront", false);
+
+		}
+		else if (Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W))
+		{
+			animator->Play(L"P_DodgeBack", false);
+
+		}
+		else if (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A))
+		{
+			GetOwner()->SetLeft();
+			animator->Play(L"P_DodgeRight", false);
+		}
+		else if (Input::GetKeyDown(eKeyCode::D) || Input::GetKey(eKeyCode::D))
+		{
+			GetOwner()->SetRight();
+			animator->Play(L"P_DodgeRight", false);
+
+		}
+		afterDodge();
+
 	}
 
 	void PlayerScr::chState()
 	{
-		if (Input::GetKeyDown(eKeyCode::W))
+		if(chCheckDirectionKey()== true)
 		{
-			//walking애니메이션 실행
 			chWalkAni();
-			mState[(UINT)ePlayerState::Idle] = false;
-			mState[(UINT)ePlayerState::Walking] = true;
+		}
+
+		if(Input::GetKeyDown(eKeyCode::W))
+		{
+			mState[(UINT)ePlayerState::Idle] = true;
+			mState[(UINT)ePlayerState::Walking] = false;
+			afterDodgeWalkAni();
 		}
 		if (Input::GetKeyUp(eKeyCode::W))
 		{
+			
 			if (chCheckDirectionKey() == false)		//다른키가 눌러져 있지 않은 상태라면
 			{
 				mState[(UINT)ePlayerState::Idle] = true;
 				mState[(UINT)ePlayerState::Walking] = false;
+				afterDodgeIdleAni();
 			}
 			else
 			{
 				//walking상태 유지 //다른 키가 눌려져 있으면 그 키로 변경 
 				chWalkAni();
-				
 			}
 		}
 
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			//walking애니메이션 실행
-			chWalkAni();
-			mState[(UINT)ePlayerState::Idle] = false;
-			mState[(UINT)ePlayerState::Walking] = true;
+			mState[(UINT)ePlayerState::Idle] = true;
+			mState[(UINT)ePlayerState::Walking] = false;
+			afterDodgeWalkAni();
 		}
 		if (Input::GetKeyUp(eKeyCode::S))
 		{
+			int a = 0;
 			if (chCheckDirectionKey() == false)		//다른키가 눌러져 있지 않은 상태라면
 			{
 				//idle로 변경
 				mState[(UINT)ePlayerState::Idle] = true;
 				mState[(UINT)ePlayerState::Walking] = false;
+				afterDodgeIdleAni();
 			}
 			else									//다른키가 눌려져 있는 상태
 			{
@@ -262,11 +462,9 @@ namespace ch
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
-			//walking애니메이션 실행
-
-			chWalkAni();
-			mState[(UINT)ePlayerState::Idle] = false;
-			mState[(UINT)ePlayerState::Walking] = true;
+			mState[(UINT)ePlayerState::Idle] = true;
+			mState[(UINT)ePlayerState::Walking] = false;
+			afterDodgeWalkAni();
 		}
 		if (Input::GetKeyUp(eKeyCode::A))
 		{
@@ -275,6 +473,7 @@ namespace ch
 				//idle로 변경
 				mState[(UINT)ePlayerState::Idle] = true;
 				mState[(UINT)ePlayerState::Walking] = false;
+				afterDodgeIdleAni();
 			}
 			else									//다른키가 눌려져 있는 상태
 			{
@@ -285,10 +484,9 @@ namespace ch
 
 		if (Input::GetKeyDown(eKeyCode::D))
 		{
-			//walking애니메이션 실행
-			chWalkAni();
-			mState[(UINT)ePlayerState::Idle] = false;
-			mState[(UINT)ePlayerState::Walking] = true;
+			mState[(UINT)ePlayerState::Idle] = true;
+			mState[(UINT)ePlayerState::Walking] = false;
+			afterDodgeWalkAni();
 		}
 		if (Input::GetKeyUp(eKeyCode::D))
 		{
@@ -297,6 +495,7 @@ namespace ch
 				//idle로 변경
 				mState[(UINT)ePlayerState::Idle] = true;
 				mState[(UINT)ePlayerState::Walking] = false;
+				afterDodgeIdleAni();
 			}
 			else									//다른키가 눌려져 있는 상태
 			{
@@ -304,6 +503,27 @@ namespace ch
 				chWalkAni();
 			}
 		}
+
+
+	}
+
+	void PlayerScr::afterDodge()
+	{
+		animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&PlayerScr::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&PlayerScr::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeBackRight") = std::bind(&PlayerScr::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeBackLeft") = std::bind(&PlayerScr::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeFront") = std::bind(&PlayerScr::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeBack") = std::bind(&PlayerScr::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&PlayerScr::chCheckDirectionKeyDoge, this);
+		animator->GetCompleteEvent(L"P_DodgeRight") = std::bind(&PlayerScr::chCheckDirectionKeyDoge, this);
+	}
+
+	void PlayerScr::allowDodge()
+	{
+		mState[(UINT)ePlayerState::Dodge] = false;
+		
+		afterDodgeWalkAni();
 	}
 
 	void PlayerScr::gunHandSide()
@@ -317,7 +537,7 @@ namespace ch
 			GetOwner()->SetRight();
 		}
 	}
-	void PlayerScr::playerLookMouse()
+	void PlayerScr::playerLookMouse()//각도에 따라 보는 방향 
 	{
 		mPrevState = mState;
 		if (C2Mangle >= 30 && C2Mangle < 60) //right back
@@ -364,5 +584,49 @@ namespace ch
 			mState[(UINT)ePlayerState::Right] = true;
 		}
 		gunHandSide();
+	}
+	void PlayerScr::GenAnimate(Vector3 dodgePos)
+	{
+		Position = dodgePos;
+		// Set animation parameters
+		AnimatorParam param;
+		param.AnimType = EAnimType::Linear;
+		param.StartValue = 0.4f;
+		param.EndValue = 1.f;
+		param.DurationTime = 0.8f;
+		param.DurationFunc = [this](float InCurValue) {
+			// This function will be called on every tick of the animation
+			Vector3 pos = transform->GetPosition();
+			pos += Position * InCurValue * Time::DeltaTime();
+			transform->SetPosition(pos);
+		};
+		param.CompleteFunc = [this](float InCurValue) {
+			// This function will be called when the animation is finished
+			mState[(UINT)ePlayerState::Idle] = true;
+			mState[(UINT)ePlayerState::Walking] = false;
+			mState[(UINT)ePlayerState::Dodge] = false;
+		};
+
+		// Register the parameters by calling the Start function on the member variable
+		GenericAnimator.Start(param);
+
+		mState[(UINT)ePlayerState::Idle] = false;
+		mState[(UINT)ePlayerState::Walking] = false;
+		mState[(UINT)ePlayerState::Dodge] = true;
+	}
+	bool PlayerScr::compareState()
+	{
+		if(	mState[(UINT)ePlayerState::Front] == mPrevState[(UINT)ePlayerState::Front] &&
+			mState[(UINT)ePlayerState::Back] == mPrevState[(UINT)ePlayerState::Back] &&
+			mState[(UINT)ePlayerState::Left] == mPrevState[(UINT)ePlayerState::Left] &&
+			mState[(UINT)ePlayerState::Right] == mPrevState[(UINT)ePlayerState::Right])
+		{
+			return false;
+		}
+		else 
+		{
+			return true;
+		}
+		
 	}
 }

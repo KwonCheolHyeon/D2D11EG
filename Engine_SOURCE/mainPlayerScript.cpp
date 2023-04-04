@@ -138,9 +138,7 @@ namespace ch
 	{
 		if (Input::GetKey(eKeyCode::D) == true || Input::GetKey(eKeyCode::A) == true || Input::GetKey(eKeyCode::W) == true || Input::GetKey(eKeyCode::S) == true)
 		{
-			
 			allowDodge();
-
 			return true;
 		}
 		else 

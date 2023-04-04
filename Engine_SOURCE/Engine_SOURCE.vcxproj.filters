@@ -134,6 +134,15 @@
     <Filter Include="GameObject\chPlayer\Hand">
       <UniqueIdentifier>{22cec039-a2cb-4eb8-94f8-ec905d677696}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Animator\GenericAnimator">
+      <UniqueIdentifier>{a6fc1162-59c3-4bb9-a3e4-95f5adb22d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Weapone">
+      <UniqueIdentifier>{ede5b582-397b-4be8-b855-737e9c0bda72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Weapone\Base">
+      <UniqueIdentifier>{0e104d63-5828-4a96-bcab-7c04c07d4bbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -314,6 +323,15 @@
     <ClInclude Include="chPlayerHandScr.h">
       <Filter>GameObject\chPlayer\Hand</Filter>
     </ClInclude>
+    <ClInclude Include="chGenericAnimator.h">
+      <Filter>Component\Animator\GenericAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="chPistol.h">
+      <Filter>GameObject\Weapone</Filter>
+    </ClInclude>
+    <ClInclude Include="chGun.h">
+      <Filter>GameObject\Weapone\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -478,6 +496,15 @@
     </ClCompile>
     <ClCompile Include="chPlayerHandScr.cpp">
       <Filter>GameObject\chPlayer\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="chGenericAnimator.cpp">
+      <Filter>Component\Animator\GenericAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="chPistol.cpp">
+      <Filter>GameObject\Weapone</Filter>
+    </ClCompile>
+    <ClCompile Include="chGun.cpp">
+      <Filter>GameObject\Weapone\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

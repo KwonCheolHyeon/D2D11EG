@@ -11,6 +11,7 @@
 #include "mainPlayer.h"
 #include "chMouseCursorScript.h"
 #include "chPlayerHand.h"
+#include "chPistol.h"
 
 namespace ch
 {
@@ -27,8 +28,6 @@ namespace ch
 
 	void PlayScene::Initalize()
 	{
-	
-
 		{
 			{
 				GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
@@ -73,6 +72,10 @@ namespace ch
 			hand->SetName(L"PHand");
 			hand->SetPlayer(player);
 
+			Pistol* pistol = object::Instantiate<Pistol>(eLayerType::Weapone, this);
+			pistol->SetName(L"Pistol");
+			pistol->SetHand(hand);
+			pistol->SetPlayer(player);
 		}
 
 		//UI
@@ -105,7 +108,7 @@ namespace ch
 			back->SetName(L"BG");
 			Transform* backTr = back->GetComponent<Transform>();
 			backTr->SetPosition(Vector3(1.0f, 1.1f, 0.1f));
-			backTr->SetScale(Vector3(6.0f, 5.0f, 0.1f));
+			backTr->SetScale(Vector3(20.0f, 20.0f, 0.1f));
 
 			SpriteRenderer* backSR = back->AddComponent<SpriteRenderer>();
 			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");

@@ -19,6 +19,7 @@ namespace ch::enums
 		Monster,
 		Player, 
 		Hand,
+		Weapone,
 		Particle,
 		UI,
 		End = 16,

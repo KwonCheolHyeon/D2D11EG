@@ -106,12 +106,18 @@ namespace ch
 	public:
 		void SetLeft() { mbIsLeft = true; }
 		void SetRight() { mbIsLeft = false; }
+		bool isLeft() { return mbIsLeft; }
 		void Flip();
 
-	
+	public:
+		void setHand() { mHand = true; }
+		void setNoHand() { mHand = false; }
+		bool GetHand() { return mHand; }
 	private:
 		bool mbIsLeft;//flip용
-		
+		bool prevIsLeft;
+		bool mHand;//구르거나 오른쪽 뒤를 볼때 
+
 	protected:
 		std::vector<Component*> mComponents;
 

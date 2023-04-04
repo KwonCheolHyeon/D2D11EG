@@ -8,7 +8,6 @@
 namespace ch 
 {
 	PlayerHand::PlayerHand()
-		
 	{
 		handDistance = 0.f;
 	}
@@ -50,11 +49,33 @@ namespace ch
 	{
 		Vector3 characterPosition = player->GetComponent<Transform>()->GetPosition();
 		Vector3 handPosition = phandTr->GetPosition();
+		if (player->GetHand()) 
+		{
+			if (player->isLeft() == true)
+			{
+				handPosition = characterPosition + Vector3(-0.13f, -0.16f, 0.f);
+				chHandLeft = true;
+			}
+			else
+			{
+				handPosition = characterPosition + Vector3(0.13f, -0.16f, 0.f);
+				chHandLeft = false;
+			}
+		}
+		else 
+		{
+			if (player->isLeft() == true)
+			{
+				handPosition = characterPosition + Vector3(-0.13f, -10.16f, 0.f);
+				chHandLeft = true;
+			}
+			else
+			{
+				handPosition = characterPosition + Vector3(0.13f, -10.16f, 0.f);
+				chHandLeft = false;
+			}
+		}
 		
-
-		handPosition = characterPosition + Vector3(0.13f, -0.16f, 0.f);
-		
-
 		phandTr->SetPosition(handPosition);
 	}
 }
@@ -62,7 +83,7 @@ namespace ch
 
 
 
-//Vector3 mPos = Input::GetMousPosition();
+		//Vector3 mPos = Input::GetMousPosition();
 		//Vector3 characterPosition = player->GetComponent<Transform>()->GetPosition();
 
 		//Vector3 mousePosition = (mPos / 100.f );

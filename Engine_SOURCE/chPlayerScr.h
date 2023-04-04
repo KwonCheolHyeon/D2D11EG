@@ -48,6 +48,8 @@ namespace ch
         
     public://마우스와 캐릭터 사이 각도
         void mousePos();//마우스 위치에 따라 캐릭터 바라보는 방향 결정
+        void gunHandSide();
+        void playerLookMouse();
 
     public:
         bool chCheckDirectionKey(); //방향키 눌렀는지 확인
@@ -55,17 +57,23 @@ namespace ch
 
     public:  //애니메이션
         void chIdleAni();
+        void afterDodgeIdleAni();
         void chWalkAni();
+        void afterDodgeWalkAni();
         void chDodgeAni();
         void chState();//상태에 따라 애니메이션 실행
 
-        void gunHandSide();
-        void playerLookMouse();
+    public: //닷지 후
+        void afterDodge();
+        void allowDodge();
+      
 
+        void GenAnimate(Vector3 dodgePos);
   
     private:
         std::bitset<static_cast<UINT>(ePlayerState::End)> mState;
         std::bitset<static_cast<UINT>(ePlayerState::End)> mPrevState;
+        bool compareState();
         Animator* animator;
         Transform* transform;
         Vector3 pos;
@@ -76,10 +84,11 @@ namespace ch
         Vector3 CharterPosition;
         float C2Mangle;//캐릭터와 마우스 사이 각도
 
+        bool canDodge;
 
-
-       
-
+        GenericAnimator GenericAnimator;
+        Vector3 Position;
+        
 	};
 
 }

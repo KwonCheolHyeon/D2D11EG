@@ -15,7 +15,6 @@ namespace ch
 	void PlayerHandScr::Update()
 	{
 
-		
 	}
 	void PlayerHandScr::FixedUpdate()
 	{

@@ -16,13 +16,16 @@ namespace ch
 
 		void SetPlayer(GameObject* _player) { player = _player; }
 		
+		
 		void handPosition();
+		bool isHandLeft() { return chHandLeft; }
 	private:
 		Transform* phandTr;
 		GameObject* player;
 
 	private:
 		float handDistance;
+		bool chHandLeft;
 	};
 }
 
