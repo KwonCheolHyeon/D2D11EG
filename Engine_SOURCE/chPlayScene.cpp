@@ -11,8 +11,8 @@
 #include "mainPlayer.h"
 #include "chMouseCursorScript.h"
 #include "chPlayerHand.h"
-#include "chPistol.h"
-
+#include "chGun.h"
+#include "chPaintShader.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -28,6 +28,7 @@ namespace ch
 
 	void PlayScene::Initalize()
 	{
+		
 		{
 			{
 				GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
@@ -51,6 +52,7 @@ namespace ch
 		{ //Main Camera 
 			chCameraOBJ = object::Instantiate<GameObject>(eLayerType::Camera, this);
 			Camera* cameraComp = chCameraOBJ->AddComponent<Camera>();
+			cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 			//cameraComp->RegisterCameraInRenderer();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			chCameraOBJ->AddComponent<CameraScript>();
@@ -72,15 +74,14 @@ namespace ch
 			hand->SetName(L"PHand");
 			hand->SetPlayer(player);
 
-			Pistol* pistol = object::Instantiate<Pistol>(eLayerType::Weapone, this);
-			pistol->SetName(L"Pistol");
-			pistol->SetHand(hand);
-			pistol->SetPlayer(player);
+			Gun* gun = object::Instantiate<Gun>(eLayerType::Hand, this);
+			gun->SetName(L"PGun");
+			gun->SetHand(hand);
 		}
 
 		//UI
 		{
-			chUiCursor = object::Instantiate<GameObject>(eLayerType::UI, this);
+			/*chUiCursor = object::Instantiate<GameObject>(eLayerType::UI, this);
 			chUiCursor->SetName(L"MouseCursor");
 
 			chUiCursor->AddComponent<MouseCursorScript>()->SetTarget(player);
@@ -93,7 +94,7 @@ namespace ch
 			std::shared_ptr<Mesh> hpmesh = Resources::Find<Mesh>(L"RectMesh");
 			std::shared_ptr<Material> hpspritematerial = Resources::Find<Material>(L"crossHairMaterial");
 			hpsr->SetMesh(hpmesh);
-			hpsr->SetMaterial(hpspritematerial);
+			hpsr->SetMaterial(hpspritematerial);*/
 
 			
 		}

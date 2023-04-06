@@ -11,6 +11,7 @@ namespace ch
 
 	Pistol::~Pistol()
 	{
+
 	}
 
 	void Pistol::Initalize()
@@ -19,7 +20,9 @@ namespace ch
 
 		pistolPosition = pistolOBJ->GetComponent<Transform>();
 		pistolPosition->SetScale(Vector3(0.28f, 0.23f, 1.0f));
-		pistolPosition->SetRotation(Vector3(0.f, 0.f, 70.f));
+		
+
+
 		SpriteRenderer* sprite = pistolOBJ->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"W_pistol_Material");
 		sprite->SetMaterial(mateiral);
@@ -31,6 +34,7 @@ namespace ch
 	void Pistol::Update()
 	{
 		pistolSetPosition();
+		
 		GameObject::Update();
 	}
 
@@ -64,7 +68,7 @@ namespace ch
 		
 		//Vector3 handRelative(cos(angle) * handDistance, sin(angle) * handDistance, 0.f);
 
-		if (pHand->isHandLeft()) //¿Þ¼Õ
+		if (pHand->IsHandLeft()) //¿Þ¼Õ
 		{
 			pistolOBJ->SetLeft();
 			weaphonePosition = handPosition + Vector3(-0.2f, 0.1f, 0.f);
@@ -76,6 +80,7 @@ namespace ch
 			weaphonePosition = handPosition + Vector3(0.2f, 0.1f, 0.f);
 			pistolPosition->SetRotation(Vector3(0.0f, 0.0f, rotationZ));
 		}
+
 		//if (player->GetHand() == false) 
 		//{
 		//	if (pHand->isHandLeft()) //¿Þ¼Õ

@@ -103,7 +103,8 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbWndExtra = 0;
     wcex.hInstance = hInstance;
     wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ENGINETT));
-    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    //wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hCursor = LoadCursorFromFile(TEXT("../Resources/enterthe/UI/crossHair/crossh.cur"));
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_ENGINETT);
     wcex.lpszClassName = szWindowClass;

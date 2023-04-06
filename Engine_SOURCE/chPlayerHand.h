@@ -17,8 +17,9 @@ namespace ch
 		void SetPlayer(GameObject* _player) { player = _player; }
 		
 		
-		void handPosition();
-		bool isHandLeft() { return chHandLeft; }
+		void HandLookCursor();
+		void HandPosition();
+		bool IsHandLeft() { return chHandLeft; }
 	private:
 		Transform* phandTr;
 		GameObject* player;

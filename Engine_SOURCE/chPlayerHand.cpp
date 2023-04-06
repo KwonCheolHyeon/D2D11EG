@@ -21,7 +21,6 @@ namespace ch
 		phandTr = phand->GetComponent<Transform>();
 		phandTr->SetScale(Vector3(0.1f, 0.1f, 1.0f));
 		
-
 		SpriteRenderer* sprite = phand->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pHandMaterial");
 		sprite->SetMaterial(mateiral);
@@ -34,7 +33,8 @@ namespace ch
 	}
 	void PlayerHand::Update()
 	{
-		handPosition();
+		HandLookCursor();
+		HandPosition();
 		GameObject::Update();
 	}
 	void PlayerHand::FixedUpdate()
@@ -45,7 +45,24 @@ namespace ch
 	{
 		GameObject::Render();
 	}
-	void PlayerHand::handPosition()
+	void PlayerHand::HandLookCursor()
+	{
+		Vector3 mousePos = Input::GetMousPosition();
+		Vector3 handPosition = phandTr->GetPosition();
+		Vector3 characterPos = player->GetComponent<Transform>()->GetPosition();
+
+		Vector3 mouseRelative = (mousePos / 100.f) + characterPos;
+		//mouseRelative += characterPos;
+		float angle = atan2(mouseRelative.y - characterPos.y, mouseRelative.x - characterPos.x);
+		// Set the rotation of the gun's hand
+		float rotationZ = angle * (180.0f / XM_PI);
+
+		phandTr->SetRotation(Vector3(180.0f, 0.0f, rotationZ));
+
+	}
+
+
+	void PlayerHand::HandPosition()
 	{
 		Vector3 characterPosition = player->GetComponent<Transform>()->GetPosition();
 		Vector3 handPosition = phandTr->GetPosition();

@@ -11,7 +11,6 @@
 
 namespace ch 
 {
-
 	PlayerScr::PlayerScr()
 	{
 		mState[(UINT)ePlayerState::Front] = true;

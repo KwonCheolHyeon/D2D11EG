@@ -6,17 +6,20 @@
 #include "chTransform.h"
 #include "chGameObject.h"
 #include "chTexture.h"
+#include "chTime.h"
 
 namespace ch
 {
 	ParticleSystem::ParticleSystem()
 		: BaseRenderer(eComponentType::ParticleSystem)
-		, mCount(0)
+		, mCount(100)
 		, mStartSize(Vector4::Zero)
 		, mEndSize(Vector4::Zero)
 		, mStartColor(Vector4::Zero)
 		, mEndColor(Vector4::Zero)
 		, mStartLifeTime(0.0f)
+		, mFrequency(1.0f)
+		, mTime(0.f)
 	{
 
 	}
@@ -25,10 +28,15 @@ namespace ch
 	{
 		delete mBuffer;
 		mBuffer = nullptr;
+
+		delete mSharedBuffer;
+		mSharedBuffer = nullptr;
 	}
 
 	void ParticleSystem::Initalize()
 	{
+		mCS = Resources::Find<ParticleShader>(L"ParticleCS");
+
 		std::shared_ptr<Mesh> point = Resources::Find<Mesh>(L"PointMesh");
 		SetMesh(point);
 
@@ -39,22 +47,25 @@ namespace ch
 		std::shared_ptr<Texture> tex = Resources::Find<Texture>(L"CartoonSmoke");
 		material->SetTexture(eTextureSlot::T0, tex);
 
-		Particle particles[1000] = {};
+		Particle particles[100] = {};
 		Vector4 startPos = Vector4(-800.0f, -450.0f, 0.0f, 0.0f);
-		for (size_t y = 0; y < 9; y++)
+		for (size_t i = 0; i < mCount; i++)
 		{
-			for (size_t x = 0; x < 16; x++)
-			{
-				particles[16 * y + x].position = startPos
-					+ Vector4(x * 100.0f, y * 100.0f, 0.0f, 0.0f);
+			particles[i].position = Vector4(0.0f, 0.0f, 20.0f, 1.0f);
+			particles[i].active = 0;
+			particles[i].direction =
+				Vector4(cosf((float)i * (XM_2PI / (float)mCount))
+					, sin((float)i * (XM_2PI / (float)mCount)), 0.0f, 1.0f);
 
-				particles[16 * y + x].active = 1;
-			}
+			particles[i].speed = 100.0f;
 		}
 
-		mCount = 144;
+		
 		mBuffer = new StructedBuffer();
-		mBuffer->Create(sizeof(Particle), mCount, eSRVType::SRV, particles);
+		mBuffer->Create(sizeof(Particle), mCount, eSRVType::UAV, particles);
+
+		mSharedBuffer = new StructedBuffer();
+		mSharedBuffer->Create(sizeof(ParticleShader), 1, eSRVType::UAV, nullptr, true);
 	}
 
 	void ParticleSystem::Update()
@@ -63,6 +74,36 @@ namespace ch
 
 	void ParticleSystem::FixedUpdate()
 	{
+		//파티클 생성 시간
+		float aliveTime = 1.0f / mFrequency;
+		//누적시간
+		mTime += Time::DeltaTime();
+		if (aliveTime < mTime)
+		{
+			float f = (mTime / aliveTime);
+			UINT iAliveCount = (UINT)f;
+			mTime = f - std::floor(f);
+
+			ParticleShared shared = { 5, };
+			mSharedBuffer->SetData(&shared, 1);
+		}
+		else
+		{
+			ParticleShared shared = {  };
+			mSharedBuffer->SetData(&shared, 1);
+		}
+
+		renderer::ParticleSystemCB info = {};
+		info.elementCount = mBuffer->GetStride();
+		info.deltaTime = Time::DeltaTime();
+
+		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::ParticleSystem];
+		cb->SetData(&info);
+		cb->Bind(eShaderStage::CS);
+
+		mCS->SetSharedStrutedBuffer(mSharedBuffer);
+		mCS->SetStrcutedBuffer(mBuffer);
+		mCS->OnExcute();
 	}
 
 	void ParticleSystem::Render()
@@ -74,5 +115,6 @@ namespace ch
 
 		GetMaterial()->Bind();
 		GetMesh()->RenderInstanced(mCount);
+		mBuffer->Clear();
 	}
 }

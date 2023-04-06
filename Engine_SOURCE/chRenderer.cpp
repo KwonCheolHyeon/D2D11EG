@@ -3,7 +3,7 @@
 #include "chMaterial.h"
 #include "chSceneManager.h"
 #include "chPaintShader.h"
-
+#include "chParticleShader.h"
 namespace ch::renderer
 {
 	Vertex vertexes[4] = {};
@@ -350,7 +350,7 @@ namespace ch::renderer
 
 		//Structed buffer
 		lightsBuffer = new StructedBuffer();
-		lightsBuffer->Create(sizeof(LightAttribute), 128, eSRVType::SRV, nullptr);
+		lightsBuffer->Create(sizeof(LightAttribute), 128, eSRVType::SRV, nullptr, true);
 	}
 
 	void LoadShader()
@@ -413,6 +413,9 @@ namespace ch::renderer
 		particleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 		Resources::Insert<Shader>(L"ParticleShader", particleShader);
 
+		std::shared_ptr<ParticleShader> particleCS = std::make_shared<ParticleShader>();
+		Resources::Insert<ParticleShader>(L"ParticleCS", particleCS);
+		particleCS->Create(L"ParticleCS.hlsl", "main");
 	}
 
 	void LoadTexture()

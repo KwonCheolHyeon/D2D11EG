@@ -49,7 +49,7 @@ namespace ch
 		}
 
 		{
-			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player,this);
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
 			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(3.0f, 0.0f, 0.0f));
 			Light* lightComp = directionalLight->AddComponent<Light>();
 			lightComp->SetType(eLightType::Point);
@@ -57,8 +57,9 @@ namespace ch
 			lightComp->SetDiffuse(Vector4(1.0f, 0.0f, 0.0f, 1.0f));
 		}
 
+
 		// Main Camera Game Object
-		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera);
+		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
 		Camera* cameraComp = cameraObj->AddComponent<Camera>();
 		cameraComp->SetProjectionType(Camera::eProjectionType::Perspective);
 		//cameraComp->RegisterCameraInRenderer();
@@ -66,71 +67,68 @@ namespace ch
 		cameraObj->AddComponent<CameraScript>();
 		mainCamera = cameraComp;
 
-		{ //Camera UI
-			GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
-			Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
-			cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
-			cameraUIComp->DisableLayerMasks();
-			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
-		}
-			
+
+
+
+
 		//SMILE RECT
 		{
 			Player* obj = object::Instantiate<Player>(eLayerType::Player, this);
 			obj->SetName(L"Zelda");
 			Transform* tr = obj->GetComponent<Transform>();
 			tr->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
-			//tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2));
-			//tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+			tr->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
 			Collider2D* collider = obj->AddComponent<Collider2D>();
 			collider->SetType(eColliderType::Rect);
-			//collider->SetCenter(Vector2(0.2f, 0.2f));
-			//collider->SetSize(Vector2(1.5f, 1.5f));
-
 			Animator* animator = obj->AddComponent<Animator>();
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Zelda", L"Zelda.png");
 			animator->Create(L"Idle", texture, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), Vector2::Zero, 3, 0.1f);
 			animator->Create(L"MoveDown", texture, Vector2(0.0f, 520.0f), Vector2(120.0f, 130.0f), Vector2::Zero, 8, 0.1f);
+			animator->Create(L"MoveLeft", texture, Vector2(0.0f, 650.0f), Vector2(120.0f, 130.0f), Vector2::Zero, 10, 0.1f);
 
-			animator->Play(L"Idle", true);
-			
-			
+			animator->Play(L"MoveLeft", true);
 
 			SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
-			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pIdleMaterial");
+			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"SpriteMaterial");
 			mr->SetMaterial(mateiral);
 			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 			mr->SetMesh(mesh);
 			obj->AddComponent<PlayerScript>();
-			
-						
+			object::DontDestroyOnLoad(obj);
 		}
 
 		//SMILE RECT
 		{
-			//Player* obj = object::Instantiate<Player>(eLayerType::Player, this);
-			//obj->SetName(L"SMILE");
-			//Transform* tr = obj->GetComponent<Transform>();
-			//tr->SetPosition(Vector3(2.0f, 0.0f, 5.0f));
-			////tr->SetScale(Vector3(2.0f, 1.0f, 1.0f));
-			////tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2 / 2.0f));
-			////tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
-			//Collider2D* collider = obj->AddComponent<Collider2D>();
-			//collider->SetSize(Vector2(2.0f, 2.0f));
-			//collider->SetType(eColliderType::Rect);
-			////collider->SetCenter(Vector2(0.2f, 0.2f));
-			////collider->SetSize(Vector2(1.5f, 1.5f));
+			Player* obj = object::Instantiate<Player>(eLayerType::Player, this);
+			obj->SetName(L"SMILE");
+			Transform* tr = obj->GetComponent<Transform>();
+			tr->SetPosition(Vector3(2.0f, 0.0f, 5.0f));
+			//tr->SetScale(Vector3(2.0f, 1.0f, 1.0f));
+			//tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2 / 2.0f));
+			//tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+			Collider2D* collider = obj->AddComponent<Collider2D>();
+			collider->SetSize(Vector2(2.0f, 2.0f));
+			collider->SetType(eColliderType::Rect);
+			//collider->SetCenter(Vector2(0.2f, 0.2f));
+			//collider->SetSize(Vector2(1.5f, 1.5f));
 
-			//SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
-			//std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"RectMaterial");
-			//mr->SetMaterial(mateiral);
-			//std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
-			//mr->SetMesh(mesh);
-			
+			SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
+			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"RectMaterial");
+			mr->SetMaterial(mateiral);
+			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			mr->SetMesh(mesh);
+			object::DontDestroyOnLoad(obj);
+		}
+		//Particle
+		{
+			Player* obj = object::Instantiate<Player>(eLayerType::Particle, this);
+			obj->SetName(L"PARTICLE");
+			Transform* tr = obj->GetComponent<Transform>();
+			tr->SetPosition(Vector3(0.0f, 0.0f, 100.0f));
+			obj->AddComponent<ParticleSystem>();
 		}
 
-		//CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Monster, true);
-
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Player, true);
 		Scene::Initalize();
 	}
 	void TitleScene::Update()
