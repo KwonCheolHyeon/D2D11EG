@@ -12,6 +12,8 @@
 #include "chMouseCursorScript.h"
 #include "chPlayerHand.h"
 #include "chGun.h"
+#include "chBulletPool.h"
+#include "chBulletScr.h"
 #include "chPaintShader.h"
 namespace ch
 {
@@ -28,7 +30,6 @@ namespace ch
 
 	void PlayScene::Initalize()
 	{
-		
 		{
 			{
 				GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
@@ -38,7 +39,7 @@ namespace ch
 				lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 			}
 
-			{
+			{//È½ºÒ¿¡ ¾¸
 				/*GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
 				directionalLight->GetComponent<Transform>()->SetPosition(Vector3(3.0f, 0.0f, 0.0f));
 				Light* lightComp = directionalLight->AddComponent<Light>();
@@ -66,6 +67,11 @@ namespace ch
 			cameraUIComp->DisableLayerMasks();
 			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		}
+		{//ÃÑ¾Ë
+
+			generateBullet(10);
+		}
+
 		{//ÇÃ·¹ÀÌ¾î
 			player = object::Instantiate<mainPlayer>(eLayerType::Player, this);
 			player->SetName(L"Player");
@@ -74,10 +80,15 @@ namespace ch
 			hand->SetName(L"PHand");
 			hand->SetPlayer(player);
 
-			Gun* gun = object::Instantiate<Gun>(eLayerType::Hand, this);
+			Gun *gun = object::Instantiate<Gun>(eLayerType::Hand, this);
 			gun->SetName(L"PGun");
 			gun->SetHand(hand);
+			gun->SetPool(pool);
+
 		}
+		
+
+
 
 		//UI
 		{
@@ -101,11 +112,11 @@ namespace ch
 
 		
 
-		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
+		
 		
 
 		{//back ground
-			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
+			/*GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
 			back->SetName(L"BG");
 			Transform* backTr = back->GetComponent<Transform>();
 			backTr->SetPosition(Vector3(1.0f, 1.1f, 0.1f));
@@ -115,9 +126,12 @@ namespace ch
 			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
 			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
 			backSR->SetMaterial(backmaterial);
-			backSR->SetMesh(backmesh);
+			backSR->SetMesh(backmesh);*/
 		}
 
+
+
+		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
 		Scene::Initalize();
 	}
 
@@ -151,6 +165,31 @@ namespace ch
 	void PlayScene::OnExit()
 	{
 		Scene::OnExit();
+
+	}
+
+	void PlayScene::generateBullet(int size)
+	{
+		pool = object::Instantiate<BulletPool>(eLayerType::Weapone, this);
+
+		for (size_t i = 0; i < size; i++)
+		{
+			Bullet* bulletobj = object::Instantiate<Bullet>(eLayerType::Weapone, this);
+			containBullets.push_back(bulletobj);
+			containBullets[i]->SetLayerType(eLayerType::Weapone);
+			containBullets[i]->SetName(L"Bullet" + i);
+			containBullets[i]->GetComponent<Transform>()->SetPosition(Vector3(100.0f,100.0f, 0.0f));
+			containBullets[i]->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.0f, 1.0f));
+			SpriteRenderer* render = containBullets[i]->AddComponent<SpriteRenderer>();
+			std::shared_ptr<Material> bulletMaterial = Resources::Find<Material>(L"W_BulletMaterial");
+			render->SetMaterial(bulletMaterial);
+			std::shared_ptr<Mesh> bulletMesh = Resources::Find<Mesh>(L"RectMesh");
+			render->SetMesh(bulletMesh);
+
+			containBullets[i]->AddComponent<BulletScr>();
+			pool->SetBullets(containBullets[i]);
+
+		}
 
 	}
 

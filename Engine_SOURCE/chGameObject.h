@@ -56,6 +56,14 @@ namespace ch
 					return comp;
 			}
 
+			for (auto c : mScripts)
+			{
+				comp = dynamic_cast<T*>(c);
+
+				if (comp != nullptr)
+					return comp;
+			}
+
 			return nullptr;
 		}
 		template <typename T>

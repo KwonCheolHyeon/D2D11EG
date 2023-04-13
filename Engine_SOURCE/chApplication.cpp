@@ -59,7 +59,7 @@ namespace ch
 		//graphicDevice->Render();
 		//graphicDevice->Present();
 
-
+		SceneManager::Destroy();
 	}
 
 	void Application::Destroy()

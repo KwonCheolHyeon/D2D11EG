@@ -1,3 +1,4 @@
+
 struct Particle
 {
     float4 position;
@@ -13,3 +14,4 @@ struct ParticleShared
 {
     uint gActiveCount;
 };
+

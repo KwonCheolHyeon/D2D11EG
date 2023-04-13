@@ -33,6 +33,7 @@ namespace ch
 	}
 	PlayerScr::~PlayerScr()
 	{
+	
 		
 	}
 	void PlayerScr::Initalize()
@@ -61,6 +62,7 @@ namespace ch
 				chIdleAni();
 			}
 		}
+
 		if (canDodge == true) {
 			if (Input::GetKeyDown(eKeyCode::RBTN) && chCheckDirectionKey()== true)
 			{

@@ -1,0 +1,121 @@
+#include "chBulletScr.h"
+#include "chTime.h"
+#include "chGameObject.h"
+#include "chPlayScene.h"
+#include "chSceneManager.h"
+#include "chGun.h"
+#include "chScene.h"
+#include "chTransform.h"
+#include "chInput.h"
+#include "chResources.h"
+#include "chSpriteRenderer.h"
+
+namespace ch
+{
+	BulletScr::BulletScr()
+		: Script()
+		, speed(0.0f)
+		, bulletDirectionX(0.f)
+		, bulletDirectionY(0.f)
+		, bulletTime(0.0f)
+		
+	{
+	
+	}
+	BulletScr::~BulletScr()
+	{
+	}
+	void BulletScr::Initalize()
+	{
+		mState[(UINT)eBulletState::wait] = true; //대기 상태
+		mState[(UINT)eBulletState::live] = true; // 쏘고 움직이는 상태
+		mState[(UINT)eBulletState::Dead] = false;
+		
+	}
+	void BulletScr::Update()
+	{
+		if (mState[(UINT)eBulletState::wait] == false && mState[(UINT)eBulletState::Dead] == false && mState[(UINT)eBulletState::live] == true)
+		{
+			bulletTime += Time::DeltaTime();
+			MoveBullet();
+		}
+		if (bulletTime >= 3.0f)
+		{
+			Reset();
+		}
+	}
+	void BulletScr::FixedUpdate()
+	{
+	}
+	void BulletScr::Render()
+	{
+	}
+	void BulletScr::OnCollisionEnter(Collider2D* collider)
+	{
+	}
+	void BulletScr::OnCollisionStay(Collider2D* collider)
+	{
+	}
+	void BulletScr::OnCollisionExit(Collider2D* collider)
+	{
+	}
+	void BulletScr::OnTriggerEnter(Collider2D* collider)
+	{
+	}
+	void BulletScr::OnTriggerStay(Collider2D* collider)
+	{
+	}
+	void BulletScr::OnTriggerExit(Collider2D* collider)
+	{
+	}
+	void BulletScr::shootingBullet(float Gunangle, Vector3 Gunpos)
+	{
+		
+		mTr = GetOwner()->GetComponent<Transform>();
+		mTr->SetRotation(Vector3(0.f, 0.f, Gunangle));
+		mTr->SetPosition(Gunpos);
+
+		mState[(UINT)eBulletState::wait] = false;
+		mState[(UINT)eBulletState::live] = true;
+		mState[(UINT)eBulletState::Dead] = false;
+	}
+	void BulletScr::MoveBullet()
+	{
+		speed = 1.0f; // Bullet's movement speed
+		float bulletDistance = speed * Time::DeltaTime();
+		Vector3 bulletPos = mTr->GetPosition();
+
+		// Update bullet position based on direction and distance
+		bulletPos += Vector3::Right * bulletDistance;
+
+		mTr->SetPosition(bulletPos);
+	}
+
+	void BulletScr::Reset()
+	{
+		bulletTime = 0;
+		speed = 0;
+		bulletDirectionX = 0;
+		bulletDirectionY = 0;
+		mTr->SetPosition(Vector3(0.f, 0.f, 0.f));
+		mTr->SetRotation(Vector3(0.f, 0.f, 0.f));
+		mState[(UINT)eBulletState::Dead] = true;
+		mState[(UINT)eBulletState::live] = false;
+		mState[(UINT)eBulletState::wait] = true;
+	}
+	bool BulletScr::isReset()
+	{
+		if (mState[(UINT)eBulletState::wait] == true && mState[(UINT)eBulletState::Dead] == true && mState[(UINT)eBulletState::live] == false )
+		{
+			return true;
+			mState[(UINT)eBulletState::wait] = true; 
+			mState[(UINT)eBulletState::live] = true; 
+			mState[(UINT)eBulletState::Dead] = false;
+		}
+		else 
+		{
+			return false;
+		}
+	
+	}
+}

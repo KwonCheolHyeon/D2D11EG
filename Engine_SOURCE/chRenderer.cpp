@@ -21,14 +21,15 @@ namespace ch::renderer
 
 	void LoadMesh()
 	{
-		//Point mesh
+#pragma region POINT MESH
 		Vertex v = {};
 		std::shared_ptr<Mesh> pointMesh = std::make_shared<Mesh>();
 		Resources::Insert<Mesh>(L"PointMesh", pointMesh);
 		pointMesh->CreateVertexBuffer(&v, 1);
 		UINT pointIndex = 0;
 		pointMesh->CreateIndexBuffer(&pointIndex, 1);
-		
+#pragma endregion
+#pragma region RECT MESH
 		//RECT
 		vertexes[0].pos = Vector4(-0.5f, 0.5f, 0.0f, 1.0f);
 		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
@@ -61,8 +62,8 @@ namespace ch::renderer
 		indexes.push_back(3);
 		indexes.push_back(0);
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
-
-		// 
+#pragma endregion
+#pragma region DEBUG RECTMESH
 		vertexes[0].pos = Vector4(-0.5f, 0.5f, -0.00001f, 1.0f);
 		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
 		vertexes[0].uv = Vector2(0.f, 0.f);
@@ -84,8 +85,8 @@ namespace ch::renderer
 		Resources::Insert<Mesh>(L"DebugRectMesh", debugmesh);
 		debugmesh->CreateVertexBuffer(vertexes, 4);
 		debugmesh->CreateIndexBuffer(indexes.data(), indexes.size());
-
-		// Circle Mesh
+#pragma endregion
+#pragma region CIRCLE MESH
 		std::vector<Vertex> circleVtxes;
 		Vertex center = {};
 		center.pos = Vector4(0.0f, 0.0f, -0.00001f, 1.0f);
@@ -124,8 +125,74 @@ namespace ch::renderer
 		Resources::Insert<Mesh>(L"CircleMesh", cirlceMesh);
 		cirlceMesh->CreateVertexBuffer(circleVtxes.data(), circleVtxes.size());
 		cirlceMesh->CreateIndexBuffer(indexes.data(), indexes.size());
+#pragma endregion
 	}
 
+	void LoadShader()
+	{
+#pragma region DEFAULT TRIANGLE SHADER
+		std::shared_ptr<Shader> shader = std::make_shared<Shader>();
+		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
+		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
+
+		Resources::Insert<Shader>(L"RectShader", shader);
+#pragma endregion
+#pragma region SPRITE SHADER
+		std::shared_ptr<Shader> spriteShader = std::make_shared<Shader>();
+		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
+		spriteShader->SetRSState(eRSType::SolidNone);
+		Resources::Insert<Shader>(L"SpriteShader", spriteShader);
+#pragma endregion
+#pragma region UI SHADER
+		std::shared_ptr<Shader> uiShader = std::make_shared<Shader>();
+		uiShader->Create(eShaderStage::VS, L"UserInterfaceVS.hlsl", "main");
+		uiShader->Create(eShaderStage::PS, L"UserInterfacePS.hlsl", "main");
+
+		Resources::Insert<Shader>(L"UIShader", uiShader);
+#pragma endregion
+#pragma region GRID SHADER
+		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
+		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
+		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
+		gridShader->SetRSState(eRSType::SolidNone);
+		gridShader->SetDSState(eDSType::NoWrite);
+		gridShader->SetBSState(eBSType::AlphaBlend);
+
+		Resources::Insert<Shader>(L"GridShader", gridShader);
+#pragma endregion
+#pragma region DEBUG SHADER
+		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
+		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
+		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
+		debugShader->SetRSState(eRSType::SolidNone);
+		debugShader->SetDSState(eDSType::NoWrite);
+		debugShader->SetBSState(eBSType::AlphaBlend);
+		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+
+		Resources::Insert<Shader>(L"DebugShader", debugShader);
+#pragma endregion
+#pragma region PAINT SHADER
+		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
+		paintShader->Create(L"PaintCS.hlsl", "main");
+		Resources::Insert<PaintShader>(L"PaintShader", paintShader);
+#pragma endregion
+#pragma region PARTICLE SHADER
+		std::shared_ptr<Shader> particleShader = std::make_shared<Shader>();
+		particleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
+		particleShader->Create(eShaderStage::GS, L"ParticleGS.hlsl", "main");
+		particleShader->Create(eShaderStage::PS, L"ParticlePS.hlsl", "main");
+		particleShader->SetRSState(eRSType::SolidNone);
+		particleShader->SetDSState(eDSType::NoWrite);
+		particleShader->SetBSState(eBSType::AlphaBlend);
+		particleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+		Resources::Insert<Shader>(L"ParticleShader", particleShader);
+
+		std::shared_ptr<ParticleShader> particleCS = std::make_shared<ParticleShader>();
+		Resources::Insert<ParticleShader>(L"ParticleCS", particleCS);
+		particleCS->Create(L"ParticleCS.hlsl", "main");
+#pragma endregion
+	}
 
 	void SetUpState()
 	{
@@ -197,10 +264,7 @@ namespace ch::renderer
 		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
 		samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
 		samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
-		//D3D11_FILTER_MIN_POINT_MAG_MIP_LINEAR = 0x5,
-		//D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT = 0x10,
 		samplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT;
-
 
 		GetDevice()->CreateSamplerState
 		(
@@ -256,8 +320,6 @@ namespace ch::renderer
 
 		GetDevice()->CreateRasterizerState(&rsDesc
 			, rasterizerStates[(UINT)eRSType::WireframeNone].GetAddressOf());
-
-
 #pragma endregion
 #pragma region Depth Stencil State
 		D3D11_DEPTH_STENCIL_DESC dsDesc = {};
@@ -292,10 +354,9 @@ namespace ch::renderer
 
 		GetDevice()->CreateDepthStencilState(&dsDesc
 			, depthstencilStates[(UINT)eDSType::None].GetAddressOf());
-
 #pragma endregion
 #pragma region Blend State
-
+		//None
 		blendStates[(UINT)eBSType::Default] = nullptr;
 
 		D3D11_BLEND_DESC bsDesc = {};
@@ -329,6 +390,7 @@ namespace ch::renderer
 
 	void LoadBuffer()
 	{
+#pragma region CONSTANT BUFFER
 		constantBuffers[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffers[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
 
@@ -347,90 +409,34 @@ namespace ch::renderer
 		constantBuffers[(UINT)eCBType::ParticleSystem] = new ConstantBuffer(eCBType::ParticleSystem);
 		constantBuffers[(UINT)eCBType::ParticleSystem]->Create(sizeof(ParticleSystemCB));
 
+		constantBuffers[(UINT)eCBType::Noise] = new ConstantBuffer(eCBType::Noise);
+		constantBuffers[(UINT)eCBType::Noise]->Create(sizeof(NoiseCB));
 
-		//Structed buffer
+#pragma endregion
+#pragma region STRUCTED BUFFER
 		lightsBuffer = new StructedBuffer();
 		lightsBuffer->Create(sizeof(LightAttribute), 128, eSRVType::SRV, nullptr, true);
-	}
-
-	void LoadShader()
-	{
-		// Default
-		std::shared_ptr<Shader> shader = std::make_shared<Shader>();
-		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
-		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
-
-		Resources::Insert<Shader>(L"RectShader", shader);
-
-		// Sprite
-		std::shared_ptr<Shader> spriteShader = std::make_shared<Shader>();
-		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
-		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
-		spriteShader->SetRSState(eRSType::SolidNone);
-		Resources::Insert<Shader>(L"SpriteShader", spriteShader);
-
-		// UI
-		std::shared_ptr<Shader> uiShader = std::make_shared<Shader>();
-		uiShader->Create(eShaderStage::VS, L"UserInterfaceVS.hlsl", "main");
-		uiShader->Create(eShaderStage::PS, L"UserInterfacePS.hlsl", "main");
-
-		Resources::Insert<Shader>(L"UIShader", uiShader);
-
-		// Grid Shader
-		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
-		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
-		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
-		gridShader->SetRSState(eRSType::SolidNone);
-		gridShader->SetDSState(eDSType::NoWrite);
-		gridShader->SetBSState(eBSType::AlphaBlend);
-
-		Resources::Insert<Shader>(L"GridShader", gridShader);
-
-		// Debug Shader
-		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
-		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
-		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
-		debugShader->SetRSState(eRSType::SolidNone);
-		debugShader->SetDSState(eDSType::NoWrite);
-		debugShader->SetBSState(eBSType::AlphaBlend);
-		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-
-		Resources::Insert<Shader>(L"DebugShader", debugShader);
-
-		//ÆäÀÌÆ® ½¦ÀÌ´õ
-		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
-		paintShader->Create(L"PaintCS.hlsl", "main");
-		Resources::Insert<PaintShader>(L"PaintShader", paintShader);
-
-		// Particle Shader
-		std::shared_ptr<Shader> particleShader = std::make_shared<Shader>();
-		particleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
-		particleShader->Create(eShaderStage::GS, L"ParticleGS.hlsl", "main");
-		particleShader->Create(eShaderStage::PS, L"ParticlePS.hlsl", "main");
-		particleShader->SetRSState(eRSType::SolidNone);
-		particleShader->SetDSState(eDSType::NoWrite);
-		particleShader->SetBSState(eBSType::AlphaBlend);
-		particleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
-		Resources::Insert<Shader>(L"ParticleShader", particleShader);
-
-		std::shared_ptr<ParticleShader> particleCS = std::make_shared<ParticleShader>();
-		Resources::Insert<ParticleShader>(L"ParticleCS", particleCS);
-		particleCS->Create(L"ParticleCS.hlsl", "main");
+#pragma endregion
 	}
 
 	void LoadTexture()
 	{
+#pragma region STATIC TEXTURE
 		Resources::Load<Texture>(L"SmileTexture", L"Smile.png");
 		Resources::Load<Texture>(L"DefaultSprite", L"Light.png");
 		Resources::Load<Texture>(L"HPBarTexture", L"HPBar.png");
 		Resources::Load<Texture>(L"CartoonSmoke", L"particle\\CartoonSmoke.png");
+		Resources::Load<Texture>(L"noise_01", L"noise\\noise_01.png");
+		Resources::Load<Texture>(L"noise_02", L"noise\\noise_02.png");
+		//Resources::Load<Texture>(L"noise_03", L"noise\\noise_03.png");
 
-
-		//Create
+#pragma endregion
+#pragma region DYNAMIC TEXTURE
 		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
 		uavTexture->Create(1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE
 			| D3D11_BIND_UNORDERED_ACCESS);
 		Resources::Insert<Texture>(L"PaintTexture", uavTexture);
+#pragma endregion
 
 		Resources::Load<Texture>(L"FadeEffectTexture", L"black.jpg");
 
@@ -456,6 +462,9 @@ namespace ch::renderer
 
 		//¹«±â
 		Resources::Load<Texture>(L"W_pistol", L"enterthe\\Waepone\\PistolFolder\\pistol_Idle.png");
+
+		//ÃÑ¾Ë
+		Resources::Load<Texture>(L"W_Bullet", L"enterthe\\Waepone\\Bullet\\bulit.png");
 
 		//bg
 		Resources::Load<Texture>(L"FloatSprite", L"battleField.png");
@@ -530,6 +539,18 @@ namespace ch::renderer
 				material->SetShader(shader);
 				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"W_pistol_Material", material);
+			}
+
+
+			{//ÃÑ¾Ë
+				std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"W_Bullet");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"W_BulletMaterial", material);
+			
 			}
 		}
 
@@ -649,6 +670,7 @@ namespace ch::renderer
 
 	void Render()
 	{
+		BindNoiseTexture();
 		BindLights();
 
 		eSceneType type = SceneManager::GetActiveScene()->GetSceneType();
@@ -682,5 +704,29 @@ namespace ch::renderer
 		cb->SetData(&trCb);
 		cb->Bind(eShaderStage::VS);
 		cb->Bind(eShaderStage::PS);
+	}
+
+	void BindNoiseTexture()
+	{
+		std::shared_ptr<Texture> noise = Resources::Find<Texture>(L"noise_01");
+		noise->BindShaderResource(eShaderStage::VS, 16);
+		noise->BindShaderResource(eShaderStage::HS, 16);
+		noise->BindShaderResource(eShaderStage::DS, 16);
+		noise->BindShaderResource(eShaderStage::GS, 16);
+		noise->BindShaderResource(eShaderStage::PS, 16);
+		noise->BindShaderResource(eShaderStage::CS, 16);
+
+		NoiseCB info = {};
+		info.noiseSize.x = noise->GetWidth();
+		info.noiseSize.y = noise->GetHeight();
+
+		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Noise];
+		cb->SetData(&info);
+		cb->Bind(eShaderStage::VS);
+		cb->Bind(eShaderStage::HS);
+		cb->Bind(eShaderStage::DS);
+		cb->Bind(eShaderStage::GS);
+		cb->Bind(eShaderStage::PS);
+		cb->Bind(eShaderStage::CS);
 	}
 }

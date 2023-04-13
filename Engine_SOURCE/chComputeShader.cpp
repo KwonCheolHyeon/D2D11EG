@@ -15,7 +15,6 @@ namespace ch::graphics
 		, mGroupZ(0)
 	{
 	}
-
 	ComputeShader::ComputeShader()
 		: Resource(eResourceType::ComputeShader)
 		, mCSBlob(nullptr)

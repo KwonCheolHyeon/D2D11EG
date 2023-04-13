@@ -12,13 +12,14 @@
 #define CB_GETBINDSLOT(name) __CBUFFERBINDSLOT__##name##__
 #define CBUFFER(name, slot) static const int CB_GETBINDSLOT(name) = slot; struct alignas(16) name
 
-#define CBSLOT_TRANSFORM 0
-#define CBSLOT_MATERIAL 1
-#define CBSLOT_GRID 2
-#define CBSLOT_ANIMATION 3
-#define CBSLOT_NUMBEROFLIGHT 4
-#define CBSLOT_NUMBEROFLIGH
-#define CBSLOT_PARTICLESYSTEM 4
+
+#define CBSLOT_TRANSFORM		0
+#define CBSLOT_MATERIAL			1
+#define CBSLOT_GRID				2
+#define CBSLOT_ANIMATION		3
+#define CBSLOT_NUMBEROFLIGHT	4
+#define CBSLOT_PARTICLESYSTEM	5
+#define CBSLOT_NOISE			6
 
 using namespace ch::math;
 
@@ -39,6 +40,7 @@ namespace ch::graphics
 		GS,
 		PS,
 		CS,
+		ALL,
 		Count,
 	};
 
@@ -109,6 +111,7 @@ namespace ch::graphics
 		Animation,
 		Light,
 		ParticleSystem,
+		Noise,
 		End,
 	};
 

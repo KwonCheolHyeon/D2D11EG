@@ -143,6 +143,9 @@
     <Filter Include="GameObject\Weapone\Base">
       <UniqueIdentifier>{0e104d63-5828-4a96-bcab-7c04c07d4bbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Weapone\Bullet">
+      <UniqueIdentifier>{17741650-3282-4837-9002-18fdb3753870}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -320,9 +323,6 @@
     <ClInclude Include="chPlayerHand.h">
       <Filter>GameObject\chPlayer\Hand</Filter>
     </ClInclude>
-    <ClInclude Include="chPlayerHandScr.h">
-      <Filter>GameObject\chPlayer\Hand</Filter>
-    </ClInclude>
     <ClInclude Include="chGenericAnimator.h">
       <Filter>Component\Animator\GenericAnimator</Filter>
     </ClInclude>
@@ -331,6 +331,15 @@
     </ClInclude>
     <ClInclude Include="chGun.h">
       <Filter>GameObject\Weapone\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="chBullet.h">
+      <Filter>GameObject\Weapone\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="chBulletScr.h">
+      <Filter>GameObject\Weapone\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="chBulletPool.h">
+      <Filter>GameObject\Weapone\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -494,9 +503,6 @@
     <ClCompile Include="chPlayerHand.cpp">
       <Filter>GameObject\chPlayer\Hand</Filter>
     </ClCompile>
-    <ClCompile Include="chPlayerHandScr.cpp">
-      <Filter>GameObject\chPlayer\Hand</Filter>
-    </ClCompile>
     <ClCompile Include="chGenericAnimator.cpp">
       <Filter>Component\Animator\GenericAnimator</Filter>
     </ClCompile>
@@ -505,6 +511,15 @@
     </ClCompile>
     <ClCompile Include="chGun.cpp">
       <Filter>GameObject\Weapone\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="chBullet.cpp">
+      <Filter>GameObject\Weapone\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="chBulletScr.cpp">
+      <Filter>GameObject\Weapone\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="chBulletPool.cpp">
+      <Filter>GameObject\Weapone\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

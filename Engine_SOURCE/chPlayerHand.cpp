@@ -2,7 +2,7 @@
 #include "chSpriteRenderer.h"
 #include "chResources.h"
 #include "chPlayerScr.h"
-#include "chPlayerHandScr.h"
+
 #include "chTime.h"
 #include "chInput.h"
 namespace ch 
@@ -26,8 +26,6 @@ namespace ch
 		sprite->SetMaterial(mateiral);
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
-
-		phand->AddComponent<PlayerHandScr>();
 		
 		GameObject::Initalize();
 	}

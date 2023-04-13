@@ -2,6 +2,8 @@
 #include "chSpriteRenderer.h"
 #include "chResources.h"
 #include "chInput.h"
+#include "chBullet.h"
+
 namespace ch 
 {
 	Pistol::Pistol()
@@ -11,7 +13,7 @@ namespace ch
 
 	Pistol::~Pistol()
 	{
-
+		
 	}
 
 	void Pistol::Initalize()
@@ -29,12 +31,19 @@ namespace ch
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
 		GameObject::Initalize();
+		
 	}
 
 	void Pistol::Update()
 	{
 		pistolSetPosition();
 		
+		if (Input::GetKeyDown(eKeyCode::LBTN)) 
+		{
+		
+
+		}
+
 		GameObject::Update();
 	}
 
@@ -62,7 +71,7 @@ namespace ch
 		mouseRelative += characterPos;
 		
 		// Calculate the angle between the mouse cursor position and the character position
-		float angle = atan2(mouseRelative.y - characterPos.y, mouseRelative.x - characterPos.x);
+		angle = atan2(mouseRelative.y - characterPos.y, mouseRelative.x - characterPos.x);
 		// Set the rotation of the gun's hand
 		float rotationZ = angle * (180.0f / XM_PI);
 		

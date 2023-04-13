@@ -171,7 +171,7 @@ namespace ch
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
 		
-		pTr = playerOBJ->AddComponent<Transform>();
+		pTr = playerOBJ->GetComponent<Transform>();
 		pTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
 		
 

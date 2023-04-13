@@ -1,6 +1,8 @@
 #pragma once
 #include "chGameObject.h"
 #include "chPlayerHand.h"
+#include "chBullet.h"
+#include "chBulletPool.h"
 namespace ch
 {
 	struct GunStat 
@@ -25,22 +27,33 @@ namespace ch
 
 		void Reload();
 		void Shot();
+		void ReturnBullet();
 		void SwapGun();
 
 		//void SetPlayer(GameObject* _player) { player = _player; }
 		void SetHand(PlayerHand* hand) { playerHand = hand; }
+		void SetPool(BulletPool* pool) { bulletpool = pool; }
+		BulletPool* GetPool() { return bulletpool; }
+	public:
+		
+		float angle;
+		void angleFind();
+
 	protected:
 		void GunLookCursor();
 
 		GunStat pistol;
 		GunStat shotGun;
 		PlayerHand* playerHand;
+
+
 	private:
 		GameObject* gunObject;
 		Transform* gunTransform;
-
-		//GameObject* player;
-		
+		BulletPool* bulletpool;
+		Bullet* bulletOBJ;
+		std::vector<Bullet*> bullets;
+		bool CollectAcces;
 
 	};
 
