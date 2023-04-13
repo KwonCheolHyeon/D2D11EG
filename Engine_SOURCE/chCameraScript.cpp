@@ -27,12 +27,33 @@ namespace ch
 		
 		if (target)
 		{
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-			Vector3 pos = tr->GetPosition();//카메라 위치
-			targetPos = target->GetComponent<Transform>()->GetPosition();
-			//플레이어 위치
-		
-			tr->SetPosition(Vector3(targetPos.x, targetPos.y, pos.z));
+			Transform* tr = GetOwner()->GetComponent<Transform>();//
+
+			Vector3 pos = tr->GetPosition(); // Camera position
+
+			targetPos = target->GetComponent<Transform>()->GetPosition(); // Player position
+
+			Vector3 mousePos =  Input::GetMousPosition(); // Mouse cursor position
+			Vector3 mouseRelative = (mousePos / 100.f);
+			mouseRelative += targetPos;//마우스 위치
+
+			
+
+			// Calculate distance between camera and target
+			Vector3 distance = Vector3(mouseRelative.x, mouseRelative.y, mouseRelative.z) - Vector3(targetPos.x, targetPos.y, targetPos.z);
+			distance = distance / 1.5f;
+			
+			float maxDistance = 3.0f; // Change this value to set the maximum distance
+			if (distance.Length() > maxDistance)
+			{
+				distance.Normalize();
+				distance *= maxDistance;
+			}
+
+			pos = targetPos + distance;
+			
+
+			tr->SetPosition(pos);
 		}
 		else {
 		

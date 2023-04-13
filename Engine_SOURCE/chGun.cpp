@@ -98,7 +98,7 @@ namespace ch
 		if (bulletOBJ != nullptr) // Check if bulletOBJ is not nullptr before using it
 		{
 			bullets.push_back(bulletOBJ);
-			bullets.back()->GetComponent<BulletScr>()->shootingBullet(angle, gunTransform->GetPosition());
+			bullets.back()->GetComponent<BulletScr>()->shootingBullet(angle, playerHand->GetComponent<Transform>()->GetPosition());
 		}
 	}
 
@@ -120,7 +120,6 @@ namespace ch
 	{
 		Vector3 handPosition = playerHand->GetComponent<Transform>()->GetPosition();
 		Vector3 mousePos = Input::GetMousPosition();
-		Vector3 weaphonePosition = gunTransform->GetPosition();
 		
 		Vector3 characterPos = playerHand->GetComponent<Transform>()->GetPosition();
 
@@ -132,7 +131,7 @@ namespace ch
 
 		float rotationZ = angle2 * (180.0f / XM_PI);
 
-		angle = angle2;
+		angle = rotationZ;
 	}
 	void Gun::GunLookCursor()
 	{

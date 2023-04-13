@@ -41,8 +41,9 @@ namespace ch
 		}
 		else {//사용가능한 총알이 없다!
 			// No available Bullet objects in the pool
-			int a = 0;
-			return nullptr;
+			Bullet* bull = new Bullet();
+			bull->Initalize();
+			return bull;
 		}
 	}
 	void BulletPool::ReturnBullet(Bullet* bullet)

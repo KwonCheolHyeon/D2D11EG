@@ -72,7 +72,9 @@ namespace ch
 	{
 		
 		mTr = GetOwner()->GetComponent<Transform>();
-		mTr->SetRotation(Vector3(0.f, 0.f, Gunangle));
+		bulletDirectionX = cos(Gunangle * (XM_PI / 180.0f));
+		bulletDirectionY = sin(Gunangle * (XM_PI / 180.0f));
+
 		mTr->SetPosition(Gunpos);
 
 		mState[(UINT)eBulletState::wait] = false;
@@ -81,12 +83,12 @@ namespace ch
 	}
 	void BulletScr::MoveBullet()
 	{
-		speed = 1.0f; // Bullet's movement speed
+		speed = 10.0f; // Bullet's movement speed
 		float bulletDistance = speed * Time::DeltaTime();
 		Vector3 bulletPos = mTr->GetPosition();
 
 		// Update bullet position based on direction and distance
-		bulletPos += Vector3::Right * bulletDistance;
+		bulletPos += Vector3(bulletDirectionX, bulletDirectionY, 0.0f) * bulletDistance;
 
 		mTr->SetPosition(bulletPos);
 	}

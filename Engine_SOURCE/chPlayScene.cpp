@@ -69,7 +69,7 @@ namespace ch
 		}
 		{//총알
 
-			generateBullet(10);
+			generateBullet(20);
 		}
 
 		{//플레이어
@@ -116,7 +116,7 @@ namespace ch
 		
 
 		{//back ground
-			/*GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
+			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
 			back->SetName(L"BG");
 			Transform* backTr = back->GetComponent<Transform>();
 			backTr->SetPosition(Vector3(1.0f, 1.1f, 0.1f));
@@ -126,7 +126,7 @@ namespace ch
 			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
 			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
 			backSR->SetMaterial(backmaterial);
-			backSR->SetMesh(backmesh);*/
+			backSR->SetMesh(backmesh);
 		}
 
 
@@ -179,7 +179,7 @@ namespace ch
 			containBullets[i]->SetLayerType(eLayerType::Weapone);
 			containBullets[i]->SetName(L"Bullet" + i);
 			containBullets[i]->GetComponent<Transform>()->SetPosition(Vector3(100.0f,100.0f, 0.0f));
-			containBullets[i]->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.0f, 1.0f));
+			containBullets[i]->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
 			SpriteRenderer* render = containBullets[i]->AddComponent<SpriteRenderer>();
 			std::shared_ptr<Material> bulletMaterial = Resources::Find<Material>(L"W_BulletMaterial");
 			render->SetMaterial(bulletMaterial);
