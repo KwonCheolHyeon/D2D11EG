@@ -52,6 +52,8 @@ public:
 
     bool IsRunning();
     void Stop(bool InCompleteEvent = false);
+
+   
 };
 
 

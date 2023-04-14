@@ -1,5 +1,6 @@
 #include "chBulletPool.h"
-
+#include "chtestBulletscr.h"
+#include "chBulletScr.h"
 namespace ch 
 {
 	BulletPool::BulletPool()
@@ -41,9 +42,10 @@ namespace ch
 		}
 		else {//사용가능한 총알이 없다!
 			// No available Bullet objects in the pool
-			Bullet* bull = new Bullet();
-			bull->Initalize();
-			return bull;
+			//Bullet* bull = new Bullet();
+			//bull->AddComponent<BulletScr>();
+			//bull->GetComponent<BulletScr>()->Initalize();
+			return nullptr;
 		}
 	}
 	void BulletPool::ReturnBullet(Bullet* bullet)

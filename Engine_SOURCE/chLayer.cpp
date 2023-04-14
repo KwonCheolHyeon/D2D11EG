@@ -70,9 +70,6 @@ namespace ch
 			obj->FixedUpdate();
 		}
 
-		// sort z axis
-		//std::vector<GameObject*> mGameObjects;
-		//std::sort(mGameObjects.begin(), mGameObjects.end(), CompareGameObjectByZAxis);
 	}
 
 	void Layer::Render()

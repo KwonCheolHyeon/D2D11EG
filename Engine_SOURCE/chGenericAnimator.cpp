@@ -83,3 +83,4 @@ void GenericAnimator::Stop(bool InCompleteEvent)
 	AccTime = 0.f;
 	EndTime = 0.f;
 }
+

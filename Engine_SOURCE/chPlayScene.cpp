@@ -69,7 +69,7 @@ namespace ch
 		}
 		{//총알
 
-			generateBullet(20);
+			generateBullet(10);
 		}
 
 		{//플레이어

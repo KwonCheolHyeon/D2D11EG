@@ -52,6 +52,14 @@ namespace ch
 
 			pos = targetPos + distance;
 			
+			if (Input::GetKey(eKeyCode::V))
+			{
+				pos = CameraWeakShakeeffect(pos);
+			}
+			if (Input::GetKey(eKeyCode::C))
+			{
+				pos = CameraStrongShakeeffect(pos);
+			}
 
 			tr->SetPosition(pos);
 		}
@@ -94,6 +102,21 @@ namespace ch
 	}
 	void CameraScript::Render()
 	{
+	}
+
+	Vector3 CameraScript::CameraWeakShakeeffect(Vector3 pos)
+	{
+		float shakeAmount = 0.1f; // Change this value to adjust the camera shake intensity
+		Vector3 shakeOffset = Vector3(RandomRange(-shakeAmount, shakeAmount), RandomRange(-shakeAmount, shakeAmount), 0.0f);
+		return pos += shakeOffset;
+
+	}
+
+	Vector3 CameraScript::CameraStrongShakeeffect(Vector3 pos)
+	{
+		float shakeAmount = 0.5f; // Change this value to adjust the camera shake intensity
+		Vector3 shakeOffset = Vector3(RandomRange(-shakeAmount, shakeAmount), RandomRange(-shakeAmount, shakeAmount), 0.0f);
+		return pos += shakeOffset;
 	}
 	
 }

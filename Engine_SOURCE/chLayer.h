@@ -14,7 +14,7 @@ namespace ch
 		virtual void FixedUpdate();
 		virtual void Render();
 		virtual void Destroy();
-		void DelteOBJ();
+		
 
 		void AddGameObject(GameObject* gameObject);
 		const std::vector<GameObject*>& GetGameObjects() { return mGameObjects; }

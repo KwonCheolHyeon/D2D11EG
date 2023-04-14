@@ -245,12 +245,12 @@ namespace ch
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 			{
-				GetOwner()->setNoHand();
+				
 				animator->Play(L"P_WIdleBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 			{
-				GetOwner()->setNoHand();
+				
 				animator->Play(L"P_WIdleBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
@@ -277,12 +277,12 @@ namespace ch
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 		{
-			GetOwner()->setNoHand();
+			
 			animator->Play(L"P_WIdleBackRight", true);
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 		{
-			GetOwner()->setNoHand();
+			
 			animator->Play(L"P_WIdleBackRight", true);
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
@@ -310,12 +310,12 @@ namespace ch
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 			{
-				GetOwner()->setNoHand();
+				
 				animator->Play(L"P_WWalkingBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 			{
-				GetOwner()->setNoHand();
+				
 				animator->Play(L"P_WWalkingBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
@@ -343,12 +343,12 @@ namespace ch
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 		{
-			GetOwner()->setNoHand();
+			
 			animator->Play(L"P_WWalkingBackRight", true);
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 		{
-			GetOwner()->setNoHand();
+			
 			animator->Play(L"P_WWalkingBackRight", true);
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))

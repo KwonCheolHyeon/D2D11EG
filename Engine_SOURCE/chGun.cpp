@@ -5,7 +5,7 @@
 #include "chPistol.h"
 #include "chBullet.h"
 #include "chBulletScr.h"
-
+#include "chtestBulletscr.h"
 namespace ch 
 {
 	Gun::Gun()
@@ -69,7 +69,17 @@ namespace ch
 		
 		if (Input::GetKeyDown(eKeyCode::LBTN))
 		{
-			Shot();
+			//Shot();
+
+			Bullet* bull = new Bullet();
+			bull->AddComponent<testBulletscr>();
+			bull->GetComponent<testBulletscr>()->Initalize();
+
+			Transform* bulletTrans = bull->GetComponent<Transform>();
+			bull->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
+			bulletTrans->SetPosition(playerHand->GetComponent<Transform>()->GetPosition());
+			bull->GetComponent<testBulletscr>()->shootingBullet(angle, playerHand->GetComponent<Transform>()->GetPosition());
+
 		}
 		if (!bullets.empty())
 		{
