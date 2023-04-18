@@ -36,23 +36,19 @@ namespace ch
 			// Get a pointer to the first available Bullet object
 			Bullet* bullet = availableBullets.back();
 			availableBullets.pop_back();
-			
-
 			return bullet;
 		}
 		else {//사용가능한 총알이 없다!
 			// No available Bullet objects in the pool
-			//Bullet* bull = new Bullet();
-			//bull->AddComponent<BulletScr>();
-			//bull->GetComponent<BulletScr>()->Initalize();
-			return nullptr;
+			Bullet* bull = new Bullet();
+			bull->AddComponent<testBulletscr>();
+			bull->GetComponent<testBulletscr>()->Initalize();
+			bull->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
+			return bull;
 		}
 	}
 	void BulletPool::ReturnBullet(Bullet* bullet)
 	{
-		//초기화 시키기  bullet->
-
-
 		availableBullets.push_back(bullet);
 	}
 }

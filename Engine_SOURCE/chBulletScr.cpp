@@ -41,7 +41,7 @@ namespace ch
 			bulletTime += Time::DeltaTime();
 			MoveBullet();
 		}
-		if (bulletTime >= 3.0f)
+		if (bulletTime >= 1.f)
 		{
 			Reset();
 		}

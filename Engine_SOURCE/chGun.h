@@ -3,6 +3,7 @@
 #include "chPlayerHand.h"
 #include "chBullet.h"
 #include "chBulletPool.h"
+#include "chGenericAnimator.h"
 namespace ch
 {
 	struct GunStat 
@@ -34,13 +35,22 @@ namespace ch
 		void SetHand(PlayerHand* hand) { playerHand = hand; }
 		void SetPool(BulletPool* pool) { bulletpool = pool; }
 		BulletPool* GetPool() { return bulletpool; }
+
+		static bool reboundTrue;
 	public:
-		
 		float angle;
 		void angleFind();
 
+	public:
+		Vector3 rebound;
+		void HandDownAnimate(Vector3 handPos);//GenericAnimator
+		void HandUpAnimate(Vector3 handPos);//GenericAnimator
+		void HandDownPos(float cur);
+		void HandUpPos(float cur);
+
 	protected:
 		void GunLookCursor();
+	
 
 		GunStat pistol;
 		GunStat shotGun;
@@ -55,6 +65,7 @@ namespace ch
 		std::vector<Bullet*> bullets;
 		bool CollectAcces;
 
+		GenericAnimator genericAnimator;
 	};
 
 }

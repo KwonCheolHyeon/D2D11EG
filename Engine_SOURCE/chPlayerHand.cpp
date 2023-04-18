@@ -1,10 +1,12 @@
 #include "chPlayerHand.h"
 #include "chSpriteRenderer.h"
 #include "chResources.h"
+#include "chGun.h"
 #include "chPlayerScr.h"
-
 #include "chTime.h"
 #include "chInput.h"
+
+
 namespace ch 
 {
 	PlayerHand::PlayerHand()
@@ -32,6 +34,14 @@ namespace ch
 	void PlayerHand::Update()
 	{
 		HandLookCursor();
+		if (Gun::reboundTrue == true) 
+		{
+			int a = 0;
+		}
+		else if(Gun::reboundTrue == false)
+		{
+			
+		}
 		HandPosition();
 		GameObject::Update();
 	}
@@ -92,27 +102,6 @@ namespace ch
 		}
 		
 		phandTr->SetPosition(handPosition);
+		
 	}
 }
-
-
-
-
-		//Vector3 mPos = Input::GetMousPosition();
-		//Vector3 characterPosition = player->GetComponent<Transform>()->GetPosition();
-
-		//Vector3 mousePosition = (mPos / 100.f );
-		//mousePosition += characterPosition;
-		//Vector3 handPosition = phandTr->GetPosition();
-
-		//// calculate the angle between the mouse position and the character position
-		//float angle = atan2(mousePosition.y - characterPosition.y, mousePosition.x - characterPosition.x);
-
-		//// set the hand position
-		//Vector3 handRelative(cos(angle) * handDistance, sin(angle) * handDistance, 0.f);
-		//handPosition = characterPosition + handRelative;
-		//phandTr->SetPosition(handPosition);
-
-		//// set the hand rotation
-		//float rotationZ = angle * (180.0f / XM_PI);
-		//phandTr->SetRotation(Vector3(0.0f, 0.0f, rotationZ));

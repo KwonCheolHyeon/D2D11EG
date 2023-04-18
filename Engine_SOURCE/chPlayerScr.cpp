@@ -586,6 +586,7 @@ namespace ch
 		}
 		gunHandSide();
 	}
+
 	void PlayerScr::GenAnimate(Vector3 dodgePos)
 	{
 		Position = dodgePos;
@@ -615,6 +616,7 @@ namespace ch
 		mState[(UINT)ePlayerState::Walking] = false;
 		mState[(UINT)ePlayerState::Dodge] = true;
 	}
+
 	bool PlayerScr::compareState()
 	{
 		if(	mState[(UINT)ePlayerState::Front] == mPrevState[(UINT)ePlayerState::Front] &&

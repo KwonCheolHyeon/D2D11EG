@@ -6,8 +6,12 @@
 #include "chBullet.h"
 #include "chBulletScr.h"
 #include "chtestBulletscr.h"
+#include "chTime.h"
+
+
 namespace ch 
 {
+	bool Gun::reboundTrue = false;
 	Gun::Gun()
 	{
 		pistol.bulletCount = 6;
@@ -63,23 +67,14 @@ namespace ch
 	}
 	void Gun::Update()
 	{
+		genericAnimator.Update(Time::DeltaTime());
 		GunLookCursor();
 		angleFind();
 
-		
 		if (Input::GetKeyDown(eKeyCode::LBTN))
 		{
-			//Shot();
-
-			Bullet* bull = new Bullet();
-			bull->AddComponent<testBulletscr>();
-			bull->GetComponent<testBulletscr>()->Initalize();
-
-			Transform* bulletTrans = bull->GetComponent<Transform>();
-			bull->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
-			bulletTrans->SetPosition(playerHand->GetComponent<Transform>()->GetPosition());
-			bull->GetComponent<testBulletscr>()->shootingBullet(angle, playerHand->GetComponent<Transform>()->GetPosition());
-
+			Shot();
+			HandDownAnimate(Vector3(0.f, 0.1f, 0.f));
 		}
 		if (!bullets.empty())
 		{
@@ -88,7 +83,7 @@ namespace ch
 				ReturnBullet();
 			}
 		}
-		
+ 
 		GameObject::Update();
 	}
 	void Gun::FixedUpdate()
@@ -115,10 +110,13 @@ namespace ch
 	void Gun::ReturnBullet()
 	{
 
-		if (!bullets.empty() && bullets.back() != nullptr)
+		if (!bullets.empty()) // 먼저 bullets 벡터가 비어있는지 체크
 		{
-			bulletpool->ReturnBullet(bullets.back());
-			bullets.pop_back();
+			if (bullets.back() != nullptr) // bullets.back()이 nullptr이 아닌지 체크
+			{
+				bulletpool->ReturnBullet(bullets.back());
+				bullets.pop_back();
+			}
 		}
 	}
 	
@@ -143,6 +141,80 @@ namespace ch
 
 		angle = rotationZ;
 	}
+
+	void Gun::HandDownAnimate(Vector3 handPos)
+	{
+		if (genericAnimator.IsRunning())
+			genericAnimator.Stop();
+
+		reboundTrue = true;
+		rebound = handPos;
+		// Set animation parameters
+		AnimatorParam param;
+		param.AnimType = EAnimType::Linear;
+		param.StartValue = 0.f;
+		param.EndValue = 0.3f;
+		param.DurationTime = 0.2f;
+		param.DurationFunc = [this](float InCurValue) {
+			HandDownPos(InCurValue);
+		};
+		param.CompleteFunc = [this](float InCurValue) {
+			// This function will be called when the animation is finished
+		// This function will be called on every tick of the animation
+			
+			HandUpAnimate(rebound);
+
+		};
+
+		genericAnimator.Start(param);
+
+	}
+
+	void Gun::HandUpAnimate(Vector3 handPos)
+	{
+		if (genericAnimator.IsRunning())
+			genericAnimator.Stop();
+
+		
+		rebound = handPos;
+		// Set animation parameters
+		AnimatorParam param;
+		param.AnimType = EAnimType::Linear;
+		param.StartValue = 0.f;
+		param.EndValue = 0.3f;
+		param.DurationTime = 0.2f;
+		param.DurationFunc = [this](float InCurValue) {
+			HandUpPos(InCurValue);
+		};
+		param.CompleteFunc = [this](float InCurValue) {
+		
+			reboundTrue = false;
+		};
+
+		genericAnimator.Start(param);
+
+	}
+
+	void Gun::HandDownPos(float cur)
+	{
+		Vector3 Hand = playerHand->GetComponent<Transform>()->GetPosition();
+		Vector3 pPos = playerHand->GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector3 diff = pPos - Hand;
+		Hand -= (rebound * cur * Time::DeltaTime()) + diff;
+		playerHand->GetComponent<Transform>()->SetPosition(Hand);
+	}
+
+	void Gun::HandUpPos(float cur)
+	{
+		Vector3 Hand = playerHand->GetComponent<Transform>()->GetPosition();
+		Vector3 pPos = playerHand->GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector3 diff = pPos - Hand;
+		Hand += (rebound * cur * Time::DeltaTime()) + diff;
+		playerHand->GetComponent<Transform>()->SetPosition(Hand);
+	}
+
+	
+
 	void Gun::GunLookCursor()
 	{
 
@@ -155,10 +227,15 @@ namespace ch
 		else //오른손
 		{
 			gunObject->SetRight();
-			
-			
 			gunObject->SetRotation(Vector3(180.0f, 0.0f, 0.f));
 		}
 		//gunTransform->SetPosition(gunPosition);
 	}
+
+
+	
+	 
+	
+
+
 }

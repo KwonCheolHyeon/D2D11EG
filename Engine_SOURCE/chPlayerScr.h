@@ -67,7 +67,7 @@ namespace ch
         void afterDodge();
         void allowDodge();
       
-
+        //구르기 애니메이션
         void GenAnimate(Vector3 dodgePos);
   
     private:

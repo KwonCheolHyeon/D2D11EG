@@ -6,13 +6,7 @@ namespace ch
 	class testBulletscr : public Script
 	{
 	public:
-		enum class eBulletState
-		{
-			live,
-			wait,
-			Dead,
-			End
-		};
+	
 		testBulletscr();
 		virtual ~testBulletscr();
 
@@ -21,39 +15,7 @@ namespace ch
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
 
-		virtual void OnCollisionEnter(Collider2D* collider);
-		virtual void OnCollisionStay(Collider2D* collider);
-		virtual void OnCollisionExit(Collider2D* collider);
-
-		virtual void OnTriggerEnter(Collider2D* collider);
-		virtual void OnTriggerStay(Collider2D* collider);
-		virtual void OnTriggerExit(Collider2D* collider);
-
-		void shootingBullet(float Gunangle, Vector3 pos); //{ angles = Gunangle, GunPos = pos , mState[(UINT)eBulletState::wait] = false, mState[(UINT)eBulletState::live] = true, mState[(UINT)eBulletState::Dead] = false;}
-		void MoveBullet();
-		void Reset();
-		bool isReset();
-
-	public://총알 상태
-		std::bitset<static_cast<UINT>(eBulletState::End)> mState;
-	private:
-		Transform* mTr;
-
-
-	private: //수치
-		float speed;
-		float bulletDirectionX;
-		float bulletDirectionY;
-		float angles;
-		Vector3 GunPos;
-
-	private:
-		float bulletTime;
-
-
-
-
-
+	
 	};
 
 }

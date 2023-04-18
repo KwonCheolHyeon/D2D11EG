@@ -69,7 +69,7 @@ namespace ch
 		}
 		{//총알
 
-			generateBullet(10);
+			generateBullet(50);
 		}
 
 		{//플레이어
@@ -180,6 +180,7 @@ namespace ch
 			containBullets[i]->SetName(L"Bullet" + i);
 			containBullets[i]->GetComponent<Transform>()->SetPosition(Vector3(100.0f,100.0f, 0.0f));
 			containBullets[i]->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
+
 			SpriteRenderer* render = containBullets[i]->AddComponent<SpriteRenderer>();
 			std::shared_ptr<Material> bulletMaterial = Resources::Find<Material>(L"W_BulletMaterial");
 			render->SetMaterial(bulletMaterial);

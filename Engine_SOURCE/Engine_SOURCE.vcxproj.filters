@@ -289,9 +289,6 @@
     <ClInclude Include="chPlayerScript.h">
       <Filter>Component\Script\Contents</Filter>
     </ClInclude>
-    <ClInclude Include="mainPlayerScript.h">
-      <Filter>GameObject\GunChar</Filter>
-    </ClInclude>
     <ClInclude Include="chMouseCursorScript.h">
       <Filter>GameObject\UI</Filter>
     </ClInclude>
@@ -471,9 +468,6 @@
     </ClCompile>
     <ClCompile Include="chPlayerScript.cpp">
       <Filter>Component\Script\Contents</Filter>
-    </ClCompile>
-    <ClCompile Include="mainPlayerScript.cpp">
-      <Filter>GameObject\GunChar</Filter>
     </ClCompile>
     <ClCompile Include="chMouseCursorScript.cpp">
       <Filter>GameObject\UI</Filter>

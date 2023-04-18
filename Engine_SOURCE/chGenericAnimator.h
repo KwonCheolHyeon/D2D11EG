@@ -86,4 +86,17 @@ public:
       // 멤버변수에 Start 함수를 호출해서 param 등록
 *      MyAnimator.Start(param);
 
+
+
+
+
+
+float AnimatorFunctionImpl::Quadratic::EaseOut(float InAccTime, float InStartValue, float InDiffValue, float InEndTime)
+{
+   InAccTime /= InEndTime;
+
+   return -InDiffValue * InAccTime * (InAccTime - 2.f) + InStartValue;
+}
+
+
 */

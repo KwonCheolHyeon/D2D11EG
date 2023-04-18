@@ -15,7 +15,7 @@ namespace ch
 		virtual void Render();
 
 		void SetPlayer(GameObject* _player) { player = _player; }
-		
+		GameObject* GetPlayer() { return player; }
 		
 		void HandLookCursor();
 		void HandPosition();

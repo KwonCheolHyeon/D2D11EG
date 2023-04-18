@@ -16,6 +16,11 @@
 #include <filesystem>
 #include <cstdlib>
 
+//쓰레드 관련
+#include <iostream>
+#include <thread>
+#include <chrono>
+
 #include "CommonInclude.h"
 #include "chEnums.h"
 
