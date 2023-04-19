@@ -25,8 +25,8 @@ namespace ch
 		
 		SpriteRenderer* sprite = phand->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pHandMaterial");
-		sprite->SetMaterial(mateiral);
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+		sprite->SetMaterial(mateiral);
 		sprite->SetMesh(mesh);
 		
 		GameObject::Initalize();
@@ -34,14 +34,6 @@ namespace ch
 	void PlayerHand::Update()
 	{
 		HandLookCursor();
-		if (Gun::reboundTrue == true) 
-		{
-			int a = 0;
-		}
-		else if(Gun::reboundTrue == false)
-		{
-			
-		}
 		HandPosition();
 		GameObject::Update();
 	}

@@ -32,7 +32,6 @@ namespace ch
 		std::shared_ptr<Mesh> bulletMesh = Resources::Find<Mesh>(L"RectMesh");
 		render->SetMesh(bulletMesh);
 
-
 		this->GetOwner()->AddComponent<BulletScr>();
 	}
 	void testBulletscr::Update()

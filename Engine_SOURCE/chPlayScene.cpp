@@ -15,6 +15,7 @@
 #include "chBulletPool.h"
 #include "chBulletScr.h"
 #include "chPaintShader.h"
+#include "chHeart_UI.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -67,6 +68,17 @@ namespace ch
 			cameraUIComp->DisableLayerMasks();
 			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		}
+#pragma region UI¸ðÀ½
+		{
+			{
+			
+			}
+
+
+
+		}
+#pragma endregion
+
 		{//ÃÑ¾Ë
 
 			generateBullet(50);
@@ -108,13 +120,17 @@ namespace ch
 			hpsr->SetMaterial(hpspritematerial);*/
 
 			
+			GameObject* heart = object::Instantiate<Heart_UI>(eLayerType::UI, this);
+			heart->SetName(L"HearUI");
+
+			Transform* htr = heart->GetComponent<Transform>();
+			htr->SetPosition(Vector3(5.f,5.f,0.f));
+			htr->SetScale(Vector3(100.f, 100.f, 0.f));
+			
+
+
 		}
-
 		
-
-		
-		
-
 		{//back ground
 			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
 			back->SetName(L"BG");

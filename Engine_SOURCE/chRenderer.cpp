@@ -473,8 +473,30 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"ZeldaSprite", L"Zelda.png");
 
 		//UI
+#pragma region UI
 		Resources::Load<Texture>(L"CrossHairSprite", L"enterthe\\UI\\crossHair\\crosshair.png");
+		#pragma region UI_Heart
+		Resources::Load<Texture>(L"FullHeartSprite", L"enterthe\\UI\\hp\\FullHeart.png");
+		Resources::Load<Texture>(L"HalfHeartSprite", L"enterthe\\UI\\hp\\HalfHeart.png");
+		Resources::Load<Texture>(L"NoHeartSprite", L"enterthe\\UI\\hp\\NoHeart.png");
+		#pragma endregion
 
+		#pragma region KEY + BLANK_BULLET + MONEY (etc)
+		Resources::Load<Texture>(L"Blank_bulletsSprite", L"enterthe\\UI\\blank_bullets\\blank_bullets.png");
+		Resources::Load<Texture>(L"KeySprite", L"enterthe\\UI\\key\\key.png");
+		Resources::Load<Texture>(L"MoneySprite", L"enterthe\\UI\\money\\money.png");
+		#pragma endregion
+
+		#pragma region ³²ÀºÃÑ¾Ë 
+		Resources::Load<Texture>(L"bulletZeroSprite", L"enterthe\\UI\\bullet\\zero.png");
+		Resources::Load<Texture>(L"bulletOneSprite", L"enterthe\\UI\\bullet\\one.png");
+		Resources::Load<Texture>(L"bulletTwoSprite", L"enterthe\\UI\\bullet\\two.png");
+		Resources::Load<Texture>(L"bulletThreeSprite", L"enterthe\\UI\\bullet\\three.png");
+		Resources::Load<Texture>(L"bulletFourSprite", L"enterthe\\UI\\bullet\\four.png");
+		Resources::Load<Texture>(L"bulletFiveSprite", L"enterthe\\UI\\bullet\\five.png");
+		#pragma endregion
+
+#pragma endregion
 		//UITest
 		Resources::Load<Texture>(L"CircleSprite", L"enterthe\\circle.png");
 
@@ -565,16 +587,122 @@ namespace ch::renderer
 		}
 
 		{//UI
-
-			{//CrossHair
-				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"CrossHairSprite");
+#pragma region UI
+			#pragma region UI_HEART
+			{//FHeart
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"FullHeartSprite");
 				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
 				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
 				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
 				uiMaterial->SetShader(uiShader);
 				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
-				Resources::Insert<Material>(L"crossHairMaterial", uiMaterial);
+				Resources::Insert<Material>(L"FullHeartMaterial", uiMaterial);
 			}
+
+			{//HHeart
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"HalfHeartSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"HalfHeartMaterial", uiMaterial);
+			}
+
+			{//NHeart
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"NoHeartSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"NoHeartMaterial", uiMaterial);
+			}
+			#pragma endregion
+			{//key
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"KeySprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"KeyMaterial", uiMaterial);
+			}
+			{//money
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"MoneySprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"MoneyMaterial", uiMaterial);
+			}
+			{//blankbullet (°øÆ÷Åº)
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"Blank_bulletsSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"Blank_bulletsMaterial", uiMaterial);
+			}
+			#pragma region remain Bullet
+			{//left bullet  5
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"bulletFiveSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"bulletFiveMaterial", uiMaterial);
+			}
+			{//left bullet  4
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"bulletFourSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"bulletFourMaterial", uiMaterial);
+			}
+			{//left bullet  3
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"bulletThreeSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"bulletThreeMaterial", uiMaterial);
+			}
+			{//left bullet  2
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"bulletTwoSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"bulletTwoMaterial", uiMaterial);
+			}
+			{//left bullet  1
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"bulletOneSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"bulletOneMaterial", uiMaterial);
+			}
+			{//left bullet  0
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"bulletZeroSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"bulletZeroMaterial", uiMaterial);
+			}
+			#pragma endregion
+#pragma endregion
 		}
 
 		// Default

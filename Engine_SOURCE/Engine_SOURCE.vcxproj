@@ -179,6 +179,7 @@
     <ClInclude Include="chGraphics.h" />
     <ClInclude Include="chGridScript.h" />
     <ClInclude Include="chGun.h" />
+    <ClInclude Include="chHeart_UI.h" />
     <ClInclude Include="chInput.h" />
     <ClInclude Include="chLayer.h" />
     <ClInclude Include="chLight.h" />
@@ -218,6 +219,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="chEngine.h" />
     <ClInclude Include="chSpriteRenderer.h" />
+    <ClInclude Include="Heart_Scr.h" />
     <ClInclude Include="mainPlayer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +245,7 @@
     <ClCompile Include="chGraphicDevice_DX11.cpp" />
     <ClCompile Include="chGridScript.cpp" />
     <ClCompile Include="chGun.cpp" />
+    <ClCompile Include="chHeart_UI.cpp" />
     <ClCompile Include="chInput.cpp" />
     <ClCompile Include="chLayer.cpp" />
     <ClCompile Include="chLight.cpp" />
@@ -280,6 +283,7 @@
     <ClCompile Include="chGameObject.cpp" />
     <ClCompile Include="Engine_SOURCE.cpp" />
     <ClCompile Include="chSpriteRenderer.cpp" />
+    <ClCompile Include="Heart_Scr.cpp" />
     <ClCompile Include="mainPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>

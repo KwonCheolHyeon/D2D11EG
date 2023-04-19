@@ -146,6 +146,12 @@
     <Filter Include="GameObject\Weapone\Bullet">
       <UniqueIdentifier>{17741650-3282-4837-9002-18fdb3753870}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UI\Heart">
+      <UniqueIdentifier>{b04175ac-8334-4b5b-90a6-964744a3a5d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\UI_Scr">
+      <UniqueIdentifier>{48dfd849-d862-44d5-9563-ebd18a7255e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -341,6 +347,12 @@
     <ClInclude Include="chtestBulletscr.h">
       <Filter>GameObject\Weapone\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="chHeart_UI.h">
+      <Filter>GameObject\UI\Heart</Filter>
+    </ClInclude>
+    <ClInclude Include="Heart_Scr.h">
+      <Filter>GameObject\UI\UI_Scr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -520,6 +532,12 @@
     </ClCompile>
     <ClCompile Include="chtestBulletscr.cpp">
       <Filter>GameObject\Weapone\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="chHeart_UI.cpp">
+      <Filter>GameObject\UI\Heart</Filter>
+    </ClCompile>
+    <ClCompile Include="Heart_Scr.cpp">
+      <Filter>GameObject\UI\UI_Scr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
