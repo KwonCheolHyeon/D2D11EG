@@ -13,13 +13,6 @@ namespace ch
 		virtual void Update();
 		virtual void FixedUpdate();
 		virtual void Render();
-
-	private:
-		int countHeart;
-		int prevHeartCount;
-		GameObject* heartObject;
-
-
 	};
 }
 

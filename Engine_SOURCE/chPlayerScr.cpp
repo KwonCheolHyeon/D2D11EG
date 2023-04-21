@@ -8,6 +8,7 @@
 #include "chGenericAnimator.h"
 #include "chPistol.h"
 #include "chObject.h"
+#include "Heart_Scr.h"
 
 namespace ch 
 {
@@ -42,6 +43,8 @@ namespace ch
 		transform = GetOwner()->GetComponent<Transform>();
 		animator = GetOwner()->GetComponent<Animator>();
 		canDodge = true;
+		pHp = 6;
+		prevHp = 6;
 	}
 	void PlayerScr::Update()
 	{
@@ -74,13 +77,22 @@ namespace ch
 			}
 		}
 
-
-		if (Input::GetKey(eKeyCode::G) )
+		if (Input::GetKeyDown(eKeyCode::G))
 		{
-			Vector3 rot = transform->GetRotation();
-			rot.z += 10.0f * Time::DeltaTime();
-			transform->SetRotation(rot);
+			pHp -= 1;
 		}
+		if (Input::GetKeyDown(eKeyCode::H))
+		{
+			pHp += 1;
+		}
+
+		if (prevHp != pHp) 
+		{
+			SetHeart();
+		}
+
+
+		
 
 	}
 	void PlayerScr::FixedUpdate()
@@ -250,7 +262,6 @@ namespace ch
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 			{
-				
 				animator->Play(L"P_WIdleBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
@@ -277,12 +288,10 @@ namespace ch
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 		{
-			
 			animator->Play(L"P_WIdleBackRight", true);
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 		{
-			
 			animator->Play(L"P_WIdleBackRight", true);
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
@@ -310,7 +319,6 @@ namespace ch
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 			{
-				
 				animator->Play(L"P_WWalkingBackRight", true);
 			}
 			else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
@@ -343,12 +351,10 @@ namespace ch
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Right] == true)
 		{
-			
 			animator->Play(L"P_WWalkingBackRight", true);
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && mState[(UINT)ePlayerState::Left] == true)
 		{
-			
 			animator->Play(L"P_WWalkingBackRight", true);
 		}
 		else if (mState[(UINT)ePlayerState::Back] == true && (mState[(UINT)ePlayerState::Left] == false && mState[(UINT)ePlayerState::Right] == false))
@@ -370,19 +376,16 @@ namespace ch
 		{
 			GetOwner()->SetRight();
 			animator->Play(L"P_DodgeBackRight", false);
-
 		}
 		else if ((Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S)) && (Input::GetKeyDown(eKeyCode::D) || Input::GetKey(eKeyCode::D)))
 		{
 			GetOwner()->SetRight();
 			animator->Play(L"P_DodgeRight", false);
-
 		}
 		else if ((Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S)) && (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A)))
 		{
 			GetOwner()->SetLeft();
 			animator->Play(L"P_DodgeRight", false);
-
 		}
 		else if (Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S))
 		{
@@ -632,4 +635,66 @@ namespace ch
 		}
 		
 	}
+
+	#pragma region 체력
+	void PlayerScr::SetHeart()
+	{
+		if (pHeartControl.size() != 0) //왜 두번 되는거지?
+		{
+			prevHp = pHp;
+			if (pHp == 8)
+			{
+				/*pHeartControl[3]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);*/
+			}
+			else if (pHp == 7)
+			{
+				/*pHeartControl[3]->GetComponent<Heart_Scr>()->setCountHeart(1);*/
+			}
+			else if (pHp == 6)
+			{
+				/*if (pHeartControl[3] != nullptr) 
+				{
+					pHeartControl[3]->GetComponent<Heart_Scr>()->setCountHeart(0);
+				}*/
+				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 5)
+			{
+				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(1);
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 4)
+			{
+				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(0);
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 3)
+			{
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(1);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 2)
+			{
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(0);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 1)
+			{
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(1);
+			}
+			else if (pHp == 0)
+			{
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(0);
+			}
+		}
+	}
+
+#pragma endregion
 }

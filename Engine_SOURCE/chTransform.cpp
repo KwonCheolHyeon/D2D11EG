@@ -13,6 +13,7 @@ namespace ch
 		, mRotation(Vector3::Zero)
 		, mPosition(Vector3::One)
 		, mParent(nullptr)
+		, moffSet(Vector3::Zero)
 	{
 
 	}
@@ -55,7 +56,10 @@ namespace ch
 		Matrix position;
 		position.Translation(mPosition);
 
-		mWorld = scale * rotation * position;
+		Matrix offset;
+		offset.Translation(moffSet);
+
+		mWorld = scale * rotation * position * offset;
 
 		mFoward = Vector3::TransformNormal(Vector3::Forward, rotation);
 		mRight = Vector3::TransformNormal(Vector3::Right, rotation);

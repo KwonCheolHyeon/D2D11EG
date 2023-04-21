@@ -20,7 +20,8 @@ namespace ch
 		void SetParent(Transform* parent) { mParent = parent; }
 		Transform* GetParent() { return mParent; }
 
-		void SetPosition(Vector3 position) { mPosition = position; };
+		void SetOffset(Vector3 offset) { moffSet = offset; }
+		void SetPosition(Vector3 position) { mPosition = position + moffSet; };
 		
 		void SetRotation(Vector3 degree) { mRotation = degree; };
 		void SetScale(Vector3 scale) { mScale = scale; };
@@ -46,6 +47,7 @@ namespace ch
 		Vector3 mRight;
 		Vector3 mUp;
 		Vector3 mPosition;
+		Vector3 moffSet;
 	
 		Vector3 mRotation;
 		Vector3 mScale;

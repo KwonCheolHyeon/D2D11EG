@@ -63,12 +63,12 @@ namespace ch
 		Camera* cameraComp = cameraObj->AddComponent<Camera>();
 		cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 		//cameraComp->RegisterCameraInRenderer();
-		cameraComp->TurnLayerMask(eLayerType::UI, false);
+		cameraComp->TurnLayerMask(eLayerType::UI, true);
 		cameraObj->AddComponent<CameraScript>();
 		mainCamera = cameraComp;
 
 
-
+		
 
 
 		//SMILE RECT

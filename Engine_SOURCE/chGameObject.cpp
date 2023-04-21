@@ -71,6 +71,8 @@ namespace ch
 
 			script->Update();
 		}
+
+
 		if (mbIsLeft != prevIsLeft) 
 		{
 		

@@ -223,11 +223,13 @@ namespace ch
 			gunObject->SetLeft();
 			//gunPosition = handPosition + Vector3(-0.2f, 0.1f, 0.f);
 			gunObject->SetRotation(Vector3(0.0f, 0.0f, 0.f));
+			gunObject->GetComponent<Transform>()->SetOffset(Vector3(0.0f, 0.0f, 0.f));
 		}
 		else //¿À¸¥¼Õ
 		{
 			gunObject->SetRight();
 			gunObject->SetRotation(Vector3(180.0f, 0.0f, 0.f));
+			gunObject->GetComponent<Transform>()->SetOffset(Vector3(0.2f, -1.5f, 0.f));
 		}
 		//gunTransform->SetPosition(gunPosition);
 	}

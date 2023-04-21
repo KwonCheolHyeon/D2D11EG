@@ -1,6 +1,7 @@
 #pragma once
 #include "chScene.h"
 #include "chBulletPool.h"
+#include "chHeart_UI.h"
 namespace ch
 {
 	
@@ -32,7 +33,7 @@ namespace ch
 		BulletPool* pool;
 	
 
-
+		std::vector<Heart_UI*> HeartControl;
 		//저장할 공간
 		std::vector<Bullet*> containBullets;
 		

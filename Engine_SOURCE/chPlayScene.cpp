@@ -16,6 +16,8 @@
 #include "chBulletScr.h"
 #include "chPaintShader.h"
 #include "chHeart_UI.h"
+#include "Heart_Scr.h"
+#include "chPlayerScr.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -71,7 +73,32 @@ namespace ch
 #pragma region UI모음
 		{
 			{
-			
+				Heart_UI* heart0 = object::Instantiate<Heart_UI>(eLayerType::UI, this);
+				heart0->SetName(L"HearUI");
+				heart0->AddComponent<Heart_Scr>();
+				Transform* htr0 = heart0->GetComponent<Transform>();
+				htr0->SetPosition(Vector3(-6.5f, 4.9f, 0.f));
+				htr0->SetScale(Vector3(0.7f, 0.65f, 0.f));
+
+
+				Heart_UI* heart1 = object::Instantiate<Heart_UI>(eLayerType::UI, this);
+				heart1->SetName(L"HearUI");
+				heart1->AddComponent<Heart_Scr>();
+				Transform* htr1 = heart1->GetComponent<Transform>();
+				htr1->SetPosition(Vector3(-5.7f, 4.9f, 0.f));
+				htr1->SetScale(Vector3(0.7f, 0.65f, 0.f));
+
+
+				Heart_UI* heart2 = object::Instantiate<Heart_UI>(eLayerType::UI, this);
+				heart2->SetName(L"HearUI");
+				heart2->AddComponent<Heart_Scr>();
+				Transform* htr2 = heart2->GetComponent<Transform>();
+				htr2->SetPosition(Vector3(-4.9f, 4.9f, 0.f));
+				htr2->SetScale(Vector3(0.7f, 0.65f, 0.f));
+
+				HeartControl.push_back(heart0); //첫번째
+				HeartControl.push_back(heart1); //두번째
+				HeartControl.push_back(heart2); //세번째
 			}
 
 
@@ -87,6 +114,8 @@ namespace ch
 		{//플레이어
 			player = object::Instantiate<mainPlayer>(eLayerType::Player, this);
 			player->SetName(L"Player");
+
+			player->GetComponent<PlayerScr>()->SetHeart_UI(HeartControl);
 
 			PlayerHand* hand = object::Instantiate<PlayerHand>(eLayerType::Hand, this);
 			hand->SetName(L"PHand");
@@ -120,12 +149,7 @@ namespace ch
 			hpsr->SetMaterial(hpspritematerial);*/
 
 			
-			GameObject* heart = object::Instantiate<Heart_UI>(eLayerType::UI, this);
-			heart->SetName(L"HearUI");
-
-			Transform* htr = heart->GetComponent<Transform>();
-			htr->SetPosition(Vector3(5.f,5.f,0.f));
-			htr->SetScale(Vector3(100.f, 100.f, 0.f));
+		
 			
 
 

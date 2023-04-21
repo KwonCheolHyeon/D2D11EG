@@ -1,5 +1,6 @@
 #pragma once
 #include "chScript.h"
+#include "chHeart_UI.h"
 namespace ch 
 {
 	class PlayerScr
@@ -66,10 +67,13 @@ namespace ch
     public: //닷지 후
         void afterDodge();
         void allowDodge();
-      
         //구르기 애니메이션
         void GenAnimate(Vector3 dodgePos);
   
+    public: //체력관련 함수
+        void SetHeart_UI(std::vector<Heart_UI*> a) { pHeartControl = a; }
+        void SetHeart();
+
     private:
         std::bitset<static_cast<UINT>(ePlayerState::End)> mState;
         std::bitset<static_cast<UINT>(ePlayerState::End)> mPrevState;
@@ -86,8 +90,14 @@ namespace ch
 
         bool canDodge;
 
+    private:
         GenericAnimator GenericAnimator;
         Vector3 Position;
+        
+    private://체력 관련 변수
+        std::vector<Heart_UI*> pHeartControl;
+        int pHp;
+        int prevHp;
         
 	};
 

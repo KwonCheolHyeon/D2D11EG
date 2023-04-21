@@ -41,7 +41,7 @@ namespace ch
 			
 			mainCamera = cameraComp;
 		}
-		{
+		{ // UI
 			{
 				// ui Ä«¸Þ¶ó
 				chUiCamera = object::Instantiate<GameObject>(eLayerType::Camera, this);
@@ -53,6 +53,8 @@ namespace ch
 
 			{
 			
+
+
 			}
 		}
 	
