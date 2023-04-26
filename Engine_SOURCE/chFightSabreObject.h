@@ -1,22 +1,18 @@
 #pragma once
 #include "chGun.h"
-namespace ch 
+namespace ch
 {
-	class Pistol : public Gun
+	class FightSabreObject :public Gun
 	{
 	public:
-		Pistol();
-		virtual ~Pistol();
+		FightSabreObject();
+		virtual ~FightSabreObject();
 
 		virtual void Initalize();
 		virtual void Update();
 		virtual void FixedUpdate();
 		virtual void Render();
 
-	
-				
+
 	};
-
-
 }
-

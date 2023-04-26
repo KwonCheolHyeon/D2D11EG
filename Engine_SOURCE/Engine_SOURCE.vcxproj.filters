@@ -152,6 +152,15 @@
     <Filter Include="GameObject\UI\UI_Scr">
       <UniqueIdentifier>{48dfd849-d862-44d5-9563-ebd18a7255e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Weapone\Pistol">
+      <UniqueIdentifier>{d9eab902-4ada-417b-951a-d3178bfe0417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Weapone\FightSabre">
+      <UniqueIdentifier>{3bef6c57-c2f9-45ca-8d8d-0f84859547a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\chMonster\Base">
+      <UniqueIdentifier>{f45b79b8-aab5-4256-ab38-91c80d3dc257}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -329,9 +338,6 @@
     <ClInclude Include="chGenericAnimator.h">
       <Filter>Component\Animator\GenericAnimator</Filter>
     </ClInclude>
-    <ClInclude Include="chPistol.h">
-      <Filter>GameObject\Weapone</Filter>
-    </ClInclude>
     <ClInclude Include="chGun.h">
       <Filter>GameObject\Weapone\Base</Filter>
     </ClInclude>
@@ -352,6 +358,24 @@
     </ClInclude>
     <ClInclude Include="Heart_Scr.h">
       <Filter>GameObject\UI\UI_Scr</Filter>
+    </ClInclude>
+    <ClInclude Include="chPistol.h">
+      <Filter>GameObject\Weapone\Pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="chPistolScr.h">
+      <Filter>GameObject\Weapone\Pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="chFightSabreObject.h">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClInclude>
+    <ClInclude Include="chFightSabreScr.h">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet_Kin.h">
+      <Filter>GameObject\chMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBase.h">
+      <Filter>GameObject\chMonster\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -515,9 +539,6 @@
     <ClCompile Include="chGenericAnimator.cpp">
       <Filter>Component\Animator\GenericAnimator</Filter>
     </ClCompile>
-    <ClCompile Include="chPistol.cpp">
-      <Filter>GameObject\Weapone</Filter>
-    </ClCompile>
     <ClCompile Include="chGun.cpp">
       <Filter>GameObject\Weapone\Base</Filter>
     </ClCompile>
@@ -538,6 +559,24 @@
     </ClCompile>
     <ClCompile Include="Heart_Scr.cpp">
       <Filter>GameObject\UI\UI_Scr</Filter>
+    </ClCompile>
+    <ClCompile Include="chPistol.cpp">
+      <Filter>GameObject\Weapone\Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="chPistolScr.cpp">
+      <Filter>GameObject\Weapone\Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="chFightSabreObject.cpp">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClCompile>
+    <ClCompile Include="chFightSabreScr.cpp">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet_Kin.cpp">
+      <Filter>GameObject\chMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBase.cpp">
+      <Filter>GameObject\chMonster\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

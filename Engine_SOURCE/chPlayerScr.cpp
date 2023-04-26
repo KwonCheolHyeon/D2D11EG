@@ -45,6 +45,9 @@ namespace ch
 		canDodge = true;
 		pHp = 6;
 		prevHp = 6;
+
+		 
+		
 	}
 	void PlayerScr::Update()
 	{
@@ -596,9 +599,9 @@ namespace ch
 		// Set animation parameters
 		AnimatorParam param;
 		param.AnimType = EAnimType::Linear;
-		param.StartValue = 0.4f;
-		param.EndValue = 1.f;
-		param.DurationTime = 0.8f;
+		param.StartValue = 0.f;
+		param.EndValue = 0.4f;
+		param.DurationTime = 0.5f;
 		param.DurationFunc = [this](float InCurValue) {
 			// This function will be called on every tick of the animation
 			Vector3 pos = transform->GetPosition();

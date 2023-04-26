@@ -23,16 +23,14 @@ namespace ch
 	}
 	void testBulletscr::Initalize()
 	{
-		Scene* playScene = SceneManager::GetActiveScene();
-		playScene->AddGameObject(GetOwner(), eLayerType::Weapone);
-
 		SpriteRenderer* render = GetOwner()->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> bulletMaterial = Resources::Find<Material>(L"W_BulletMaterial");
 		render->SetMaterial(bulletMaterial);
 		std::shared_ptr<Mesh> bulletMesh = Resources::Find<Mesh>(L"RectMesh");
 		render->SetMesh(bulletMesh);
 
-		this->GetOwner()->AddComponent<BulletScr>();
+		GetOwner()->AddComponent<BulletScr>();
+		GetOwner()->GetComponent<BulletScr>()->Initalize();
 	}
 	void testBulletscr::Update()
 	{

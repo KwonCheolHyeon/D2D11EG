@@ -18,6 +18,8 @@
 #include "chHeart_UI.h"
 #include "Heart_Scr.h"
 #include "chPlayerScr.h"
+#include "MonsterBase.h"
+#include "Bullet_Kin.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -108,7 +110,7 @@ namespace ch
 
 		{//총알
 
-			generateBullet(50);
+			generateBullet(100);
 		}
 
 		{//플레이어
@@ -116,6 +118,12 @@ namespace ch
 			player->SetName(L"Player");
 
 			player->GetComponent<PlayerScr>()->SetHeart_UI(HeartControl);
+
+			GameObject* gunBox = object::Instantiate<GameObject>(eLayerType::Weapone, this);
+			gunBox->SetName(L"GunBox");
+			gunBox->GetComponent<Transform>()->SetPosition(Vector3(3.f, 3.f, 0.f));
+			gunBox->GetComponent<Transform>()->SetScale(Vector3(0.1f, 0.1f,0.f));
+
 
 			PlayerHand* hand = object::Instantiate<PlayerHand>(eLayerType::Hand, this);
 			hand->SetName(L"PHand");
@@ -125,38 +133,20 @@ namespace ch
 			gun->SetName(L"PGun");
 			gun->SetHand(hand);
 			gun->SetPool(pool);
+			gun->SetGunBox(gunBox);
+			gun->SetPlayer(player);
+			
+
 
 		}
-		
 
-
-
-		//UI
-		{
-			/*chUiCursor = object::Instantiate<GameObject>(eLayerType::UI, this);
-			chUiCursor->SetName(L"MouseCursor");
-
-			chUiCursor->AddComponent<MouseCursorScript>()->SetTarget(player);
-			chUiCursorTR = chUiCursor->GetComponent<Transform>();
-			chUiCursorTR->SetPosition(Input::GetMousPosition());
-			chUiCursorTR->SetScale(Vector3(0.5f, 0.5f, 1.f));
-
-			SpriteRenderer* hpsr = chUiCursor->AddComponent<SpriteRenderer>();
-			chUiCursor->AddComponent(hpsr);
-			std::shared_ptr<Mesh> hpmesh = Resources::Find<Mesh>(L"RectMesh");
-			std::shared_ptr<Material> hpspritematerial = Resources::Find<Material>(L"crossHairMaterial");
-			hpsr->SetMesh(hpmesh);
-			hpsr->SetMaterial(hpspritematerial);*/
-
-			
-		
-			
-
-
+		{//몬스터
+			GameObject* monster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			monster->AddComponent<Bullet_Kin>();
 		}
 		
 		{//back ground
-			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
+			/*GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
 			back->SetName(L"BG");
 			Transform* backTr = back->GetComponent<Transform>();
 			backTr->SetPosition(Vector3(1.0f, 1.1f, 0.1f));
@@ -166,7 +156,7 @@ namespace ch
 			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
 			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
 			backSR->SetMaterial(backmaterial);
-			backSR->SetMesh(backmesh);
+			backSR->SetMesh(backmesh);*/
 		}
 
 
@@ -220,6 +210,11 @@ namespace ch
 			containBullets[i]->SetName(L"Bullet" + i);
 			containBullets[i]->GetComponent<Transform>()->SetPosition(Vector3(100.0f,100.0f, 0.0f));
 			containBullets[i]->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
+
+			Collider2D* mCollider = bulletobj->AddComponent<Collider2D>();
+			mCollider->SetName(L"billetKinCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(1.f, 1.f));
 
 			SpriteRenderer* render = containBullets[i]->AddComponent<SpriteRenderer>();
 			std::shared_ptr<Material> bulletMaterial = Resources::Find<Material>(L"W_BulletMaterial");

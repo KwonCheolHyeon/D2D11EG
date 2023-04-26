@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet_Kin.h" />
     <ClInclude Include="chAnimation.h" />
     <ClInclude Include="chAnimator.h" />
     <ClInclude Include="chApplication.h" />
@@ -173,6 +174,8 @@
     <ClInclude Include="chEntity.h" />
     <ClInclude Include="chEnums.h" />
     <ClInclude Include="chFadeEffect.h" />
+    <ClInclude Include="chFightSabreObject.h" />
+    <ClInclude Include="chFightSabreScr.h" />
     <ClInclude Include="chGameObject.h" />
     <ClInclude Include="chGenericAnimator.h" />
     <ClInclude Include="chGraphicDevice_DX11.h" />
@@ -195,6 +198,7 @@
     <ClInclude Include="chParticleShader.h" />
     <ClInclude Include="chParticleSystem.h" />
     <ClInclude Include="chPistol.h" />
+    <ClInclude Include="chPistolScr.h" />
     <ClInclude Include="chPlayer.h" />
     <ClInclude Include="chPlayerScr.h" />
     <ClInclude Include="chPlayerScript.h" />
@@ -221,8 +225,10 @@
     <ClInclude Include="chSpriteRenderer.h" />
     <ClInclude Include="Heart_Scr.h" />
     <ClInclude Include="mainPlayer.h" />
+    <ClInclude Include="MonsterBase.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet_Kin.cpp" />
     <ClCompile Include="chAnimation.cpp" />
     <ClCompile Include="chAnimator.cpp" />
     <ClCompile Include="chApplication.cpp" />
@@ -241,6 +247,8 @@
     <ClCompile Include="chConstantBuffer.cpp" />
     <ClCompile Include="chEntity.cpp" />
     <ClCompile Include="chFadeEffect.cpp" />
+    <ClCompile Include="chFightSabreObject.cpp" />
+    <ClCompile Include="chFightSabreScr.cpp" />
     <ClCompile Include="chGenericAnimator.cpp" />
     <ClCompile Include="chGraphicDevice_DX11.cpp" />
     <ClCompile Include="chGridScript.cpp" />
@@ -260,6 +268,7 @@
     <ClCompile Include="chParticleShader.cpp" />
     <ClCompile Include="chParticleSystem.cpp" />
     <ClCompile Include="chPistol.cpp" />
+    <ClCompile Include="chPistolScr.cpp" />
     <ClCompile Include="chPlayer.cpp" />
     <ClCompile Include="chPlayerScr.cpp" />
     <ClCompile Include="chPlayerScript.cpp" />
@@ -285,6 +294,7 @@
     <ClCompile Include="chSpriteRenderer.cpp" />
     <ClCompile Include="Heart_Scr.cpp" />
     <ClCompile Include="mainPlayer.cpp" />
+    <ClCompile Include="MonsterBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl" />

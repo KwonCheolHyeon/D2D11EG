@@ -41,7 +41,7 @@ namespace ch
 			bulletTime += Time::DeltaTime();
 			MoveBullet();
 		}
-		if (bulletTime >= 1.f)
+		if (bulletTime >= 1.5f)
 		{
 			Reset();
 		}
@@ -54,6 +54,10 @@ namespace ch
 	}
 	void BulletScr::OnCollisionEnter(Collider2D* collider)
 	{
+		if (collider->GetOwner()->GetLayerType() == eLayerType::Monster || collider->GetOwner()->GetLayerType() == eLayerType::Wall)
+		{
+			Reset();
+		}
 	}
 	void BulletScr::OnCollisionStay(Collider2D* collider)
 	{

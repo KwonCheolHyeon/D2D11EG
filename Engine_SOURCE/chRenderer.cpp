@@ -460,9 +460,14 @@ namespace ch::renderer
 		//playerHand
 		Resources::Load<Texture>(L"PlayerHand", L"enterthe\\character\\hand.png");
 
+#pragma region 몬스터
+		Resources::Load<Texture>(L"BulletKinIdle", L"enterthe\\enemy\\bullet_Kin\\idle\\idle_02.png");
+
+#pragma endregion
+
 		//무기
 		Resources::Load<Texture>(L"W_pistol", L"enterthe\\Waepone\\PistolFolder\\pistol_Idle.png");
-
+		Resources::Load<Texture>(L"W_fightsabreSprite", L"enterthe\\Waepone\\FightSabre\\Item.png");
 		//총알
 		Resources::Load<Texture>(L"W_Bullet", L"enterthe\\Waepone\\Bullet\\bulit.png");
 
@@ -541,6 +546,16 @@ namespace ch::renderer
 			
 		}
 
+		{
+			std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"BulletKinIdle");
+			std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+			std::shared_ptr<Material> material = std::make_shared<Material>();
+			material->SetRenderingMode(eRenderingMode::Transparent);
+			material->SetShader(shader);
+			material->SetTexture(eTextureSlot::T0, texture);
+			Resources::Insert<Material>(L"BulletKinMaterial", material);
+		}
+
 		{//playerHand
 
 			std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"PlayerHand");
@@ -554,13 +569,26 @@ namespace ch::renderer
 		}
 		{ //무기
 			{
-				std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"W_pistol");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"W_pistol_Material", material);
+				{
+					std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"W_pistol");
+					std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+					std::shared_ptr<Material> material = std::make_shared<Material>();
+					material->SetRenderingMode(eRenderingMode::Transparent);
+					material->SetShader(shader);
+					material->SetTexture(eTextureSlot::T0, texture);
+					Resources::Insert<Material>(L"W_pistol_Material", material);
+				}
+				{
+					std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"W_fightsabreSprite");
+					std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+					std::shared_ptr<Material> material = std::make_shared<Material>();
+					material->SetRenderingMode(eRenderingMode::Transparent);
+					material->SetShader(shader);
+					material->SetTexture(eTextureSlot::T0, texture);
+					Resources::Insert<Material>(L"W_FightSabre_Material", material);
+				}
+
+
 			}
 
 

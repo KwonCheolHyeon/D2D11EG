@@ -178,7 +178,8 @@ namespace ch
 		pCollider = playerOBJ->AddComponent<Collider2D>();
 		pCollider->SetName(L"playerCollider");
 		pCollider->SetType(eColliderType::Rect);
-		pCollider->SetSize(Vector2(0.08f, 0.1f));
+		pCollider->SetSize(Vector2(.075f, .1f));
+		
 
 		playerOBJ->AddComponent<Rigidbody>();
 		playerOBJ->AddComponent<PlayerScr>();

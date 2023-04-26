@@ -1,6 +1,10 @@
 #include "chBulletPool.h"
 #include "chtestBulletscr.h"
 #include "chBulletScr.h"
+#include "chScene.h"
+#include "chSceneManager.h"
+#include "chSpriteRenderer.h"
+#include "chResources.h"
 namespace ch 
 {
 	BulletPool::BulletPool()
@@ -43,7 +47,13 @@ namespace ch
 			Bullet* bull = new Bullet();
 			bull->AddComponent<testBulletscr>();
 			bull->GetComponent<testBulletscr>()->Initalize();
+			/*Bullet* bull = new Bullet();
+			bull->AddComponent<BulletScr>();*/
 			bull->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
+
+			Scene* playScene = SceneManager::GetActiveScene();
+			playScene->AddGameObject(bull, eLayerType::Weapone);
+					
 			return bull;
 		}
 	}

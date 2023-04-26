@@ -34,6 +34,8 @@ namespace ch
 
 	void Collider2D::FixedUpdate()
 	{
+		mTransform = GetOwner()->GetComponent<Transform>();
+
 		Vector3 scale = mTransform->GetScale();
 		scale *= Vector3(mSize.x, mSize.y, 1.0f);
 

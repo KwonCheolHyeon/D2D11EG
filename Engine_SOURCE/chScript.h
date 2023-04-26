@@ -4,6 +4,12 @@
 
 namespace ch
 {
+	struct GunState 
+	{
+		bool active;
+		int GunNum;//num == 1 : 피스톨,  num == 2 : 2번총 
+	};
+
 	class Script : public Component
 	{
 	public:
