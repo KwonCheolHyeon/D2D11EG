@@ -43,7 +43,7 @@ namespace ch
 
 #pragma region Hit
 		{
-			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"WIdleBack", L"enterthe/enemy/bullet_Kin/hit/hit01.png");
+			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"MHit", L"enterthe/enemy/bullet_Kin/hit/hit01.png");
 			monsAnimator->Create(L"M_Hit", texture, Vector2(0.0f, 0.0f), Vector2(13.0f, 23.0f), Vector2::Zero, 2, 0.3f);
 
 		}
@@ -92,7 +92,7 @@ namespace ch
 
 	void Bullet_Kin::Update()
 	{
-		
+		monsAnimator->GetCompleteEvent(L"M_Hit") = std::bind(&Bullet_Kin::endHitAnimation, this);
 	}
 
 	void Bullet_Kin::FixedUpdate()
@@ -107,7 +107,7 @@ namespace ch
 	{
 		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone)
 		{
-			int a = 0;
+			monsAnimator->Play(L"M_Hit", false);
 		}
 	}
 
@@ -129,6 +129,11 @@ namespace ch
 
 	void Bullet_Kin::OnTriggerExit(Collider2D* oppo)
 	{
+	}
+
+	void Bullet_Kin::endHitAnimation()
+	{
+		monsAnimator->Play(L"M_Idle_Front", true);
 	}
 
 }

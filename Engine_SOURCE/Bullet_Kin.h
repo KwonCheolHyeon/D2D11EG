@@ -22,6 +22,7 @@ namespace ch
         virtual void OnTrigger(Collider2D* oppo);
         virtual void OnTriggerExit(Collider2D* oppo);
 
+        void endHitAnimation();
 
     private:
         Animator* monsAnimator;

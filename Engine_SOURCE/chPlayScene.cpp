@@ -147,7 +147,7 @@ namespace ch
 		}
 		
 		{//back ground
-			/*GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
+			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
 			back->SetName(L"BG");
 			Transform* backTr = back->GetComponent<Transform>();
 			backTr->SetPosition(Vector3(1.0f, 1.1f, 0.1f));
@@ -157,7 +157,7 @@ namespace ch
 			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
 			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
 			backSR->SetMaterial(backmaterial);
-			backSR->SetMesh(backmesh);*/
+			backSR->SetMesh(backmesh);
 		}
 
 
