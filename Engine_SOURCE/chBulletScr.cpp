@@ -18,7 +18,6 @@ namespace ch
 		, bulletDirectionX(0.f)
 		, bulletDirectionY(0.f)
 		, bulletTime(0.0f)
-		
 	{
 	
 	}
@@ -54,7 +53,7 @@ namespace ch
 	}
 	void BulletScr::OnCollisionEnter(Collider2D* collider)
 	{
-		if (collider->GetOwner()->GetLayerType() == eLayerType::Monster || collider->GetOwner()->GetLayerType() == eLayerType::Wall)
+		if (collider->GetOwner()->GetLayerType() == eLayerType::Monster)
 		{
 			Reset();
 		}
@@ -64,6 +63,7 @@ namespace ch
 	}
 	void BulletScr::OnCollisionExit(Collider2D* collider)
 	{
+		
 	}
 	void BulletScr::OnTriggerEnter(Collider2D* collider)
 	{

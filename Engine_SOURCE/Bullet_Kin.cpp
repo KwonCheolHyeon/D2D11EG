@@ -18,9 +18,9 @@ namespace ch
 	{
 		
 		monsAnimator = GetOwner()->AddComponent<Animator>();
-
+		GetOwner()->SetLayerType(eLayerType::Monster);
 		mTr = GetOwner()->GetComponent<Transform>();
-		mTr->SetPosition(Vector3(1.f, 1.f, 0.f));
+		mTr->SetPosition(Vector3(6.f, 6.f, 0.f));
 		mTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
 		
 

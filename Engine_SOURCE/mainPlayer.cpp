@@ -173,7 +173,7 @@ namespace ch
 		
 		pTr = playerOBJ->GetComponent<Transform>();
 		pTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
-		
+		pTr->SetPosition(Vector3(2.f, 1.f, 0.f));
 
 		pCollider = playerOBJ->AddComponent<Collider2D>();
 		pCollider->SetName(L"playerCollider");

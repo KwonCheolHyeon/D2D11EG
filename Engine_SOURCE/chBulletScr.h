@@ -1,9 +1,9 @@
 #pragma once
 #include "chScript.h"
 
+
 namespace ch
 {
-	
 	class BulletScr : public Script
 	{
 	public:
@@ -14,6 +14,7 @@ namespace ch
 			Dead,
 			End
 		};
+
 		BulletScr();
 		virtual ~BulletScr();
 
@@ -22,9 +23,9 @@ namespace ch
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
 
-		virtual void OnCollisionEnter(Collider2D* collider);
-		virtual void OnCollisionStay(Collider2D* collider);
-		virtual void OnCollisionExit(Collider2D* collider);
+		virtual void OnCollisionEnter(Collider2D* collider) override;
+		virtual void OnCollisionStay(Collider2D* collider) override;
+		virtual void OnCollisionExit(Collider2D* collider) override;
 
 		virtual void OnTriggerEnter(Collider2D* collider);
 		virtual void OnTriggerStay(Collider2D* collider);

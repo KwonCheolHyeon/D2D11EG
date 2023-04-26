@@ -20,6 +20,7 @@
 #include "chPlayerScr.h"
 #include "MonsterBase.h"
 #include "Bullet_Kin.h"
+#include "chCollisionManager.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -163,6 +164,9 @@ namespace ch
 
 		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
 		Scene::Initalize();
+
+		
+		
 	}
 
 	void PlayScene::Update()
@@ -188,7 +192,7 @@ namespace ch
 
 	void PlayScene::OnEnter()
 	{
-		
+		CollisionManager::CollisionLayerCheck(eLayerType::Weapone, eLayerType::Monster);
 		Scene::OnEnter();
 	}
 
