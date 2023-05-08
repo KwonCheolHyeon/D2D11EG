@@ -161,6 +161,15 @@
     <Filter Include="GameObject\chMonster\Base">
       <UniqueIdentifier>{f45b79b8-aab5-4256-ab38-91c80d3dc257}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\chPlayer\Player">
+      <UniqueIdentifier>{fc64b96a-a80b-4abe-8545-0b09c8193e12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\chPlayer\Player\Base">
+      <UniqueIdentifier>{a887afc6-561d-46cb-9b73-d86916e9756b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\chPlayer\Player\Convict">
+      <UniqueIdentifier>{0f6b4353-3bcd-45ae-ad51-aecac58b7a11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -283,9 +292,6 @@
     <ClInclude Include="chShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="mainPlayer.h">
-      <Filter>GameObject\GunChar</Filter>
-    </ClInclude>
     <ClInclude Include="chMainMenuScene.h">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClInclude>
@@ -328,9 +334,6 @@
     </ClInclude>
     <ClInclude Include="chStructedBuffer.h">
       <Filter>Graphics\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="chPlayerScr.h">
-      <Filter>GameObject\chPlayer</Filter>
     </ClInclude>
     <ClInclude Include="chPlayerHand.h">
       <Filter>GameObject\chPlayer\Hand</Filter>
@@ -376,6 +379,21 @@
     </ClInclude>
     <ClInclude Include="MonsterBase.h">
       <Filter>GameObject\chMonster\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="mainPlayer.h">
+      <Filter>GameObject\GunChar</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterBase.h">
+      <Filter>GameObject\chPlayer\Player\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="chPlayerScr.h">
+      <Filter>GameObject\GunChar</Filter>
+    </ClInclude>
+    <ClInclude Include="Convict.h">
+      <Filter>GameObject\chPlayer\Player\Convict</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvictMove.h">
+      <Filter>GameObject\chPlayer\Player\Convict</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -484,9 +502,6 @@
     <ClCompile Include="chCollider3D.cpp">
       <Filter>Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="mainPlayer.cpp">
-      <Filter>GameObject\GunChar</Filter>
-    </ClCompile>
     <ClCompile Include="chMainMenuScene.cpp">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClCompile>
@@ -529,9 +544,6 @@
     </ClCompile>
     <ClCompile Include="chStructedBuffer.cpp">
       <Filter>Graphics\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="chPlayerScr.cpp">
-      <Filter>GameObject\chPlayer</Filter>
     </ClCompile>
     <ClCompile Include="chPlayerHand.cpp">
       <Filter>GameObject\chPlayer\Hand</Filter>
@@ -577,6 +589,21 @@
     </ClCompile>
     <ClCompile Include="MonsterBase.cpp">
       <Filter>GameObject\chMonster\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="mainPlayer.cpp">
+      <Filter>GameObject\GunChar</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterBase.cpp">
+      <Filter>GameObject\chPlayer\Player\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="chPlayerScr.cpp">
+      <Filter>GameObject\GunChar</Filter>
+    </ClCompile>
+    <ClCompile Include="Convict.cpp">
+      <Filter>GameObject\chPlayer\Player\Convict</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvictMove.cpp">
+      <Filter>GameObject\chPlayer\Player\Convict</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

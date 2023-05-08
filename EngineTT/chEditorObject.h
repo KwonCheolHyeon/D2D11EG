@@ -4,7 +4,7 @@
 
 namespace ch
 {
-	class EditorObject : public GameObject
+	class EditorObject : public ch::GameObject
 	{
 	public:
 		EditorObject();
@@ -16,7 +16,6 @@ namespace ch
 		virtual void Render();
 
 	private:
-
+		
 	};
 }
-

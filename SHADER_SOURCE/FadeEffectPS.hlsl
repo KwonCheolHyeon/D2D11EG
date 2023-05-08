@@ -23,14 +23,5 @@ float4 main(VSOut In) : SV_Target
     color = defaultTexture.Sample(anisotropicSampler, In.UV);
     color.w *= cbfData;    
     return color;
-    
-    
-    /*
-    float4 color = (float) 0.0f;
-    
-    color = defaultTexture.Sample(anisotropicSampler, In.UV);
-    color.w *= alpha;    
-    return color;
-    
-    */
+
 }

@@ -76,6 +76,10 @@ namespace ch
 #pragma region UI모음
 		{
 			{
+			
+
+			}
+			{
 				Heart_UI* heart0 = object::Instantiate<Heart_UI>(eLayerType::UI, this);
 				heart0->SetName(L"HearUI");
 				heart0->AddComponent<Heart_Scr>();
@@ -103,9 +107,6 @@ namespace ch
 				HeartControl.push_back(heart1); //두번째
 				HeartControl.push_back(heart2); //세번째
 			}
-
-
-
 		}
 #pragma endregion
 
@@ -150,12 +151,12 @@ namespace ch
 			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
 			back->SetName(L"BG");
 			Transform* backTr = back->GetComponent<Transform>();
-			backTr->SetPosition(Vector3(1.0f, 1.1f, 0.1f));
-			backTr->SetScale(Vector3(20.0f, 20.0f, 0.1f));
+			backTr->SetPosition(Vector3(1.0f, 1.0f, 0.1f));
+			backTr->SetScale(Vector3(10.0f, 10.0f, 0.1f));
 
 			SpriteRenderer* backSR = back->AddComponent<SpriteRenderer>();
 			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
-			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"floatMaterial");
+			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"Map01_Material");
 			backSR->SetMaterial(backmaterial);
 			backSR->SetMesh(backmesh);
 		}

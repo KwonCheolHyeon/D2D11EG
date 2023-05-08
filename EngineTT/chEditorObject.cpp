@@ -9,7 +9,7 @@ namespace ch
 	}
 	EditorObject::~EditorObject()
 	{
-
+		
 	}
 	void EditorObject::Initalize()
 	{

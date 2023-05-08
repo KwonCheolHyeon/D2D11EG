@@ -1,10 +1,10 @@
 #pragma once
+#include "chEntity.h"
 
 namespace ch
 {
-	class Widget
+	class Widget : public ch::Entity
 	{
-
-
+	
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "chScript.h"
 #include "chHeart_UI.h"
+#include "chGenericAnimator.h"
 namespace ch 
 {
 	class PlayerScr

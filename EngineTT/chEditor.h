@@ -18,6 +18,10 @@ namespace ch
 		void Release();
 		void DebugRender(graphics::DebugMesh& mehs);
 
+		void ImGui_Initialize();
+		void ImGui_Run();
+		void ImGui_Release();
+
 	private:
 		std::vector<Widget*> mWidgets;
 		std::vector<EditorObject*> mEditorObjects;

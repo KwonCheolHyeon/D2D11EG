@@ -64,7 +64,7 @@ namespace ch::graphics
 		// Get rendertarget for swapchain
 		hr = mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)renderTarget.GetAddressOf());
 		mRenderTargetTexture->Create(renderTarget);
-
+		Resources::Insert<Texture>(L"RenderTargetTexture", mRenderTargetTexture);
 
 		D3D11_TEXTURE2D_DESC depthBuffer = {};
 		depthBuffer.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;

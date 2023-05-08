@@ -134,19 +134,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="chDebugObject.h" />
     <ClInclude Include="chEditor.h" />
-    <ClInclude Include="chEditorObject.h" />
-    <ClInclude Include="chWidget.h" />
     <ClInclude Include="EngineTT.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="chDebugObject.h" />
+    <ClInclude Include="chEditorObject.h" />
+    <ClInclude Include="chWidget.h" />
     <ClInclude Include="memoeyLeak.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="chDebugObject.cpp" />
     <ClCompile Include="chEditor.cpp" />
+    <ClCompile Include="chDebugObject.cpp" />
     <ClCompile Include="chEditorObject.cpp" />
     <ClCompile Include="chWidget.cpp" />
     <ClCompile Include="main.cpp" />

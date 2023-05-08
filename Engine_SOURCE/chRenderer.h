@@ -82,6 +82,7 @@ namespace ch::renderer
 	CBUFFER(NoiseCB, CBSLOT_NOISE)
 	{
 		Vector4 noiseSize;
+		float noiseTime;
 	};
 
 	extern Vertex vertexes[4];
@@ -105,6 +106,7 @@ namespace ch::renderer
 	void PushLightAttribute(LightAttribute lightAttribute);
 	void BindLights();
 	void BindNoiseTexture();
+	void CopyRenderTarget();
 
 }
 

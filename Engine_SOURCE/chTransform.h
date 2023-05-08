@@ -33,6 +33,7 @@ namespace ch
 		Vector3 GetScale() { return mScale; };
 		
 		Vector3 Foward() { return mFoward; }
+
 		Vector3 Right() { return mRight; }
 
 		Vector3 Up() { return mUp; }

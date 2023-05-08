@@ -45,9 +45,6 @@ namespace ch
 		canDodge = true;
 		pHp = 6;
 		prevHp = 6;
-
-		 
-		
 	}
 	void PlayerScr::Update()
 	{

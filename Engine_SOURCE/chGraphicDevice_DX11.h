@@ -63,7 +63,7 @@ namespace ch::graphics
 		void Present();
 
 		ID3D11Device* GetID3D11Device() { return mDevice.Get(); }
-
+		
 	private:
 		Microsoft::WRL::ComPtr <ID3D11Device> mDevice;
 		Microsoft::WRL::ComPtr <ID3D11DeviceContext> mContext;

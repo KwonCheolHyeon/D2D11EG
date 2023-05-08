@@ -14,6 +14,18 @@
     <Filter Include="Editor">
       <UniqueIdentifier>{4902d164-367a-47c1-b007-f40ace5a9558}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{10a15626-5acb-4f17-9df7-ccddbf6f9d5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View">
+      <UniqueIdentifier>{ab168d9d-3170-4a9c-8b73-1b2f753e26bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Widget">
+      <UniqueIdentifier>{f5f980d2-400e-4290-a4ce-89911aa3982d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Object">
+      <UniqueIdentifier>{301fc4ff-1e3e-4c60-b1c0-a19a37b56fe4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -31,10 +43,16 @@
     <ClInclude Include="chEditor.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="chDebugObject.h" />
-    <ClInclude Include="chEditorObject.h" />
-    <ClInclude Include="chWidget.h" />
     <ClInclude Include="memoeyLeak.h" />
+    <ClInclude Include="chDebugObject.h">
+      <Filter>Editor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="chEditorObject.h">
+      <Filter>Editor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="chWidget.h">
+      <Filter>Widget</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EngineTT.rc">
@@ -56,8 +74,14 @@
     <ClCompile Include="chEditor.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
-    <ClCompile Include="chDebugObject.cpp" />
-    <ClCompile Include="chEditorObject.cpp" />
-    <ClCompile Include="chWidget.cpp" />
+    <ClCompile Include="chDebugObject.cpp">
+      <Filter>Editor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="chEditorObject.cpp">
+      <Filter>Editor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="chWidget.cpp">
+      <Filter>Widget</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

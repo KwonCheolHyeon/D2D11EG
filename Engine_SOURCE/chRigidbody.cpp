@@ -12,7 +12,7 @@ namespace ch
 		,mForce(Vector3::Zero)
 		,mAccelation(Vector3::Zero)
 		,mVelocity(Vector3::Zero)
-		, mFriction(15.0f)
+		, mFriction(100.0f)
 	{
 		mLimitVelocity = 5.0f;
 		mbGround = true;
@@ -52,9 +52,17 @@ namespace ch
 
 			float Accel = fForce / mMass;
 
-			mAccelation = mForce * Accel;
+			float dt = Time::DeltaTime();
 
-			mVelocity += mAccelation * Time::DeltaTime();
+			// Divide the force into smaller steps and apply them
+			const int numSteps = 10;
+			Vector3 forceStep = mForce * Accel / numSteps;
+
+			for (int i = 0; i < numSteps; ++i)
+			{
+				mAccelation = forceStep;
+				mVelocity += mAccelation * dt / numSteps;
+			}
 		}
 
 		// Apply friction to velocity

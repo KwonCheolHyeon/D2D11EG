@@ -83,6 +83,7 @@ namespace ch::graphics
 		Opaque,
 		CutOut,
 		Transparent,
+		PostProcess,
 		End,
 	};
 

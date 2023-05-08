@@ -66,18 +66,15 @@ namespace ch
 		cameraComp->TurnLayerMask(eLayerType::UI, true);
 		cameraObj->AddComponent<CameraScript>();
 		mainCamera = cameraComp;
-
-
-		
-
-
+		Transform* zeldaTr;
 		//SMILE RECT
 		{
 			Player* obj = object::Instantiate<Player>(eLayerType::Player, this);
 			obj->SetName(L"Zelda");
-			Transform* tr = obj->GetComponent<Transform>();
-			tr->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
-			tr->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+			zeldaTr = obj->GetComponent<Transform>();
+			zeldaTr->SetPosition(Vector3(0.0f, 0.0f, 20.0f));
+			//zeldaTr->SetRotation(Vector3(0.0f, 0.0f, 45.0f));
+			zeldaTr->SetScale(Vector3(200.0f, 200.0f, 1.0f));
 			Collider2D* collider = obj->AddComponent<Collider2D>();
 			collider->SetType(eColliderType::Rect);
 			Animator* animator = obj->AddComponent<Animator>();
@@ -96,7 +93,7 @@ namespace ch
 			obj->AddComponent<PlayerScript>();
 			object::DontDestroyOnLoad(obj);
 		}
-
+		
 		//SMILE RECT
 		{
 			Player* obj = object::Instantiate<Player>(eLayerType::Player, this);
@@ -127,6 +124,26 @@ namespace ch
 			tr->SetPosition(Vector3(0.0f, 0.0f, 100.0f));
 			obj->AddComponent<ParticleSystem>();
 		}
+
+		//post process object
+		{
+			GameObject* obj = object::Instantiate<GameObject>(eLayerType::PostProcess,this);
+			obj->SetName(L"PostProcessGameObject");
+			zeldaTr = obj->GetComponent<Transform>();
+			zeldaTr->SetPosition(Vector3(0.0f, 0.0f, 19.0f));
+			zeldaTr->SetScale(Vector3(200.0f, 200.0f, 1.0f));
+
+			Collider2D* collider = obj->AddComponent<Collider2D>();
+			collider->SetType(eColliderType::Rect);
+			//collider->SetSize(Vector2(1.0f, 0.5f));
+
+			SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
+			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"PostProcessMaterial");
+			mr->SetMaterial(mateiral);
+			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			mr->SetMesh(mesh);
+		}
+
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Player, true);
 		Scene::Initalize();

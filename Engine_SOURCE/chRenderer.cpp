@@ -1,4 +1,5 @@
 #include "chRenderer.h"
+#include "chTime.h"
 #include "chResources.h"
 #include "chMaterial.h"
 #include "chSceneManager.h"
@@ -18,6 +19,8 @@ namespace ch::renderer
 	std::vector<DebugMesh> debugMeshes;
 	std::vector<LightAttribute> lights;
 	StructedBuffer* lightsBuffer = nullptr;
+
+	std::shared_ptr<Texture> postProcessTexture = nullptr;
 
 	void LoadMesh()
 	{
@@ -192,6 +195,14 @@ namespace ch::renderer
 		Resources::Insert<ParticleShader>(L"ParticleCS", particleCS);
 		particleCS->Create(L"ParticleCS.hlsl", "main");
 #pragma endregion
+
+#pragma region POST PROCESS SHADER
+		std::shared_ptr<Shader> postProcessShader = std::make_shared<Shader>();
+		postProcessShader->Create(eShaderStage::VS, L"PostProcessVS.hlsl", "main");
+		postProcessShader->Create(eShaderStage::PS, L"PostProcessPS.hlsl", "main");
+		postProcessShader->SetDSState(eDSType::NoWrite);
+		Resources::Insert<Shader>(L"PostProcessShader", postProcessShader);
+#pragma endregion
 	}
 
 	void SetUpState()
@@ -257,6 +268,12 @@ namespace ch::renderer
 			, particleShader->GetVSBlobBufferPointer()
 			, particleShader->GetVSBlobBufferSize()
 			, particleShader->GetInputLayoutAddressOf());
+
+		std::shared_ptr<Shader> postProcessShader = Resources::Find<Shader>(L"PostProcessShader");
+		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
+			, postProcessShader->GetVSBlobBufferPointer()
+			, postProcessShader->GetVSBlobBufferSize()
+			, postProcessShader->GetInputLayoutAddressOf());
 
 #pragma endregion
 #pragma region sampler state
@@ -386,6 +403,7 @@ namespace ch::renderer
 		GetDevice()->CreateBlendState(&bsDesc, blendStates[(UINT)eBSType::OneOne].GetAddressOf());
 
 #pragma endregion
+
 	}
 
 	void LoadBuffer()
@@ -428,7 +446,7 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"CartoonSmoke", L"particle\\CartoonSmoke.png");
 		Resources::Load<Texture>(L"noise_01", L"noise\\noise_01.png");
 		Resources::Load<Texture>(L"noise_02", L"noise\\noise_02.png");
-		//Resources::Load<Texture>(L"noise_03", L"noise\\noise_03.png");
+		Resources::Load<Texture>(L"noise_03", L"noise\\noise_03.jpg");
 
 #pragma endregion
 #pragma region DYNAMIC TEXTURE
@@ -437,7 +455,12 @@ namespace ch::renderer
 			| D3D11_BIND_UNORDERED_ACCESS);
 		Resources::Insert<Texture>(L"PaintTexture", uavTexture);
 #pragma endregion
-
+#pragma region NOISE
+		//noise
+		postProcessTexture = std::make_shared<Texture>();
+		postProcessTexture->Create(1600, 900, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE);
+		postProcessTexture->BindShaderResource(eShaderStage::PS, 60);
+#pragma endregion
 		Resources::Load<Texture>(L"FadeEffectTexture", L"black.jpg");
 
 		//main menu
@@ -462,6 +485,12 @@ namespace ch::renderer
 
 #pragma region ∏ÛΩ∫≈Õ
 		Resources::Load<Texture>(L"BulletKinIdle", L"enterthe\\enemy\\bullet_Kin\\idle\\idle_02.png");
+
+#pragma endregion
+
+#pragma region ∏ 
+		Resources::Load<Texture>(L"Map_01_Texture", L"enterthe\\Map\\map\\map01.png");
+		
 
 #pragma endregion
 
@@ -504,7 +533,6 @@ namespace ch::renderer
 #pragma endregion
 		//UITest
 		Resources::Load<Texture>(L"CircleSprite", L"enterthe\\circle.png");
-
 	}
 
 	void LoadMaterial()
@@ -614,8 +642,8 @@ namespace ch::renderer
 			Resources::Insert<Material>(L"floatMaterial", material);
 		}
 
-		{//UI
-#pragma region UI
+		{//UI	
+		#pragma region UI
 			#pragma region UI_HEART
 			{//FHeart
 				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"FullHeartSprite");
@@ -632,21 +660,21 @@ namespace ch::renderer
 				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
 				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
 				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
-				uiMaterial->SetShader(uiShader);
-				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
-				Resources::Insert<Material>(L"HalfHeartMaterial", uiMaterial);
+uiMaterial->SetShader(uiShader);
+uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+Resources::Insert<Material>(L"HalfHeartMaterial", uiMaterial);
 			}
 
 			{//NHeart
-				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"NoHeartSprite");
-				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
-				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
-				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
-				uiMaterial->SetShader(uiShader);
-				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
-				Resources::Insert<Material>(L"NoHeartMaterial", uiMaterial);
+			std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"NoHeartSprite");
+			std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+			std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+			uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			uiMaterial->SetShader(uiShader);
+			uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+			Resources::Insert<Material>(L"NoHeartMaterial", uiMaterial);
 			}
-			#pragma endregion
+#pragma endregion
 			{//key
 				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"KeySprite");
 				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
@@ -674,7 +702,7 @@ namespace ch::renderer
 				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
 				Resources::Insert<Material>(L"Blank_bulletsMaterial", uiMaterial);
 			}
-			#pragma region remain Bullet
+#pragma region remain Bullet
 			{//left bullet  5
 				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"bulletFiveSprite");
 				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
@@ -729,7 +757,22 @@ namespace ch::renderer
 				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
 				Resources::Insert<Material>(L"bulletZeroMaterial", uiMaterial);
 			}
-			#pragma endregion
+#pragma endregion
+#pragma endregion
+		}
+		{//∏ 
+		#pragma region ∏ 
+			{//map 01
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_01_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map01_Material", material);
+			}
+			
+
 #pragma endregion
 		}
 
@@ -798,6 +841,13 @@ namespace ch::renderer
 		particleMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		particleMaterial->SetShader(particleShader);
 		Resources::Insert<Material>(L"ParticleMaterial", particleMaterial);
+#pragma region POSTPROCESS
+		std::shared_ptr<Shader> postProcessShader = Resources::Find<Shader>(L"PostProcessShader");
+		std::shared_ptr<Material> postProcessMaterial = std::make_shared<Material>();
+		postProcessMaterial->SetRenderingMode(eRenderingMode::PostProcess);
+		postProcessMaterial->SetShader(postProcessShader);
+		Resources::Insert<Material>(L"PostProcessMaterial", postProcessMaterial);
+#pragma endregion
 	}
 
 	void Initialize()
@@ -861,7 +911,7 @@ namespace ch::renderer
 		cb->Bind(eShaderStage::VS);
 		cb->Bind(eShaderStage::PS);
 	}
-
+	float noiseTime = 10.0f;
 	void BindNoiseTexture()
 	{
 		std::shared_ptr<Texture> noise = Resources::Find<Texture>(L"noise_01");
@@ -875,6 +925,8 @@ namespace ch::renderer
 		NoiseCB info = {};
 		info.noiseSize.x = noise->GetWidth();
 		info.noiseSize.y = noise->GetHeight();
+		noiseTime -= Time::DeltaTime();
+		info.noiseTime = noiseTime;
 
 		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Noise];
 		cb->SetData(&info);
@@ -884,5 +936,20 @@ namespace ch::renderer
 		cb->Bind(eShaderStage::GS);
 		cb->Bind(eShaderStage::PS);
 		cb->Bind(eShaderStage::CS);
+	}
+
+	void CopyRenderTarget()
+	{
+		std::shared_ptr<Texture> renderTarget = Resources::Find<Texture>(L"RenderTargetTexture");
+
+		ID3D11ShaderResourceView* srv = nullptr;
+		GetDevice()->BindShaderResource(eShaderStage::PS, 60, &srv);
+
+		ID3D11Texture2D* dest = postProcessTexture->GetTexture().Get();
+		ID3D11Texture2D* source = renderTarget->GetTexture().Get();
+
+		GetDevice()->CopyResource(dest, source);
+
+		postProcessTexture->BindShaderResource(eShaderStage::PS, 60);
 	}
 }

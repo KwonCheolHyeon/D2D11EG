@@ -111,6 +111,8 @@ namespace ch
 		//Vector3 GetScale();
 		Vector3 GetRotation();
 
+		Vector3 GetCenterPos() { return GetPos() + Vector3(GetComponent<Transform>()->GetScale().x / 2, GetComponent<Transform>()->GetScale().y, GetComponent<Transform>()->GetScale().z); }
+
 	public:
 		void SetLeft() { mbIsLeft = true; }
 		void SetRight() { mbIsLeft = false; }

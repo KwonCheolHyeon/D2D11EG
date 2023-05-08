@@ -14,7 +14,7 @@ namespace ch
 
 	void DebugObject::FixedUpdate()
 	{
-		for (Component* comp : mComponents)
+		for (ch::Component* comp : mComponents)
 		{
 			if (comp == nullptr)
 				continue;

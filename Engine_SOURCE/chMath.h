@@ -373,6 +373,7 @@ namespace ch::math
         static const Vector3 Left;
         static const Vector3 Forward;
         static const Vector3 Backward;
+
     };
 
     // Binary operators

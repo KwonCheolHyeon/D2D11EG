@@ -113,7 +113,8 @@ namespace ch
 				}
 			}
 #pragma endregion
-#pragma endregion
+		#pragma endregion
+
 		#pragma region Weapon
 			//P_ 플레이어  W : Weapon
 		#pragma region Idle

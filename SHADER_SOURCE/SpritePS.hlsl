@@ -39,12 +39,23 @@ float4 main(VSOut In) : SV_Target
     {
         color = defaultTexture.Sample(anisotropicSampler, In.UV);
     }
+     
+    // noise, paper burn effect
+    //if ( 0.0f < NoiseTime )
+    //{
+    //    color.a -= NoiseTexture.Sample(anisotropicSampler, In.UV).x * 0.25f * (10.0f - NoiseTime);
+    //}
+    
+    
+    if (color.a <= 0.0f)
+        discard;
     
     LightColor lightColor = (LightColor) 0.0f;
     for (int i = 0; i < numberOfLight; i++)
     {
         CalculateLight(lightColor, In.WorldPos.xyz, i);
     }
+   
     
     color *= lightColor.diffuse;
    //spritePs이부분 추가하면 오류

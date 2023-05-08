@@ -23,6 +23,7 @@ namespace ch::enums
 		Player,
 		TwoHandWeapone,
 		Particle,
+		PostProcess,
 		UI,
 		End = 16,
 	};

@@ -158,6 +158,7 @@
     <ClInclude Include="chAnimation.h" />
     <ClInclude Include="chAnimator.h" />
     <ClInclude Include="chApplication.h" />
+    <ClInclude Include="CharacterBase.h" />
     <ClInclude Include="chBaseRenderer.h" />
     <ClInclude Include="chBullet.h" />
     <ClInclude Include="chBulletPool.h" />
@@ -220,6 +221,8 @@
     <ClInclude Include="chTitleScene.h" />
     <ClInclude Include="chTransform.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="Convict.h" />
+    <ClInclude Include="ConvictMove.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="chEngine.h" />
     <ClInclude Include="chSpriteRenderer.h" />
@@ -232,6 +235,7 @@
     <ClCompile Include="chAnimation.cpp" />
     <ClCompile Include="chAnimator.cpp" />
     <ClCompile Include="chApplication.cpp" />
+    <ClCompile Include="CharacterBase.cpp" />
     <ClCompile Include="chBaseRenderer.cpp" />
     <ClCompile Include="chBullet.cpp" />
     <ClCompile Include="chBulletPool.cpp" />
@@ -290,6 +294,8 @@
     <ClCompile Include="chTitleScene.cpp" />
     <ClCompile Include="chTransform.cpp" />
     <ClCompile Include="chGameObject.cpp" />
+    <ClCompile Include="Convict.cpp" />
+    <ClCompile Include="ConvictMove.cpp" />
     <ClCompile Include="Engine_SOURCE.cpp" />
     <ClCompile Include="chSpriteRenderer.cpp" />
     <ClCompile Include="Heart_Scr.cpp" />
