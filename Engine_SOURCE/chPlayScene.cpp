@@ -147,19 +147,7 @@ namespace ch
 			monster->AddComponent<Bullet_Kin>();
 		}
 		
-		{//back ground
-			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
-			back->SetName(L"BG");
-			Transform* backTr = back->GetComponent<Transform>();
-			backTr->SetPosition(Vector3(1.0f, 1.0f, 0.1f));
-			backTr->SetScale(Vector3(10.0f, 10.0f, 0.1f));
-
-			SpriteRenderer* backSR = back->AddComponent<SpriteRenderer>();
-			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
-			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"Map01_Material");
-			backSR->SetMaterial(backmaterial);
-			backSR->SetMesh(backmesh);
-		}
+		generateMap();
 
 
 
@@ -231,6 +219,25 @@ namespace ch
 			pool->SetBullets(containBullets[i]);
 
 		}
+
+	}
+
+	void PlayScene::generateMap()
+	{
+		{//back ground01
+			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
+			back->SetName(L"BG01");
+			Transform* backTr = back->GetComponent<Transform>();
+			backTr->SetPosition(Vector3(0.0f, 0.0f, 0.1f));
+			backTr->SetScale(Vector3(50.0f, 61.3f, 0.1f));
+
+			SpriteRenderer* backSR = back->AddComponent<SpriteRenderer>();
+			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
+			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"MapSample_Material");
+			backSR->SetMaterial(backmaterial);
+			backSR->SetMesh(backmesh);
+		}
+		
 
 	}
 

@@ -490,8 +490,19 @@ namespace ch::renderer
 
 #pragma region ¸Ê
 		Resources::Load<Texture>(L"Map_01_Texture", L"enterthe\\Map\\map\\map01.png");
-		
-
+		Resources::Load<Texture>(L"Map_02_Texture", L"enterthe\\Map\\map\\map02.png");
+		Resources::Load<Texture>(L"Map_03_Texture", L"enterthe\\Map\\map\\map03.png");
+		Resources::Load<Texture>(L"Map_04_Texture", L"enterthe\\Map\\map\\map04.png");
+		Resources::Load<Texture>(L"Map_05_Texture", L"enterthe\\Map\\map\\map05.png");
+		Resources::Load<Texture>(L"Map_06_Texture", L"enterthe\\Map\\map\\map06.png");
+		Resources::Load<Texture>(L"Map_07_Texture", L"enterthe\\Map\\map\\map07.png");
+		Resources::Load<Texture>(L"Map_08_Texture", L"enterthe\\Map\\map\\map08.png");
+		Resources::Load<Texture>(L"Map_09_Texture", L"enterthe\\Map\\map\\map09.png");
+		Resources::Load<Texture>(L"Map_10_Texture", L"enterthe\\Map\\map\\map10.png");
+		Resources::Load<Texture>(L"Map_11_Texture", L"enterthe\\Map\\map\\map11.png");
+		Resources::Load<Texture>(L"Map_vertical_Texture", L"enterthe\\Map\\map\\vertical_map.png");
+		Resources::Load<Texture>(L"Map_horizontal_Texture", L"enterthe\\Map\\map\\horizontal_map.png");
+		Resources::Load<Texture>(L"Map_sample_Texture", L"enterthe\\Map\\map\\map_sample.png");
 #pragma endregion
 
 		//¹«±â
@@ -770,6 +781,114 @@ Resources::Insert<Material>(L"HalfHeartMaterial", uiMaterial);
 				material->SetShader(shader);
 				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"Map01_Material", material);
+			}
+			{//map 02
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_02_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map02_Material", material);
+			}
+			{//map 03
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_03_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map03_Material", material);
+			}
+			{//map 04
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_04_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map04_Material", material);
+			}
+			{//map 06
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_06_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map06_Material", material);
+			}
+			{//map 07
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_07_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map07_Material", material);
+			}
+			{//map 08
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_08_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map08_Material", material);
+			}
+			{//map 09
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_09_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map09_Material", material);
+			}
+			{//map 10
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_10_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map10_Material", material);
+			}
+			{//map 11
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_11_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Map11_Material", material);
+			}
+			{//map ¼¼·Î
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_vertical_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Mapvertical_Material", material);
+			}
+			{//map °¡·Î
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_horizontal_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Maphorizontal_Material", material);
+			}
+			{//map »ùÇÃ
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_sample_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"MapSample_Material", material);
 			}
 			
 
