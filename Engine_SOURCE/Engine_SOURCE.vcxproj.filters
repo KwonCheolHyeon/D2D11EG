@@ -170,6 +170,12 @@
     <Filter Include="GameObject\chPlayer\Player\Convict">
       <UniqueIdentifier>{0f6b4353-3bcd-45ae-ad51-aecac58b7a11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object">
+      <UniqueIdentifier>{a60a3a8a-e2e0-4446-9023-bec10d779992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Table">
+      <UniqueIdentifier>{f1eabed8-c5bb-428e-8afd-c07efb69cc02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -395,6 +401,12 @@
     <ClInclude Include="ConvictMove.h">
       <Filter>GameObject\chPlayer\Player\Convict</Filter>
     </ClInclude>
+    <ClInclude Include="TableObject.h">
+      <Filter>GameObject\Object\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="TableScr.h">
+      <Filter>GameObject\Object\Table</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -604,6 +616,12 @@
     </ClCompile>
     <ClCompile Include="ConvictMove.cpp">
       <Filter>GameObject\chPlayer\Player\Convict</Filter>
+    </ClCompile>
+    <ClCompile Include="TableObject.cpp">
+      <Filter>GameObject\Object\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="TableScr.cpp">
+      <Filter>GameObject\Object\Table</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

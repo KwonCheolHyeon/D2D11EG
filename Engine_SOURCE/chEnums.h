@@ -17,6 +17,7 @@ namespace ch::enums
 		Grid,
 		BackGround,
 		Wall,
+		Object,
 		Hand,
 		Weapone,
 		Monster,

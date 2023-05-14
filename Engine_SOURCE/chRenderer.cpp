@@ -504,7 +504,21 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"Map_horizontal_Texture", L"enterthe\\Map\\map\\horizontal_map.png");
 		Resources::Load<Texture>(L"Map_sample_Texture", L"enterthe\\Map\\map\\map_sample.png");
 #pragma endregion
+#pragma region 오브젝트
+		Resources::Load<Texture>(L"Table_Default", L"enterthe\\object\\table\\table_default.png"); //기본 책상
 
+		Resources::Load<Texture>(L"Table_Front_01", L"enterthe\\object\\table\\front\\table_front_01.png"); //
+		Resources::Load<Texture>(L"Table_Front_02", L"enterthe\\object\\table\\front\\table_front_02.png"); //
+		
+		Resources::Load<Texture>(L"Table_Back_01", L"enterthe\\object\\table\\back\\table_back_01.png"); //
+		Resources::Load<Texture>(L"Table_Back_02", L"enterthe\\object\\table\\back\\table_back_02.png"); //
+
+		Resources::Load<Texture>(L"Table_Left_01", L"enterthe\\object\\table\\left\\table_left_01.png");
+		Resources::Load<Texture>(L"Table_Left_02", L"enterthe\\object\\table\\left\\table_left_02.png");
+
+		Resources::Load<Texture>(L"Table_Right_01", L"enterthe\\object\\table\\right\\table_right_01.png");
+		Resources::Load<Texture>(L"Table_Right_02", L"enterthe\\object\\table\\right\\table_right_02.png");
+#pragma endregion
 		//무기
 		Resources::Load<Texture>(L"W_pistol", L"enterthe\\Waepone\\PistolFolder\\pistol_Idle.png");
 		Resources::Load<Texture>(L"W_fightsabreSprite", L"enterthe\\Waepone\\FightSabre\\Item.png");
@@ -671,9 +685,9 @@ namespace ch::renderer
 				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
 				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
 				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
-uiMaterial->SetShader(uiShader);
-uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
-Resources::Insert<Material>(L"HalfHeartMaterial", uiMaterial);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"HalfHeartMaterial", uiMaterial);
 			}
 
 			{//NHeart
@@ -890,11 +904,96 @@ Resources::Insert<Material>(L"HalfHeartMaterial", uiMaterial);
 				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"MapSample_Material", material);
 			}
-			
+
 
 #pragma endregion
 		}
+#pragma region 오브젝트
+		{
+			{
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Default");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Table_Material", material);
+			}
+			{//테이블 프로트01
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Front_01");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Table_Front_01_Material", material);
+			}
+			{
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Front_02");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Table_Front_02_Material", material);
+			}
+			{ // back
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Back_01");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Table_Back_01_Material", material);
+			}
+			{
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Back_02");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Table_Back_02_Material", material);
+			}
+			{//left
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Left_01");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Table_Left_01_Material", material);
+			}
+			{
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Left_02");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Table_Left_02_Material", material);
+			}
+			{ // right
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Right_01");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Table_Right_01_Material", material);
+			}
+			{
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Right_02");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Table_Right_02_Material", material);
+			}
 
+		}
+#pragma endregion
 		// Default
 		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"PaintTexture");
 		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"RectShader");

@@ -2,6 +2,8 @@
 #include "chScript.h"
 #include "chHeart_UI.h"
 #include "chGenericAnimator.h"
+#include "chAnimator.h"
+
 namespace ch 
 {
 	class PlayerScr
