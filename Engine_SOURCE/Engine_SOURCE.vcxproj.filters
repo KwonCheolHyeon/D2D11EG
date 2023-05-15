@@ -176,6 +176,9 @@
     <Filter Include="GameObject\Object\Table">
       <UniqueIdentifier>{f1eabed8-c5bb-428e-8afd-c07efb69cc02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Map">
+      <UniqueIdentifier>{3ec8a6af-9cf6-4a44-9ae1-cd836ff4f037}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -407,6 +410,9 @@
     <ClInclude Include="TableScr.h">
       <Filter>GameObject\Object\Table</Filter>
     </ClInclude>
+    <ClInclude Include="chMapCollider.h">
+      <Filter>GameObject\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -622,6 +628,9 @@
     </ClCompile>
     <ClCompile Include="TableScr.cpp">
       <Filter>GameObject\Object\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="chMapCollider.cpp">
+      <Filter>GameObject\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -54,19 +54,16 @@ namespace ch
 
 #pragma endregion
 		SpriteRenderer* sprite = tableOBJ->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pIdleMaterial");
+		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"Table_Material");
 		sprite->SetMaterial(mateiral);
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
 
-		Transform* pTr = tableOBJ->GetComponent<Transform>();
-		pTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
-		pTr->SetPosition(Vector3(1.f, 1.f, 0.f));
 
 		Collider2D* pCollider = tableOBJ->AddComponent<Collider2D>();
 		pCollider->SetName(L"TableCollider");
 		pCollider->SetType(eColliderType::Rect);
-		pCollider->SetSize(Vector2(.075f, .1f));
+		pCollider->SetSize(Vector2(1.f, 0.5f));
 
 		tableOBJ->AddComponent<Rigidbody>();
 

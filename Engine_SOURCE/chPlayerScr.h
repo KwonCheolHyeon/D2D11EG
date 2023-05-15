@@ -90,7 +90,7 @@ namespace ch
         Vector3 mousePositon;
         Vector3 CharterPosition;
         float C2Mangle;//캐릭터와 마우스 사이 각도
-
+        float playerSpeed;
         bool canDodge;
 
     private:

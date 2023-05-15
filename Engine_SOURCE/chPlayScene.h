@@ -31,7 +31,8 @@ namespace ch
 		GameObject* player;
 
 		BulletPool* pool;
-	
+		
+		Transform* mapTr;
 
 		std::vector<Heart_UI*> HeartControl;
 		//저장할 공간

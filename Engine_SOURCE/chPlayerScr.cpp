@@ -45,6 +45,7 @@ namespace ch
 		canDodge = true;
 		pHp = 6;
 		prevHp = 6;
+		playerSpeed = 2.f;
 	}
 	void PlayerScr::Update()
 	{
@@ -84,6 +85,15 @@ namespace ch
 		if (Input::GetKeyDown(eKeyCode::H))
 		{
 			pHp += 1;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Q))
+		{
+			playerSpeed = 2.f;
+		}
+		if (Input::GetKeyDown(eKeyCode::E))
+		{
+			playerSpeed = 10.f;
 		}
 
 		if (prevHp != pHp) 
@@ -156,7 +166,7 @@ namespace ch
 				direction.Normalize();
 			}
 
-			pos += direction * 2.0f * Time::DeltaTime();
+			pos += direction * playerSpeed * Time::DeltaTime();
 			transform->SetPosition(pos);
 		}
 	}

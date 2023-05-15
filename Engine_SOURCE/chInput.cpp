@@ -86,6 +86,8 @@ namespace ch
 			mMousPosition.x = ((float)mousePos.x - mWinWidthCenter);
 			mMousPosition.y = -((float)mousePos.y - mWinHeightCenter);
 			mMousPosition.z = 1.0f;
+
+			
 		}
 		else
 		{

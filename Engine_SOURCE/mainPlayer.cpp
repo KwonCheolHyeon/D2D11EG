@@ -18,7 +18,7 @@ namespace ch
 	mainPlayer::mainPlayer()
 	{
 		SetLayerType(eLayerType::Player);
-		this->AddComponent<PlayerScr>();
+		
 
 		GameObject* playerOBJ = dynamic_cast<GameObject*>(this);
 

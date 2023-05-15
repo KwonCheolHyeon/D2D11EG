@@ -2,7 +2,6 @@
 #include "chSpriteRenderer.h"
 #include "chResources.h"
 #include "chInput.h"
-#include "chPistol.h"
 #include "chBullet.h"
 #include "chBulletScr.h"
 #include "chtestBulletscr.h"

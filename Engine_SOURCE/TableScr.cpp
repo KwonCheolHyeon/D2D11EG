@@ -1,5 +1,5 @@
 #include "TableScr.h"
-
+#include "TableObject.h"
 namespace ch 
 {
 	TableScr::TableScr()
