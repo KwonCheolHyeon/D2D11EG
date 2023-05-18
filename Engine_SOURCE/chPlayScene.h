@@ -23,7 +23,7 @@ namespace ch
 	public://생성할 함수
 		void generateBullet(int size);
 		void generateMap();
-
+		void generateObject();
 	private:
 		GameObject* chCameraOBJ;
 		GameObject* chUiCursor;

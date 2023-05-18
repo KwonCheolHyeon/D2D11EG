@@ -20,6 +20,8 @@
 #include "chPlayerScr.h"
 #include "MonsterBase.h"
 #include "Bullet_Kin.h"
+#include "TableObject.h"
+#include "MapObject.h"
 #include "chCollisionManager.h"
 namespace ch
 {
@@ -146,9 +148,11 @@ namespace ch
 			GameObject* monster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
 			monster->AddComponent<Bullet_Kin>();
 		}
+
+
 		
 		generateMap();
-
+		generateObject();
 
 
 		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
@@ -191,6 +195,7 @@ namespace ch
 	void PlayScene::OnEnter()
 	{
 		CollisionManager::CollisionLayerCheck(eLayerType::Weapone, eLayerType::Monster);
+		CollisionManager::CollisionLayerCheck(eLayerType::Object, eLayerType::Player);
 		Scene::OnEnter();
 	}
 
@@ -234,18 +239,12 @@ namespace ch
 	void PlayScene::generateMap()
 	{
 		{//back ground01
-			GameObject* back = object::Instantiate<GameObject>(eLayerType::BackGround, this);
+			GameObject* back = object::Instantiate<MapObject>(eLayerType::BackGround, this);
 			back->SetName(L"BG01");
 
 			mapTr = back->GetComponent<Transform>();
 			mapTr->SetPosition(Vector3(0.0f, 0.0f, 0.1f));
 			mapTr->SetScale(Vector3(50.0f, 61.3f, 0.1f));
-
-			SpriteRenderer* backSR = back->AddComponent<SpriteRenderer>();
-			std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
-			std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"MapSample_Material");
-			backSR->SetMaterial(backmaterial);
-			backSR->SetMesh(backmesh);
 		}
 #pragma region 콜라이더
 		{
@@ -258,7 +257,6 @@ namespace ch
 
 			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
 			mapCollider->SetType(eColliderType::Rect);
-			
 		}
 
 		{
@@ -475,6 +473,20 @@ namespace ch
 		
 
 #pragma endregion
+
+	}
+
+	void PlayScene::generateObject()
+	{
+		{//책상
+			GameObject* tableObject = object::Instantiate<TableObject>(eLayerType::Object, this);
+			tableObject->SetName(L"table1");
+
+			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(0.5f, 0.5f, 6.0f));
+			mapColliderTr->SetScale(Vector3(1.0f, 0.7f, 0.1f));
+			
+		}
 
 	}
 

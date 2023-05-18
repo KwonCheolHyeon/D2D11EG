@@ -16,7 +16,6 @@ namespace ch::enums
 		Camera,
 		Grid,
 		BackGround,
-		Wall,
 		Object,
 		Hand,
 		Weapone,
@@ -26,6 +25,7 @@ namespace ch::enums
 		Particle,
 		PostProcess,
 		UI,
+		Wall,
 		End = 16,
 	};
 

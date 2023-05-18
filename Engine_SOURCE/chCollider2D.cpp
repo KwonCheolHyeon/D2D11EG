@@ -42,7 +42,7 @@ namespace ch
 		Vector3 rotation = mTransform->GetRotation();
 
 		Vector3 position = mTransform->GetPosition();
-		Vector3 colliderPos = position + Vector3(mCenter.x, mCenter.y, 1.0f);
+		Vector3 colliderPos = position + Vector3(mCenter.x, mCenter.y, - 11.0f);
 		mPosition = colliderPos;
 
 		Matrix scaleMatrix = Matrix::CreateScale(scale);
@@ -123,5 +123,7 @@ namespace ch
 			script->OnTriggerExit(collider);
 		}
 	}
+
+	
 
 }

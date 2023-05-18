@@ -63,7 +63,8 @@ namespace ch
 		Collider2D* pCollider = tableOBJ->AddComponent<Collider2D>();
 		pCollider->SetName(L"TableCollider");
 		pCollider->SetType(eColliderType::Rect);
-		pCollider->SetSize(Vector2(1.f, 0.5f));
+		pCollider->SetSize(Vector2(1.f, 0.7f));
+		pCollider->SetCenter(Vector2(0.f, 0.1f));
 
 		tableOBJ->AddComponent<Rigidbody>();
 

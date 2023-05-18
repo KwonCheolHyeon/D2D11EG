@@ -1,6 +1,6 @@
 #pragma once
 #include "chScript.h"
-
+#include "chAnimator.h"
 namespace ch
 {
 
@@ -23,6 +23,11 @@ namespace ch
         virtual void OnTrigger(Collider2D* oppo);
         virtual void OnTriggerExit(Collider2D* oppo);
 
+        int GetClosestDirection(Collider2D* collider);
+
+    private:
+        int directionNumber; // 1 = ╩С , 2 = ©Л , 3 = го , 4 = аб
+        Animator* tAnimator;
 
 
 

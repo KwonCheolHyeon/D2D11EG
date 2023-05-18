@@ -11,8 +11,7 @@ namespace ch
 	}
 	void MapCollider::Initalize()
 	{
-		
-		
+	
 	}
 	void MapCollider::Update()
 	{

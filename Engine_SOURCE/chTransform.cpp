@@ -77,6 +77,7 @@ namespace ch
 
 	void Transform::Render()
 	{
+		
 	}
 
 	void Transform::SetConstantBuffer()

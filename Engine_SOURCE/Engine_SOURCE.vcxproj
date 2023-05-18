@@ -229,6 +229,7 @@
     <ClInclude Include="chSpriteRenderer.h" />
     <ClInclude Include="Heart_Scr.h" />
     <ClInclude Include="mainPlayer.h" />
+    <ClInclude Include="MapObject.h" />
     <ClInclude Include="MonsterBase.h" />
     <ClInclude Include="TableObject.h" />
     <ClInclude Include="TableScr.h" />
@@ -304,6 +305,7 @@
     <ClCompile Include="chSpriteRenderer.cpp" />
     <ClCompile Include="Heart_Scr.cpp" />
     <ClCompile Include="mainPlayer.cpp" />
+    <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="MonsterBase.cpp" />
     <ClCompile Include="TableObject.cpp" />
     <ClCompile Include="TableScr.cpp" />
