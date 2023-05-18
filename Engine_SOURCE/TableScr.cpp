@@ -24,21 +24,34 @@ namespace ch
 		{
 			if (Input::GetKeyDown(eKeyCode::E)) 
 			{
-				this->GetOwner()->GetComponent<Transform>()->SetScale(Vector3(5.f, 4.f, 1.f));
-				if (directionNumber == 1)
+			
+				if (directionNumber == 1)//상
 				{
+					this->GetOwner()->GetComponent<Transform>()->SetScale(Vector3(8.f, 6.f, 1.f));
+					this->GetOwner()->GetComponent<Collider2D>()->SetCenter(Vector2(-0.09f, -0.09f));
+					this->GetOwner()->GetComponent<Collider2D>()->SetSize(Vector2(0.16f, 0.09f));
 					tAnimator->Play(L"T_table_front_Ani",false);
 				}
-				else if (directionNumber == 2) 
+				else if (directionNumber == 2) //우 
 				{
+					this->GetOwner()->GetComponent<Transform>()->SetScale(Vector3(9.6f, 5.625f, 1.f));
+					this->GetOwner()->GetComponent<Collider2D>()->SetCenter(Vector2(-0.75f, 0.f));
+					this->GetOwner()->GetComponent<Collider2D>()->SetSize(Vector2(0.02f, 0.2f));
 					tAnimator->Play(L"T_table_left_Ani",false);
 				}
-				else if (directionNumber == 3)
+				else if (directionNumber == 3) // 하
 				{
+					this->GetOwner()->GetComponent<Transform>()->SetScale(Vector3(8.f, 6.f, 1.f));
+					this->GetOwner()->GetComponent<Collider2D>()->SetCenter(Vector2(-0.07f, 0.f));
+					this->GetOwner()->GetComponent<Collider2D>()->SetSize(Vector2(0.16f, 0.08f));
 					tAnimator->Play(L"T_table_back_Ani",false);
 				}
-				else if (directionNumber == 4)
+				else if (directionNumber == 4) // 좌
 				{
+					this->GetOwner()->GetComponent<Transform>()->SetScale(Vector3(9.6f, 5.625f, 1.f));
+					this->GetOwner()->GetComponent<Transform>()->SetPosition(this->GetOwner()->GetComponent<Transform>()->GetPosition() - Vector3(0.5f,0.f,0.f));
+					this->GetOwner()->GetComponent<Collider2D>()->SetCenter(Vector2(0.85f, 0.f));
+					this->GetOwner()->GetComponent<Collider2D>()->SetSize(Vector2(0.02f, 0.2f));
 					tAnimator->Play(L"T_table_right_Ani",false);
 				}
 			}
@@ -77,22 +90,7 @@ namespace ch
 	void TableScr::OnCollision(Collider2D* oppo)
 	{
 		
-		if (GetClosestDirection(oppo) == 1) //상
-		{
-			directionNumber = 1;
-		}
-		else if (GetClosestDirection(oppo) == 2)
-		{
-			directionNumber = 2;
-		}
-		else if (GetClosestDirection(oppo) == 3)
-		{
-			directionNumber = 3;
-		}
-		else if (GetClosestDirection(oppo) == 4)
-		{
-			directionNumber = 4;
-		}
+		
 	}
 
 	void TableScr::OnCollisionExit(Collider2D* oppo)
@@ -106,27 +104,12 @@ namespace ch
 
 	void TableScr::OnTrigger(Collider2D* oppo)
 	{
-		if (GetClosestDirection(oppo) == 1) //상
-		{
-			directionNumber = 1;
-		}
-		else if (GetClosestDirection(oppo) == 2)
-		{
-			directionNumber = 2;
-		}
-		else if (GetClosestDirection(oppo) == 3)
-		{
-			directionNumber = 3;
-		}
-		else if (GetClosestDirection(oppo) == 4)
-		{
-			directionNumber = 4;
-		}
+	
 	}
 
 	void TableScr::OnTriggerExit(Collider2D* oppo)
 	{
-		directionNumber = 0;
+		
 	}
 
 	int TableScr::GetClosestDirection(Collider2D* collider)

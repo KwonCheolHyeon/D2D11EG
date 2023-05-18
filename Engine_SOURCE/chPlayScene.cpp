@@ -483,10 +483,28 @@ namespace ch
 			tableObject->SetName(L"table1");
 
 			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(0.5f, 0.5f, 6.0f));
-			mapColliderTr->SetScale(Vector3(1.0f, 0.7f, 0.1f));
-			
+			mapColliderTr->SetPosition(Vector3(0.5f, 0.5f, 0.0f));
+			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
 		}
+
+		{//책상
+			GameObject* tableObject = object::Instantiate<TableObject>(eLayerType::Object, this);
+			tableObject->SetName(L"table1");
+
+			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(0.5f, 2.0f, 0.0f));
+			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
+		}
+
+		{//책상
+			GameObject* tableObject = object::Instantiate<TableObject>(eLayerType::Object, this);
+			tableObject->SetName(L"table1");
+
+			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(3.5f, 2.0f, 0.0f));
+			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
+		}
+
 
 	}
 

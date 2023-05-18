@@ -38,6 +38,7 @@ namespace ch
 		{
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"table_left_Ani", L"enterthe/object/table/left/table_left_Ani.png");
 			tAnimator->Create(L"T_table_left_Ani", texture, Vector2(0.0f, 0.0f), Vector2(36.0f, 42.0f), Vector2::Zero, 3, 0.1f);
+			
 		}
 		{
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"table_left_break_Ani", L"enterthe/object/table/left/table_left_break_Ani.png");
@@ -45,7 +46,7 @@ namespace ch
 		}
 		{
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"table_right_Ani", L"enterthe/object/table/right/table_right_Ani.png");
-			tAnimator->Create(L"T_table_right_Ani", texture, Vector2(0.0f, 0.0f), Vector2(33.0f, 42.0f), Vector2::Zero, 3, 0.1f);
+			tAnimator->Create(L"T_table_right_Ani", texture, Vector2(0.0f, 0.0f), Vector2(40.0f, 42.0f), Vector2::Zero, 3, 0.1f);
 		}
 		{
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"table_right_break_Ani", L"enterthe/object/table/right/table_right_break_Ani.png");
