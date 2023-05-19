@@ -1,6 +1,8 @@
 #include "TableScr.h"
 #include "TableObject.h"
 #include "chInput.h"
+#include "chSpriteRenderer.h"
+#include "chResources.h"
 namespace ch 
 {
 	TableScr::TableScr()
@@ -15,16 +17,20 @@ namespace ch
 	void TableScr::Initalize()
 	{
 		directionNumber = 0;
+		prevDN = 5;
 		tAnimator = this->GetOwner()->GetComponent<Animator>();
+		tableCount = 3;
+		once0 = 0;
+		once1 = 0;
+		once2 = 0;
 	}
 
 	void TableScr::Update()
 	{
-		if (directionNumber != 0) 
+		if (directionNumber != 0 && prevDN != 1)
 		{
 			if (Input::GetKeyDown(eKeyCode::E)) 
 			{
-			
 				if (directionNumber == 1)//»ó
 				{
 					this->GetOwner()->GetComponent<Transform>()->SetScale(Vector3(8.f, 6.f, 1.f));
@@ -54,7 +60,90 @@ namespace ch
 					this->GetOwner()->GetComponent<Collider2D>()->SetSize(Vector2(0.02f, 0.2f));
 					tAnimator->Play(L"T_table_right_Ani",false);
 				}
+				prevDN = 1;
 			}
+		}
+
+
+		if (tableCount == 2 && prevDN == 1 && once2 == 0 )
+		{
+			if (directionNumber == 1) //front
+			{
+				SpriteRenderer* sprite = this->GetOwner()->GetComponent<SpriteRenderer>();
+				std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"Table_Front_01_Material");
+				sprite->SetMaterial(mateiral);
+			}
+			else if (directionNumber == 2) // left
+			{
+				SpriteRenderer* sprite = this->GetOwner()->GetComponent<SpriteRenderer>();
+				std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"Table_Left_01_Material");
+				sprite->SetMaterial(mateiral);
+			}
+			else if (directionNumber == 3) // back
+			{
+				SpriteRenderer* sprite = this->GetOwner()->GetComponent<SpriteRenderer>();
+				std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"Table_Back_01_Material");
+				sprite->SetMaterial(mateiral);
+			}
+			else if (directionNumber == 4)  // right
+			{
+				SpriteRenderer* sprite = this->GetOwner()->GetComponent<SpriteRenderer>();
+				std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"Table_Right_01_Material");
+				sprite->SetMaterial(mateiral);
+			}
+			once2 +=1;
+		}
+		else if (tableCount == 1 && prevDN == 1 && once1 ==0)
+		{
+			if (directionNumber == 1)
+			{
+				SpriteRenderer* sprite = this->GetOwner()->GetComponent<SpriteRenderer>();
+				std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"Table_Front_02_Material");
+				sprite->SetMaterial(mateiral);
+			}
+			else if (directionNumber == 2)
+			{
+				SpriteRenderer* sprite = this->GetOwner()->GetComponent<SpriteRenderer>();
+				std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"Table_Left_02_Material");
+				sprite->SetMaterial(mateiral);
+			}
+			else if (directionNumber == 3)
+			{
+				SpriteRenderer* sprite = this->GetOwner()->GetComponent<SpriteRenderer>();
+				std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"Table_Back_02_Material");
+				sprite->SetMaterial(mateiral);
+			}
+			else if (directionNumber == 4)
+			{
+				SpriteRenderer* sprite = this->GetOwner()->GetComponent<SpriteRenderer>();
+				std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"Table_Right_02_Material");
+				sprite->SetMaterial(mateiral);
+			}
+			once1 += 1;
+		}
+		else if (tableCount == 0 && prevDN == 1 && once0 == 0 )
+		{
+			if (directionNumber == 1)
+			{
+				tAnimator->Play(L"T_table_front_break_Ani", false);
+				this->GetOwner()->SetLayerType(eLayerType::Dummy);
+			}
+			else if (directionNumber == 2)
+			{
+				tAnimator->Play(L"T_table_left_break_Ani", false);
+				this->GetOwner()->SetLayerType(eLayerType::Dummy);
+			}
+			else if (directionNumber == 3)
+			{
+				tAnimator->Play(L"T_table_back_break_Ani", false);
+				this->GetOwner()->SetLayerType(eLayerType::Dummy);
+			}
+			else if (directionNumber == 4)
+			{
+				tAnimator->Play(L"T_table_right_break_Ani", false);
+				this->GetOwner()->SetLayerType(eLayerType::Dummy);
+			}
+			once0 += 1;
 		}
 		
 	}
@@ -69,21 +158,29 @@ namespace ch
 
 	void TableScr::OnCollisionEnter(Collider2D* oppo)
 	{
-		if (GetClosestDirection(oppo) == 1) //»ó
+		if (prevDN != 1)
 		{
-			directionNumber = 1;
+			if (GetClosestDirection(oppo) == 1) //»ó
+			{
+				directionNumber = 1;
+			}
+			else if (GetClosestDirection(oppo) == 2)
+			{
+				directionNumber = 2;
+			}
+			else if (GetClosestDirection(oppo) == 3)
+			{
+				directionNumber = 3;
+			}
+			else if (GetClosestDirection(oppo) == 4)
+			{
+				directionNumber = 4;
+			}
 		}
-		else if (GetClosestDirection(oppo) == 2)
+
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone)
 		{
-			directionNumber = 2;
-		}
-		else if (GetClosestDirection(oppo) == 3)
-		{
-			directionNumber = 3;
-		}
-		else if (GetClosestDirection(oppo) == 4)
-		{
-			directionNumber = 4;
+			tableCount -= 1;
 		}
 	}
 
@@ -95,7 +192,7 @@ namespace ch
 
 	void TableScr::OnCollisionExit(Collider2D* oppo)
 	{
-		directionNumber = 0;
+		
 	}
 
 	void TableScr::OnTriggerEnter(Collider2D* oppo)

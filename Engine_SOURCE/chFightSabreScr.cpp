@@ -22,7 +22,7 @@ namespace ch
 	void FightSabreScr::Initalize()
 	{
 		Scene* playScene = SceneManager::GetActiveScene();
-		playScene->AddGameObject(GetOwner(), eLayerType::TwoHandWeapone);
+		playScene->AddGameObject(GetOwner(), eLayerType::Weapone);
 
 		gunObject = GetOwner();
 		gunTransform = gunObject->GetComponent<Transform>();

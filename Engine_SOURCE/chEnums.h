@@ -21,7 +21,7 @@ namespace ch::enums
 		Weapone,
 		Monster,
 		Player,
-		TwoHandWeapone,
+		Dummy,
 		Particle,
 		PostProcess,
 		UI,

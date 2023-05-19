@@ -195,7 +195,8 @@ namespace ch
 	void PlayScene::OnEnter()
 	{
 		CollisionManager::CollisionLayerCheck(eLayerType::Weapone, eLayerType::Monster);
-		CollisionManager::CollisionLayerCheck(eLayerType::Object, eLayerType::Player);
+		CollisionManager::CollisionLayerCheck(eLayerType::Object, eLayerType::Player); // 책상과 플레이어
+		CollisionManager::CollisionLayerCheck(eLayerType::Object, eLayerType::Weapone);//총알과 책상
 		Scene::OnEnter();
 	}
 
@@ -483,7 +484,7 @@ namespace ch
 			tableObject->SetName(L"table1");
 
 			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(0.5f, 0.5f, 0.0f));
+			mapColliderTr->SetPosition(Vector3(-1.5f, 0.5f, 0.0f));
 			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
 		}
 

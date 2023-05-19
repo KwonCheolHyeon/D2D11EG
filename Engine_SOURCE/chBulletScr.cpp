@@ -57,6 +57,10 @@ namespace ch
 		{
 			Reset();
 		}
+		if (collider->GetOwner()->GetLayerType() == eLayerType::Object)
+		{
+			Reset();
+		}
 	}
 	void BulletScr::OnCollisionStay(Collider2D* collider)
 	{

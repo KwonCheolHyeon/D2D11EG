@@ -27,8 +27,12 @@ namespace ch
 
     private:
         int directionNumber; // 1 = ╩С , 2 = ©Л , 3 = го , 4 = аб
+        int prevDN;
+        int once2;
+        int once1;
+        int once0;
         Animator* tAnimator;
-
+        int tableCount;
 
 
 	};
