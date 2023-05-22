@@ -9,11 +9,8 @@
 #include "chRigidbody.h"
 #include "chPlayerHand.h"
 
-
-
 namespace ch
 {
-	
 
 	mainPlayer::mainPlayer()
 	{

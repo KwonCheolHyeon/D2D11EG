@@ -7,6 +7,7 @@ namespace ch::enums
 		Tilte,
 		Main,
 		Play,
+		Test,
 		End,
 	};
 

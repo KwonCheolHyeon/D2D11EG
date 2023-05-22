@@ -11,6 +11,7 @@
 #include "chGridScript.h"
 #include "chTitleScene.h"
 #include "chPlayScene.h"
+#include "chTestScene.h"
 #include "chMainMenuScene.h"
 
 namespace ch
@@ -25,8 +26,9 @@ namespace ch
 		mScenes[(UINT)eSceneType::Tilte] = new TitleScene(); //scene추가 부분
 		mScenes[(UINT)eSceneType::Main] = new MainMenu();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
+		mScenes[(UINT)eSceneType::Test] = new TestScene();
 
-		mActiveScene = mScenes[(UINT)eSceneType::Play];
+		mActiveScene = mScenes[(UINT)eSceneType::Test];
 
 		for (Scene* scene : mScenes)
 		{

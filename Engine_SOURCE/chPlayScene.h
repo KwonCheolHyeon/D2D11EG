@@ -29,6 +29,7 @@ namespace ch
 		GameObject* chUiCursor;
 		Transform* chUiCursorTR;
 		GameObject* player;
+		GameObject* player2;
 
 		BulletPool* pool;
 		

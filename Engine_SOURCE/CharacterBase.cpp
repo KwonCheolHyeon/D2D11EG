@@ -14,7 +14,7 @@ namespace ch
 	{
 		SetLayerType(eLayerType::Player);
 
-		GameObject* playerOBJ = dynamic_cast<CharacterBase*>(this);
+		playerOBJ = dynamic_cast<GameObject*>(this);
 			
 		SpriteRenderer* sprite = playerOBJ->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pIdleMaterial");
@@ -27,9 +27,16 @@ namespace ch
 		pTr->SetPosition(Vector3(2.f, 1.f, 0.f));
 
 		pAnima = playerOBJ->AddComponent<Animator>();
-		playerOBJ->AddComponent<Collider2D>();
+
+		pCollider = playerOBJ->AddComponent<Collider2D>(); //오류 걸림
+		pCollider->SetName(L"playerCollider");
+		pCollider->SetType(eColliderType::Rect);
+		pCollider->SetSize(Vector2(.1f, .2f));
+
 		playerOBJ->AddComponent<Rigidbody>();
 		
+		playerOBJ->AddComponent<Convict>();
+		playerOBJ->AddComponent<ConvictMove>();
 		reset();
 
 	}
@@ -46,9 +53,8 @@ namespace ch
 
 	void CharacterBase::Update()
 	{
-		 
-
-
+		
+		playerLookingMouse();
 		GameObject::Update();
 	}
 
@@ -75,7 +81,7 @@ namespace ch
 	}
 	void CharacterBase::playerLookingMouse()
 	{
-		
+		MouseAndPlayerAngle();
 		if (c2mAngle >= 30 && c2mAngle < 60) //right back
 		{
 			pD = PlayerDirections::NE;
@@ -102,6 +108,9 @@ namespace ch
 		}
 
 	}
+
+	
+
 	void CharacterBase::reset()
 	{
 		pD = PlayerDirections::South; //정면

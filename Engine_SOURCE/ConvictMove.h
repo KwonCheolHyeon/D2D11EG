@@ -41,10 +41,18 @@ namespace ch
 
     public:
         void Walking();
+        void afterWalking();
         void Dodging();
         void afterDodging();
         void gotoNormal();
+        
+
+    public:
         bool CheckKeyDirection();
+        bool chCheckDirectionKeyDoge(); //닷지용
+        void chState();//상태에 따라 애니메이션 실행
+        void chIdleAni();
+
     private://
         PlayerState pS;
         PlayerDodgeDirections pDD;
@@ -53,6 +61,9 @@ namespace ch
         Rigidbody* pRb;
         CharacterBase* player;
         
+    public:
+        static bool canDodge; 
+        bool isDodging;
 	};
 }
 

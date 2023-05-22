@@ -3,12 +3,6 @@
 #include "chAnimator.h"
 namespace ch
 {
-	//enum pHandWeaphone
-	//{
-	//	NoHand,	//무기 없음			//0
-	//	OneHand, //한손 무기			//1
-	//	TwoHand // 두손 무기		//2
-	//};
 
 	enum PlayerDirections//얘는 하나만 켜짐
 	{
@@ -35,22 +29,22 @@ namespace ch
 
 		PlayerDirections GetPD() { return pD; }
 		void SetPD(PlayerDirections _a) { pD = _a; };
-
-
 		void reset();
 
 	public:// 01   : 마우스플레이어 사이 각도 관련
 		void MouseAndPlayerAngle();
 		void playerLookingMouse();
+		
 
 	public:
 		PlayerDirections pD;
-		
+		Collider2D* pCollider;
 	private://01
 		float c2mAngle;
 
 	private://보류
 		Animator* pAnima;
+		GameObject* playerOBJ;
 	};
 }
 

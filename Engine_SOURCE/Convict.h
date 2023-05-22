@@ -26,11 +26,16 @@ namespace ch
         virtual void OnTriggerExit(Collider2D* oppo);
 
     public:// 01   : 마우스플레이어 사이 각도 관련
-        void MouseAndPlayerAngle();
+      
         void playerLookingMouse();
-    private:
+        void HandSide();
+        void MouseAndPlayerAngle();
         void SetAnimation();
-
+    private:
+        
+        bool isDodgeAnimationing();
+        void afterDodging();
+        void playWalkingAin();
     private:
         Transform* pTr;
         Collider2D* pCollider;
@@ -40,7 +45,10 @@ namespace ch
 
     private://01
         float c2mAngle;
-
+        int prevIdleDirection;//
+        int prevWalkDirection;//
+        int prevPlayerState;
+        bool playWalking;
 	};
 }
 

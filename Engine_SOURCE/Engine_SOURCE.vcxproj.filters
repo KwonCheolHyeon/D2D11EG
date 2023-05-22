@@ -179,6 +179,9 @@
     <Filter Include="GameObject\Object\Map">
       <UniqueIdentifier>{3ec8a6af-9cf6-4a44-9ae1-cd836ff4f037}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\chMonster\Boss">
+      <UniqueIdentifier>{c3c7ab14-c2ae-4196-b407-234fd5c3b8a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -416,6 +419,12 @@
     <ClInclude Include="MapObject.h">
       <Filter>GameObject\Object\Map</Filter>
     </ClInclude>
+    <ClInclude Include="chBoss.h">
+      <Filter>GameObject\chMonster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="chTestScene.h">
+      <Filter>Scene\PlayGameScenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -637,6 +646,12 @@
     </ClCompile>
     <ClCompile Include="MapObject.cpp">
       <Filter>GameObject\Object\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="chBoss.cpp">
+      <Filter>GameObject\chMonster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="chTestScene.cpp">
+      <Filter>Scene\PlayGameScenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

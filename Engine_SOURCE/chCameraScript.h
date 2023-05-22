@@ -1,5 +1,7 @@
 #pragma once
 #include "chScript.h"
+#include <d2d1.h>
+#include <dwrite.h>
 
 namespace ch
 {
@@ -23,6 +25,6 @@ namespace ch
 		Camera* mCameraObject;
 		GameObject* target;
 		Vector3 targetPos;
-	
+
 	};
 }

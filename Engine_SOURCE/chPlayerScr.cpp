@@ -54,7 +54,6 @@ namespace ch
 		
 		if (mState[(UINT)ePlayerState::Dodge] == false) 
 		{
-			
 			chCheckDirectionKey();
 			playerLookMouse();
 
@@ -93,7 +92,7 @@ namespace ch
 		}
 		if (Input::GetKeyDown(eKeyCode::E))
 		{
-			playerSpeed = 10.f;
+			playerSpeed = 5.f;
 		}
 
 		if (prevHp != pHp) 

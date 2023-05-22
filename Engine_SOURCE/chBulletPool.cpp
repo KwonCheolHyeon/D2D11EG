@@ -5,6 +5,7 @@
 #include "chSceneManager.h"
 #include "chSpriteRenderer.h"
 #include "chResources.h"
+
 namespace ch 
 {
 	BulletPool::BulletPool()

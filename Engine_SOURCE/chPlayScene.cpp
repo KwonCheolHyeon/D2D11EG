@@ -23,6 +23,7 @@
 #include "TableObject.h"
 #include "MapObject.h"
 #include "chCollisionManager.h"
+#include "CharacterBase.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -139,8 +140,9 @@ namespace ch
 			gun->SetPool(pool);
 			gun->SetGunBox(gunBox);
 			gun->SetPlayer(player);
-			
+		}
 
+		{
 
 		}
 

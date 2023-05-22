@@ -160,6 +160,7 @@
     <ClInclude Include="chApplication.h" />
     <ClInclude Include="CharacterBase.h" />
     <ClInclude Include="chBaseRenderer.h" />
+    <ClInclude Include="chBoss.h" />
     <ClInclude Include="chBullet.h" />
     <ClInclude Include="chBulletPool.h" />
     <ClInclude Include="chBulletScr.h" />
@@ -217,6 +218,7 @@
     <ClInclude Include="chShader.h" />
     <ClInclude Include="chStructedBuffer.h" />
     <ClInclude Include="chtestBulletscr.h" />
+    <ClInclude Include="chTestScene.h" />
     <ClInclude Include="chTexture.h" />
     <ClInclude Include="chTime.h" />
     <ClInclude Include="chTitleScene.h" />
@@ -241,6 +243,7 @@
     <ClCompile Include="chApplication.cpp" />
     <ClCompile Include="CharacterBase.cpp" />
     <ClCompile Include="chBaseRenderer.cpp" />
+    <ClCompile Include="chBoss.cpp" />
     <ClCompile Include="chBullet.cpp" />
     <ClCompile Include="chBulletPool.cpp" />
     <ClCompile Include="chBulletScr.cpp" />
@@ -294,6 +297,7 @@
     <ClCompile Include="chShader.cpp" />
     <ClCompile Include="chStructedBuffer.cpp" />
     <ClCompile Include="chtestBulletscr.cpp" />
+    <ClCompile Include="chTestScene.cpp" />
     <ClCompile Include="chTexture.cpp" />
     <ClCompile Include="chTime.cpp" />
     <ClCompile Include="chTitleScene.cpp" />

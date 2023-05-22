@@ -5,6 +5,7 @@
 #include "chTime.h"
 #include "chCamera.h"
 
+
 namespace ch
 {
 	CameraScript::CameraScript()
@@ -20,6 +21,9 @@ namespace ch
 	{
 		mCameraObject = GetOwner()->GetComponent<Camera>();
 		target = mCameraObject->GetTarget();
+
+
+
 	}
 
 	void CameraScript::Update()
@@ -97,8 +101,6 @@ namespace ch
 			tr->SetPosition(pos);
 		}
 
-	
-
 		
 	}
 	void CameraScript::Render()
@@ -119,5 +121,7 @@ namespace ch
 		Vector3 shakeOffset = Vector3(RandomRange(-shakeAmount, shakeAmount), RandomRange(-shakeAmount, shakeAmount), 0.0f);
 		return pos += shakeOffset;
 	}
+
+
 	
 }
