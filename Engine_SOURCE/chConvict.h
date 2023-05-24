@@ -1,17 +1,19 @@
 #pragma once
+
 #include "chScript.h"
 #include "CharacterBase.h"
 #include "chAnimator.h"
 #include "chCollider2D.h"
-#include "ConvictMove.h"
 
 namespace ch
 {
-	class Convict : public Script
-	{
-	public:
-        Convict();
-        virtual ~Convict();
+ 
+
+    class chConvict : public Script
+    {
+    public:
+        chConvict();
+        virtual ~chConvict();
 
         virtual void Initalize() override;
         virtual void Update() override;
@@ -31,13 +33,6 @@ namespace ch
         void HandSide();
         void MouseAndPlayerAngle();
         void SetAnimation();
-
-    public:
-        void IdleAni();
-        void RunAni();
-        void RollingAni();
-        void ShotAni();
-
     private:
         bool isDodgeAnimationing();
         void afterDodging();
@@ -47,17 +42,11 @@ namespace ch
         Collider2D* pCollider;
         Animator* pAnimator;
         CharacterBase* player;
-
-        PlayerState cPS;
-        PlayerDodgeDirections cPDD;
-        PlayerDirections CPD;
     private://01
         float c2mAngle;
         int prevIdleDirection;//
         int prevWalkDirection;//
         int prevPlayerState;
         bool playWalking;
-	};
+    };
 }
-
-//죄수 캐릭터 이미지와 콜라이더와 체력 담당

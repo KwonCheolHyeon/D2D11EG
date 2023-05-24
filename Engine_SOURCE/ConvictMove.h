@@ -7,20 +7,21 @@ namespace ch
 {
     enum PlayerState
     {
-        Idle = 1, // 기본 상태		//1
-        Walk = 2, //걷기				//2
-        Dodge = 3 // 구르기			//3
+        Idle, // 기본 상태		//1
+        Walk, //걷기				//2
+        Rolling, // 구르기			//3
+        Default
     };
     enum PlayerDodgeDirections
     {
-        NorthDodge = 1,//위 1
-        SouthDodge = 2,//아래 2
+        NorthDodge,//위 1
+        SouthDodge,//아래 2
 
-        EastDodge = 3,//동 3
-        WestDodge = 4,//서 4
+        EastDodge,//동 3
+        WestDodge,//서 4
 
-        NEDodge = 5,//북동쪽 5
-        NWDodge = 6//북서쪽 6
+        NEDodge,//북동쪽 5
+        NWDodge//북서쪽 6
     };
 	class ConvictMove :public Script
 	{
@@ -39,7 +40,9 @@ namespace ch
         PlayerDodgeDirections GetPDD() { return pDD; }
         void SetPDD(PlayerDodgeDirections _a) { pDD = _a; };
 
+        bool GetCandDodging() {return canDodge;}
     public:
+        void Idle();
         void Walking();
         void afterWalking();
         void Dodging();
@@ -64,6 +67,8 @@ namespace ch
     public:
         static bool canDodge; 
         bool isDodging;
+        bool isRolling;
+
 	};
 }
 

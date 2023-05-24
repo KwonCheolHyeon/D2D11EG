@@ -159,11 +159,25 @@ namespace ch
 
 	void Convict::Update()
 	{
-		if (ConvictMove::canDodge)
+	
+		HandSide();
+		
+		switch (cPS)
 		{
-			HandSide();
+		case PlayerState::Idle:
+			IdleAni();
+			break;
+		case PlayerState::Walk:
+			RunAni();
+			break;
+		case PlayerState::Rolling:
+			RollingAni();
+			break;
+		case PlayerState::Default:
+
+			break;
+		
 		}
-		SetAnimation();
 		
 	}
 
@@ -209,15 +223,21 @@ namespace ch
 
 	void Convict::HandSide()
 	{
-		MouseAndPlayerAngle();
-		if (c2mAngle >= 90 && c2mAngle < 270) //총 위치 왼쪽 //왼쪽 보기
-		{
-			GetOwner()->SetLeft();
+		if (GetOwner()->GetComponent<ConvictMove>()->GetCandDodging()) {
+			MouseAndPlayerAngle();
+			if (c2mAngle >= 90 && c2mAngle < 270) //총 위치 왼쪽 //왼쪽 보기
+			{
+				GetOwner()->SetLeft();
+			}
+			else  //총 위치 오른쪽 // 오른쪽 보기
+			{
+				GetOwner()->SetRight();
+			}
 		}
-		else  //총 위치 오른쪽 // 오른쪽 보기
-		{
-			GetOwner()->SetRight();
-		}
+
+		cPS = GetOwner()->GetComponent<ConvictMove>()->GetPS();
+		CPD = player->GetPD();
+		
 	}
 
 	void Convict::MouseAndPlayerAngle()
@@ -230,6 +250,8 @@ namespace ch
 		mousePositon += CharterPosition;//마우스 위치가 화면에 고정되어 있으므로 캐릭터가 이동한 위치 만큼 더해줌
 		float aaa = atan2(mousePositon.y - CharterPosition.y, mousePositon.x - CharterPosition.x);
 		c2mAngle = fmodf((aaa * (180.0f / XM_PI) + 360.0f), 360.0f);// C2Mangle 360각
+
+
 	}
 
 	void Convict::SetAnimation()
@@ -330,6 +352,114 @@ namespace ch
 				c = 7;
 			}
 		
+	}
+
+	void Convict::IdleAni()
+	{
+		
+		switch (CPD)
+		{
+		case PlayerDirections::North:
+			if(pAnimator->IsAnimationRunning(L"P_O_Idle_Back") == false)
+				pAnimator->Play(L"P_O_Idle_Back");
+			break;
+		case PlayerDirections::South:
+			if (pAnimator->IsAnimationRunning(L"P_O_Idle_Front") == false)
+				pAnimator->Play(L"P_O_Idle_Front");
+			break;
+		case PlayerDirections::East:
+			if (pAnimator->IsAnimationRunning(L"P_O_Idle_Right") == false)
+				pAnimator->Play(L"P_O_Idle_Right");
+			break;
+		case PlayerDirections::West:
+			if (pAnimator->IsAnimationRunning(L"P_O_Idle_Right") == false)
+				pAnimator->Play(L"P_O_Idle_Right");
+			break;
+		case PlayerDirections::NE:
+			if (pAnimator->IsAnimationRunning(L"P_O_Idle_BackRight") == false)
+				pAnimator->Play(L"P_O_Idle_BackRight");
+			break;
+		case PlayerDirections::NW:
+			if (pAnimator->IsAnimationRunning(L"P_O_Idle_BackRight") == false)
+				pAnimator->Play(L"P_O_Idle_BackRight");
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	void Convict::RunAni()
+	{
+		switch (CPD)
+		{
+		case PlayerDirections::North:
+			if (pAnimator->IsAnimationRunning(L"P_O_WalkingBack") == false)
+				pAnimator->Play(L"P_O_WalkingBack");
+			break;
+		case PlayerDirections::South:
+			if (pAnimator->IsAnimationRunning(L"P_O_WalkingFront") == false)
+				pAnimator->Play(L"P_O_WalkingFront");
+			break;
+		case PlayerDirections::East:
+			if (pAnimator->IsAnimationRunning(L"P_O_WalkingRight") == false)
+				pAnimator->Play(L"P_O_WalkingRight");
+			break;
+		case PlayerDirections::West:
+			if (pAnimator->IsAnimationRunning(L"P_O_WalkingRight") == false)
+				pAnimator->Play(L"P_O_WalkingRight");
+			break;
+		case PlayerDirections::NE:
+			if (pAnimator->IsAnimationRunning(L"P_O_WalkingBackRight") == false)
+				pAnimator->Play(L"P_O_WalkingBackRight");
+			break;
+		case PlayerDirections::NW:
+			if (pAnimator->IsAnimationRunning(L"P_O_WalkingBackRight") == false)
+				pAnimator->Play(L"P_O_WalkingBackRight");
+			break;
+		default:
+			break;
+		}
+	}
+
+	void Convict::RollingAni()
+	{
+		cPDD = GetOwner()->GetComponent<ConvictMove>()->GetPDD();
+		switch (cPDD)
+		{
+		case PlayerDodgeDirections::NorthDodge:
+			pAnimator->Play(L"P_DodgeBack", false);
+			break;
+		case PlayerDodgeDirections::SouthDodge:
+			pAnimator->Play(L"P_DodgeFront", false);
+			break;
+		case PlayerDodgeDirections::EastDodge: 
+			
+			pAnimator->Play(L"P_DodgeRight", false);
+			GetOwner()->SetRight();
+			break;
+		case PlayerDodgeDirections::WestDodge:
+			
+			pAnimator->Play(L"P_DodgeRight", false);
+			GetOwner()->SetLeft();
+			break;
+		case PlayerDodgeDirections::NEDodge:
+			
+			pAnimator->Play(L"P_DodgeBackRight", false);
+			GetOwner()->SetRight();
+			break;
+		case PlayerDodgeDirections::NWDodge:
+			
+			pAnimator->Play(L"P_DodgeBackRight", false);
+			GetOwner()->SetLeft();
+			break;
+		default:
+			break;
+		}
+	}
+
+	void Convict::ShotAni()
+	{
 	}
 
 	bool Convict::isDodgeAnimationing()

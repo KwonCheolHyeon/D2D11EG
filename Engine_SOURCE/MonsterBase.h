@@ -3,10 +3,15 @@
 
 namespace ch 
 {
-	struct monsterState 
+	enum monsterState 
 	{
-		int state;
-		bool death;
+		Spawn,
+		mIdle,
+		Hit,
+		Move,
+		Attack,
+		SkyBomb,
+		Death
 	};
 	class MonsterBase : public GameObject
 	{

@@ -1,5 +1,7 @@
 #pragma once
 #include "chScript.h"
+#include "chAnimator.h"
+#include "MonsterBase.h"
 namespace ch
 {
 	class Boss : public Script
@@ -22,8 +24,10 @@ namespace ch
         virtual void OnTriggerExit(Collider2D* oppo);
 
     private:
-
-
+        Animator* mBossAni;
+        GameObject* mBoss;
+        Transform* mBtr;
+        Collider2D* mBcol;
 
 	};
 }

@@ -25,27 +25,33 @@ namespace ch
 	void ConvictMove::Update()
 	{
 		
-		if (!isDodging) // Skip movement if dodging
-		{
-			chState();
+		chState();
+		
 
-			if (pS == PlayerState::Walk)
-			{
-				Walking();
-				afterWalking();
-			}
-		}
-
-		if (canDodge && !isDodging) // Start dodging if not already dodging
+		if (Input::GetKeyDown(eKeyCode::RBTN) && !isDodging)
 		{
-			if (Input::GetKeyDown(eKeyCode::RBTN) && CheckKeyDirection())
-			{
-				canDodge = false;
-				pS = PlayerState::Dodge;
-				Dodging();
-				afterDodging();
-			}
+			pS = PlayerState::Rolling;
 		}
+		
+		switch (pS)
+		{
+		case PlayerState::Idle:
+			Idle();
+			break;
+		case PlayerState::Walk:
+			Walking();
+			break;
+		case PlayerState::Rolling:
+			Dodging();
+			break;
+		default:
+			
+			break;
+		}
+		
+		afterDodging();
+
+		
 		
 		
 	}
@@ -94,6 +100,11 @@ namespace ch
 		pTr->SetPosition(pos);
 	}
 
+	void ConvictMove::Idle()
+	{
+		
+	}
+
 	void ConvictMove::afterWalking()
 	{
 		if (Input::GetKeyUp(eKeyCode::W))
@@ -121,26 +132,27 @@ namespace ch
 	void ConvictMove::Dodging()
 	{
 		isDodging = true;
-		float power = 2000.f;
+		canDodge = false;
+		float power = 8000.f;
 
 		if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A)))
 		{
-			pRb->SetVelocity(Vector3(-1.f, 1.0f, 0.0f) * power); // 规氢  * power
+			pRb->SetVelocity(Vector3(-2.f, 2.0f, 0.0f) * power); // 规氢  * power
 			pDD = PlayerDodgeDirections::NWDodge;
 		}
 		else if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && (Input::GetKeyDown(eKeyCode::D) || Input::GetKey(eKeyCode::D)))
 		{
-			pRb->SetVelocity(Vector3(1.f, 1.0f, 0.0f) * power); // 规氢  * power
+			pRb->SetVelocity(Vector3(2.f, 2.0f, 0.0f) * power); // 规氢  * power
 			pDD = PlayerDodgeDirections::NEDodge;
 		}
 		else if ((Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S)) && (Input::GetKeyDown(eKeyCode::D) || Input::GetKey(eKeyCode::D)))
 		{
-			pRb->SetVelocity(Vector3(1.f, -1.0f, 0.0f) * power); // 规氢  * power
+			pRb->SetVelocity(Vector3(2.f, -2.0f, 0.0f) * power); // 规氢  * power
 			pDD = PlayerDodgeDirections::EastDodge;
 		}
 		else if ((Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S)) && (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A)))
 		{
-			pRb->SetVelocity(Vector3(-1.f, -1.0f, 0.0f) * power);
+			pRb->SetVelocity(Vector3(-2.f, -2.0f, 0.0f) * power);
 			pDD = PlayerDodgeDirections::WestDodge;
 		}
 		else if (Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S))
@@ -163,17 +175,15 @@ namespace ch
 			pRb->SetVelocity(Vector3::Right * power);
 			pDD = PlayerDodgeDirections::EastDodge;
 		}
+		
 	}
 
 	void ConvictMove::afterDodging()
 	{
 		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeRight") = std::bind(&ConvictMove::gotoNormal, this);
-		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&ConvictMove::gotoNormal, this);
 		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeBackRight") = std::bind(&ConvictMove::gotoNormal, this);
-		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeBackLeft") = std::bind(&ConvictMove::gotoNormal, this);
 		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeFront") = std::bind(&ConvictMove::gotoNormal, this);
 		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeBack") = std::bind(&ConvictMove::gotoNormal, this);
-		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeLeft") = std::bind(&ConvictMove::gotoNormal, this);
 		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeRight") = std::bind(&ConvictMove::gotoNormal, this);
 	}
 
@@ -189,7 +199,9 @@ namespace ch
 		{
 			pS = PlayerState::Idle;
 		}
-		
+
+		// Reset the rolling state
+		isRolling = false;
 	}
 
 	bool ConvictMove::CheckKeyDirection()
@@ -206,22 +218,31 @@ namespace ch
 
 	void ConvictMove::chState()
 	{
-		bool isWalking = false;
+		if (canDodge) 
+		{
+			bool isWalking = false;
 
-		if (Input::GetKey(eKeyCode::W) || Input::GetKey(eKeyCode::A) ||
-			Input::GetKey(eKeyCode::S) || Input::GetKey(eKeyCode::D))
+			if (Input::GetKey(eKeyCode::W) || Input::GetKey(eKeyCode::A) ||
+				Input::GetKey(eKeyCode::S) || Input::GetKey(eKeyCode::D))
+			{
+				isWalking = true;
+			}
+
+			if (isWalking)
+			{
+				pS = PlayerState::Walk;
+			}
+			else
+			{
+				pS = PlayerState::Idle;
+			}
+		}
+		else 
 		{
-			isWalking = true;
+			pS = PlayerState::Default;
 		}
 
-		if (isWalking)
-		{
-			pS = PlayerState::Walk;
-		}
-		else
-		{
-			pS = PlayerState::Idle;
-		}
+		
 	}
 
 }
