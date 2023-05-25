@@ -10,7 +10,8 @@
 #include "chSpriteRenderer.h"
 #include "MapObject.h"
 #include "CharacterBase.h"
-
+#include "MonsterBase.h"
+#include "chBoss.h"
 namespace ch 
 {
 	TestScene::TestScene()
@@ -43,11 +44,12 @@ namespace ch
 			mainCamera = cameraComp;
 		}
 		{
-
 			player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
-			player->SetName(L"Player");
-
-		
+			player->SetName(L"Player");		
+		}
+		{
+			GameObject* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			BossMonster->AddComponent<Boss>();
 		}
 
 		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);

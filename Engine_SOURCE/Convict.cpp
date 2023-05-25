@@ -145,7 +145,7 @@ namespace ch
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
 
-		pCollider = GetOwner()->GetComponent<Collider2D>();
+	
 
 
 		player = dynamic_cast<CharacterBase*>(GetOwner());
@@ -176,7 +176,6 @@ namespace ch
 		case PlayerState::Default:
 
 			break;
-		
 		}
 		
 	}

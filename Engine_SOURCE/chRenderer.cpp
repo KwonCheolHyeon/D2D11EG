@@ -592,7 +592,7 @@ namespace ch::renderer
 			std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"PlayerIdle");
 			std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
 			std::shared_ptr<Material> material = std::make_shared<Material>();
-			material->SetRenderingMode(eRenderingMode::Transparent);
+			material->SetRenderingMode(eRenderingMode::Opaque);
 			material->SetShader(shader);
 			material->SetTexture(eTextureSlot::T0, texture);
 			Resources::Insert<Material>(L"pIdleMaterial", material);
@@ -914,7 +914,7 @@ namespace ch::renderer
 				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Table_Default");
 				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
 				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetRenderingMode(eRenderingMode::Opaque);
 				material->SetShader(shader);
 				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"Table_Material", material);
@@ -1006,7 +1006,7 @@ namespace ch::renderer
 		std::shared_ptr <Texture> spriteTexture = Resources::Find<Texture>(L"DefaultSprite");
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 		std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-		spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		spriteMaterial->SetRenderingMode(eRenderingMode::Opaque);
 		spriteMaterial->SetShader(spriteShader);
 		spriteMaterial->SetTexture(eTextureSlot::T0, spriteTexture);
 		Resources::Insert<Material>(L"SpriteMaterial", spriteMaterial);

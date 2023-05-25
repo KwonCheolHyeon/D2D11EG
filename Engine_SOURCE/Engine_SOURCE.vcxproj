@@ -173,7 +173,6 @@
     <ClInclude Include="chComponent.h" />
     <ClInclude Include="chComputeShader.h" />
     <ClInclude Include="chConstantBuffer.h" />
-    <ClInclude Include="chConvict.h" />
     <ClInclude Include="chEntity.h" />
     <ClInclude Include="chEnums.h" />
     <ClInclude Include="chFadeEffect.h" />
@@ -225,7 +224,6 @@
     <ClInclude Include="chTitleScene.h" />
     <ClInclude Include="chTransform.h" />
     <ClInclude Include="CommonInclude.h" />
-    <ClInclude Include="ConCharMove.h" />
     <ClInclude Include="Convict.h" />
     <ClInclude Include="ConvictMove.h" />
     <ClInclude Include="framework.h" />
@@ -258,7 +256,6 @@
     <ClCompile Include="chComponent.cpp" />
     <ClCompile Include="chComputeShader.cpp" />
     <ClCompile Include="chConstantBuffer.cpp" />
-    <ClCompile Include="chConvict.cpp" />
     <ClCompile Include="chEntity.cpp" />
     <ClCompile Include="chFadeEffect.cpp" />
     <ClCompile Include="chFightSabreObject.cpp" />
@@ -306,7 +303,6 @@
     <ClCompile Include="chTitleScene.cpp" />
     <ClCompile Include="chTransform.cpp" />
     <ClCompile Include="chGameObject.cpp" />
-    <ClCompile Include="ConCharMove.cpp" />
     <ClCompile Include="Convict.cpp" />
     <ClCompile Include="ConvictMove.cpp" />
     <ClCompile Include="Engine_SOURCE.cpp" />

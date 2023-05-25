@@ -425,12 +425,6 @@
     <ClInclude Include="chTestScene.h">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClInclude>
-    <ClInclude Include="chConvict.h">
-      <Filter>GameObject\chPlayer\Player\Convict</Filter>
-    </ClInclude>
-    <ClInclude Include="ConCharMove.h">
-      <Filter>GameObject\chPlayer\Player\Convict</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -658,12 +652,6 @@
     </ClCompile>
     <ClCompile Include="chTestScene.cpp">
       <Filter>Scene\PlayGameScenes</Filter>
-    </ClCompile>
-    <ClCompile Include="chConvict.cpp">
-      <Filter>GameObject\chPlayer\Player\Convict</Filter>
-    </ClCompile>
-    <ClCompile Include="ConCharMove.cpp">
-      <Filter>GameObject\chPlayer\Player\Convict</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
