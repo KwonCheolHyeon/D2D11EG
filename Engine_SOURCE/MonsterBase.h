@@ -7,6 +7,7 @@ namespace ch
 	{
 		Spawn,
 		mIdle,
+		chase,
 		Hit,
 		Move,
 		Attack,

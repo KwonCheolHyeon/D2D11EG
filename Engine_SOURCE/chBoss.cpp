@@ -192,6 +192,37 @@ namespace ch
 	}
 	void Boss::Update()
 	{
+
+		switch (mS)
+		{
+		case monsterState::Spawn:
+			BossSpawn();
+			break;
+		case monsterState::mIdle:
+			BossIdle();
+			break;
+		case monsterState::chase:
+			BossChase();
+			break;
+		case monsterState::Hit:
+			BossHit();
+			break;
+		case monsterState::Move:
+			BossMove();
+			break;
+		case monsterState::Attack:
+			BossAttack();
+			break;
+		case monsterState::SkyBomb:
+			BossSkyBomb();
+			break;
+		case monsterState::Death:
+			BossDeath();
+			break;
+		default:
+			break;
+		}
+
 	}
 	void Boss::FixedUpdate()
 	{
@@ -215,6 +246,30 @@ namespace ch
 	{
 	}
 	void Boss::OnTriggerExit(Collider2D* oppo)
+	{
+	}
+	void Boss::BossSpawn()
+	{
+	}
+	void Boss::BossIdle()
+	{
+	}
+	void Boss::BossChase()
+	{
+	}
+	void Boss::BossHit()
+	{
+	}
+	void Boss::BossMove()
+	{
+	}
+	void Boss::BossAttack()
+	{
+	}
+	void Boss::BossSkyBomb()
+	{
+	}
+	void Boss::BossDeath()
 	{
 	}
 }

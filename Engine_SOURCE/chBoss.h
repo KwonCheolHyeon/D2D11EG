@@ -24,11 +24,20 @@ namespace ch
         virtual void OnTriggerExit(Collider2D* oppo);
 
     private:
+        void BossSpawn();
+        void BossIdle();
+        void BossChase();
+        void BossHit();
+        void BossMove();
+        void BossAttack();
+        void BossSkyBomb();
+        void BossDeath();
+    private:
         Animator* mBossAni;
         GameObject* mBoss;
         Transform* mBtr;
         Collider2D* mBcol;
-
+        monsterState mS;
 	};
 }
 
