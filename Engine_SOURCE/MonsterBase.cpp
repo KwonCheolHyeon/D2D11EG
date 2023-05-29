@@ -4,6 +4,7 @@ namespace ch
 {
 	MonsterBase::MonsterBase()
 	{
+
 	}
 	MonsterBase::~MonsterBase()
 	{

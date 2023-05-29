@@ -17,6 +17,11 @@ namespace ch
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
+
+	public:
+		void SetPlayerData(GameObject* _player) { player = _player; }
+		GameObject* GetPlayerData() { return player; }
+
 	private:
 		GameObject* chCameraOBJ;
 		GameObject* player;

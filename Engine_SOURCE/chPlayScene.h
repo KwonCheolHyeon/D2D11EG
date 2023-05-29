@@ -24,6 +24,7 @@ namespace ch
 		void generateBullet(int size);
 		void generateMap();
 		void generateObject();
+		void GetPlayerData();
 	private:
 		GameObject* chCameraOBJ;
 		GameObject* chUiCursor;

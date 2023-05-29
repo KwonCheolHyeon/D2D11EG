@@ -8,6 +8,8 @@
 #include "Convict.h"
 #include "ConvictMove.h"
 
+#include "chScene.h"
+#include "chTestScene.h"
 namespace ch 
 {
 	CharacterBase::CharacterBase()
@@ -37,6 +39,9 @@ namespace ch
 		
 		playerOBJ->AddComponent<Convict>();
 		playerOBJ->AddComponent<ConvictMove>();
+
+		
+		
 		reset();
 
 	}

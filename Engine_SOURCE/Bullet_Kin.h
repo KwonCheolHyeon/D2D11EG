@@ -1,7 +1,10 @@
 #pragma once
+#include <cmath>
 #include "chScript.h"
 #include "chAnimator.h"
 #include "MonsterBase.h"
+#include "chasePlayerOBJ.h"
+#include "chGenericAnimator.h"
 
 namespace ch
 {
@@ -40,9 +43,40 @@ namespace ch
         Transform* mTr;
         monsterState mS;
 
+        GameObject* player;
+        MonsterBase* thisMonster;
+        GameObject* thisMosterCollider;
+
+    private://¼öÇÐ
+        float CalculateDistance(const Vector3& position1, const Vector3& position2)
+        {
+            Vector3 distanceVector = position2 - position1;
+            return distanceVector.Length(); 
+        }
+
+        Vector3 Normalize(const Vector3& vector)
+        {
+            float magnitude = vector.Length(); 
+            if (magnitude != 0.0f)
+            {
+                return vector / magnitude;
+            }
+            else
+            {
+                return Vector3(0.0f, 0.0f, 0.0f); 
+            }
+        }
+
+    private:
+        void GenericMoveAnimator(int dire);
+        GenericAnimator GenericAnimator;
+        Vector3 dir;
     private:
         int monsterHp;
         bool HitAcc;
+
+  
+
 	};
 
 }

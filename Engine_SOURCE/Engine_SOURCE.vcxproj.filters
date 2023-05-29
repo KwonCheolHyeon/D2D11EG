@@ -425,6 +425,12 @@
     <ClInclude Include="chTestScene.h">
       <Filter>Scene\PlayGameScenes</Filter>
     </ClInclude>
+    <ClInclude Include="chasePlayerOBJ.h">
+      <Filter>GameObject\chMonster\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="chasePlayerSCR.h">
+      <Filter>GameObject\chMonster\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -652,6 +658,12 @@
     </ClCompile>
     <ClCompile Include="chTestScene.cpp">
       <Filter>Scene\PlayGameScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="chasePlayerOBJ.cpp">
+      <Filter>GameObject\chMonster\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="chasePlayerSCR.cpp">
+      <Filter>GameObject\chMonster\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

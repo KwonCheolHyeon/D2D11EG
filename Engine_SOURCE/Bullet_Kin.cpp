@@ -1,9 +1,15 @@
 #include "Bullet_Kin.h"
 #include "chGameObject.h"
+#include <random>
+#include "MonsterBase.h"
 #include "chResources.h"
 #include "chSpriteRenderer.h"
 #include "chCollider2D.h"
 #include "chRigidbody.h"
+#include "chScene.h"
+#include "chTestScene.h"
+#include "chasePlayerOBJ.h"
+#include "chasePlayerSCR.h"
 namespace ch 
 {
 	Bullet_Kin::Bullet_Kin()
@@ -16,14 +22,17 @@ namespace ch
 
 	void Bullet_Kin::Initalize()
 	{
+		thisMonster = dynamic_cast<MonsterBase*>(GetOwner());
+		thisMosterCollider = thisMonster->GetMonsterChaseCollider();
+		
 		monsterHp = 5;
+		
 		monsAnimator = GetOwner()->AddComponent<Animator>();
 		GetOwner()->SetLayerType(eLayerType::Monster);
 		mTr = GetOwner()->GetComponent<Transform>();
 		mTr->SetPosition(Vector3(6.f, 6.f, 0.f));
 		mTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
 		
-
 #pragma region idle
 		{
 			{
@@ -88,6 +97,10 @@ namespace ch
 		monsAnimator->Play(L"M_Idle_Front", true);
 
 		GetOwner()->AddComponent<Rigidbody>();
+
+		TestScene scene;
+		player = scene.GetPlayerData(); // 플레이어 
+		mS = monsterState::mIdle;
 	}
 
 	void Bullet_Kin::Update()
@@ -137,43 +150,88 @@ namespace ch
 		
 		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone)
 		{
-			mS = monsterState::Hit;
+			monsterHp -= 1;
+			if(monsterHp == 0)
+			{
+				mS = monsterState::Death;
+			}
+			else 
+			{
+				mS = monsterState::Hit;
+			}
+		}
+
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Wall) 
+		{
+			
 		}
 	}
 
 	void Bullet_Kin::OnCollision(Collider2D* oppo)
 	{
+
 	}
 
 	void Bullet_Kin::OnCollisionExit(Collider2D* oppo)
 	{
+
 	}
 
 	void Bullet_Kin::OnTriggerEnter(Collider2D* oppo)
 	{
+
 	}
 
 	void Bullet_Kin::OnTrigger(Collider2D* oppo)
 	{
+
 	}
 
 	void Bullet_Kin::OnTriggerExit(Collider2D* oppo)
 	{
+
+
 	}
 	void Bullet_Kin::Spawn()
 	{
+
+
 	}
 
 	void Bullet_Kin::Idle()
 	{
-
-
-
+		if (thisMosterCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true) 
+		{
+			mS = monsterState::chase;
+		}
+		else //false
+		{
+			mS = monsterState::Move;
+		}
 
 	}
 
 	void Bullet_Kin::chase()
 	{
+
+		Vector3 monsterPosition = mTr->GetPosition();
+		Vector3 playerPosition = player->GetComponent<Transform>()->GetPosition();
+
+		float distanceToPlayer = CalculateDistance(monsterPosition, playerPosition);
+
+		if (distanceToPlayer > 3.0f)//3거리 밖일때
+		{
+			Vector3 direction = Normalize(playerPosition - monsterPosition);
+			Vector3 velocity = direction * 1.f;
+			monsterPosition += velocity;
+
+			mTr->SetPosition(monsterPosition);
+		}
+		else //3거리 안에 들어옴
+		{
+		
+		}
+
 
 	}
 
@@ -190,11 +248,18 @@ namespace ch
 
 	void Bullet_Kin::Move()
 	{
-
+		static std::random_device rd;
+		static std::mt19937 gen(rd());
+		static std::uniform_int_distribution<int> dist(1, 8);
+		
+		int dir = dist(gen);
+		GenericMoveAnimator(dir);
 	}
 
 	void Bullet_Kin::Attack()
 	{
+
+
 	}
 
 	void Bullet_Kin::Death()
@@ -203,14 +268,66 @@ namespace ch
 
 	}
 
-
 	void Bullet_Kin::endHitAnimation()
 	{
-
 
 		HitAcc = true;
 		monsAnimator->Play(L"M_Idle_Front", true);
 		mS = monsterState::mIdle;
 		
 	}
+
+	void Bullet_Kin::GenericMoveAnimator(int dire)
+	{
+		dir = Vector3::Zero;
+		switch (dire)
+		{
+		case 1:
+			dir = Vector3::Up; // North
+			break;
+		case 2:
+			dir = Vector3::Down; // South
+			break;
+		case 3:
+			dir = Vector3::Right; // East
+			break;
+		case 4:
+			dir = Vector3::Left; // West
+			break;
+		case 5:
+			dir = Vector3::Up + Vector3::Right; // NE
+			break;
+		case 6:
+			dir = Vector3::Up + Vector3::Left; // NW
+			break;
+		case 7:
+			dir = Vector3::Down + Vector3::Right; // SE
+			break;
+		case 8:
+			dir = Vector3::Down + Vector3::Left; // SW
+			break;
+		default:
+			return; // Invalid direction
+		}
+
+		// Set animation parameters
+		AnimatorParam param;
+		param.AnimType = EAnimType::Linear;
+		param.StartValue = 0.f;
+		param.EndValue = 0.5f;
+		param.DurationTime = 0.5f;
+		param.DurationFunc = [this](float InCurValue) {
+			Vector3 pos = mTr->GetPosition();
+			pos += dir * InCurValue * Time::DeltaTime();
+			mTr->SetPosition(pos);
+		};
+		param.CompleteFunc = [this](float InCurValue) {
+			mS = monsterState::mIdle;
+		};
+
+		GenericAnimator.Start(param);
+	}
+
+
+
 }

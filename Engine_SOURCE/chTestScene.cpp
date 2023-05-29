@@ -1,6 +1,7 @@
 #include "chTestScene.h"
 #include "chSceneManager.h"
 #include "chInput.h"
+#include "chGameObject.h"
 #include "chObject.h"
 #include "chCamera.h"
 #include "chCameraScript.h"
@@ -11,6 +12,9 @@
 #include "MapObject.h"
 #include "CharacterBase.h"
 #include "MonsterBase.h"
+#include "Bullet_Kin.h"
+#include "chasePlayerOBJ.h"
+#include "chasePlayerSCR.h"
 #include "chBoss.h"
 namespace ch 
 {
@@ -45,11 +49,27 @@ namespace ch
 		}
 		{
 			player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
-			player->SetName(L"Player");		
+			player->SetName(L"TestPlayer");		
+
+			SetPlayerData(player);
 		}
 		{
 			GameObject* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
 			BossMonster->AddComponent<Boss>();
+		}
+		{
+
+			GameObject* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->AddComponent<Bullet_Kin>();
+		
+
+			GameObject* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::Monster, this);
+			chaseCollier->SetName(L"most");
+		
+			kinMonster->GetComponent<MonsterBase>()->SetMonsterChaseCollider(chaseCollier);
+			chaseCollier->GetComponent<chasePlayerOBJ>()->SetOwnerObj(kinMonster);
+			
+			
 		}
 
 		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
@@ -73,6 +93,7 @@ namespace ch
 
 	void TestScene::OnEnter()
 	{
+
 		Scene::OnEnter();
 	}
 

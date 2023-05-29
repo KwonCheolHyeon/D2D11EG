@@ -159,6 +159,8 @@
     <ClInclude Include="chAnimator.h" />
     <ClInclude Include="chApplication.h" />
     <ClInclude Include="CharacterBase.h" />
+    <ClInclude Include="chasePlayerOBJ.h" />
+    <ClInclude Include="chasePlayerSCR.h" />
     <ClInclude Include="chBaseRenderer.h" />
     <ClInclude Include="chBoss.h" />
     <ClInclude Include="chBullet.h" />
@@ -242,6 +244,8 @@
     <ClCompile Include="chAnimator.cpp" />
     <ClCompile Include="chApplication.cpp" />
     <ClCompile Include="CharacterBase.cpp" />
+    <ClCompile Include="chasePlayerOBJ.cpp" />
+    <ClCompile Include="chasePlayerSCR.cpp" />
     <ClCompile Include="chBaseRenderer.cpp" />
     <ClCompile Include="chBoss.cpp" />
     <ClCompile Include="chBullet.cpp" />
