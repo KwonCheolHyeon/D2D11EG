@@ -1,6 +1,8 @@
 #pragma once
 #include "chScript.h"
 #include "chAnimator.h"
+#include "MonsterBase.h"
+
 namespace ch
 {
 	class Bullet_Kin : public Script
@@ -24,9 +26,23 @@ namespace ch
 
         void endHitAnimation();
 
+    public:
+        void Spawn();
+        void Idle();
+        void chase();
+        void Hit();
+        void Move();
+        void Attack();
+        void Death();
+
     private:
         Animator* monsAnimator;
         Transform* mTr;
+        monsterState mS;
+
+    private:
+        int monsterHp;
+        bool HitAcc;
 	};
 
 }

@@ -16,7 +16,7 @@ namespace ch
 
 	void Bullet_Kin::Initalize()
 	{
-		
+		monsterHp = 5;
 		monsAnimator = GetOwner()->AddComponent<Animator>();
 		GetOwner()->SetLayerType(eLayerType::Monster);
 		mTr = GetOwner()->GetComponent<Transform>();
@@ -92,7 +92,36 @@ namespace ch
 
 	void Bullet_Kin::Update()
 	{
-		monsAnimator->GetCompleteEvent(L"M_Hit") = std::bind(&Bullet_Kin::endHitAnimation, this);
+
+
+		switch (mS)
+		{
+		case monsterState::Spawn:
+			Spawn();
+			break;
+		case monsterState::mIdle:
+			Idle();
+			break;
+		case monsterState::chase:
+			chase();
+			break;
+		case monsterState::Hit:
+			Hit();
+			break;
+		case monsterState::Move:
+			Move();
+			break;
+		case monsterState::Attack:
+			Attack();
+			break;
+		case monsterState::Death:
+			Death();
+			break;
+		default:
+			break;
+		}
+
+
 	}
 
 	void Bullet_Kin::FixedUpdate()
@@ -105,9 +134,10 @@ namespace ch
 
 	void Bullet_Kin::OnCollisionEnter(Collider2D* oppo)
 	{
+		
 		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone)
 		{
-			monsAnimator->Play(L"M_Hit", false);
+			mS = monsterState::Hit;
 		}
 	}
 
@@ -130,10 +160,57 @@ namespace ch
 	void Bullet_Kin::OnTriggerExit(Collider2D* oppo)
 	{
 	}
+	void Bullet_Kin::Spawn()
+	{
+	}
+
+	void Bullet_Kin::Idle()
+	{
+
+
+
+
+	}
+
+	void Bullet_Kin::chase()
+	{
+
+	}
+
+	void Bullet_Kin::Hit()
+	{
+		if (HitAcc == true)
+		{
+			HitAcc = false;
+			monsAnimator->Play(L"M_Hit", false);
+		}
+
+		monsAnimator->GetCompleteEvent(L"M_Hit") = std::bind(&Bullet_Kin::endHitAnimation, this);
+	}
+
+	void Bullet_Kin::Move()
+	{
+
+	}
+
+	void Bullet_Kin::Attack()
+	{
+	}
+
+	void Bullet_Kin::Death()
+	{
+
+
+	}
+
 
 	void Bullet_Kin::endHitAnimation()
 	{
-		monsAnimator->Play(L"M_Idle_Front", true);
-	}
 
+
+		HitAcc = true;
+		monsAnimator->Play(L"M_Idle_Front", true);
+		mS = monsterState::mIdle;
+		
+	}
 }
