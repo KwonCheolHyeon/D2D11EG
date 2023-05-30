@@ -25,7 +25,8 @@ namespace ch
 	private:
 		GameObject* chCameraOBJ;
 		GameObject* player;
-	
+		class MonsterBase* kinMonster;
+		class chasePlayerOBJ* chaseCollier;
 
 
 	};

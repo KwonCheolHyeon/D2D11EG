@@ -13,18 +13,16 @@ namespace ch
 		virtual void Update();
 		virtual void FixedUpdate();
 		virtual void Render();
-	
+		
 	public:
-		void SetOwnerObj(GameObject* _a) { OwnerObject = _a; }
-		GameObject* GetOwnerObj() const { return OwnerObject; }
+		void SetOwnerTransform(Transform* _a) { OwnerTr = _a; }
+
 
 	private:
-		GameObject* OwnerObject; // Declare the member variable
-		
+		Transform* OwnerTr;
 		Collider2D* mCollider;
 	public:
-	
-		Transform* OwnerTr;
+		
 		Transform* thisTr;
 	};
 

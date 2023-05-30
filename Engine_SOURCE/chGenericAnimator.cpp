@@ -71,6 +71,7 @@ void GenericAnimator::Stop(bool InCompleteEvent)
 		if (Param.CompleteFunc)
 		{
 			Param.CompleteFunc(EndValue);
+			Param.CompleteFunc = nullptr;
 			return;
 		}
 	}

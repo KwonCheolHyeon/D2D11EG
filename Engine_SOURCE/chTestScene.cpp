@@ -16,6 +16,8 @@
 #include "chasePlayerOBJ.h"
 #include "chasePlayerSCR.h"
 #include "chBoss.h"
+#include "chCollisionManager.h"
+#include "Bullet_Kin_Gun.h"
 namespace ch 
 {
 	TestScene::TestScene()
@@ -58,26 +60,33 @@ namespace ch
 			BossMonster->AddComponent<Boss>();
 		}
 		{
-
-			GameObject* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
 			kinMonster->AddComponent<Bullet_Kin>();
-		
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinMonster->SetPlayer(player);
 
-			GameObject* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::Monster, this);
+			chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
 			chaseCollier->SetName(L"most");
-		
-			kinMonster->GetComponent<MonsterBase>()->SetMonsterChaseCollider(chaseCollier);
-			chaseCollier->GetComponent<chasePlayerOBJ>()->SetOwnerObj(kinMonster);
-			
-			
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
+			gun->SetOwnerMoster(kinMonster);
 		}
 
+
+		
 		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
 		Scene::Initalize();
 	}
 
 	void TestScene::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::N))
+		{
+			SceneManager::LoadScene(eSceneType::Main);
+		}
 		Scene::Update();
 	}
 
@@ -94,6 +103,7 @@ namespace ch
 	void TestScene::OnEnter()
 	{
 
+		CollisionManager::CollisionLayerCheck(eLayerType::MonsterCollider, eLayerType::Player); // 책상과 플레이어
 		Scene::OnEnter();
 	}
 

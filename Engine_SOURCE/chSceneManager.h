@@ -18,6 +18,7 @@ namespace ch
 		static Scene* GetActiveScene() { return mActiveScene; }
 		static Scene* GetPlayScene() { return mScenes[(UINT)eSceneType::Play]; }
 		static Scene* GetTestScene() { return mScenes[(UINT)eSceneType::Test]; }
+	
 		static Scene* GetScene(eLayerType type) { return mScenes[(UINT)type]; }
 
 	private:

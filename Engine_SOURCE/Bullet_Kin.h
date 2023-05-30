@@ -37,7 +37,8 @@ namespace ch
         void Move();
         void Attack();
         void Death();
-
+        
+        void GetP2Mangle();
     private:
         Animator* monsAnimator;
         Transform* mTr;
@@ -69,12 +70,16 @@ namespace ch
 
     private:
         void GenericMoveAnimator(int dire);
+       
         GenericAnimator GenericAnimator;
         Vector3 dir;
     private:
         int monsterHp;
         bool HitAcc;
-
+    private:
+      
+        int term;// idle상태 일때 2초간 텀을 주기 위해 
+        float P2Mangle;
   
 
 	};

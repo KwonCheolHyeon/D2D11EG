@@ -22,6 +22,7 @@ namespace ch
 
 	void Bullet_Kin::Initalize()
 	{
+		
 		thisMonster = dynamic_cast<MonsterBase*>(GetOwner());
 		thisMosterCollider = thisMonster->GetMonsterChaseCollider();
 		
@@ -98,14 +99,14 @@ namespace ch
 
 		GetOwner()->AddComponent<Rigidbody>();
 
-		TestScene scene;
-		player = scene.GetPlayerData(); // 플레이어 
+		term = 1;
+		player = thisMonster->GetPlayer(); // 플레이어 
 		mS = monsterState::mIdle;
 	}
 
 	void Bullet_Kin::Update()
 	{
-
+		GenericAnimator.Update(Time::DeltaTime());
 
 		switch (mS)
 		{
@@ -200,7 +201,8 @@ namespace ch
 
 	void Bullet_Kin::Idle()
 	{
-		if (thisMosterCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true) 
+
+		if (thisMosterCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true)
 		{
 			mS = monsterState::chase;
 		}
@@ -222,14 +224,15 @@ namespace ch
 		if (distanceToPlayer > 3.0f)//3거리 밖일때
 		{
 			Vector3 direction = Normalize(playerPosition - monsterPosition);
-			Vector3 velocity = direction * 1.f;
-			monsterPosition += velocity;
+			float moveDistance = 0.1f * Time::DeltaTime();
 
-			mTr->SetPosition(monsterPosition);
+			// Interpolate the movement gradually
+			Vector3 newPosition = monsterPosition + direction * moveDistance;
+			mTr->SetPosition(newPosition);
 		}
 		else //3거리 안에 들어옴
 		{
-		
+			mS = monsterState::Attack;
 		}
 
 
@@ -252,7 +255,18 @@ namespace ch
 		static std::mt19937 gen(rd());
 		static std::uniform_int_distribution<int> dist(1, 8);
 		
+
 		int dir = dist(gen);
+		if (term == 1) 
+		{
+			term *= -1;
+		}
+		else if (term == -1) 
+		{
+			term *= -1;
+			dir = 9;
+		}
+
 		GenericMoveAnimator(dir);
 	}
 
@@ -264,7 +278,19 @@ namespace ch
 
 	void Bullet_Kin::Death()
 	{
+		monsAnimator->Play(L"M_Death", false);
 
+	}
+
+	void Bullet_Kin::GetP2Mangle()
+	{
+		Vector3 playerPos = thisMonster->GetPlayer()->GetComponent<Transform>()->GetPosition();
+
+		Vector3 MonsterPos = GetOwner()->GetCenterPos();
+
+		playerPos += MonsterPos;//마우스 위치가 화면에 고정되어 있으므로 캐릭터가 이동한 위치 만큼 더해줌
+		float aaa = atan2(playerPos.y - MonsterPos.y, playerPos.x - MonsterPos.x);
+		P2Mangle = fmodf((aaa * (180.0f / XM_PI) + 360.0f), 360.0f);// C2Mangle 360각
 
 	}
 
@@ -279,54 +305,75 @@ namespace ch
 
 	void Bullet_Kin::GenericMoveAnimator(int dire)
 	{
+		mS = monsterState::Attack;
 		dir = Vector3::Zero;
 		switch (dire)
 		{
 		case 1:
 			dir = Vector3::Up; // North
+			monsAnimator->Play(L"M_Walk_Back", true);
 			break;
 		case 2:
 			dir = Vector3::Down; // South
+			monsAnimator->Play(L"M_Walk_Front", true);
 			break;
 		case 3:
 			dir = Vector3::Right; // East
+			monsAnimator->Play(L"M_Walk_left", true);
+			GetOwner()->SetLeft();
 			break;
 		case 4:
 			dir = Vector3::Left; // West
+			monsAnimator->Play(L"M_Walk_left", true);
+			GetOwner()->SetRight();
 			break;
 		case 5:
 			dir = Vector3::Up + Vector3::Right; // NE
+			monsAnimator->Play(L"M_Walk_Back", true);
 			break;
 		case 6:
 			dir = Vector3::Up + Vector3::Left; // NW
+			monsAnimator->Play(L"M_Walk_Back", true);
 			break;
 		case 7:
 			dir = Vector3::Down + Vector3::Right; // SE
+			monsAnimator->Play(L"M_Walk_Front", true);
 			break;
 		case 8:
 			dir = Vector3::Down + Vector3::Left; // SW
+			monsAnimator->Play(L"M_Walk_Front", true);
+			break;
+		case 9:
+			monsAnimator->Play(L"M_Idle_Front", true);
 			break;
 		default:
 			return; // Invalid direction
 		}
+		dir *= 1;
 
 		// Set animation parameters
 		AnimatorParam param;
 		param.AnimType = EAnimType::Linear;
 		param.StartValue = 0.f;
 		param.EndValue = 0.5f;
-		param.DurationTime = 0.5f;
+		param.DurationTime = 2.f;
 		param.DurationFunc = [this](float InCurValue) {
 			Vector3 pos = mTr->GetPosition();
 			pos += dir * InCurValue * Time::DeltaTime();
 			mTr->SetPosition(pos);
+			
 		};
 		param.CompleteFunc = [this](float InCurValue) {
 			mS = monsterState::mIdle;
 		};
-
+		
 		GenericAnimator.Start(param);
+
+	
+	
 	}
+
+	
 
 
 

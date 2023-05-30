@@ -182,6 +182,9 @@
     <Filter Include="GameObject\chMonster\Boss">
       <UniqueIdentifier>{c3c7ab14-c2ae-4196-b407-234fd5c3b8a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\chMonster\Bullet_Kin">
+      <UniqueIdentifier>{2e9d5a65-8fdd-4201-b742-2de9748b9a57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -279,9 +282,6 @@
     </ClInclude>
     <ClInclude Include="chTitleScene.h">
       <Filter>Scene\PlayGameScenes</Filter>
-    </ClInclude>
-    <ClInclude Include="chBaseRenderer.h">
-      <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="chGridScript.h">
       <Filter>Resource\Script</Filter>
@@ -386,9 +386,6 @@
     <ClInclude Include="chFightSabreScr.h">
       <Filter>GameObject\Weapone\FightSabre</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet_Kin.h">
-      <Filter>GameObject\chMonster</Filter>
-    </ClInclude>
     <ClInclude Include="MonsterBase.h">
       <Filter>GameObject\chMonster\Base</Filter>
     </ClInclude>
@@ -430,6 +427,18 @@
     </ClInclude>
     <ClInclude Include="chasePlayerSCR.h">
       <Filter>GameObject\chMonster\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet_Kin.h">
+      <Filter>GameObject\chMonster\Bullet_Kin</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet_Kin_Gun.h">
+      <Filter>GameObject\chMonster\Bullet_Kin</Filter>
+    </ClInclude>
+    <ClInclude Include="chBaseRenderer.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet_Kin_Gun_Scr.h">
+      <Filter>GameObject\chMonster\Bullet_Kin</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -620,9 +629,6 @@
     <ClCompile Include="chFightSabreScr.cpp">
       <Filter>GameObject\Weapone\FightSabre</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet_Kin.cpp">
-      <Filter>GameObject\chMonster</Filter>
-    </ClCompile>
     <ClCompile Include="MonsterBase.cpp">
       <Filter>GameObject\chMonster\Base</Filter>
     </ClCompile>
@@ -664,6 +670,15 @@
     </ClCompile>
     <ClCompile Include="chasePlayerSCR.cpp">
       <Filter>GameObject\chMonster\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet_Kin.cpp">
+      <Filter>GameObject\chMonster\Bullet_Kin</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet_Kin_Gun.cpp">
+      <Filter>GameObject\chMonster\Bullet_Kin</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet_Kin_Gun_Scr.cpp">
+      <Filter>GameObject\chMonster\Bullet_Kin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

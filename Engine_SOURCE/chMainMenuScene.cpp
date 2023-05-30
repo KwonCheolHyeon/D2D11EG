@@ -92,7 +92,7 @@ namespace ch
 	{
 		if (Input::GetKeyDown(eKeyCode::N))
 		{
-			SceneManager::LoadScene(eSceneType::Play);
+			SceneManager::LoadScene(eSceneType::Test);
 		}
 		Scene::Update();
 	}

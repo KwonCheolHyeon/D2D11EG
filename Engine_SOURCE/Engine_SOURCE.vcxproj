@@ -155,6 +155,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bullet_Kin.h" />
+    <ClInclude Include="Bullet_Kin_Gun.h" />
+    <ClInclude Include="Bullet_Kin_Gun_Scr.h" />
     <ClInclude Include="chAnimation.h" />
     <ClInclude Include="chAnimator.h" />
     <ClInclude Include="chApplication.h" />
@@ -240,6 +242,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet_Kin.cpp" />
+    <ClCompile Include="Bullet_Kin_Gun.cpp" />
+    <ClCompile Include="Bullet_Kin_Gun_Scr.cpp" />
     <ClCompile Include="chAnimation.cpp" />
     <ClCompile Include="chAnimator.cpp" />
     <ClCompile Include="chApplication.cpp" />

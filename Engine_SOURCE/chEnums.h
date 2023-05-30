@@ -27,6 +27,7 @@ namespace ch::enums
 		PostProcess,
 		UI,
 		Wall,
+		MonsterCollider,
 		End = 16,
 	};
 
