@@ -1,6 +1,6 @@
 #include "Bullet_Kin_Gun_Scr.h"
 #include "Bullet_Kin_Gun.h"
-
+#include "Bullet_Kin.h"
 namespace ch 
 {
 	Bullet_Kin_Gun_Scr::Bullet_Kin_Gun_Scr()
@@ -16,10 +16,17 @@ namespace ch
 		anima->Play(L"WGun_Idle");
 
 		thisTrans = GetOwner()->GetComponent<Transform>();
+
+		Owner = dynamic_cast<Bullet_Kin_Gun*>(GetOwner());
+		
 	}
 	void Bullet_Kin_Gun_Scr::Update()
 	{
-		
+		if (Owner->GetOwnerMonster()->GetComponent<Bullet_Kin>()->GetShot() == true) 
+		{
+			Owner->GetOwnerMonster()->GetComponent<Bullet_Kin>()->SetShot(false);
+			Shot();
+		}
 	}
 	void Bullet_Kin_Gun_Scr::FixedUpdate()
 	{
@@ -44,5 +51,12 @@ namespace ch
 	}
 	void Bullet_Kin_Gun_Scr::OnTriggerExit(Collider2D* oppo)
 	{
+	}
+	void Bullet_Kin_Gun_Scr::Shot()
+	{
+		Animator* monsterGunAni = GetOwner()->GetComponent<Animator>();
+		monsterGunAni->Play(L"WGun_Shot",false);
+
+
 	}
 }

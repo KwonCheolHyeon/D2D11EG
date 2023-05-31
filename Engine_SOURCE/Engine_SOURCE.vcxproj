@@ -237,6 +237,8 @@
     <ClInclude Include="mainPlayer.h" />
     <ClInclude Include="MapObject.h" />
     <ClInclude Include="MonsterBase.h" />
+    <ClInclude Include="MonsterBulletObj.h" />
+    <ClInclude Include="MonsterBulletScr.h" />
     <ClInclude Include="TableObject.h" />
     <ClInclude Include="TableScr.h" />
   </ItemGroup>
@@ -319,6 +321,8 @@
     <ClCompile Include="mainPlayer.cpp" />
     <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="MonsterBase.cpp" />
+    <ClCompile Include="MonsterBulletObj.cpp" />
+    <ClCompile Include="MonsterBulletScr.cpp" />
     <ClCompile Include="TableObject.cpp" />
     <ClCompile Include="TableScr.cpp" />
   </ItemGroup>

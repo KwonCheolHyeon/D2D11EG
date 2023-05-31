@@ -39,6 +39,9 @@ namespace ch
         void Death();
         
         void GetP2Mangle();
+        bool GetShot() { return Shot; }
+        void SetShot(bool _a) { Shot = _a; }
+        float GetAngle() { return P2Mangle; }
     private:
         Animator* monsAnimator;
         Transform* mTr;
@@ -70,17 +73,16 @@ namespace ch
 
     private:
         void GenericMoveAnimator(int dire);
-       
         GenericAnimator GenericAnimator;
         Vector3 dir;
     private:
         int monsterHp;
         bool HitAcc;
+        bool Shot;
     private:
-      
         int term;// idle상태 일때 2초간 텀을 주기 위해 
         float P2Mangle;
-  
+        
 
 	};
 

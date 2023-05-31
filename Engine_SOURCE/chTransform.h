@@ -28,7 +28,7 @@ namespace ch
 
 
 		Vector3 GetPosition() { return mPosition; };
-		
+		Vector3 GetCenterPos() { return Vector3(mPosition.x / 2, mPosition.y / 2, mPosition.z / 2); }
 		Vector3 GetRotation() { return mRotation; };
 		Vector3 GetScale() { return mScale; };
 		

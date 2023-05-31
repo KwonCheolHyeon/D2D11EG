@@ -185,6 +185,9 @@
     <Filter Include="GameObject\chMonster\Bullet_Kin">
       <UniqueIdentifier>{2e9d5a65-8fdd-4201-b742-2de9748b9a57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\chMonster\MonsterBullet">
+      <UniqueIdentifier>{dc6d312f-7d84-4e3f-b8cd-049ae6612c67}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -440,6 +443,12 @@
     <ClInclude Include="Bullet_Kin_Gun_Scr.h">
       <Filter>GameObject\chMonster\Bullet_Kin</Filter>
     </ClInclude>
+    <ClInclude Include="MonsterBulletObj.h">
+      <Filter>GameObject\chMonster\MonsterBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBulletScr.h">
+      <Filter>GameObject\chMonster\MonsterBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -679,6 +688,12 @@
     </ClCompile>
     <ClCompile Include="Bullet_Kin_Gun_Scr.cpp">
       <Filter>GameObject\chMonster\Bullet_Kin</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBulletObj.cpp">
+      <Filter>GameObject\chMonster\MonsterBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBulletScr.cpp">
+      <Filter>GameObject\chMonster\MonsterBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

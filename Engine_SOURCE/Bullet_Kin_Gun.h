@@ -1,6 +1,6 @@
 #pragma once
 #include "chGameObject.h"
-
+#include "MonsterBase.h"
 namespace ch 
 {
 	class Bullet_Kin_Gun : public GameObject
@@ -16,10 +16,13 @@ namespace ch
 
 		void SetOwnerMoster(MonsterBase* _a) { OwnerMonster = _a; }
 		MonsterBase* GetOwnerMonster() { return OwnerMonster; }
-	private:
-		class MonsterBase* OwnerMonster;
-		Animator* monsterGunAni;
 
+		void GunPos();
+		void GunRotation();
+	private:
+		MonsterBase* OwnerMonster;
+		Animator* monsterGunAni;
+		float P2Gangle;
 	};
 
 

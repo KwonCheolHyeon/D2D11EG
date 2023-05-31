@@ -22,10 +22,12 @@ namespace ch
         virtual void OnTrigger(Collider2D* oppo);
         virtual void OnTriggerExit(Collider2D* oppo);
 
+        void Shot();
     private:
         Animator* anima;
         Transform* thisTrans;
-        class MonsterBase* Owner;
+        Bullet_Kin_Gun* Owner;
+      
 	};
 
 

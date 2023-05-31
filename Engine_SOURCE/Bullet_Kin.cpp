@@ -134,7 +134,7 @@ namespace ch
 		default:
 			break;
 		}
-
+		GetP2Mangle();
 
 	}
 
@@ -272,7 +272,7 @@ namespace ch
 
 	void Bullet_Kin::Attack()
 	{
-
+		Shot = true;
 
 	}
 
@@ -320,28 +320,32 @@ namespace ch
 		case 3:
 			dir = Vector3::Right; // East
 			monsAnimator->Play(L"M_Walk_left", true);
-			GetOwner()->SetLeft();
+			GetOwner()->SetRight();
 			break;
 		case 4:
 			dir = Vector3::Left; // West
 			monsAnimator->Play(L"M_Walk_left", true);
-			GetOwner()->SetRight();
+			GetOwner()->SetLeft();
 			break;
 		case 5:
 			dir = Vector3::Up + Vector3::Right; // NE
 			monsAnimator->Play(L"M_Walk_Back", true);
+			GetOwner()->SetRight();
 			break;
 		case 6:
 			dir = Vector3::Up + Vector3::Left; // NW
 			monsAnimator->Play(L"M_Walk_Back", true);
+			GetOwner()->SetLeft();
 			break;
 		case 7:
 			dir = Vector3::Down + Vector3::Right; // SE
 			monsAnimator->Play(L"M_Walk_Front", true);
+			GetOwner()->SetRight();
 			break;
 		case 8:
 			dir = Vector3::Down + Vector3::Left; // SW
 			monsAnimator->Play(L"M_Walk_Front", true);
+			GetOwner()->SetLeft();
 			break;
 		case 9:
 			monsAnimator->Play(L"M_Idle_Front", true);
