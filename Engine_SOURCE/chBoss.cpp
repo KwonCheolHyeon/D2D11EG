@@ -1,6 +1,7 @@
 #include "chBoss.h"
 #include "chResources.h"
 #include "chSpriteRenderer.h"
+#include "MonsterBulletScr.h"
 namespace ch
 {
 	Boss::Boss()
@@ -11,13 +12,15 @@ namespace ch
 	}
 	void Boss::Initalize()
 	{
+		thisMonster = dynamic_cast<MonsterBase*>(GetOwner());
+
 		mBoss = GetOwner();
 		mBossAni = GetOwner()->AddComponent<Animator>();
 		mBtr = GetOwner()->GetComponent<Transform>();
 		mBcol = GetOwner()->AddComponent<Collider2D>();
 		mBcol->SetName(L"BossCollider");
 		mBcol->SetType(eColliderType::Rect);
-		mBcol->SetSize(Vector2(1.f, 1.f));
+		mBcol->SetSize(Vector2(0.3f, 0.3f));
 
 
 		SpriteRenderer* sprite = GetOwner()->AddComponent<SpriteRenderer>();
@@ -179,20 +182,20 @@ namespace ch
 			}
 		}
 
-		{
-
-
-
-		}
 
 	#pragma endregion
 		mBtr->SetPosition(Vector3(1.f, 1.f, 1.f));
 		mBtr->SetScale(Vector3(5.f, 6.f, 1.f));
-		mBossAni->Play(L"Boss_Down_Hit");
+		mBossAni->Play(L"Boss_LeftDown_Idle");
+		monsterHp = 6;
+		
+		player = thisMonster->GetPlayer();
 	}
 	void Boss::Update()
 	{
-
+		
+		SetMd();
+		mS = monsterState::Attack;
 		switch (mS)
 		{
 		case monsterState::Spawn:
@@ -223,6 +226,8 @@ namespace ch
 			break;
 		}
 
+
+		
 	}
 	void Boss::FixedUpdate()
 	{
@@ -232,44 +237,236 @@ namespace ch
 	}
 	void Boss::OnCollisionEnter(Collider2D* oppo)
 	{
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone)
+		{
+			monsterHp -= 1;
+			if (monsterHp == 0)
+			{
+				mS = monsterState::Death;
+			}
+			else
+			{
+				mS = monsterState::Hit;
+			}
+		}
 	}
 	void Boss::OnCollision(Collider2D* oppo)
 	{
+
 	}
 	void Boss::OnCollisionExit(Collider2D* oppo)
 	{
+
 	}
 	void Boss::OnTriggerEnter(Collider2D* oppo)
 	{
+
 	}
 	void Boss::OnTrigger(Collider2D* oppo)
 	{
+
 	}
 	void Boss::OnTriggerExit(Collider2D* oppo)
 	{
+
 	}
 	void Boss::BossSpawn()
 	{
+
 	}
 	void Boss::BossIdle()
 	{
+
 	}
 	void Boss::BossChase()
 	{
+
 	}
 	void Boss::BossHit()
 	{
+
+		switch (mD)
+		{
+		case monsterDir::mNorth:
+
+			break;
+		case monsterDir::mSouth:
+
+			break;
+		case monsterDir::mEast:
+
+			break;
+		case monsterDir::mWest:
+
+			break;
+		case monsterDir::mNE:
+
+			break;
+		case monsterDir::mNW:
+
+			break;
+		case monsterDir::mSE:
+
+			break;
+		case monsterDir::mSW:
+
+			break;
+		default:
+			break;
+		}
+
+
+
+
 	}
 	void Boss::BossMove()
 	{
+
+
+
 	}
 	void Boss::BossAttack()
 	{
+		switch (mD)
+		{
+		case monsterDir::mNorth:
+
+			break;
+		case monsterDir::mSouth:
+
+			break;
+		case monsterDir::mEast:
+
+			break;
+		case monsterDir::mWest:
+
+			break;
+		case monsterDir::mNE:
+
+			break;
+		case monsterDir::mNW:
+
+			break;
+		case monsterDir::mSE:
+
+			break;
+		case monsterDir::mSW:
+
+			break;
+		default:
+			break;
+		}
+
+		attackTimer -= Time::DeltaTime(); // attackTimer 값을 감소
+
+		if (attackTimer <= 0.0f)
+		{
+			Attack();
+			attackTimer = 0.2f; // 0.2초로 타이머 재설정
+		}
 	}
 	void Boss::BossSkyBomb()
 	{
+
 	}
 	void Boss::BossDeath()
 	{
+
+	}
+	void Boss::SetMd()
+	{
+		
+		Vector3 monsterPosition = mBoss->GetComponent<Transform>()->GetPosition();
+		Vector3 playerPosition = player->GetComponent<Transform>()->GetPosition();
+
+		float dx = playerPosition.x - monsterPosition.x;
+		float dy = playerPosition.y - monsterPosition.y;
+
+		float angle = atan2(dy, dx) * 180 / 3.141592f;
+
+
+		if (angle >= -22.5 && angle < 22.5)
+		{
+			mD = monsterDir::mEast;
+		}
+		else if (angle >= 22.5 && angle < 67.5)
+		{
+			mD = monsterDir::mNE;
+		}
+		else if (angle >= 67.5 && angle < 112.5)
+		{
+			mD = monsterDir::mNorth;
+		}
+		else if (angle >= 112.5 && angle < 157.5)
+		{
+			mD = monsterDir::mNW;
+		}
+		else if (angle >= 157.5 || angle < -157.5)
+		{
+			mD = monsterDir::mWest;
+		}
+		else if (angle >= -157.5 && angle < -112.5)
+		{
+			mD = monsterDir::mSW;
+		}
+		else if (angle >= -112.5 && angle < -67.5)
+		{
+			mD = monsterDir::mSouth;
+		}
+		else if (angle >= -67.5 && angle < -22.5)
+		{
+			mD = monsterDir::mSE;
+		}
+	}
+	void Boss::Attack()
+	{
+		monsBullet = new MonsterBulletObj();
+		MonsterBulletScr* bulletScript = monsBullet->AddComponent<MonsterBulletScr>();
+		bulletScript->Initalize();
+		float angle = 0;
+		Vector3 boss = mBoss->GetComponent<Transform>()->GetPosition();
+
+		switch (mD)
+		{
+		case monsterDir::mNorth:
+			angle = 90.f;
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(0.f,1.f,0.f);
+			break;
+		case monsterDir::mSouth:
+			angle = 270.f;
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(0.f, -1.f, 0.f);
+			break;
+		case monsterDir::mEast:
+			angle = 0.f;
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(1.f, 0.f, 0.f);
+			break;
+		case monsterDir::mWest:
+			angle = 180.f;
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(-1.f, 0.f, 0.f);
+			break;
+		case monsterDir::mNE:
+			angle = 45.f;
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(1.f, 1.f, 0.f);
+			break;
+		case monsterDir::mNW:
+			angle = 135.f;
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(-1.f, 1.f, 0.f);
+			break;
+		case monsterDir::mSE:
+			angle = 315.f;
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(1.f, -1.f, 0.f);
+			break;
+		case monsterDir::mSW:
+			angle = 225.f;
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(-1.f, -1.f, 0.f);
+			break;
+		default:
+			break;
+		}
+
+
+
+		bulletScript->shootingBullet(angle, boss);
+
 	}
 }

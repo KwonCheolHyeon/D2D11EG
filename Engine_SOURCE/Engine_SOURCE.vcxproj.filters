@@ -449,6 +449,9 @@
     <ClInclude Include="MonsterBulletScr.h">
       <Filter>GameObject\chMonster\MonsterBullet</Filter>
     </ClInclude>
+    <ClInclude Include="BossGun.h">
+      <Filter>GameObject\chMonster\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -694,6 +697,9 @@
     </ClCompile>
     <ClCompile Include="MonsterBulletScr.cpp">
       <Filter>GameObject\chMonster\MonsterBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BossGun.cpp">
+      <Filter>GameObject\chMonster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

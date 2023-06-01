@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BossGun.h" />
     <ClInclude Include="Bullet_Kin.h" />
     <ClInclude Include="Bullet_Kin_Gun.h" />
     <ClInclude Include="Bullet_Kin_Gun_Scr.h" />
@@ -243,6 +244,7 @@
     <ClInclude Include="TableScr.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BossGun.cpp" />
     <ClCompile Include="Bullet_Kin.cpp" />
     <ClCompile Include="Bullet_Kin_Gun.cpp" />
     <ClCompile Include="Bullet_Kin_Gun_Scr.cpp" />

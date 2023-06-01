@@ -2,6 +2,7 @@
 #include "chScript.h"
 #include "chAnimator.h"
 #include "MonsterBase.h"
+#include "MonsterBulletObj.h"
 namespace ch
 {
 	class Boss : public Script
@@ -32,12 +33,44 @@ namespace ch
         void BossAttack();
         void BossSkyBomb();
         void BossDeath();
+
+        void SetMd();
+        void Attack();
+
+    private://¼öÇÐ
+        float CalculateDistance(const Vector3& position1, const Vector3& position2)
+        {
+            Vector3 distanceVector = position2 - position1;
+            return distanceVector.Length();
+        }
+
+        Vector3 Normalize(const Vector3& vector)
+        {
+            float magnitude = vector.Length();
+            if (magnitude != 0.0f)
+            {
+                return vector / magnitude;
+            }
+            else
+            {
+                return Vector3(0.0f, 0.0f, 0.0f);
+            }
+        }
     private:
         Animator* mBossAni;
         GameObject* mBoss;
         Transform* mBtr;
         Collider2D* mBcol;
         monsterState mS;
+        monsterDir mD;
+
+    private:
+        GameObject* player;
+        MonsterBase* thisMonster;
+        chasePlayerOBJ* thisMosterCollider;
+        int monsterHp;
+        float attackTimer;
+        MonsterBulletObj* monsBullet;
 	};
 }
 

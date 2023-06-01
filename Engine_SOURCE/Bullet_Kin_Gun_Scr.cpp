@@ -21,6 +21,7 @@ namespace ch
 		Owner = dynamic_cast<Bullet_Kin_Gun*>(GetOwner());
 		allowShot = true;
 		ShotTime = 0.f;
+		afterShotCalled = false;
 		
 	}
 	void Bullet_Kin_Gun_Scr::Update()
@@ -36,8 +37,11 @@ namespace ch
 		}
 		if (allowShot == false) 
 		{
-			
 			ShotTerm();
+		}
+		if (afterShotCalled == true) 
+		{
+			anima->GetEndEvent(L"WGun_Shot") = std::bind(&Bullet_Kin_Gun_Scr::afterShot, this);
 		}
 
 	
@@ -70,18 +74,18 @@ namespace ch
 	{
 		Animator* monsterGunAni = GetOwner()->GetComponent<Animator>();
 		monsterGunAni->Play(L"WGun_Shot",false);
-
-		afterShot();
+		afterShotCalled = true;
 
 	}
 	void Bullet_Kin_Gun_Scr::ShotTerm()
 	{
 		ShotTime += Time::DeltaTime();
 
+
 		if (ShotTime >= 2.5f) 
 		{
 			Animator* monsterGunAni = GetOwner()->GetComponent<Animator>();
-			
+
 			ShotTime = 0.f;
 			allowShot = true;
 		}
@@ -93,5 +97,8 @@ namespace ch
 		bulletScript->Initalize();
 		float angle = Owner->GetP2Gangle();
 		bulletScript->shootingBullet(angle, Owner->GetOwnerMonster()->GetComponent<Transform>()->GetPosition());
+		afterShotCalled = false;
 	}
 }
+
+//anima->GetCompleteEvent(L"WGun_Shot") = std::bind(&Bullet_Kin_Gun_Scr::afterShot, this);

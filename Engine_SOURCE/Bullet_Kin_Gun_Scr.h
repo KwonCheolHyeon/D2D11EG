@@ -33,7 +33,9 @@ namespace ch
         Transform* thisTrans;
         Bullet_Kin_Gun* Owner;
         bool allowShot;
+        bool afterShotCalled;
         float ShotTime;
+       
         MonsterBulletObj* monsBullet;
 	};
 

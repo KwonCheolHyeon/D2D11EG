@@ -18,6 +18,7 @@
 #include "chBoss.h"
 #include "chCollisionManager.h"
 #include "Bullet_Kin_Gun.h"
+#include "chCollider2D.h"
 namespace ch 
 {
 	TestScene::TestScene()
@@ -51,13 +52,26 @@ namespace ch
 		}
 		{
 			player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
-			player->SetName(L"TestPlayer");		
+			player->SetName(L"TestPlayer");
 
 			SetPlayerData(player);
 		}
 		{
-			GameObject* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			MonsterBase* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
 			BossMonster->AddComponent<Boss>();
+			Transform* bossTr = BossMonster->GetComponent<Transform>();
+			BossMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCol = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCol->SetName(L"Boss");
+
+			Collider2D* mCollider = chaseCol->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(15.f, 15.f));
+
+			chaseCol->SetOwnerTransform(bossTr);
+			BossMonster->SetMonsterChaseCollider(chaseCol);
 		}
 		{
 			kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
@@ -67,6 +81,11 @@ namespace ch
 
 			chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
 			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
 
 			chaseCollier->SetOwnerTransform(kinTransform);
 			kinMonster->SetMonsterChaseCollider(chaseCollier);

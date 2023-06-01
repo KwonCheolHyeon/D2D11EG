@@ -9,10 +9,7 @@ namespace ch
 		thisTr = GetComponent<Transform>();
 
 	
-		mCollider = this->AddComponent<Collider2D>(); //오류 걸림
-		mCollider->SetName(L"MonsterChaseCollider");
-		mCollider->SetType(eColliderType::Rect);
-		mCollider->SetSize(Vector2(6.f,6.f));
+		
 	}
 
 	chasePlayerOBJ::~chasePlayerOBJ()
