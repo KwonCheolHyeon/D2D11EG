@@ -4,6 +4,7 @@
 #include "chAnimator.h"
 #include "chResources.h"
 #include "chSpriteRenderer.h"
+#include "chasePlayerSCR.h"
 namespace ch 
 {
 
@@ -39,16 +40,21 @@ namespace ch
 		}
 
 		monsterGunAni->Play(L"WGun_Shot");
+		this->GetComponent<Transform>()->SetPosition(Vector3::Zero);
 		this->GetComponent<Transform>()->SetParent(OwnerMonster->GetComponent<Transform>());
 		this->GetComponent<Transform>()->SetScale(Vector3(1.f, .9f, 1.f));
+		this->GetComponent<Transform>()->SetOffset(Vector3(0.06f, 0.f, 0.1f));
 
-		this->GetComponent<Transform>()->SetOffset(Vector3(-0.93f, -1.f, 1.f));
+		monsterChaseCollider = OwnerMonster->GetMonsterChaseCollider();
 		GameObject::Initalize();
 	}
 
 	void Bullet_Kin_Gun::Update()
 	{
+		
 		GunPos();
+
+
 		GameObject::Update();
 	}
 
@@ -66,19 +72,32 @@ namespace ch
 	{
 		Transform* tr = this->GetComponent<Transform>();
 		Transform* OMtr = OwnerMonster->GetComponent<Transform>();
+
+		
+
 		GunRotation();
 
-		if (OwnerMonster->isLeft() == true) 
+		
+	
+
+		if (monsterChaseCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true) 
 		{
 			
+			if (OwnerMonster->isLeft() == true)
+			{
+				tr->SetRotation(Vector3(180.0f, 180.0f, -P2Gangle));
+			}
+			else
+			{
+				tr->SetRotation(Vector3(0.0f, 0.0f, P2Gangle));
+			}
+
 		}
 		else 
 		{
-			
-		}
-
+			tr->SetRotation(Vector3::Zero);
 		
-		tr->SetRotation(Vector3(0.0f, 0.0f, P2Gangle));
+		}
 		
 		
 		
@@ -87,9 +106,12 @@ namespace ch
 
 	void Bullet_Kin_Gun::GunRotation()
 	{
-		Vector3 playerPos = OwnerMonster->GetPlayer()->GetComponent<Transform>()->GetPosition();
 
-		Vector3 GunPos = this->GetComponent<Transform>()->GetPosition();
+
+		Vector3 playerPos = OwnerMonster->GetPlayer()->GetComponent<Transform>()->GetCenterPos();
+
+		Vector3 GunPos = OwnerMonster->GetComponent<Transform>()->GetCenterPos();
+		
 
 		float angle = atan2(playerPos.y - GunPos.y, playerPos.x - GunPos.x);
 		float rotationZ = fmodf((angle * (180.0f / XM_PI) + 360.0f), 360.0f); // Calculate the rotation angle in degrees

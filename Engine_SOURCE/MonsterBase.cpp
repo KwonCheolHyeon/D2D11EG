@@ -33,7 +33,7 @@ namespace ch
 	{
 		GameObject::Render();
 	}
-	void MonsterBase::SetMonsterChaseCollider(GameObject* _a)
+	void MonsterBase::SetMonsterChaseCollider(chasePlayerOBJ* _a)
 	{
 		monsterChaseCollider  =_a;
 	}

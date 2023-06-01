@@ -11,7 +11,7 @@ namespace ch::enums
 		End,
 	};
 
-	enum class eLayerType
+	enum class eLayerType //더이상 못늘림
 	{
 		None = 0,
 		Camera,
@@ -21,6 +21,7 @@ namespace ch::enums
 		Hand,
 		Weapone,
 		Monster,
+		MonsterBullet,
 		Player,
 		Dummy,
 		Particle,

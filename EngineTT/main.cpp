@@ -40,7 +40,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    //_CrtSetBreakAlloc(607); //틀린거 찾아주는 코드
+   //_CrtSetBreakAlloc(1081); //틀린거 찾아주는 코드
+
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_ENGINETT, szWindowClass, MAX_LOADSTRING);
@@ -80,6 +81,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ch::SceneManager::Release();
     application.Release();
     editor.Release();
+
+   
     return (int)msg.wParam;
 }
 

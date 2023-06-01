@@ -83,7 +83,7 @@ namespace ch
 		}
 #pragma endregion
 		
-		SpriteRenderer* sprite = GetOwner()->AddComponent<SpriteRenderer>();
+		SpriteRenderer* sprite = GetOwner()->GetComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"BulletKinMaterial");
 		sprite->SetMaterial(mateiral);
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
@@ -102,6 +102,7 @@ namespace ch
 		term = 1;
 		player = thisMonster->GetPlayer(); // 플레이어 
 		mS = monsterState::mIdle;
+		Shot = false;
 	}
 
 	void Bullet_Kin::Update()
@@ -134,9 +135,42 @@ namespace ch
 		default:
 			break;
 		}
-		GetP2Mangle();
-
+		
+		if (pervmD != mD)
+		{
+			pervmD = mD;
+			switch (mD)
+			{
+			case monsterDir::mNorth:
+				monsAnimator->Play(L"M_Walk_Back");
+				break;
+			case monsterDir::mSouth:
+				monsAnimator->Play(L"M_Walk_Front");
+				break;
+			case monsterDir::mEast:
+				monsAnimator->Play(L"M_Walk_left");
+				break;
+			case monsterDir::mWest:
+				monsAnimator->Play(L"M_Walk_left");
+				break;
+			case monsterDir::mNE:
+				monsAnimator->Play(L"M_Walk_Back");
+				break;
+			case monsterDir::mNW:
+				monsAnimator->Play(L"M_Walk_Back");
+				break;
+			case monsterDir::mSE:
+				monsAnimator->Play(L"M_Walk_Front");
+				break;
+			case monsterDir::mSW:
+				monsAnimator->Play(L"M_Walk_Front");
+				break;
+			default:
+				break;
+			}
+		}
 	}
+	
 
 	void Bullet_Kin::FixedUpdate()
 	{
@@ -201,7 +235,7 @@ namespace ch
 
 	void Bullet_Kin::Idle()
 	{
-
+		
 		if (thisMosterCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true)
 		{
 			mS = monsterState::chase;
@@ -221,7 +255,7 @@ namespace ch
 
 		float distanceToPlayer = CalculateDistance(monsterPosition, playerPosition);
 
-		if (distanceToPlayer > 3.0f)//3거리 밖일때
+		if (distanceToPlayer > 3.0f) // 3거리 밖일때
 		{
 			Vector3 direction = Normalize(playerPosition - monsterPosition);
 			float moveDistance = 0.1f * Time::DeltaTime();
@@ -229,12 +263,54 @@ namespace ch
 			// Interpolate the movement gradually
 			Vector3 newPosition = monsterPosition + direction * moveDistance;
 			mTr->SetPosition(newPosition);
+
+			if (playerPosition.x < monsterPosition.x)
+			{
+				GetOwner()->SetLeft();
+			}
+			else
+			{
+				GetOwner()->SetRight();
+			}
+
+			// 몬스터의 이동 방향을 설정
+			if (direction.x > 0 && direction.y > 0)
+			{
+				mD = monsterDir::mNE;
+			}
+			else if (direction.x < 0 && direction.y > 0)
+			{
+				mD = monsterDir::mNW;
+			}
+			else if (direction.x > 0 && direction.y < 0)
+			{
+				mD = monsterDir::mSE;
+			}
+			else if (direction.x < 0 && direction.y < 0)
+			{
+				mD = monsterDir::mSW;
+			}
+			else if (direction.x > 0)
+			{
+				mD = monsterDir::mEast;
+			}
+			else if (direction.x < 0)
+			{
+				mD = monsterDir::mWest;
+			}
+			else if (direction.y > 0)
+			{
+				mD = monsterDir::mNorth;
+			}
+			else if (direction.y < 0)
+			{
+				mD = monsterDir::mSouth;
+			}
 		}
-		else //3거리 안에 들어옴
+		else // 3거리 안에 들어옴
 		{
 			mS = monsterState::Attack;
 		}
-
 
 	}
 
@@ -267,13 +343,14 @@ namespace ch
 			dir = 9;
 		}
 
+		
 		GenericMoveAnimator(dir);
 	}
 
 	void Bullet_Kin::Attack()
 	{
 		Shot = true;
-
+		mS = monsterState::mIdle;
 	}
 
 	void Bullet_Kin::Death()
@@ -291,7 +368,7 @@ namespace ch
 		playerPos += MonsterPos;//마우스 위치가 화면에 고정되어 있으므로 캐릭터가 이동한 위치 만큼 더해줌
 		float aaa = atan2(playerPos.y - MonsterPos.y, playerPos.x - MonsterPos.x);
 		P2Mangle = fmodf((aaa * (180.0f / XM_PI) + 360.0f), 360.0f);// C2Mangle 360각
-
+		//현재 안씀
 	}
 
 	void Bullet_Kin::endHitAnimation()
@@ -305,7 +382,7 @@ namespace ch
 
 	void Bullet_Kin::GenericMoveAnimator(int dire)
 	{
-		mS = monsterState::Attack;
+		mS = monsterState::SkyBomb;
 		dir = Vector3::Zero;
 		switch (dire)
 		{
@@ -365,7 +442,6 @@ namespace ch
 			Vector3 pos = mTr->GetPosition();
 			pos += dir * InCurValue * Time::DeltaTime();
 			mTr->SetPosition(pos);
-			
 		};
 		param.CompleteFunc = [this](float InCurValue) {
 			mS = monsterState::mIdle;
@@ -373,7 +449,10 @@ namespace ch
 		
 		GenericAnimator.Start(param);
 
-	
+		if (thisMosterCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true)
+		{
+			mS = monsterState::chase;
+		}
 	
 	}
 

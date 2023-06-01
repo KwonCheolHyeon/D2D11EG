@@ -524,7 +524,8 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"W_fightsabreSprite", L"enterthe\\Waepone\\FightSabre\\Item.png");
 		//ÃÑ¾Ë
 		Resources::Load<Texture>(L"W_Bullet", L"enterthe\\Waepone\\Bullet\\bulit.png");
-
+		//Àû ÃÑ¾Ë
+		Resources::Load<Texture>(L"Enemy_Bullet", L"enterthe\\enemy\\enemy_bullet.png");
 		//bg
 		Resources::Load<Texture>(L"FloatSprite", L"battleField.png");
 
@@ -990,6 +991,15 @@ namespace ch::renderer
 				material->SetShader(shader);
 				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"Table_Right_02_Material", material);
+			}
+			{//Àû ÃÑ¾Ë
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Enemy_Bullet");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Enemy_Bullet_material", material);
 			}
 
 		}

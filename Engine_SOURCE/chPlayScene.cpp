@@ -134,12 +134,12 @@ namespace ch
 			hand->SetName(L"PHand");
 			hand->SetPlayer(player);
 
-			/*Gun *gun = object::Instantiate<Gun>(eLayerType::Hand, this);
+			Gun *gun = object::Instantiate<Gun>(eLayerType::Hand, this);
 			gun->SetName(L"PGun");
 			gun->SetHand(hand);
 			gun->SetPool(pool);
 			gun->SetGunBox(gunBox);
-			gun->SetPlayer(player);*/
+			gun->SetPlayer(player);
 		}
 
 		{
@@ -149,6 +149,7 @@ namespace ch
 		{//∏ÛΩ∫≈Õ
 			GameObject* monster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
 			monster->AddComponent<Bullet_Kin>();
+
 		}
 
 

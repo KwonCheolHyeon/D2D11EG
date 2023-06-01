@@ -46,6 +46,8 @@ namespace ch
         Animator* monsAnimator;
         Transform* mTr;
         monsterState mS;
+        monsterDir mD;
+        monsterDir pervmD;
 
         GameObject* player;
         MonsterBase* thisMonster;

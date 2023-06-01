@@ -41,14 +41,15 @@ namespace ch
 		virtual void Render();
 
 	public:
-		void SetMonsterChaseCollider(GameObject* _a);
-		GameObject* GetMonsterChaseCollider() { return monsterChaseCollider; }
+		void SetMonsterChaseCollider(chasePlayerOBJ* _a);
+		chasePlayerOBJ* GetMonsterChaseCollider() { return monsterChaseCollider; }
 
 		void SetPlayer(GameObject* _a) { player = _a; }
 		GameObject* GetPlayer() { return player; }
 	private:
-		GameObject* monsterChaseCollider; // Declare the member variable
+		class chasePlayerOBJ* monsterChaseCollider; // Declare the member variable
 		GameObject* player;
+		
 	};
 }
 

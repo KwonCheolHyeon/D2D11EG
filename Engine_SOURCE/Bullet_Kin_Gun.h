@@ -17,12 +17,14 @@ namespace ch
 		void SetOwnerMoster(MonsterBase* _a) { OwnerMonster = _a; }
 		MonsterBase* GetOwnerMonster() { return OwnerMonster; }
 
+		float GetP2Gangle() { return P2Gangle; }
 		void GunPos();
 		void GunRotation();
 	private:
 		MonsterBase* OwnerMonster;
 		Animator* monsterGunAni;
 		float P2Gangle;
+		class chasePlayerOBJ* monsterChaseCollider;
 	};
 
 

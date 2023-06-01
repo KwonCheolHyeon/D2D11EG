@@ -1,6 +1,9 @@
 #pragma once
 #include "chScript.h"
 #include "chAnimator.h"
+#include "MonsterBulletObj.h"
+#include "MonsterBulletScr.h"
+#include "Bullet_Kin_Gun.h"
 namespace ch 
 {
 	class Bullet_Kin_Gun_Scr :public Script
@@ -23,11 +26,15 @@ namespace ch
         virtual void OnTriggerExit(Collider2D* oppo);
 
         void Shot();
+        void ShotTerm();
+        void afterShot();
     private:
         Animator* anima;
         Transform* thisTrans;
         Bullet_Kin_Gun* Owner;
-      
+        bool allowShot;
+        float ShotTime;
+        MonsterBulletObj* monsBullet;
 	};
 
 

@@ -13,6 +13,6 @@
 
 
 void main() {
-    _CrtSetBreakAlloc(1645);
+    _CrtSetBreakAlloc(8950);
     _CrtDumpMemoryLeaks();
 }
