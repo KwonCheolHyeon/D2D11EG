@@ -26,14 +26,14 @@ namespace ch
 
 		Transform* pTr = playerOBJ->GetComponent<Transform>();
 		pTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
-		pTr->SetPosition(Vector3(2.f, 1.f, 0.f));
+		pTr->SetPosition(Vector3(-11.f, -10.f, -9.f));
 
 		pAnima = playerOBJ->AddComponent<Animator>();
 
 		pCollider = playerOBJ->AddComponent<Collider2D>(); //오류 걸림
 		pCollider->SetName(L"playerCollider");
 		pCollider->SetType(eColliderType::Rect);
-		pCollider->SetSize(Vector2(.1f, .2f));
+		pCollider->SetSize(Vector2(.1f, .1f));
 
 		playerOBJ->AddComponent<Rigidbody>();
 		

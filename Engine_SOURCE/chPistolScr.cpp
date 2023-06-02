@@ -64,9 +64,13 @@ namespace ch
 					Shot();
 					HandDownAnimate(Vector3(0.f, 0.1f, 0.f));
 
-					Vector3 characterPos = playerHand->GetComponent<Transform>()->GetPosition();
-
-					int a = 0;
+					Vector3 a = Input::GetWorldMousPosition();
+					a.x;
+					a.y;
+					a.z;
+				
+					int c = 0;
+					
 				}
 			}
 			if (!bullets.empty())

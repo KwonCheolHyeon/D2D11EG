@@ -40,7 +40,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-   //_CrtSetBreakAlloc(1081); //틀린거 찾아주는 코드
+    //_CrtSetBreakAlloc(8896); //틀린거 찾아주는 코드
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -108,7 +108,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     //wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
     wcex.hCursor = LoadCursorFromFile(TEXT("../Resources/enterthe/UI/crossHair/crossh.cur"));
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_ENGINETT);
+    wcex.lpszMenuName = nullptr;//MAKEINTRESOURCEW(IDC_ENGINETT);
     wcex.lpszClassName = szWindowClass;
     wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 

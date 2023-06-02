@@ -107,6 +107,8 @@ namespace ch
 		//void SetScale(Vector3 _Value);
 		void SetRotation(Vector3 _Value);
 
+		
+		Vector3 GetWorldPos();
 		Vector3 GetPos();
 		//Vector3 GetScale();
 		Vector3 GetRotation();

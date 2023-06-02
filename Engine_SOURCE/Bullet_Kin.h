@@ -84,6 +84,7 @@ namespace ch
     private:
         int term;// idle상태 일때 2초간 텀을 주기 위해 
         float P2Mangle;
+        float hitTimer;
         
 
 	};

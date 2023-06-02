@@ -148,6 +148,10 @@ namespace ch
 			GetComponent<Transform>()->SetRotation(_Value);
 		}
 	}
+	Vector3 GameObject::GetWorldPos()
+	{
+		return GetComponent<Transform>()->GetWorldPosition();
+	}
 	Vector3 GameObject::GetPos()
 	{
 		return GetComponent<Transform>()->GetPosition();

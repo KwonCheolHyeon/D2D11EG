@@ -107,4 +107,19 @@ namespace ch
 		UpdateWindow(mHwnd);
 	}
 
+	Vector2 Application::GetResolutionRatio()
+	{
+		RECT	windowRC;
+
+		GetClientRect(mHwnd, &windowRC);
+
+		float width = static_cast<float>(windowRC.right - windowRC.left);
+		float height = static_cast<float>(windowRC.bottom - windowRC.top);
+
+		return Vector2(mWidth / width, mHeight / height);
+
+	}
 }
+
+
+

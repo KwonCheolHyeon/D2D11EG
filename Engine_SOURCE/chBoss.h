@@ -63,6 +63,7 @@ namespace ch
         Collider2D* mBcol;
         monsterState mS;
         monsterDir mD;
+        monsterDir prevmD;
 
     private:
         GameObject* player;
@@ -70,6 +71,7 @@ namespace ch
         chasePlayerOBJ* thisMosterCollider;
         int monsterHp;
         float attackTimer;
+        int first;
         MonsterBulletObj* monsBullet;
 	};
 }

@@ -4,6 +4,7 @@
 #include "chResources.h"
 #include "chSpriteRenderer.h"
 #include "chInput.h"
+#include "Heart_Scr.h"
 namespace ch
 {
 	Convict::Convict()
@@ -139,7 +140,7 @@ namespace ch
 	#pragma endregion
 #pragma endregion
 
-		SpriteRenderer* sprite = GetOwner()->AddComponent<SpriteRenderer>();
+		SpriteRenderer* sprite = GetOwner()->GetComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pIdleMaterial");
 		sprite->SetMaterial(mateiral);
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
@@ -154,6 +155,8 @@ namespace ch
 		pAnimator->Play(L"P_O_Idle_Front");
 		prevIdleDirection = 7;
 		prevWalkDirection = 12;
+		pHp = 6;
+		prevHp = 6;
 		playWalking = false;
 	}
 
@@ -178,6 +181,10 @@ namespace ch
 			break;
 		}
 		
+		if (prevHp != pHp)
+		{
+			SetHeart();
+		}
 	}
 
 	void Convict::FixedUpdate()
@@ -188,9 +195,12 @@ namespace ch
 	{
 	}
 
-	#pragma region 충돌 관련
 	void Convict::OnCollisionEnter(Collider2D* oppo)
 	{
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet )
+		{
+			pHp -= 1;
+		}
 	}
 
 	void Convict::OnCollision(Collider2D* oppo)
@@ -201,17 +211,8 @@ namespace ch
 	{
 	}
 
-	void Convict::OnTriggerEnter(Collider2D* oppo)
-	{
-	}
-
-	void Convict::OnTrigger(Collider2D* oppo)
-	{
-	}
-
-	void Convict::OnTriggerExit(Collider2D* oppo)
-	{
-	}
+	#pragma region 충돌 관련
+	
 #pragma endregion
 
 
@@ -488,6 +489,69 @@ namespace ch
 	void Convict::playWalkingAin()
 	{
 		playWalking = true;
+	}
+
+	void Convict::SetHeart()
+	{
+		if (pHeartControl.size() != 0) //왜 두번 되는거지?
+		{
+			prevHp = pHp;
+			if (pHp == 8)
+			{
+				/*pHeartControl[3]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);*/
+			}
+			else if (pHp == 7)
+			{
+				/*pHeartControl[3]->GetComponent<Heart_Scr>()->setCountHeart(1);*/
+			}
+			else if (pHp == 6)
+			{
+				/*if (pHeartControl[3] != nullptr)
+				{
+					pHeartControl[3]->GetComponent<Heart_Scr>()->setCountHeart(0);
+				}*/
+				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 5)
+			{
+				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(1);
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 4)
+			{
+				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(0);
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 3)
+			{
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(1);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 2)
+			{
+				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(0);
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
+			}
+			else if (pHp == 1)
+			{
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(1);
+			}
+			else if (pHp == 0)
+			{
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(0);
+			}
+			else 
+			{
+				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(0);
+			}
+		}
 	}
 	
 }

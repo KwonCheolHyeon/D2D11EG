@@ -31,6 +31,14 @@ namespace ch
 	}
 	void MainMenu::Initalize()
 	{
+		{
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
+			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
+			Light* lightComp = directionalLight->AddComponent<Light>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		{
 			// main Ä«¸Þ¶ó
@@ -92,7 +100,7 @@ namespace ch
 	{
 		if (Input::GetKeyDown(eKeyCode::N))
 		{
-			SceneManager::LoadScene(eSceneType::Test);
+			SceneManager::LoadScene(eSceneType::Play);
 		}
 		Scene::Update();
 	}

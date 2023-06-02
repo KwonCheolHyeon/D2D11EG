@@ -44,7 +44,10 @@ namespace ch
 			anima->GetEndEvent(L"WGun_Shot") = std::bind(&Bullet_Kin_Gun_Scr::afterShot, this);
 		}
 
-	
+		if (Owner->GetOwnerMonster()->IsDead() == true) 
+		{
+			this->GetOwner()->Death();
+		}
 	}
 	void Bullet_Kin_Gun_Scr::FixedUpdate()
 	{

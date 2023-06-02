@@ -5,6 +5,8 @@
 #include "chSceneManager.h"
 #include "chPaintShader.h"
 #include "chParticleShader.h"
+
+
 namespace ch::renderer
 {
 	Vertex vertexes[4] = {};
@@ -462,7 +464,7 @@ namespace ch::renderer
 		postProcessTexture->BindShaderResource(eShaderStage::PS, 60);
 #pragma endregion
 		Resources::Load<Texture>(L"FadeEffectTexture", L"black.jpg");
-
+		Resources::Load<Texture>(L"EmptyTexture", L"empty.png");
 		//main menu
 		Resources::Load<Texture>(L"mainBG", L"enterthe\\mainmenu\\BackGround.png");
 		Resources::Load<Texture>(L"mainMenu", L"enterthe\\mainmenu\\main_menu.png");
@@ -1056,7 +1058,16 @@ namespace ch::renderer
 		//fadeMaterial->SetShader(fadeShader);
 		//fadeMaterial->SetTexture(fadeTexture);
 		//Resources::Insert<Material>(L"FadeEffectMaterial", fadeMaterial);
-
+		
+		{//≈ı∏Ì
+			std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"EmptyTexture");
+			std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+			std::shared_ptr<Material> material = std::make_shared<Material>();
+			material->SetRenderingMode(eRenderingMode::Transparent);
+			material->SetShader(shader);
+			material->SetTexture(eTextureSlot::T0, texture);
+			Resources::Insert<Material>(L"EmptyMaterial", material);
+		}
 		// Debug
 		std::shared_ptr<Shader> debugShader = Resources::Find<Shader>(L"DebugShader");
 		std::shared_ptr<Material> debugMaterial = std::make_shared<Material>();

@@ -33,7 +33,7 @@ namespace ch
 		pis->GetComponent<PistolScr>()->SetpistolHand(GetHand());
 		pis->GetComponent<PistolScr>()->SetpistolPool(GetPool());
 		pis->GetComponent<PistolScr>()->SetGunBox(GetGunBox());
-		Scene* playScene = SceneManager::GetActiveScene();
+		Scene* playScene = SceneManager::GetPlayScene();
 		playScene->AddGameObject(pis, eLayerType::Weapone);
 		Guns.push_back(pis);//Guns[0] == ÇÇ½ºÅç;
 

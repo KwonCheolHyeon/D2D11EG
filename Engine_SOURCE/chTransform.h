@@ -40,7 +40,14 @@ namespace ch
 
 		Matrix& GetWolrdMatrix() { return mWorld; }
 
-		
+		const Vector3& GetWorldPosition() const { return mWorldPosition; }
+		const Vector3& GetWorldRotation() const { return mWorldRotation; }
+		const Vector3& GetWorldScale() const { return mWorldScale; }
+
+		float GetWorldPositionX() const { return mWorldPosition.x; }
+		float GetWorldPositionY() const { return mWorldPosition.y; }
+		float GetWorldPositionZ() const { return mWorldPosition.z; }
+		Vector2 GetWorldPositionXY() const { return Vector2(mWorldPosition.x, mWorldPosition.y); }
 
 	private:
 		Transform* mParent;
@@ -53,5 +60,9 @@ namespace ch
 		Vector3 mRotation;
 		Vector3 mScale;
 		Matrix mWorld;
+
+		Vector3 mWorldPosition;
+		Vector3 mWorldRotation;
+		Vector3 mWorldScale;
 	};
 }

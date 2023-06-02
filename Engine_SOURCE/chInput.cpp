@@ -3,12 +3,16 @@
 #include "chCamera.h"
 
 extern ch::Application application;
+
 namespace ch
 {
 	std::vector<Input::Key> Input::mKeys;
 	math::Vector3 Input::mMousPosition; 
+	math::Vector3 Input::mWorldMousePosition;
+
 	float Input::mWinWidthCenter;
 	float Input::mWinHeightCenter;
+
 	int ASCII[(UINT)eKeyCode::END] =
 	{
 		//Alphabet
@@ -80,13 +84,9 @@ namespace ch
 				}
 			}
 
-			POINT mousePos = {};
-			GetCursorPos(&mousePos);
-			ScreenToClient(application.GetHwnd(), &mousePos);
-			mMousPosition.x = ((float)mousePos.x - mWinWidthCenter);
-			mMousPosition.y = -((float)mousePos.y - mWinHeightCenter);
-			mMousPosition.z = 1.0f;
+			
 
+			ConvertMousePos();
 			
 		}
 		else
@@ -113,4 +113,34 @@ namespace ch
 
 		SetWindowText(hWnd, szFloat);
 	}
+
+	void Input::ConvertMousePos()
+	{
+
+		POINT ptMouse = {};
+		GetCursorPos(&ptMouse);
+		ScreenToClient(application.GetHwnd(), &ptMouse);
+
+		RECT windowRect;
+		GetClientRect(application.GetHwnd(), &windowRect);
+
+		Vector2 resolutionRatio = application.GetResolutionRatio();
+
+		Vector2 mousePos;
+
+		mousePos.x = static_cast<float>(ptMouse.x - (windowRect.right - windowRect.left) * 0.5f) * resolutionRatio.x;
+		mousePos.y = static_cast<float>((windowRect.bottom - windowRect.top) * 0.5f - ptMouse.y) * resolutionRatio.y;
+
+		mMousPosition.x = mousePos.x;
+		mMousPosition.y = mousePos.y;
+
+		if (renderer::mainCamera)
+		{
+			Vector3 camPos = renderer::mainCamera->GetOwner()->GetWorldPos();
+
+			mWorldMousePosition.x = (mMousPosition.x / 100.f) + camPos.x;
+			mWorldMousePosition.y = (mMousPosition.y / 100.f) + camPos.y;
+		}
+	}
+	
 }

@@ -29,6 +29,7 @@ namespace ch
 		UINT GetWidth() { return mWidth; }
 		UINT GetHeight() { return mHeight; }
 
+		Vector2 GetResolutionRatio();
 	private:
 		bool initialized = false;
 		std::unique_ptr<graphics::GraphicDevice_DX11> graphicDevice;

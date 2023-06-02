@@ -144,6 +144,7 @@ namespace ch
 				this->GetOwner()->SetLayerType(eLayerType::Dummy);
 			}
 			once0 += 1;
+			this->GetOwner()->GetComponent<Collider2D>()->SetSize(Vector2::Zero);
 		}
 		
 	}

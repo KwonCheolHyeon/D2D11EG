@@ -702,6 +702,7 @@ namespace ch
 			{
 				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(0);
 			}
+
 		}
 	}
 

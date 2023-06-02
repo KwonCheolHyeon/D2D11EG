@@ -33,70 +33,70 @@ namespace ch
 
 	void TestScene::Initalize()
 	{
-		{
-			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
-			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
-			Light* lightComp = directionalLight->AddComponent<Light>();
-			lightComp->SetType(eLightType::Directional);
-			lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-		}
+		//{
+		//	GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
+		//	directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
+		//	Light* lightComp = directionalLight->AddComponent<Light>();
+		//	lightComp->SetType(eLightType::Directional);
+		//	lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		//}
 
-		{ //Main Camera 
-			chCameraOBJ = object::Instantiate<GameObject>(eLayerType::Camera, this);
-			Camera* cameraComp = chCameraOBJ->AddComponent<Camera>();
-			cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
-			//cameraComp->RegisterCameraInRenderer();
-			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			chCameraOBJ->AddComponent<CameraScript>();
-			mainCamera = cameraComp;
-		}
-		{
-			player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
-			player->SetName(L"TestPlayer");
+		//{ //Main Camera 
+		//	chCameraOBJ = object::Instantiate<GameObject>(eLayerType::Camera, this);
+		//	Camera* cameraComp = chCameraOBJ->AddComponent<Camera>();
+		//	cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
+		//	//cameraComp->RegisterCameraInRenderer();
+		//	cameraComp->TurnLayerMask(eLayerType::UI, false);
+		//	chCameraOBJ->AddComponent<CameraScript>();
+		//	mainCamera = cameraComp;
+		//}
+		//{
+		//	player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
+		//	player->SetName(L"TestPlayer");
 
-			SetPlayerData(player);
-		}
-		{
-			MonsterBase* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
-			BossMonster->AddComponent<Boss>();
-			Transform* bossTr = BossMonster->GetComponent<Transform>();
-			BossMonster->SetPlayer(player);
+		//	//SetPlayerData(player);
+		//}
+		//{
+		//	MonsterBase* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+		//	BossMonster->AddComponent<Boss>();
+		//	Transform* bossTr = BossMonster->GetComponent<Transform>();
+		//	BossMonster->SetPlayer(player);
 
-			chasePlayerOBJ* chaseCol = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
-			chaseCol->SetName(L"Boss");
+		//	chasePlayerOBJ* chaseCol = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+		//	chaseCol->SetName(L"Boss");
 
-			Collider2D* mCollider = chaseCol->AddComponent<Collider2D>(); //오류 걸림
-			mCollider->SetName(L"BossChaseCollider");
-			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(15.f, 15.f));
+		//	Collider2D* mCollider = chaseCol->AddComponent<Collider2D>(); //오류 걸림
+		//	mCollider->SetName(L"BossChaseCollider");
+		//	mCollider->SetType(eColliderType::Rect);
+		//	mCollider->SetSize(Vector2(15.f, 15.f));
 
-			chaseCol->SetOwnerTransform(bossTr);
-			BossMonster->SetMonsterChaseCollider(chaseCol);
-		}
-		{
-			kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
-			kinMonster->AddComponent<Bullet_Kin>();
-			Transform* kinTransform = kinMonster->GetComponent<Transform>();
-			kinMonster->SetPlayer(player);
+		//	chaseCol->SetOwnerTransform(bossTr);
+		//	BossMonster->SetMonsterChaseCollider(chaseCol);
+		//}
+		//{
+		//	kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+		//	kinMonster->AddComponent<Bullet_Kin>();
+		//	Transform* kinTransform = kinMonster->GetComponent<Transform>();
+		//	kinMonster->SetPlayer(player);
 
-			chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
-			chaseCollier->SetName(L"most");
+		//	chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+		//	chaseCollier->SetName(L"most");
 
-			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
-			mCollider->SetName(L"BossChaseCollider");
-			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(10.f, 10.f));
+		//	Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+		//	mCollider->SetName(L"BossChaseCollider");
+		//	mCollider->SetType(eColliderType::Rect);
+		//	mCollider->SetSize(Vector2(10.f, 10.f));
 
-			chaseCollier->SetOwnerTransform(kinTransform);
-			kinMonster->SetMonsterChaseCollider(chaseCollier);
+		//	chaseCollier->SetOwnerTransform(kinTransform);
+		//	kinMonster->SetMonsterChaseCollider(chaseCollier);
 
-			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
-			gun->SetOwnerMoster(kinMonster);
-		}
+		//	Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
+		//	gun->SetOwnerMoster(kinMonster);
+		//}
 
 
-		
-		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
+		//
+		//chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
 		Scene::Initalize();
 	}
 
@@ -104,7 +104,7 @@ namespace ch
 	{
 		if (Input::GetKeyDown(eKeyCode::N))
 		{
-			SceneManager::LoadScene(eSceneType::Main);
+			SceneManager::LoadScene(eSceneType::Play);
 		}
 		Scene::Update();
 	}

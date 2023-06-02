@@ -28,7 +28,7 @@ namespace ch
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		mScenes[(UINT)eSceneType::Test] = new TestScene();
 
-		mActiveScene = mScenes[(UINT)eSceneType::Test];
+		mActiveScene = mScenes[(UINT)eSceneType::Play];
 
 		for (Scene* scene : mScenes)
 		{

@@ -31,7 +31,7 @@ namespace ch
 		monsAnimator = GetOwner()->AddComponent<Animator>();
 		GetOwner()->SetLayerType(eLayerType::Monster);
 		mTr = GetOwner()->GetComponent<Transform>();
-		mTr->SetPosition(Vector3(6.f, 6.f, 0.f));
+		mTr->SetPosition(Vector3(5.f, -10.f, 0.f));
 		mTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
 		
 #pragma region idle
@@ -83,7 +83,7 @@ namespace ch
 		}
 #pragma endregion
 		
-		SpriteRenderer* sprite = GetOwner()->GetComponent<SpriteRenderer>();
+		SpriteRenderer* sprite = GetOwner()->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"BulletKinMaterial");
 		sprite->SetMaterial(mateiral);
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
@@ -204,7 +204,7 @@ namespace ch
 
 	void Bullet_Kin::OnCollision(Collider2D* oppo)
 	{
-
+	
 	}
 
 	void Bullet_Kin::OnCollisionExit(Collider2D* oppo)
@@ -255,10 +255,10 @@ namespace ch
 
 		float distanceToPlayer = CalculateDistance(monsterPosition, playerPosition);
 
-		if (distanceToPlayer > 3.0f) // 3거리 밖일때
+		if (distanceToPlayer > 8.0f) // 3거리 밖일때
 		{
 			Vector3 direction = Normalize(playerPosition - monsterPosition);
-			float moveDistance = 0.1f * Time::DeltaTime();
+			float moveDistance = 0.9f * Time::DeltaTime();
 
 			// Interpolate the movement gradually
 			Vector3 newPosition = monsterPosition + direction * moveDistance;
@@ -316,13 +316,14 @@ namespace ch
 
 	void Bullet_Kin::Hit()
 	{
-		if (HitAcc == true)
-		{
-			HitAcc = false;
-			monsAnimator->Play(L"M_Hit", false);
-		}
+		monsAnimator->Play(L"M_Hit", false);
+		hitTimer -= Time::DeltaTime(); // attackTimer 값을 감소
 
-		monsAnimator->GetCompleteEvent(L"M_Hit") = std::bind(&Bullet_Kin::endHitAnimation, this);
+		if (hitTimer <= 0.0f)
+		{
+			endHitAnimation();
+			hitTimer = 0.2f; // 0.2초로 타이머 재설정
+		}
 	}
 
 	void Bullet_Kin::Move()
@@ -356,7 +357,7 @@ namespace ch
 	void Bullet_Kin::Death()
 	{
 		monsAnimator->Play(L"M_Death", false);
-
+		this->GetOwner()->Death();
 	}
 
 	void Bullet_Kin::GetP2Mangle()

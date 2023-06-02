@@ -5,6 +5,7 @@
 #include "chSpriteRenderer.h"
 #include "chResources.h"
 #include "chTime.h"
+#include "chLayer.h"
 namespace ch 
 {
 	MonsterBulletScr::MonsterBulletScr()
@@ -32,7 +33,7 @@ namespace ch
 		Collider2D* bulletColl = GetOwner()->AddComponent<Collider2D>();
 		bulletColl->SetType(eColliderType::Rect);
 		bulletColl->SetCenter(Vector2(0.0f, 0.0f));
-		bulletColl->SetSize(Vector2(0.1f, 0.1f));
+		bulletColl->SetSize(Vector2(1.f, 1.f));
 
 		SpriteRenderer* bulletSr = GetOwner()->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> bodyMateiral = Resources::Find<Material>(L"Enemy_Bullet_material");
@@ -63,6 +64,10 @@ namespace ch
 
 	void MonsterBulletScr::OnCollisionEnter(Collider2D* oppo)
 	{
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Wall || oppo->GetOwner()->GetLayerType() == eLayerType::Player)
+		{
+			Reset();
+		}
 	}
 
 	void MonsterBulletScr::OnCollision(Collider2D* oppo)
@@ -107,6 +112,14 @@ namespace ch
 	}
 	void MonsterBulletScr::Reset()
 	{
+
+		SpriteRenderer* bulletSr = GetOwner()->GetComponent<SpriteRenderer>();
+		std::shared_ptr<Material> bodyMateiral = Resources::Find<Material>(L"EmptyMaterial");
+		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+		bulletSr->SetMaterial(bodyMateiral);
+		bulletSr->SetMesh(mesh);
+		
 		GetOwner()->Death();
+		
 	}
 }

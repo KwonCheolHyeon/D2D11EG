@@ -4,7 +4,7 @@
 #include "chAnimator.h"
 #include "chCollider2D.h"
 #include "ConvictMove.h"
-
+#include "chHeart_UI.h"
 namespace ch
 {
 	class Convict : public Script
@@ -22,10 +22,6 @@ namespace ch
         virtual void OnCollision(Collider2D* oppo);
         virtual void OnCollisionExit(Collider2D* oppo);
 
-        virtual void OnTriggerEnter(Collider2D* oppo);
-        virtual void OnTrigger(Collider2D* oppo);
-        virtual void OnTriggerExit(Collider2D* oppo);
-
     public:// 01   : 마우스플레이어 사이 각도 관련
         void playerLookingMouse();
         void HandSide();
@@ -37,6 +33,11 @@ namespace ch
         void RunAni();
         void RollingAni();
         void ShotAni();
+
+    public: //체력관련 함수
+        void SetHeart_UI(std::vector<Heart_UI*> a) { pHeartControl = a; }
+        void SetHeart();
+
 
     private:
         bool isDodgeAnimationing();
@@ -57,6 +58,10 @@ namespace ch
         int prevWalkDirection;//
         int prevPlayerState;
         bool playWalking;
+
+        std::vector<Heart_UI*> pHeartControl;
+        int pHp;
+        int prevHp;
 	};
 }
 

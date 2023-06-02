@@ -37,12 +37,12 @@ namespace ch
 		mTransform = GetOwner()->GetComponent<Transform>();
 
 		Vector3 scale = mTransform->GetScale();
-		scale *= Vector3(mSize.x, mSize.y, 1.0f);
+		scale *= Vector3(mSize.x, mSize.y, -1.0f);
 
 		Vector3 rotation = mTransform->GetRotation();
 
 		Vector3 position = mTransform->GetPosition();
-		Vector3 colliderPos = position + Vector3(mCenter.x, mCenter.y, - 11.0f);
+		Vector3 colliderPos = position + Vector3(mCenter.x, mCenter.y, -1.0f);
 		mPosition = colliderPos;
 
 		Matrix scaleMatrix = Matrix::CreateScale(scale);

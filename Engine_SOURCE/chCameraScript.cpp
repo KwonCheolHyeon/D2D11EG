@@ -65,6 +65,7 @@ namespace ch
 				pos = CameraStrongShakeeffect(pos);
 			}
 			
+			
 
 			tr->SetPosition(pos);
 		}

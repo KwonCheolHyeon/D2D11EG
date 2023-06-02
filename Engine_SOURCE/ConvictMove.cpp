@@ -20,7 +20,9 @@ namespace ch
 		pS = PlayerState::Idle;
 		canDodge = true;
 		isDodging = false;
-		
+		isWall = false;
+		wallPosition = Vector3::Zero;
+		GetOwner()->setHand();
 	}
 	void ConvictMove::Update()
 	{
@@ -42,6 +44,7 @@ namespace ch
 			Walking();
 			break;
 		case PlayerState::Rolling:
+			GetOwner()->setNoHand();
 			Dodging();
 			break;
 		default:
@@ -63,9 +66,41 @@ namespace ch
 	{
 	}
 
+	void ConvictMove::OnCollisionEnter(Collider2D* oppo)
+	{
+
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Wall || oppo->GetOwner()->GetName() == (L"MapWall"))
+		{
+			isWall = true;
+			pRb->SetVelocity(Vector3::Zero);
+		}
+
+	}
+
+	void ConvictMove::OnCollision(Collider2D* oppo)
+	{
+		
+	}
+
+	void ConvictMove::OnCollisionExit(Collider2D* oppo)
+	{
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Wall || oppo->GetOwner()->GetName() == (L"MapWall"))
+		{
+			isWall = false;
+
+		}
+	}
+
+	void ConvictMove::OnTriggerEnter(Collider2D* oppo)
+	{
+	}
+
+	void ConvictMove::OnTrigger(Collider2D* oppo)
+	{
+	}
+
 	void ConvictMove::Walking()
 	{
-		Vector3 pos = pTr->GetPosition();
 		Vector3 direction = Vector3::Zero;
 
 		// Up
@@ -96,13 +131,27 @@ namespace ch
 			direction.Normalize();
 		}
 
-		pos += direction * 3.5f * Time::DeltaTime();
-		pTr->SetPosition(pos);
+		float speed = 3.5f;
+		Vector3 velocity = direction * speed;
+		if (isWall == true) 
+		{
+			pRb->SetVelocity(-velocity);
+		}
+		else 
+		{
+		
+			pRb->SetVelocity(velocity);
+		}
+		
 	}
 
 	void ConvictMove::Idle()
 	{
 		
+	}
+
+	void ConvictMove::OnTriggerExit(Collider2D* oppo)
+	{
 	}
 
 	void ConvictMove::afterWalking()
@@ -133,7 +182,7 @@ namespace ch
 	{
 		isDodging = true;
 		canDodge = false;
-		float power = 8000.f;
+		float power = 800.f;
 
 		if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && (Input::GetKeyDown(eKeyCode::A) || Input::GetKey(eKeyCode::A)))
 		{
@@ -157,7 +206,7 @@ namespace ch
 		}
 		else if (Input::GetKeyDown(eKeyCode::S) || Input::GetKey(eKeyCode::S))
 		{
-			pRb->SetVelocity(Vector3::Down * power);
+			pRb->SetVelocity(Vector3(0.f, -2.0f, 0.0f) * power);
 			pDD = PlayerDodgeDirections::SouthDodge;
 		}
 		else if (Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W))
@@ -189,6 +238,7 @@ namespace ch
 
 	void ConvictMove::gotoNormal()
 	{
+		GetOwner()->setHand();
 		isDodging = false; // Reset isDodging flag
 		canDodge = true; // Enable dodging again
 		if (CheckKeyDirection())

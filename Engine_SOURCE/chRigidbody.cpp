@@ -12,9 +12,9 @@ namespace ch
 		,mForce(Vector3::Zero)
 		,mAccelation(Vector3::Zero)
 		,mVelocity(Vector3::Zero)
-		, mFriction(10.0f)
+		, mFriction(20.0f)
 	{
-		mLimitVelocity = 5.0f;
+		mLimitVelocity = 10.0f;
 		mbGround = true;
 		mGravity = Vector3(0.0f, 0.0f,0.1f);
 		mForceResetTimer = 0.0f;

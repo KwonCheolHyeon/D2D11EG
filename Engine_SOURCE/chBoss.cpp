@@ -2,6 +2,7 @@
 #include "chResources.h"
 #include "chSpriteRenderer.h"
 #include "MonsterBulletScr.h"
+#include "chasePlayerSCR.h"
 namespace ch
 {
 	Boss::Boss()
@@ -13,6 +14,7 @@ namespace ch
 	void Boss::Initalize()
 	{
 		thisMonster = dynamic_cast<MonsterBase*>(GetOwner());
+		thisMosterCollider = thisMonster->GetMonsterChaseCollider();
 
 		mBoss = GetOwner();
 		mBossAni = GetOwner()->AddComponent<Animator>();
@@ -184,18 +186,24 @@ namespace ch
 
 
 	#pragma endregion
-		mBtr->SetPosition(Vector3(1.f, 1.f, 1.f));
+		mBtr->SetPosition(Vector3(26.f, 19.f, 1.f));
 		mBtr->SetScale(Vector3(5.f, 6.f, 1.f));
 		mBossAni->Play(L"Boss_LeftDown_Idle");
 		monsterHp = 6;
-		
+		first = 1;
 		player = thisMonster->GetPlayer();
 	}
 	void Boss::Update()
 	{
-		
+		if (mS != monsterState::mIdle && thisMosterCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() && first == 1)
+		{
+			first *= -1;
+			mS = monsterState::mIdle;
+		}
+
+
 		SetMd();
-		mS = monsterState::Attack;
+
 		switch (mS)
 		{
 		case monsterState::Spawn:
@@ -276,11 +284,18 @@ namespace ch
 	}
 	void Boss::BossIdle()
 	{
-
+		if (thisMosterCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true)
+		{
+			mS = monsterState::Attack;
+		}
+		else //false
+		{
+			mS = monsterState::Move;
+		}
 	}
 	void Boss::BossChase()
 	{
-
+		
 	}
 	void Boss::BossHit()
 	{
@@ -288,28 +303,28 @@ namespace ch
 		switch (mD)
 		{
 		case monsterDir::mNorth:
-
+			mBossAni->Play(L"Boss_Up_Hit");
 			break;
 		case monsterDir::mSouth:
-
+			mBossAni->Play(L"Boss_Down_Hit");
 			break;
 		case monsterDir::mEast:
-
+			mBossAni->Play(L"Boss_Right_Hit");
 			break;
 		case monsterDir::mWest:
-
+			mBossAni->Play(L"Boss_Left_Hit");
 			break;
 		case monsterDir::mNE:
-
+			mBossAni->Play(L"Boss_RightUp_Hit");
 			break;
 		case monsterDir::mNW:
-
+			mBossAni->Play(L"Boss_LeftUp_Hit");
 			break;
 		case monsterDir::mSE:
-
+			mBossAni->Play(L"Boss_RightDown_Hit");
 			break;
 		case monsterDir::mSW:
-
+			mBossAni->Play(L"Boss_LeftDown_Hit");
 			break;
 		default:
 			break;
@@ -321,49 +336,73 @@ namespace ch
 	}
 	void Boss::BossMove()
 	{
+		Vector3 monsterPosition = mBoss->GetComponent<Transform>()->GetPosition();
+		Vector3 playerPosition = player->GetComponent<Transform>()->GetPosition();
 
+		float distanceToPlayer = CalculateDistance(monsterPosition, playerPosition);
 
+		if (distanceToPlayer > 6.0f)
+		{
+			Vector3 direction = Normalize(playerPosition - monsterPosition);
+			float moveDistance = 1.f * Time::DeltaTime();
+			Vector3 newPosition = monsterPosition + direction * moveDistance;
+			mBoss->GetComponent<Transform>()->SetPosition(newPosition);
+		}
+		else if (distanceToPlayer < 3.0f) //플레이어와 보스 사이의 거리가 너무 가까우면 피함
+		{
+			int a = 0;
+		}
+
+		mS = monsterState::mIdle;
 
 	}
 	void Boss::BossAttack()
 	{
-		switch (mD)
-		{
-		case monsterDir::mNorth:
+		
 
-			break;
-		case monsterDir::mSouth:
-
-			break;
-		case monsterDir::mEast:
-
-			break;
-		case monsterDir::mWest:
-
-			break;
-		case monsterDir::mNE:
-
-			break;
-		case monsterDir::mNW:
-
-			break;
-		case monsterDir::mSE:
-
-			break;
-		case monsterDir::mSW:
-
-			break;
-		default:
-			break;
+		if (mD != prevmD) {
+			prevmD = mD;
+			switch (mD)
+			{
+			case monsterDir::mNorth:
+				mBossAni->Play(L"Boss_Up_Move");
+				break;
+			case monsterDir::mSouth:
+				mBossAni->Play(L"Boss_Down_Move");
+				break;
+			case monsterDir::mEast:
+				mBossAni->Play(L"Boss_Right_Move");
+				break;
+			case monsterDir::mWest:
+				mBossAni->Play(L"Boss_Left_Move");
+				break;
+			case monsterDir::mNE:
+				mBossAni->Play(L"Boss_RightUp_Move");
+				break;
+			case monsterDir::mNW:
+				mBossAni->Play(L"Boss_LeftUp_Move");
+				break;
+			case monsterDir::mSE:
+				mBossAni->Play(L"Boss_RightDown_Move");
+				break;
+			case monsterDir::mSW:
+				mBossAni->Play(L"Boss_LeftDown_Move");
+				break;
+			default:
+				break;
+			}
 		}
+
 
 		attackTimer -= Time::DeltaTime(); // attackTimer 값을 감소
 
 		if (attackTimer <= 0.0f)
 		{
 			Attack();
-			attackTimer = 0.2f; // 0.2초로 타이머 재설정
+			attackTimer = 0.07f; // 0.2초로 타이머 재설정
 		}
+
+		BossMove();
 	}
 	void Boss::BossSkyBomb()
 	{
@@ -430,19 +469,19 @@ namespace ch
 		{
 		case monsterDir::mNorth:
 			angle = 90.f;
-			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(0.f,1.f,0.f);
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(0.2f,1.f,0.f);
 			break;
 		case monsterDir::mSouth:
 			angle = 270.f;
-			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(0.f, -1.f, 0.f);
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(-0.2f, -1.f, 0.f);
 			break;
 		case monsterDir::mEast:
 			angle = 0.f;
-			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(1.f, 0.f, 0.f);
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(1.f, -0.2f, 0.f);
 			break;
 		case monsterDir::mWest:
 			angle = 180.f;
-			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(-1.f, 0.f, 0.f);
+			boss = mBoss->GetComponent<Transform>()->GetPosition() + Vector3(-1.f, -0.2f, 0.f);
 			break;
 		case monsterDir::mNE:
 			angle = 45.f;
@@ -464,9 +503,11 @@ namespace ch
 			break;
 		}
 
+		float angleVariation = (rand() % 45) - 22;
 
+		float finalAngle = angle + angleVariation;
 
-		bulletScript->shootingBullet(angle, boss);
+		bulletScript->shootingBullet(finalAngle, boss);
 
 	}
 }

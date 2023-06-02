@@ -21,7 +21,8 @@ namespace ch
 		GameObject* phand = this;
 
 		phandTr = phand->GetComponent<Transform>();
-		phandTr->SetScale(Vector3(0.1f, 0.1f, 1.0f));
+		phandTr->SetPosition(Vector3(0.f, 0.f, -9.f));
+		phandTr->SetScale(Vector3(0.1f, .1f, 1.0f));
 		
 		SpriteRenderer* sprite = phand->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pHandMaterial");
@@ -34,6 +35,7 @@ namespace ch
 	void PlayerHand::Update()
 	{
 		HandLookCursor();
+		
 		HandPosition();
 		GameObject::Update();
 	}
@@ -92,6 +94,8 @@ namespace ch
 				chHandLeft = false;
 			}
 		}
+
+		
 		
 		phandTr->SetPosition(handPosition);
 		

@@ -34,6 +34,14 @@ namespace ch
         virtual void FixedUpdate() override;
         virtual void Render() override;
 
+        virtual void OnCollisionEnter(Collider2D* oppo);
+        virtual void OnCollision(Collider2D* oppo);
+        virtual void OnCollisionExit(Collider2D* oppo);
+
+        virtual void OnTriggerEnter(Collider2D* oppo);
+        virtual void OnTrigger(Collider2D* oppo);
+        virtual void OnTriggerExit(Collider2D* oppo);
+
         PlayerState GetPS() { return pS; }
         void SetPS(PlayerState _a) { pS = _a; };
 
@@ -68,7 +76,8 @@ namespace ch
         static bool canDodge; 
         bool isDodging;
         bool isRolling;
-
+        bool isWall;
+        Vector3 wallPosition;
 	};
 }
 

@@ -1,7 +1,8 @@
 #pragma once
 #include "CommonInclude.h"
 #include "chMath.h"
-
+#include "chGameObject.h"
+#include "chApplication.h"
 
 namespace ch
 {
@@ -50,6 +51,7 @@ namespace ch
 		static void Initialize();
 		static void Update();
 		static void Render(HDC hdc);
+		static void ConvertMousePos();
 
 		static __forceinline eKeyState GetKeyState(eKeyCode keyCode)
 		{
@@ -59,6 +61,11 @@ namespace ch
 		static __forceinline math::Vector3 GetMousPosition()
 		{
 			return mMousPosition;
+		}
+
+		static __forceinline math::Vector3 GetWorldMousPosition()
+		{
+			return mWorldMousePosition;
 		}
 
 		static __forceinline void SetMousPosition(const math::Vector3& newPos)
@@ -90,6 +97,7 @@ namespace ch
 	private:
 		static std::vector<Key> mKeys;
 		static math::Vector3 mMousPosition;
+		static math::Vector3 mWorldMousePosition;
 		static float mWinWidthCenter;
 		static float mWinHeightCenter;
 	};

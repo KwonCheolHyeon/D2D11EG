@@ -24,6 +24,9 @@
 #include "MapObject.h"
 #include "chCollisionManager.h"
 #include "CharacterBase.h"
+#include "Bullet_Kin_Gun.h"
+#include "chBoss.h"
+#include "Convict.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -118,38 +121,95 @@ namespace ch
 			generateBullet(100);
 		}
 
-		{//플레이어
-			player = object::Instantiate<mainPlayer>(eLayerType::Player, this);
-			player->SetName(L"Player");
+		//{//플레이어
+		//	player = object::Instantiate<mainPlayer>(eLayerType::Player, this);
+		//	player->SetName(L"Player");
 
-			player->GetComponent<PlayerScr>()->SetHeart_UI(HeartControl);
+		//	player->GetComponent<PlayerScr>()->SetHeart_UI(HeartControl);
 
-			GameObject* gunBox = object::Instantiate<GameObject>(eLayerType::Weapone, this);
-			gunBox->SetName(L"GunBox");
-			gunBox->GetComponent<Transform>()->SetPosition(Vector3(3.f, 3.f, 0.f));
-			gunBox->GetComponent<Transform>()->SetScale(Vector3(0.1f, 0.1f,0.f));
+		//	GameObject* gunBox = object::Instantiate<GameObject>(eLayerType::Weapone, this);
+		//	gunBox->SetName(L"GunBox");
+		//	gunBox->GetComponent<Transform>()->SetPosition(Vector3(3.f, 3.f, 0.f));
+		//	gunBox->GetComponent<Transform>()->SetScale(Vector3(0.1f, 0.1f,0.f));
 
 
-			PlayerHand* hand = object::Instantiate<PlayerHand>(eLayerType::Hand, this);
-			hand->SetName(L"PHand");
-			hand->SetPlayer(player);
 
-			Gun *gun = object::Instantiate<Gun>(eLayerType::Hand, this);
-			gun->SetName(L"PGun");
-			gun->SetHand(hand);
-			gun->SetPool(pool);
-			gun->SetGunBox(gunBox);
-			gun->SetPlayer(player);
+		//	PlayerHand* hand = object::Instantiate<PlayerHand>(eLayerType::Hand, this);
+		//	hand->SetName(L"PHand");
+		//	hand->SetPlayer(player);
+
+		//	Gun *gun = object::Instantiate<Gun>(eLayerType::Hand, this);
+		//	gun->SetName(L"PGun");
+		//	gun->SetHand(hand);
+		//	gun->SetPool(pool);
+		//	gun->SetGunBox(gunBox);
+		//	gun->SetPlayer(player);
+		//}
+
+
+
+		{
+				player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
+				player->SetName(L"Player");
+				player->GetComponent<Convict>()->SetHeart_UI(HeartControl);
+
+				GameObject* gunBox = object::Instantiate<GameObject>(eLayerType::Weapone, this);
+				gunBox->SetName(L"GunBox");
+				gunBox->GetComponent<Transform>()->SetPosition(Vector3(3.f, 3.f, 0.f));
+				gunBox->GetComponent<Transform>()->SetScale(Vector3(0.1f, 0.1f,0.f));
+
+
+				PlayerHand* hand = object::Instantiate<PlayerHand>(eLayerType::Hand, this);
+				hand->SetName(L"PHand");
+				hand->SetPlayer(player);
+
+				Gun *gun = object::Instantiate<Gun>(eLayerType::Hand, this);
+				gun->SetName(L"PGun");
+				gun->SetHand(hand);
+				gun->SetPool(pool);
+				gun->SetGunBox(gunBox);
+				gun->SetPlayer(player);
+		}
+
+		{//몬스터
+			
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->AddComponent<Bullet_Kin>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
+			gun->SetOwnerMoster(kinMonster);
 		}
 
 		{
 
-		}
+			MonsterBase* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			BossMonster->AddComponent<Boss>();
+			Transform* bossTr = BossMonster->GetComponent<Transform>();
+			BossMonster->SetPlayer(player);
 
-		{//몬스터
-			GameObject* monster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
-			monster->AddComponent<Bullet_Kin>();
+			chasePlayerOBJ* chaseCol = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCol->SetName(L"Boss");
 
+			Collider2D* mCollider = chaseCol->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(15.f, 15.f));
+
+			chaseCol->SetOwnerTransform(bossTr);
+			BossMonster->SetMonsterChaseCollider(chaseCol);
 		}
 
 
@@ -161,8 +221,6 @@ namespace ch
 		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
 		Scene::Initalize();
 
-		
-		
 	}
 
 	void PlayScene::Update()
@@ -200,6 +258,13 @@ namespace ch
 		CollisionManager::CollisionLayerCheck(eLayerType::Weapone, eLayerType::Monster);
 		CollisionManager::CollisionLayerCheck(eLayerType::Object, eLayerType::Player); // 책상과 플레이어
 		CollisionManager::CollisionLayerCheck(eLayerType::Object, eLayerType::Weapone);//총알과 책상
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Wall);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::MonsterBullet);
+		CollisionManager::CollisionLayerCheck(eLayerType::Wall, eLayerType::MonsterBullet);
+		CollisionManager::CollisionLayerCheck(eLayerType::Wall, eLayerType::Weapone);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::MonsterCollider);
+		
+
 		Scene::OnEnter();
 	}
 
@@ -428,15 +493,9 @@ namespace ch
 		}
 
 		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
+			
 
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(20.148f, -8.3535f, 1.0f));
-			mapColliderTr->SetScale(Vector3(-10.574f, 1.553f, 0.0f));
 
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
 		}
 
 		{
@@ -487,7 +546,7 @@ namespace ch
 			tableObject->SetName(L"table1");
 
 			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-1.5f, 0.5f, 0.0f));
+			mapColliderTr->SetPosition(Vector3(-12.5f, -8.f, 0.0f));
 			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
 		}
 
@@ -496,7 +555,7 @@ namespace ch
 			tableObject->SetName(L"table1");
 
 			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(0.5f, 2.0f, 0.0f));
+			mapColliderTr->SetPosition(Vector3(-15.5f, -8.0f, 0.0f));
 			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
 		}
 
@@ -505,7 +564,7 @@ namespace ch
 			tableObject->SetName(L"table1");
 
 			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(3.5f, 2.0f, 0.0f));
+			mapColliderTr->SetPosition(Vector3(-12.5f, -13.0f, 0.0f));
 			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
 		}
 
