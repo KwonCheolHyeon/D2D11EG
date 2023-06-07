@@ -31,6 +31,7 @@ namespace ch
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
 
+
 	#pragma region 애니
 		{//Down
 
@@ -192,6 +193,7 @@ namespace ch
 		monsterHp = 6;
 		first = 1;
 		player = thisMonster->GetPlayer();
+		hit = false;
 	}
 	void Boss::Update()
 	{
@@ -234,8 +236,6 @@ namespace ch
 			break;
 		}
 
-
-		
 	}
 	void Boss::FixedUpdate()
 	{
@@ -254,7 +254,7 @@ namespace ch
 			}
 			else
 			{
-				mS = monsterState::Hit;
+				hit = true;
 			}
 		}
 	}
@@ -303,36 +303,43 @@ namespace ch
 		switch (mD)
 		{
 		case monsterDir::mNorth:
-			mBossAni->Play(L"Boss_Up_Hit");
+			mBossAni->Play(L"Boss_Up_Hit",false);
 			break;
 		case monsterDir::mSouth:
-			mBossAni->Play(L"Boss_Down_Hit");
+			mBossAni->Play(L"Boss_Down_Hit",false);
 			break;
 		case monsterDir::mEast:
-			mBossAni->Play(L"Boss_Right_Hit");
+			mBossAni->Play(L"Boss_Right_Hit",false);
 			break;
 		case monsterDir::mWest:
-			mBossAni->Play(L"Boss_Left_Hit");
+			mBossAni->Play(L"Boss_Left_Hit",false);
 			break;
 		case monsterDir::mNE:
-			mBossAni->Play(L"Boss_RightUp_Hit");
+			mBossAni->Play(L"Boss_RightUp_Hit",false);
 			break;
 		case monsterDir::mNW:
-			mBossAni->Play(L"Boss_LeftUp_Hit");
+			mBossAni->Play(L"Boss_LeftUp_Hit",false);
 			break;
 		case monsterDir::mSE:
-			mBossAni->Play(L"Boss_RightDown_Hit");
+			mBossAni->Play(L"Boss_RightDown_Hit",false);
 			break;
 		case monsterDir::mSW:
-			mBossAni->Play(L"Boss_LeftDown_Hit");
+			mBossAni->Play(L"Boss_LeftDown_Hit",false);
 			break;
 		default:
 			break;
 		}
 
+		hitAniTimer -= Time::DeltaTime(); // attackTimer 값을 감소
 
+		if (hitAniTimer <= 0.0f)
+		{
+			prevmD = monsterDir::prev;
+			hit = false;
+			hitAniTimer = 0.4f; // 0.2초로 타이머 재설정
+		}
 
-
+		
 	}
 	void Boss::BossMove()
 	{
@@ -354,45 +361,50 @@ namespace ch
 		}
 
 		mS = monsterState::mIdle;
-
 	}
+
 	void Boss::BossAttack()
 	{
-		
-
-		if (mD != prevmD) {
-			prevmD = mD;
-			switch (mD)
-			{
-			case monsterDir::mNorth:
-				mBossAni->Play(L"Boss_Up_Move");
-				break;
-			case monsterDir::mSouth:
-				mBossAni->Play(L"Boss_Down_Move");
-				break;
-			case monsterDir::mEast:
-				mBossAni->Play(L"Boss_Right_Move");
-				break;
-			case monsterDir::mWest:
-				mBossAni->Play(L"Boss_Left_Move");
-				break;
-			case monsterDir::mNE:
-				mBossAni->Play(L"Boss_RightUp_Move");
-				break;
-			case monsterDir::mNW:
-				mBossAni->Play(L"Boss_LeftUp_Move");
-				break;
-			case monsterDir::mSE:
-				mBossAni->Play(L"Boss_RightDown_Move");
-				break;
-			case monsterDir::mSW:
-				mBossAni->Play(L"Boss_LeftDown_Move");
-				break;
-			default:
-				break;
-			}
+		if (hit == true) 
+		{
+			BossHit();
 		}
+		else if(hit == false)
+		{
+			if (mD != prevmD) {
+				prevmD = mD;
+				switch (mD)
+				{
+				case monsterDir::mNorth:
+					mBossAni->Play(L"Boss_Up_Move");
+					break;
+				case monsterDir::mSouth:
+					mBossAni->Play(L"Boss_Down_Move");
+					break;
+				case monsterDir::mEast:
+					mBossAni->Play(L"Boss_Right_Move");
+					break;
+				case monsterDir::mWest:
+					mBossAni->Play(L"Boss_Left_Move");
+					break;
+				case monsterDir::mNE:
+					mBossAni->Play(L"Boss_RightUp_Move");
+					break;
+				case monsterDir::mNW:
+					mBossAni->Play(L"Boss_LeftUp_Move");
+					break;
+				case monsterDir::mSE:
+					mBossAni->Play(L"Boss_RightDown_Move");
+					break;
+				case monsterDir::mSW:
+					mBossAni->Play(L"Boss_LeftDown_Move");
+					break;
+				default:
+					break;
+				}
+			}
 
+		}
 
 		attackTimer -= Time::DeltaTime(); // attackTimer 값을 감소
 
@@ -403,6 +415,8 @@ namespace ch
 		}
 
 		BossMove();
+
+		
 	}
 	void Boss::BossSkyBomb()
 	{
@@ -414,7 +428,6 @@ namespace ch
 	}
 	void Boss::SetMd()
 	{
-		
 		Vector3 monsterPosition = mBoss->GetComponent<Transform>()->GetPosition();
 		Vector3 playerPosition = player->GetComponent<Transform>()->GetPosition();
 

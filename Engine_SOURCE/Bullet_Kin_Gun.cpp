@@ -54,7 +54,6 @@ namespace ch
 		
 		GunPos();
 
-
 		GameObject::Update();
 	}
 
@@ -73,13 +72,9 @@ namespace ch
 		Transform* tr = this->GetComponent<Transform>();
 		Transform* OMtr = OwnerMonster->GetComponent<Transform>();
 
-		
-
 		GunRotation();
 
 		
-	
-
 		if (monsterChaseCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true) 
 		{
 			
@@ -96,11 +91,7 @@ namespace ch
 		else 
 		{
 			tr->SetRotation(Vector3::Zero);
-		
 		}
-		
-		
-		
 
 	}
 

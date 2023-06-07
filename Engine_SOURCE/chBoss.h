@@ -62,6 +62,7 @@ namespace ch
         Transform* mBtr;
         Collider2D* mBcol;
         monsterState mS;
+
         monsterDir mD;
         monsterDir prevmD;
 
@@ -69,10 +70,15 @@ namespace ch
         GameObject* player;
         MonsterBase* thisMonster;
         chasePlayerOBJ* thisMosterCollider;
-        int monsterHp;
-        float attackTimer;
-        int first;
         MonsterBulletObj* monsBullet;
+        int monsterHp;
+        int first;
+        bool hit;
+
+    private://≈∏¿Ã∏”
+        float attackTimer;
+        float hitAniTimer;
+
 	};
 }
 

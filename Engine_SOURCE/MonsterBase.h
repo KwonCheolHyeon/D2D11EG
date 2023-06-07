@@ -27,7 +27,8 @@ namespace ch
 		mNW = 6,//북서쪽 6
 
 		mSE = 7,//남동쪽 7
-		mSW = 8//남서쪽 8
+		mSW = 8,//남서쪽 8
+		prev
 	};
 	class MonsterBase : public GameObject
 	{
