@@ -78,7 +78,7 @@ namespace ch
     private://≈∏¿Ã∏”
         float attackTimer;
         float hitAniTimer;
-
+        GenericAnimator GenericAnimator;
 	};
 }
 

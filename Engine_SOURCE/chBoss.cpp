@@ -190,7 +190,7 @@ namespace ch
 		mBtr->SetPosition(Vector3(26.f, 19.f, 1.f));
 		mBtr->SetScale(Vector3(5.f, 6.f, 1.f));
 		mBossAni->Play(L"Boss_LeftDown_Idle");
-		monsterHp = 6;
+		monsterHp = 100;
 		first = 1;
 		player = thisMonster->GetPlayer();
 		hit = false;
@@ -420,6 +420,11 @@ namespace ch
 	}
 	void Boss::BossSkyBomb()
 	{
+
+
+
+
+
 
 	}
 	void Boss::BossDeath()
