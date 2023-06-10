@@ -71,13 +71,19 @@ namespace ch
         Transform* pTr;
         Rigidbody* pRb;
         CharacterBase* player;
-        
+
     public:
         static bool canDodge; 
         bool isDodging;
         bool isRolling;
         bool isWall;
         Vector3 wallPosition;
+        float speed;
+    private: //플레이어 벽
+        int directNum; //방향 결정
+        int secdirectNum;
+        int GetClosestDirection(Collider2D* collider);
+        int colliderCount;
 	};
 }
 

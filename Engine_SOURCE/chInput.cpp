@@ -9,7 +9,8 @@ namespace ch
 	std::vector<Input::Key> Input::mKeys;
 	math::Vector3 Input::mMousPosition; 
 	math::Vector3 Input::mWorldMousePosition;
-
+	math::Vector2 Input::mMousePosition;
+	math::Vector2 Input::mMouseWorldPosition;
 	float Input::mWinWidthCenter;
 	float Input::mWinHeightCenter;
 
@@ -141,6 +142,19 @@ namespace ch
 			mWorldMousePosition.x = (mMousPosition.x / 100.f) + camPos.x;
 			mWorldMousePosition.y = (mMousPosition.y / 100.f) + camPos.y;
 		}
+
+
+		Camera* cameraComp = renderer::mainCamera;
+
+		if (nullptr == cameraComp)
+			return;
+
+		Vector3 cameraPos = cameraComp->GetOwner()->GetComponent<Transform>()->GetPosition();
+		mMouseWorldPosition = mMousePosition + Vector2(cameraPos.x, cameraPos.y);
+
+
 	}
+
+	
 	
 }

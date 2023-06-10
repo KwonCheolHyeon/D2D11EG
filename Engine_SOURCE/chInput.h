@@ -52,6 +52,7 @@ namespace ch
 		static void Update();
 		static void Render(HDC hdc);
 		static void ConvertMousePos();
+		
 
 		static __forceinline eKeyState GetKeyState(eKeyCode keyCode)
 		{
@@ -66,6 +67,16 @@ namespace ch
 		static __forceinline math::Vector3 GetWorldMousPosition()
 		{
 			return mWorldMousePosition;
+		}
+
+		static __forceinline math::Vector2 GetMousPosition2()
+		{
+			return mMousePosition;
+		}
+
+		static __forceinline math::Vector2 GetWorldMousPosition2()
+		{
+			return mMouseWorldPosition;
 		}
 
 		static __forceinline void SetMousPosition(const math::Vector3& newPos)
@@ -98,7 +109,11 @@ namespace ch
 		static std::vector<Key> mKeys;
 		static math::Vector3 mMousPosition;
 		static math::Vector3 mWorldMousePosition;
+		
 		static float mWinWidthCenter;
 		static float mWinHeightCenter;
+
+		static math::Vector2 mMousePosition;
+		static math::Vector2 mMouseWorldPosition;
 	};
 }

@@ -505,6 +505,7 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"Map_vertical_Texture", L"enterthe\\Map\\map\\vertical_map.png");
 		Resources::Load<Texture>(L"Map_horizontal_Texture", L"enterthe\\Map\\map\\horizontal_map.png");
 		Resources::Load<Texture>(L"Map_sample_Texture", L"enterthe\\Map\\map\\map_sample.png");
+		Resources::Load<Texture>(L"Map_sample_Texture2", L"enterthe\\Map\\map\\map_sample2.png");
 #pragma endregion
 #pragma region 오브젝트
 		Resources::Load<Texture>(L"Table_Default", L"enterthe\\object\\table\\table_default.png"); //기본 책상
@@ -906,6 +907,15 @@ namespace ch::renderer
 				material->SetShader(shader);
 				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"MapSample_Material", material);
+			}
+			{//map 샘플
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_sample_Texture2");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"MapSample_Material2", material);
 			}
 
 

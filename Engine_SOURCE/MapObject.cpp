@@ -11,7 +11,7 @@ namespace ch
 		
 		SpriteRenderer* backSR = map->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> backmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"MapSample_Material");
+		std::shared_ptr<Material> backmaterial = Resources::Find<Material>(L"MapSample_Material2");
 		backSR->SetMaterial(backmaterial);
 		backSR->SetMesh(backmesh);
 

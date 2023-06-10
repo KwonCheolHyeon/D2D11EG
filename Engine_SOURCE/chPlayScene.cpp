@@ -238,7 +238,13 @@ namespace ch
 		{
 			mapTr->SetPosition(Vector3(0.0f, 0.0f, 0.1f));
 		}
-
+		if (Input::GetKeyDown(eKeyCode::SPACE))
+		{
+			Vector3 mouse = Input::GetWorldMousPosition();
+			Vector2 mouse2 = Input::GetWorldMousPosition2();
+			Vector3 chara = player->GetComponent<Transform>()->GetPosition();
+ 			int b = 0;
+		}
 
 		Scene::Update();
 	}
@@ -313,7 +319,7 @@ namespace ch
 
 			mapTr = back->GetComponent<Transform>();
 			mapTr->SetPosition(Vector3(0.0f, 0.0f, 0.1f));
-			mapTr->SetScale(Vector3(50.0f, 61.3f, 0.1f));
+			mapTr->SetScale(Vector3(50.0f, 62.91f, 0.1f));
 		}
 #pragma region 콜라이더
 		{
@@ -321,8 +327,8 @@ namespace ch
 			mapColliderObject->SetName(L"MapWall");
 
 			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(5.5f, -0.25f, 0.0f));
-			mapColliderTr->SetScale(Vector3(7.3f, 1.0f, 1.0f));
+			mapColliderTr->SetPosition(Vector3(-17.95f, -8.65f, 0.0f));
+			mapColliderTr->SetScale(Vector3(5.8f, 4.73f, 1.0f));
 
 			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
 			mapCollider->SetType(eColliderType::Rect);
@@ -333,12 +339,11 @@ namespace ch
 			mapColliderObject->SetName(L"MapWall");
 
 			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(12.1f, 1.1f, 0.0f));
-			mapColliderTr->SetScale(Vector3(6.68f, 4.0f, 1.0f));
+			mapColliderTr->SetPosition(Vector3(-12.18f, -8.685f, 0.0f));
+			mapColliderTr->SetScale(Vector3(3.838f, 4.7f, 1.0f));
 
 			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
 			mapCollider->SetType(eColliderType::Rect);
-			mapCollider->SetCenter(Vector2(0.0f, 0.0f));
 		}
 
 		{
@@ -346,193 +351,41 @@ namespace ch
 			mapColliderObject->SetName(L"MapWall");
 
 			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(18.32f, -0.2f, 0.0f));
-			mapColliderTr->SetScale(Vector3(7.79f, 5.5f, 1.0f));
+			mapColliderTr->SetPosition(Vector3(-12.18f, -8.685f, 0.0f));
+			mapColliderTr->SetScale(Vector3(3.838f, 4.7f, 1.0f));
 
 			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
 			mapCollider->SetType(eColliderType::Rect);
-			
+		}
+
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-7.44f, -12.3f, 0.0f));
+			mapColliderTr->SetScale(Vector3(5.7f, 4.12f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-0.849f, -12.72f, 0.0f));
+			mapColliderTr->SetScale(Vector3(7.61f, 1.44f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+
+
 		
-		}
 
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(11.55f, -6.2f, 0.0f));
-			mapColliderTr->SetScale(Vector3(6.7f, 8.25f, 1.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-
-
-		}
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(3.74f, -8.5f, 1.0f));
-			mapColliderTr->SetScale(Vector3(9.68f, 1.41f, 0.0f));
-			
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-
-
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-4.22f, -7.88f, 1.0f));
-			mapColliderTr->SetScale(Vector3(6.73f, 5.02f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(6.49f, -22.885f, 1.0f));
-			mapColliderTr->SetScale(Vector3(4.4f, 10.85f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-5.92f, -28.3f, 1.0f));
-			mapColliderTr->SetScale(Vector3(6.7f, 4.2f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(11.57f, -14.5f, 1.0f));
-			mapColliderTr->SetScale(Vector3(6.7f, 5.91f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(14.8f, -14.9f, 1.0f));
-			mapColliderTr->SetScale(Vector3(1.26f, 5.6f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-2.14f, 7.72f, 1.0f));
-			mapColliderTr->SetScale(Vector3(10.4f, 5.6f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(12.1f, 8.04f, 1.0f));
-			mapColliderTr->SetScale(Vector3(6.7f, 7.4f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(6.82f, 7.7f, 1.0f));
-			mapColliderTr->SetScale(Vector3(5.25f, 5.5f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-4.5f, 1.96f, 1.0f));
-			mapColliderTr->SetScale(Vector3(12.9f, 6.125f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			
-
-
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-9.82f, -3.6f, 1.0f));
-			mapColliderTr->SetScale(Vector3(4.5f, 5.5f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-16.7f, -3.6f, 1.0f));
-			mapColliderTr->SetScale(Vector3(7.f, 5.5f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
-
-		{
-			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
-			mapColliderObject->SetName(L"MapWall");
-
-			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-4.25f, -13.79f, 1.0f));
-			mapColliderTr->SetScale(Vector3(6.65f, 4.5f, 0.0f));
-
-			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
-			mapCollider->SetType(eColliderType::Rect);
-		}
+		
 		
 
 #pragma endregion
