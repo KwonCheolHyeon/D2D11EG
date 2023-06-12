@@ -18,8 +18,8 @@ namespace ch
 
 	void MonsterBulletScr::Initalize()
 	{
-		Scene* playScene = SceneManager::GetActiveScene();
-		playScene->AddGameObject(GetOwner(), eLayerType::MonsterBullet);
+		/*Scene* playScene = SceneManager::GetActiveScene();
+		playScene->AddGameObject(GetOwner(), eLayerType::MonsterBullet);*/
 
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();

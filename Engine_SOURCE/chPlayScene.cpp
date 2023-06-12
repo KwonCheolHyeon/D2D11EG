@@ -27,6 +27,9 @@
 #include "Bullet_Kin_Gun.h"
 #include "chBoss.h"
 #include "Convict.h"
+#include "DoorObj.h"
+#include "DoorScr.h"
+#include "DoorColliderObj.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -146,7 +149,7 @@ namespace ch
 		//	gun->SetPlayer(player);
 		//}
 
-
+		generateObject();
 
 		{
 				player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
@@ -155,7 +158,7 @@ namespace ch
 
 				GameObject* gunBox = object::Instantiate<GameObject>(eLayerType::Weapone, this);
 				gunBox->SetName(L"GunBox");
-				gunBox->GetComponent<Transform>()->SetPosition(Vector3(3.f, 3.f, 0.f));
+				gunBox->GetComponent<Transform>()->SetPosition(Vector3(-17.f, 13.7f, 0.f));
 				gunBox->GetComponent<Transform>()->SetScale(Vector3(0.1f, 0.1f,0.f));
 
 
@@ -176,6 +179,7 @@ namespace ch
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
 			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-4.86f, 11.44f, 0.1f));
 			kinMonster->SetPlayer(player);
 
 			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
@@ -191,9 +195,11 @@ namespace ch
 
 			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
 			gun->SetOwnerMoster(kinMonster);
+
+			mainDoor1->SetMonsterBases(kinMonster);
 		}
 
-		{
+		{ //보스
 
 			MonsterBase* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
 			BossMonster->AddComponent<Boss>();
@@ -215,7 +221,7 @@ namespace ch
 
 		
 		generateMap();
-		generateObject();
+		
 
 
 		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
@@ -420,6 +426,65 @@ namespace ch
 			mapColliderTr->SetPosition(Vector3(-12.5f, -13.0f, 0.0f));
 			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
 		}
+
+		{//문
+			DoorObj* DoorObject = object::Instantiate<DoorObj>(eLayerType::Wall, this);
+			DoorObject->SetName(L"DoorFront");
+
+			DoorObject->AddComponent<DoorScr>();
+
+			Transform* mapColliderTr = DoorObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-14.6f, -9.6f, 0.0f));
+			mapColliderTr->SetScale(Vector3(6.f, 5.f, 0.1f));
+		}
+
+		{//문
+			DoorObj* DoorObject = object::Instantiate<DoorObj>(eLayerType::Wall, this);
+			DoorObject->SetName(L"DoorSide");
+
+			DoorObject->AddComponent<DoorScr>();
+
+			Transform* mapColliderTr = DoorObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-10.24f, -14.05f, 0.0f));
+			mapColliderTr->SetScale(Vector3(5.f, 5.f, 0.1f));
+
+			
+		}
+
+
+
+		{//문
+			mainDoor1 = object::Instantiate<DoorObj>(eLayerType::Wall, this);
+			mainDoor1->SetName(L"DoorSide");
+
+			mainDoor1->AddComponent<DoorScr>();
+
+			Transform* mapColliderTr = mainDoor1->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-9.57f, 14.34f, 0.0f));
+			mapColliderTr->SetScale(Vector3(5.f, 5.f, 0.1f));
+
+			DoorColliderObj* DoorColObject = object::Instantiate<DoorColliderObj>(eLayerType::MonsterCollider, this);
+			DoorColObject->SetName(L"DoorSideCol");
+			DoorColObject->SetDoor(mainDoor1);
+
+			mainDoor1->isMainDoorTrue();
+			
+		}
+
+		{//문
+			DoorObj* DoorObject = object::Instantiate<DoorObj>(eLayerType::Wall, this);
+			DoorObject->SetName(L"DoorFront");
+
+			DoorObject->AddComponent<DoorScr>();
+
+			Transform* mapColliderTr = DoorObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-0.8f, 3.5f, 0.0f));
+			mapColliderTr->SetScale(Vector3(6.f, 5.f, 0.1f));
+			
+			
+		}
+
+		
 
 
 	}

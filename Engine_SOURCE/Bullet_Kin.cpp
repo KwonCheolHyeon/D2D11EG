@@ -31,7 +31,7 @@ namespace ch
 		monsAnimator = GetOwner()->AddComponent<Animator>();
 		GetOwner()->SetLayerType(eLayerType::Monster);
 		mTr = GetOwner()->GetComponent<Transform>();
-		mTr->SetPosition(Vector3(5.f, -10.f, 0.f));
+		
 		mTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
 		
 #pragma region idle

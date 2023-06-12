@@ -230,6 +230,11 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="Convict.h" />
     <ClInclude Include="ConvictMove.h" />
+    <ClInclude Include="DoorColliderObj.h" />
+    <ClInclude Include="DoorColliderScr.h" />
+    <ClInclude Include="DoorObj.h" />
+    <ClInclude Include="DoorRoomControl.h" />
+    <ClInclude Include="DoorScr.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="chEngine.h" />
     <ClInclude Include="chSpriteRenderer.h" />
@@ -239,6 +244,7 @@
     <ClInclude Include="MonsterBase.h" />
     <ClInclude Include="MonsterBulletObj.h" />
     <ClInclude Include="MonsterBulletScr.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TableObject.h" />
     <ClInclude Include="TableScr.h" />
   </ItemGroup>
@@ -315,6 +321,11 @@
     <ClCompile Include="chGameObject.cpp" />
     <ClCompile Include="Convict.cpp" />
     <ClCompile Include="ConvictMove.cpp" />
+    <ClCompile Include="DoorColliderObj.cpp" />
+    <ClCompile Include="DoorColliderScr.cpp" />
+    <ClCompile Include="DoorObj.cpp" />
+    <ClCompile Include="DoorRoomControl.cpp" />
+    <ClCompile Include="DoorScr.cpp" />
     <ClCompile Include="Engine_SOURCE.cpp" />
     <ClCompile Include="chSpriteRenderer.cpp" />
     <ClCompile Include="Heart_Scr.cpp" />
@@ -328,6 +339,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine_SOURCE.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

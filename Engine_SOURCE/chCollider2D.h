@@ -27,11 +27,11 @@ namespace ch
 		void SetSize(Vector2 size) { mSize = size; }
 		void SetCenter(Vector2 center) { mCenter = center; }
 		void SetRadius(float radius) { mRadius = radius; }
+
 		bool IsTriiger() { return mbTrigger; }
 		UINT GetID() { return mID; }
 		Vector3 GetPosition() { return mPosition; }
 		Vector2 GetSize() { return mSize; }
-		
 
 		eColliderType GetType() { return mType; }
 	private:

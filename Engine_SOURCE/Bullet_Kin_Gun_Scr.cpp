@@ -2,6 +2,7 @@
 #include "Bullet_Kin_Gun.h"
 #include "Bullet_Kin.h"
 #include "chScene.h"
+#include "chObject.h"
 namespace ch 
 {
 	Bullet_Kin_Gun_Scr::Bullet_Kin_Gun_Scr()
@@ -95,7 +96,8 @@ namespace ch
 	}
 	void Bullet_Kin_Gun_Scr::afterShot()
 	{
-		monsBullet = new MonsterBulletObj();
+		
+		monsBullet = object::Instantiate<MonsterBulletObj>(eLayerType::MonsterBullet);
 		MonsterBulletScr* bulletScript = monsBullet->AddComponent<MonsterBulletScr>();
 		bulletScript->Initalize();
 		float angle = Owner->GetP2Gangle();

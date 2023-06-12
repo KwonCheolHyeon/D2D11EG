@@ -2,6 +2,7 @@
 #include "chScene.h"
 #include "chBulletPool.h"
 #include "chHeart_UI.h"
+#include "DoorObj.h"
 namespace ch
 {
 	
@@ -40,6 +41,14 @@ namespace ch
 		//저장할 공간
 		std::vector<Bullet*> containBullets;
 		
+		DoorObj* mainDoor1;
+		DoorObj* mainDoor2;
+		DoorObj* mainDoor3;
+		DoorObj* mainDoor4;
+		DoorObj* mainDoor5;
+		DoorObj* mainDoor6;
+		DoorObj* mainDoor7;
+		DoorObj* mainDoor8;
 		
 	};
 }

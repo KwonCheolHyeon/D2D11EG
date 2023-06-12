@@ -188,6 +188,12 @@
     <Filter Include="GameObject\chMonster\MonsterBullet">
       <UniqueIdentifier>{dc6d312f-7d84-4e3f-b8cd-049ae6612c67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\Door">
+      <UniqueIdentifier>{026d3e34-1ee6-4110-bb49-50ca98d0be6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Door\Doors">
+      <UniqueIdentifier>{e2ae439c-9462-4721-a9d3-d296897024f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -449,6 +455,22 @@
     <ClInclude Include="MonsterBulletScr.h">
       <Filter>GameObject\chMonster\MonsterBullet</Filter>
     </ClInclude>
+    <ClInclude Include="DoorObj.h">
+      <Filter>GameObject\Object\Door\Doors</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="DoorScr.h">
+      <Filter>GameObject\Object\Door\Doors</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorColliderObj.h">
+      <Filter>GameObject\Object\Door\Doors</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorColliderScr.h">
+      <Filter>GameObject\Object\Door\Doors</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorRoomControl.h">
+      <Filter>GameObject\Object\Door</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -695,10 +717,30 @@
     <ClCompile Include="MonsterBulletScr.cpp">
       <Filter>GameObject\chMonster\MonsterBullet</Filter>
     </ClCompile>
+    <ClCompile Include="DoorObj.cpp">
+      <Filter>GameObject\Object\Door\Doors</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorScr.cpp">
+      <Filter>GameObject\Object\Door\Doors</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorColliderObj.cpp">
+      <Filter>GameObject\Object\Door\Doors</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorColliderScr.cpp">
+      <Filter>GameObject\Object\Door\Doors</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorRoomControl.cpp">
+      <Filter>GameObject\Object\Door</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl">
       <Filter>Common\Math</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine_SOURCE.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
