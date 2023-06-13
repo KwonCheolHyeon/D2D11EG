@@ -1,18 +1,19 @@
 #pragma once
 #include "chGameObject.h"
-namespace ch
+namespace ch 
 {
-	class FightSabreObject :public GameObject
+	class ItemBox : public GameObject
 	{
 	public:
-		FightSabreObject();
-		virtual ~FightSabreObject();
+		ItemBox();
+		virtual ~ItemBox();
 
 		virtual void Initalize();
 		virtual void Update();
 		virtual void FixedUpdate();
 		virtual void Render();
 
-
 	};
+
 }
+

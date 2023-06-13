@@ -3,6 +3,7 @@
 #include "chBulletPool.h"
 #include "chHeart_UI.h"
 #include "DoorObj.h"
+
 namespace ch
 {
 	
@@ -25,7 +26,7 @@ namespace ch
 		void generateBullet(int size);
 		void generateMap();
 		void generateObject();
-		void GetPlayerData();
+
 	private:
 		GameObject* chCameraOBJ;
 		GameObject* chUiCursor;
@@ -49,6 +50,8 @@ namespace ch
 		DoorObj* mainDoor6;
 		DoorObj* mainDoor7;
 		DoorObj* mainDoor8;
+
+	
 		
 	};
 }

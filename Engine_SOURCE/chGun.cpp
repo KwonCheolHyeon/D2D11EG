@@ -33,6 +33,8 @@ namespace ch
 		pis->GetComponent<PistolScr>()->SetpistolHand(GetHand());
 		pis->GetComponent<PistolScr>()->SetpistolPool(GetPool());
 		pis->GetComponent<PistolScr>()->SetGunBox(GetGunBox());
+
+
 		Scene* playScene = SceneManager::GetPlayScene();
 		playScene->AddGameObject(pis, eLayerType::Weapone);
 		Guns.push_back(pis);//Guns[0] == ÇÇ½ºÅç;
@@ -73,13 +75,13 @@ namespace ch
 		if (Input::GetKeyDown(eKeyCode::NUM_1)) 
 		{
 			Guns[0]->GetComponent<PistolScr>()->pistolState.active = true;
-			Guns[1]->GetComponent<FightSabreScr>()->pistolState.active = false;
+			//Guns[1]->GetComponent<FightSabreScr>()->pistolState.active = false;
 		
 		}
 		if (Input::GetKeyDown(eKeyCode::NUM_2))
 		{
 			Guns[0]->GetComponent<PistolScr>()->pistolState.active = false;
-			Guns[1]->GetComponent<FightSabreScr>()->pistolState.active = true;
+			//Guns[1]->GetComponent<FightSabreScr>()->pistolState.active = true;
 		}
 		if (Input::GetKeyDown(eKeyCode::NUM_3))
 		{

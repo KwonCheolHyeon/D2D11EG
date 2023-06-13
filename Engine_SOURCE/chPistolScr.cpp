@@ -51,6 +51,13 @@ namespace ch
 		
 		if (pistolState.active == true) 
 		{
+
+			SpriteRenderer* sprite = gunObject->GetComponent<SpriteRenderer>();
+			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"W_pistol_Material");
+			sprite->SetMaterial(mateiral);
+			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			sprite->SetMesh(mesh);
+
 			shotTimer += Time::DeltaTime();
 			//gunTransform->SetParent(playerHand->GetComponent<Transform>());
 			genericAnimator.Update(Time::DeltaTime());
@@ -146,7 +153,11 @@ namespace ch
 
 	void PistolScr::notActiveState()
 	{
-		gunTransform->SetParent(gunBox->GetComponent<Transform>());
+		SpriteRenderer* sprite = gunObject->GetComponent<SpriteRenderer>();
+		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"EmptyMaterial");
+		sprite->SetMaterial(mateiral);
+		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+		sprite->SetMesh(mesh);
 	}
 
 	void PistolScr::HandDownAnimate(Vector3 handPos)

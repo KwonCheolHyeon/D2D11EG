@@ -3,6 +3,7 @@
 #include "chAnimator.h"
 #include "MonsterBase.h"
 #include "MonsterBulletObj.h"
+#include "chGenericAnimator.h"
 namespace ch
 {
 	class Boss : public Script

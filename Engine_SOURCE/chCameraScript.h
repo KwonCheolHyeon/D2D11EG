@@ -25,7 +25,7 @@ namespace ch
 	private: //¼öÇÐ
 
 	private:
-		Camera* mCameraObject;
+		class Camera* mCameraObject;
 		GameObject* target;
 		Vector3 targetPos;
 

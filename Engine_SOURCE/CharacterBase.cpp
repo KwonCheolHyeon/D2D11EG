@@ -26,7 +26,7 @@ namespace ch
 
 		Transform* pTr = playerOBJ->GetComponent<Transform>();
 		pTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
-		pTr->SetPosition(Vector3(-17.f, 13.7f, -9.5f));
+		pTr->SetPosition(Vector3(-16.1f, -3.23f, -9.f));
 
 		pAnima = playerOBJ->AddComponent<Animator>();
 

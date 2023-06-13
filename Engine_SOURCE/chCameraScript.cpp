@@ -1,9 +1,10 @@
 #include "chCameraScript.h"
+#include "chCamera.h"
 #include "chTransform.h"
 #include "chGameObject.h"
 #include "chInput.h"
 #include "chTime.h"
-#include "chCamera.h"
+
 
 
 namespace ch

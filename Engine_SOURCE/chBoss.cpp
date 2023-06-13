@@ -1,4 +1,5 @@
 #include "chBoss.h"
+#include "chObject.h"
 #include "chResources.h"
 #include "chSpriteRenderer.h"
 #include "MonsterBulletScr.h"
@@ -477,7 +478,7 @@ namespace ch
 	}
 	void Boss::Attack()
 	{
-		monsBullet = new MonsterBulletObj();
+		monsBullet = object::Instantiate<MonsterBulletObj>(eLayerType::MonsterBullet);
 		MonsterBulletScr* bulletScript = monsBullet->AddComponent<MonsterBulletScr>();
 		bulletScript->Initalize();
 		float angle = 0;

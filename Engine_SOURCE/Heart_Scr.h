@@ -1,6 +1,6 @@
 #pragma once
 #include "chScript.h"
-
+#include "chSpriteRenderer.h"
 namespace ch
 {
 	class Heart_Scr : public Script

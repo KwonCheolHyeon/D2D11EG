@@ -194,6 +194,9 @@
     <Filter Include="GameObject\Object\Door\Doors">
       <UniqueIdentifier>{e2ae439c-9462-4721-a9d3-d296897024f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\ItemBox">
+      <UniqueIdentifier>{96eefc92-95fc-4c1c-a281-7a6fea526051}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -471,6 +474,12 @@
     <ClInclude Include="DoorRoomControl.h">
       <Filter>GameObject\Object\Door</Filter>
     </ClInclude>
+    <ClInclude Include="ItemBox.h">
+      <Filter>GameObject\Object\ItemBox</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBoxScr.h">
+      <Filter>GameObject\Object\ItemBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -731,6 +740,12 @@
     </ClCompile>
     <ClCompile Include="DoorRoomControl.cpp">
       <Filter>GameObject\Object\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBox.cpp">
+      <Filter>GameObject\Object\ItemBox</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBoxScr.cpp">
+      <Filter>GameObject\Object\ItemBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
