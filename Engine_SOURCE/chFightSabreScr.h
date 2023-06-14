@@ -1,7 +1,7 @@
 #pragma once
 #include "chScript.h"
 #include "chGun.h"
-
+#include "chPlayerHand.h"
 namespace ch
 {
 	enum FightSabreState
@@ -24,21 +24,39 @@ namespace ch
 		virtual void FixedUpdate();
 		virtual void Render();
 
+		void SetpistolHand(PlayerHand* hand) { playerHand = hand; }
+		PlayerHand* GetpistolHand() { return playerHand; }
+
 		void FightSabreOn() { fss = FightSabreState::SabreActive; }
 		void FightSabreOff() { fss = FightSabreState::SabrenonActive; }
 
 		void ItemBox();
-		void Idle();
+		void Active();
 		void nonActiveGun();
 		void Reload();
 		void Shot();
 
+	public:
+		//ÃÑ °¢µµ °ü·Ã
+		void angleFind();
+		void GunLookCursor();
+
+
+	public:
 		bool touchGun;
 		bool prevTouchGun;
+
 	private:
+		Gun* gunObj;
+		PlayerHand* playerHand;
 		Animator* anima;
 		FightSabreState fss;
 		FightSabreState prevFss;
+		Transform* gunTransform;
+	private:
+		float angle;
+		float shotTimer = 0.0f;
+
 	};
 
 }

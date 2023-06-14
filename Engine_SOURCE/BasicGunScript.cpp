@@ -15,9 +15,12 @@ namespace ch
 	void BasicGunScript::Initalize()
 	{
 		gunObj = dynamic_cast<Gun*>(GetOwner());
+
 		gunTransform = gunObj->GetComponent<Transform>();
-		gunTransform->SetScale(Vector3(3.28f, 3.23f, 1.0f));
+		
 		gunTransform->SetParent(playerHand->GetComponent<Transform>());
+		gunTransform->SetInheritParentScale(false);
+		gunTransform->SetScale(Vector3(4.28f, 4.23f, 1.0f));
 
 		Vector3 gunPosition = gunTransform->GetPosition();
 		Vector3 handPosition = playerHand->GetComponent<Transform>()->GetPosition();
@@ -29,7 +32,12 @@ namespace ch
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
 
-
+		gunani = gunObj->GetComponent<Animator>();
+		{//기본
+			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"pistol_Idle", L"enterthe/Waepone/PistolFolder/pistol_Idle.png");
+			gunani->Create(L"W_pistol_Idle", texture, Vector2(0.0f, 0.0f), Vector2(15.0f, 11.0f), Vector2::Zero, 1, 0.1f);
+		}
+		
 
 		ps = PistolState::PistolActive;
 		reboundTrue = false;
@@ -64,15 +72,10 @@ namespace ch
 	}
 	void BasicGunScript::Active()
 	{
-
-		SpriteRenderer* sprite = gunObj->GetComponent<SpriteRenderer>();
-		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"W_pistol_Material");
-		sprite->SetMaterial(mateiral);
-		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
-		sprite->SetMesh(mesh);
+		gunani->Play(L"W_pistol_Idle", true);
 
 		shotTimer += Time::DeltaTime();
-		//gunTransform->SetParent(playerHand->GetComponent<Transform>());
+		
 		genericAnimator.Update(Time::DeltaTime());
 		GunLookCursor();
 		angleFind();
@@ -83,13 +86,6 @@ namespace ch
 			{
 				Shot();// ps = PistolState::Shot;
 				HandDownAnimate(Vector3(0.f, 0.1f, 0.f));
-
-				Vector3 a = Input::GetWorldMousPosition();
-				a.x;
-				a.y;
-				a.z;
-
-				int c = 0;
 			}
 		}
 		if (!bullets.empty())
@@ -163,15 +159,17 @@ namespace ch
 	{
 		if (playerHand->IsHandLeft()) //왼손
 		{
+			gunTransform->SetScale(Vector3(4.28f, 4.23f, 1.0f));
 			gunObj->SetLeft();
 			gunObj->SetRotation(Vector3(0.0f, 0.0f, 0.f));
-			gunObj->GetComponent<Transform>()->SetOffset(Vector3(0.0f, 0.0f, 0.f));
+			gunObj->GetComponent<Transform>()->SetOffset(Vector3(-0.85f, -0.9f, 0.f));
 		}
 		else //오른손
 		{
+			gunTransform->SetScale(Vector3(4.28f, 4.23f, 1.0f));
 			gunObj->SetRight();
 			gunObj->SetRotation(Vector3(180.0f, 0.0f, 0.f));
-			gunObj->GetComponent<Transform>()->SetOffset(Vector3(0.2f, -1.5f, 0.f));
+			gunObj->GetComponent<Transform>()->SetOffset(Vector3(-0.85f, -1.1f, 0.f));
 		}
 	}
 	void BasicGunScript::HandDownAnimate(Vector3 handPos)

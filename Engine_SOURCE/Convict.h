@@ -62,6 +62,9 @@ namespace ch
         std::vector<Heart_UI*> pHeartControl;
         int pHp;
         int prevHp;
+
+    private:
+        bool isOneHand;
 	};
 }
 

@@ -76,7 +76,7 @@ namespace ch
 		if (mbIsLeft != prevIsLeft) 
 		{
 		
-		Flip();
+			Flip();
 		}
 	}
 

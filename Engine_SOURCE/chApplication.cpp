@@ -58,7 +58,7 @@ namespace ch
 		CollisionManager::Render();
 		//graphicDevice->Render();
 		//graphicDevice->Present();
-
+		SceneManager::Destroy();
 
 	}
 	void Application::Destroy()

@@ -2,7 +2,6 @@
 #include "chSpriteRenderer.h"
 #include "chResources.h"
 #include "chInput.h"
-
 #include "chPistolScr.h"
 #include "BasicGunScript.h"
 #include "chFightSabreObject.h"
@@ -27,6 +26,7 @@ namespace ch
 	void Gun::Initalize()
 	{
 
+		this->AddComponent<Animator>();
 
 		SpriteRenderer* sprite = this->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"EmptyMaterial");
@@ -39,6 +39,14 @@ namespace ch
 		Scr1->SetpistolHand(GetHand());
 		Scr1->SetpistolPool(GetPool());
 		Scr1->SetGunBox(GetGunBox());
+
+		FightSabreScr* Scr2 = this->AddComponent<FightSabreScr>();
+		Scr2->SetpistolHand(GetHand());
+	
+		this->GetComponent<FightSabreScr>()->FightSabreOff();
+
+
+
 		
 		GameObject::Initalize();
 	}
@@ -65,12 +73,14 @@ namespace ch
 	{
 		if (Input::GetKeyDown(eKeyCode::NUM_1)) 
 		{
+			this->GetComponent<FightSabreScr>()->FightSabreOff();
 			this->GetComponent<BasicGunScript>()->PistolOn();
-		
+			
 		}
 		if (Input::GetKeyDown(eKeyCode::NUM_2))
 		{
 			this->GetComponent<BasicGunScript>()->PistolOff();
+			this->GetComponent<FightSabreScr>()->FightSabreOn();
 			
 		}
 		if (Input::GetKeyDown(eKeyCode::NUM_3))

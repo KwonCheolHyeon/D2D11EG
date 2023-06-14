@@ -30,6 +30,7 @@ namespace ch
 		Vector3 GetPosition() { return mPosition; };
 		Vector3 GetCenterPos() { return Vector3(mPosition.x / 2, mPosition.y / 2, mPosition.z / 2); }
 		Vector3 GetRotation() { return mRotation; };
+		
 		Vector3 GetScale() { return mScale; };
 		
 		Vector3 Foward() { return mFoward; }
@@ -49,6 +50,10 @@ namespace ch
 		float GetWorldPositionZ() const { return mWorldPosition.z; }
 		Vector2 GetWorldPositionXY() const { return Vector2(mWorldPosition.x, mWorldPosition.y); }
 
+
+		bool GetInheritParentScale() const { return mInheritParentScale; }
+		void SetInheritParentScale(bool inherit) { mInheritParentScale = inherit; }
+
 	private:
 		Transform* mParent;
 		Vector3 mFoward;
@@ -64,5 +69,6 @@ namespace ch
 		Vector3 mWorldPosition;
 		Vector3 mWorldRotation;
 		Vector3 mWorldScale;
+		bool mInheritParentScale;
 	};
 }

@@ -31,7 +31,7 @@
 #include "DoorObj.h"
 #include "DoorScr.h"
 #include "DoorColliderObj.h"
-
+#include "HeartObj.h"
 
 
 namespace ch
@@ -153,6 +153,11 @@ namespace ch
 				gun->SetPlayer(player);
 
 
+		}
+
+		{
+			GameObject* Heart = object::Instantiate<HeartObj>(eLayerType::Weapone, this);
+		
 		}
 #pragma region 스테이지1 몬스터
 		{// 스테이지1 몬스터1

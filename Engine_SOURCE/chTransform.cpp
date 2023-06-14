@@ -14,6 +14,7 @@ namespace ch
 		, mPosition(Vector3::One)
 		, mParent(nullptr)
 		, moffSet(Vector3::Zero)
+		, mInheritParentScale(true)
 	{
 
 	}
@@ -71,8 +72,26 @@ namespace ch
 
 		if (mParent)
 		{
-			mWorld *= mParent->mWorld;
+			if (!mInheritParentScale)
+			{
+				// Get the parent's world matrix without scale
+				Matrix parentWorldNoScale = mParent->GetWolrdMatrix();
+				Vector3 parentWorldScale, parentWorldTranslation;
+				Quaternion parentWorldRotation;
+				parentWorldNoScale.Decompose(parentWorldScale, parentWorldRotation, parentWorldTranslation);
+				parentWorldNoScale = Matrix::CreateFromQuaternion(parentWorldRotation) * Matrix::CreateTranslation(parentWorldTranslation);
+
+				// Combine the current object's transform with the parent's transform without scale
+				mWorld = mWorld * parentWorldNoScale;
+			}
+			else
+			{
+				// Combine the current object's transform with the parent's world matrix
+				mWorld *= mParent->GetWolrdMatrix();
+			}
 		}
+
+
 	}
 
 	void Transform::Render()

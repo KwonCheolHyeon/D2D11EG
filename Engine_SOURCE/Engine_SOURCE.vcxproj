@@ -236,9 +236,13 @@
     <ClInclude Include="DoorObj.h" />
     <ClInclude Include="DoorRoomControl.h" />
     <ClInclude Include="DoorScr.h" />
+    <ClInclude Include="FightSabreBullet.h" />
+    <ClInclude Include="FightSabreBulletScr.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="chEngine.h" />
     <ClInclude Include="chSpriteRenderer.h" />
+    <ClInclude Include="HeartObj.h" />
+    <ClInclude Include="HeartScr.h" />
     <ClInclude Include="Heart_Scr.h" />
     <ClInclude Include="ItemBox.h" />
     <ClInclude Include="ItemBoxScr.h" />
@@ -332,6 +336,10 @@
     <ClCompile Include="DoorScr.cpp" />
     <ClCompile Include="Engine_SOURCE.cpp" />
     <ClCompile Include="chSpriteRenderer.cpp" />
+    <ClCompile Include="FightSabreBullet.cpp" />
+    <ClCompile Include="FightSabreBulletScr.cpp" />
+    <ClCompile Include="HeartObj.cpp" />
+    <ClCompile Include="HeartScr.cpp" />
     <ClCompile Include="Heart_Scr.cpp" />
     <ClCompile Include="ItemBox.cpp" />
     <ClCompile Include="ItemBoxScr.cpp" />

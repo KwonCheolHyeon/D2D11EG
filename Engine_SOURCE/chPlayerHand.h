@@ -27,6 +27,7 @@ namespace ch
 	private:
 		float handDistance;
 		bool chHandLeft;
+		bool isPistol;
 	};
 }
 

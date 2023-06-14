@@ -197,6 +197,9 @@
     <Filter Include="GameObject\Object\ItemBox">
       <UniqueIdentifier>{96eefc92-95fc-4c1c-a281-7a6fea526051}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\Heart">
+      <UniqueIdentifier>{dfe4b465-4537-4f62-a059-55b889d72d4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -483,6 +486,18 @@
     <ClInclude Include="BasicGunScript.h">
       <Filter>GameObject\Weapone\Pistol</Filter>
     </ClInclude>
+    <ClInclude Include="FightSabreBullet.h">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClInclude>
+    <ClInclude Include="FightSabreBulletScr.h">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartObj.h">
+      <Filter>GameObject\Object\Heart</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartScr.h">
+      <Filter>GameObject\Object\Heart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -752,6 +767,18 @@
     </ClCompile>
     <ClCompile Include="BasicGunScript.cpp">
       <Filter>GameObject\Weapone\Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="FightSabreBullet.cpp">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClCompile>
+    <ClCompile Include="FightSabreBulletScr.cpp">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartObj.cpp">
+      <Filter>GameObject\Object\Heart</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartScr.cpp">
+      <Filter>GameObject\Object\Heart</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

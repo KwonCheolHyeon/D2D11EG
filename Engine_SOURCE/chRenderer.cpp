@@ -527,6 +527,8 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"W_fightsabreSprite", L"enterthe\\Waepone\\FightSabre\\Item.png");
 		//ÃÑ¾Ë
 		Resources::Load<Texture>(L"W_Bullet", L"enterthe\\Waepone\\Bullet\\bulit.png");
+		Resources::Load<Texture>(L"W_Bullet_02", L"enterthe\\Waepone\\FightSabre\\bullet\\bullet01.png");
+
 		//Àû ÃÑ¾Ë
 		Resources::Load<Texture>(L"Enemy_Bullet", L"enterthe\\enemy\\enemy_bullet.png");
 		//bg
@@ -658,6 +660,17 @@ namespace ch::renderer
 				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"W_BulletMaterial", material);
 			
+			}
+
+			{//ÃÑ¾Ë2
+				std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"W_Bullet_02");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"W_BulletMaterial2", material);
+
 			}
 		}
 
@@ -791,96 +804,7 @@ namespace ch::renderer
 		}
 		{//¸Ê
 		#pragma region ¸Ê
-			{//map 01
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_01_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map01_Material", material);
-			}
-			{//map 02
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_02_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map02_Material", material);
-			}
-			{//map 03
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_03_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map03_Material", material);
-			}
-			{//map 04
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_04_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map04_Material", material);
-			}
-			{//map 06
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_06_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map06_Material", material);
-			}
-			{//map 07
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_07_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map07_Material", material);
-			}
-			{//map 08
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_08_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map08_Material", material);
-			}
-			{//map 09
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_09_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map09_Material", material);
-			}
-			{//map 10
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_10_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map10_Material", material);
-			}
-			{//map 11
-				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_11_Texture");
-				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-				std::shared_ptr<Material> material = std::make_shared<Material>();
-				material->SetRenderingMode(eRenderingMode::Transparent);
-				material->SetShader(shader);
-				material->SetTexture(eTextureSlot::T0, texture);
-				Resources::Insert<Material>(L"Map11_Material", material);
-			}
+			
 			{//map ¼¼·Î
 				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_vertical_Texture");
 				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");

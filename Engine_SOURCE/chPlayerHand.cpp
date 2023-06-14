@@ -30,13 +30,34 @@ namespace ch
 		sprite->SetMaterial(mateiral);
 		sprite->SetMesh(mesh);
 		
+		isPistol = true;
 		GameObject::Initalize();
 	}
 	void PlayerHand::Update()
 	{
 		HandLookCursor();
-		
 		HandPosition();
+
+		if (Input::GetKeyDown(eKeyCode::NUM_1))
+		{
+			SpriteRenderer* sprite = this->GetComponent<SpriteRenderer>();
+			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pHandMaterial");
+			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			sprite->SetMaterial(mateiral);
+			sprite->SetMesh(mesh);
+
+			isPistol = true;
+		}
+		if (Input::GetKeyDown(eKeyCode::NUM_2))
+		{
+			SpriteRenderer* sprite = this->GetComponent<SpriteRenderer>();
+			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"EmptyMaterial");
+			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			sprite->SetMaterial(mateiral);
+			sprite->SetMesh(mesh);
+
+			isPistol = false;
+		}
 		GameObject::Update();
 	}
 	void PlayerHand::FixedUpdate()
@@ -66,38 +87,79 @@ namespace ch
 
 	void PlayerHand::HandPosition()
 	{
-		Vector3 characterPosition = player->GetComponent<Transform>()->GetPosition();
-		Vector3 handPosition = phandTr->GetPosition();
-		if (player->GetHand()) 
+		if (isPistol == true) 
 		{
-			if (player->isLeft() == true)
+			Vector3 characterPosition = player->GetComponent<Transform>()->GetPosition();
+			Vector3 handPosition = phandTr->GetPosition();
+			if (player->GetHand())
 			{
-				handPosition = characterPosition + Vector3(-0.13f, -0.16f, 0.f);
-				chHandLeft = true;
+				if (player->isLeft() == true)
+				{
+					handPosition = characterPosition + Vector3(-0.13f, -0.16f, 0.f);
+					chHandLeft = true;
+				}
+				else
+				{
+					handPosition = characterPosition + Vector3(0.13f, -0.16f, 0.f);
+					chHandLeft = false;
+				}
 			}
 			else
 			{
-				handPosition = characterPosition + Vector3(0.13f, -0.16f, 0.f);
-				chHandLeft = false;
+				if (player->isLeft() == true)
+				{
+					handPosition = characterPosition + Vector3(-0.13f, -10.16f, 0.f);
+					chHandLeft = true;
+				}
+				else
+				{
+					handPosition = characterPosition + Vector3(0.13f, -10.16f, 0.f);
+					chHandLeft = false;
+				}
 			}
+
+			phandTr->SetPosition(handPosition);
+		
 		}
 		else 
 		{
-			if (player->isLeft() == true)
+			Vector3 characterPosition = player->GetComponent<Transform>()->GetPosition();
+			Vector3 handPosition = phandTr->GetPosition();
+			if (player->GetHand())
 			{
-				handPosition = characterPosition + Vector3(-0.13f, -10.16f, 0.f);
-				chHandLeft = true;
+				if (player->isLeft() == true)
+				{
+					handPosition = characterPosition + Vector3(0.f, -0.16f, 0.f);
+					chHandLeft = true;
+				}
+				else
+				{
+					handPosition = characterPosition + Vector3(0.f, -0.16f, 0.f);
+					chHandLeft = false;
+				}
 			}
 			else
 			{
-				handPosition = characterPosition + Vector3(0.13f, -10.16f, 0.f);
-				chHandLeft = false;
+				if (player->isLeft() == true)
+				{
+					handPosition = characterPosition + Vector3(-0.13f, -10.16f, 0.f);
+					chHandLeft = true;
+				}
+				else
+				{
+					handPosition = characterPosition + Vector3(-0.13f, -10.16f, 0.f);
+					chHandLeft = false;
+				}
 			}
+
+			phandTr->SetPosition(handPosition);
+		
 		}
+		
 
 		
 		
-		phandTr->SetPosition(handPosition);
+		
 		
 	}
 }

@@ -59,6 +59,7 @@ namespace ch
 		PlayerHand* playerHand;
 		Transform* gunTransform;
 		GenericAnimator genericAnimator;
+		Animator* gunani;
 
 		BulletPool* bulletpool;
 		Bullet* bulletOBJ;

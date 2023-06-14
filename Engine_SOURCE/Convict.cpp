@@ -158,6 +158,7 @@ namespace ch
 		pHp = 6;
 		prevHp = 6;
 		playWalking = false;
+		isOneHand = true;
 	}
 
 	void Convict::Update()
@@ -184,6 +185,15 @@ namespace ch
 		if (prevHp != pHp)
 		{
 			SetHeart();
+		}
+
+		if (Input::GetKeyDown(eKeyCode::NUM_1))
+		{
+			isOneHand = true;
+		}
+		if (Input::GetKeyDown(eKeyCode::NUM_2))
+		{
+			isOneHand = false;
 		}
 	}
 
@@ -356,69 +366,142 @@ namespace ch
 
 	void Convict::IdleAni()
 	{
-		
-		switch (CPD)
+		if (isOneHand) 
 		{
-		case PlayerDirections::North:
-			if(pAnimator->IsAnimationRunning(L"P_O_Idle_Back") == false)
-				pAnimator->Play(L"P_O_Idle_Back");
-			break;
-		case PlayerDirections::South:
-			if (pAnimator->IsAnimationRunning(L"P_O_Idle_Front") == false)
-				pAnimator->Play(L"P_O_Idle_Front");
-			break;
-		case PlayerDirections::East:
-			if (pAnimator->IsAnimationRunning(L"P_O_Idle_Right") == false)
-				pAnimator->Play(L"P_O_Idle_Right");
-			break;
-		case PlayerDirections::West:
-			if (pAnimator->IsAnimationRunning(L"P_O_Idle_Right") == false)
-				pAnimator->Play(L"P_O_Idle_Right");
-			break;
-		case PlayerDirections::NE:
-			if (pAnimator->IsAnimationRunning(L"P_O_Idle_BackRight") == false)
-				pAnimator->Play(L"P_O_Idle_BackRight");
-			break;
-		case PlayerDirections::NW:
-			if (pAnimator->IsAnimationRunning(L"P_O_Idle_BackRight") == false)
-				pAnimator->Play(L"P_O_Idle_BackRight");
-			break;
-		default:
-			break;
+			switch (CPD)
+			{
+			case PlayerDirections::North:
+				if (pAnimator->IsAnimationRunning(L"P_O_Idle_Back") == false)
+					pAnimator->Play(L"P_O_Idle_Back");
+				break;
+			case PlayerDirections::South:
+				if (pAnimator->IsAnimationRunning(L"P_O_Idle_Front") == false)
+					pAnimator->Play(L"P_O_Idle_Front");
+				break;
+			case PlayerDirections::East:
+				if (pAnimator->IsAnimationRunning(L"P_O_Idle_Right") == false)
+					pAnimator->Play(L"P_O_Idle_Right");
+				break;
+			case PlayerDirections::West:
+				if (pAnimator->IsAnimationRunning(L"P_O_Idle_Right") == false)
+					pAnimator->Play(L"P_O_Idle_Right");
+				break;
+			case PlayerDirections::NE:
+				if (pAnimator->IsAnimationRunning(L"P_O_Idle_BackRight") == false)
+					pAnimator->Play(L"P_O_Idle_BackRight");
+				break;
+			case PlayerDirections::NW:
+				if (pAnimator->IsAnimationRunning(L"P_O_Idle_BackRight") == false)
+					pAnimator->Play(L"P_O_Idle_BackRight");
+				break;
+			default:
+				break;
+			}
+		
 		}
+		else 
+		{
+			switch (CPD)
+			{
+			case PlayerDirections::North:
+				if (pAnimator->IsAnimationRunning(L"PT_IdleBack") == false)
+					pAnimator->Play(L"PT_IdleBack");
+				break;
+			case PlayerDirections::South:
+				if (pAnimator->IsAnimationRunning(L"PT_IdleFront") == false)
+					pAnimator->Play(L"PT_IdleFront");
+				break;
+			case PlayerDirections::East:
+				if (pAnimator->IsAnimationRunning(L"PT_IdleRight") == false)
+					pAnimator->Play(L"PT_IdleRight");
+				break;
+			case PlayerDirections::West:
+				if (pAnimator->IsAnimationRunning(L"PT_IdleRight") == false)
+					pAnimator->Play(L"PT_IdleRight");
+				break;
+			case PlayerDirections::NE:
+				if (pAnimator->IsAnimationRunning(L"PT_IdleBackRight") == false)
+					pAnimator->Play(L"PT_IdleBackRight");
+				break;
+			case PlayerDirections::NW:
+				if (pAnimator->IsAnimationRunning(L"PT_IdleBackRight") == false)
+					pAnimator->Play(L"PT_IdleBackRight");
+				break;
+			default:
+				break;
+			}
+		
+		}
+		
 
 	}
 
 	void Convict::RunAni()
 	{
-		switch (CPD)
+		if (isOneHand)
 		{
-		case PlayerDirections::North:
-			if (pAnimator->IsAnimationRunning(L"P_O_WalkingBack") == false)
-				pAnimator->Play(L"P_O_WalkingBack");
-			break;
-		case PlayerDirections::South:
-			if (pAnimator->IsAnimationRunning(L"P_O_WalkingFront") == false)
-				pAnimator->Play(L"P_O_WalkingFront");
-			break;
-		case PlayerDirections::East:
-			if (pAnimator->IsAnimationRunning(L"P_O_WalkingRight") == false)
-				pAnimator->Play(L"P_O_WalkingRight");
-			break;
-		case PlayerDirections::West:
-			if (pAnimator->IsAnimationRunning(L"P_O_WalkingRight") == false)
-				pAnimator->Play(L"P_O_WalkingRight");
-			break;
-		case PlayerDirections::NE:
-			if (pAnimator->IsAnimationRunning(L"P_O_WalkingBackRight") == false)
-				pAnimator->Play(L"P_O_WalkingBackRight");
-			break;
-		case PlayerDirections::NW:
-			if (pAnimator->IsAnimationRunning(L"P_O_WalkingBackRight") == false)
-				pAnimator->Play(L"P_O_WalkingBackRight");
-			break;
-		default:
-			break;
+			switch (CPD)
+			{
+			case PlayerDirections::North:
+				if (pAnimator->IsAnimationRunning(L"P_O_WalkingBack") == false)
+					pAnimator->Play(L"P_O_WalkingBack");
+				break;
+			case PlayerDirections::South:
+				if (pAnimator->IsAnimationRunning(L"P_O_WalkingFront") == false)
+					pAnimator->Play(L"P_O_WalkingFront");
+				break;
+			case PlayerDirections::East:
+				if (pAnimator->IsAnimationRunning(L"P_O_WalkingRight") == false)
+					pAnimator->Play(L"P_O_WalkingRight");
+				break;
+			case PlayerDirections::West:
+				if (pAnimator->IsAnimationRunning(L"P_O_WalkingRight") == false)
+					pAnimator->Play(L"P_O_WalkingRight");
+				break;
+			case PlayerDirections::NE:
+				if (pAnimator->IsAnimationRunning(L"P_O_WalkingBackRight") == false)
+					pAnimator->Play(L"P_O_WalkingBackRight");
+				break;
+			case PlayerDirections::NW:
+				if (pAnimator->IsAnimationRunning(L"P_O_WalkingBackRight") == false)
+					pAnimator->Play(L"P_O_WalkingBackRight");
+				break;
+			default:
+				break;
+			}
+		}
+		else 
+		{
+		
+			switch (CPD)
+			{
+			case PlayerDirections::North:
+				if (pAnimator->IsAnimationRunning(L"PT_WalkBack") == false)
+					pAnimator->Play(L"PT_WalkBack");
+				break;
+			case PlayerDirections::South:
+				if (pAnimator->IsAnimationRunning(L"PT_WalkFront") == false)
+					pAnimator->Play(L"PT_WalkFront");
+				break;
+			case PlayerDirections::East:
+				if (pAnimator->IsAnimationRunning(L"PT_WalkRight") == false)
+					pAnimator->Play(L"PT_WalkRight");
+				break;
+			case PlayerDirections::West:
+				if (pAnimator->IsAnimationRunning(L"PT_WalkRight") == false)
+					pAnimator->Play(L"PT_WalkRight");
+				break;
+			case PlayerDirections::NE:
+				if (pAnimator->IsAnimationRunning(L"PT_WalkBackRight") == false)
+					pAnimator->Play(L"PT_WalkBackRight");
+				break;
+			case PlayerDirections::NW:
+				if (pAnimator->IsAnimationRunning(L"PT_WalkBackRight") == false)
+					pAnimator->Play(L"PT_WalkBackRight");
+				break;
+			default:
+				break;
+			}
 		}
 	}
 

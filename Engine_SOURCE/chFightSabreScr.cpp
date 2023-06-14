@@ -2,12 +2,13 @@
 #include "chScene.h"
 #include "chSceneManager.h"
 #include "chPlayScene.h"
+#include "chObject.h"
 #include "chSpriteRenderer.h"
 #include "chAnimation.h"
 #include "chResources.h"
 #include "chInput.h"
-#include "chBullet.h"
-#include "chBulletScr.h"
+#include "FightSabreBullet.h"
+#include "FightSabreBulletScr.h"
 #include "chTime.h"
 namespace ch 
 {
@@ -21,15 +22,26 @@ namespace ch
 
 	void FightSabreScr::Initalize()
 	{
+		gunObj = dynamic_cast<Gun*>(GetOwner());
 
-		SpriteRenderer* sprite = GetOwner()->GetComponent<SpriteRenderer>();
+
+		gunTransform = gunObj->GetComponent<Transform>();
+		
+		gunTransform->SetParent(playerHand->GetComponent<Transform>());
+		gunTransform->SetInheritParentScale(false);
+
+		Vector3 gunPosition = gunTransform->GetPosition();
+		Vector3 handPosition = playerHand->GetComponent<Transform>()->GetPosition();
+		gunTransform->SetPosition(gunPosition);
+
+		SpriteRenderer* sprite = gunObj->GetComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"W_FightSabre_Material");
 		sprite->SetMaterial(mateiral);
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
 
 #pragma region 애니메이터
-		anima = GetOwner()->GetComponent<Animator>();
+		anima = gunObj->GetComponent<Animator>();
 
 		{//기본
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"FightSabre_Idle", L"enterthe/Waepone/FightSabre/idle/idle.png");
@@ -47,6 +59,11 @@ namespace ch
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"FightSabre_Item", L"enterthe/Waepone/FightSabre/Item.png");
 			anima->Create(L"W_FightSabre_Item", texture, Vector2(0.0f, 0.0f), Vector2(35.0f, 14.0f), Vector2::Zero, 1, 0.1f);
 		}
+		{//투명
+			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"FightSabre_empty", L"empty.png");
+			anima->Create(L"W_FightSabre_empty", texture, Vector2(0.0f, 0.0f), Vector2(35.0f, 14.0f), Vector2::Zero, 1, 0.1f);
+		}
+
 		 
 #pragma endregion
 
@@ -66,7 +83,7 @@ namespace ch
 			ItemBox();
 			break;
 		case FightSabreState::SabreActive:
-			Idle();
+			Active();
 			break;
 		case FightSabreState::SabrenonActive:
 			nonActiveGun();
@@ -90,6 +107,8 @@ namespace ch
 
 	void FightSabreScr::Render()
 	{
+
+
 	}
 
 	void FightSabreScr::ItemBox()//아이템 박스에 튀어나와서 플레이어가 줍기전
@@ -98,21 +117,86 @@ namespace ch
 		
 	}
 
-	void FightSabreScr::Idle() // 기본 들고 있을때 
+	void FightSabreScr::Active() // 기본 들고 있을때 
 	{
-		anima->Play(L"W_FightSabre_Idle");
+		if (prevFss != fss) 
+		{
+			gunTransform->SetScale(Vector3(6.f, 5.f, 1.0f));
+			prevFss = fss;
+			anima->Play(L"W_FightSabre_Idle", true);
+		}
+		angleFind();
+		GunLookCursor();
+
+		if (Input::GetKeyDown(eKeyCode::LBTN))
+		{
+			fss = FightSabreState::SabreShot;
+		}
+
 	}
 
 	void FightSabreScr::nonActiveGun() // 피스톨과 스왑했을때
 	{
-	}
+		prevFss = fss;
+		
 
+	}
+	
 	void FightSabreScr::Reload() // 장전
 	{
+
+
 	}
 
 	void FightSabreScr::Shot() //쏠때
 	{
+		prevFss = fss;
+		
+		anima->Play(L"W_FightSabre_shot", false);
+
+		FightSabreBullet* bullet = object::Instantiate<FightSabreBullet>(eLayerType::Weapone);
+		FightSabreBulletScr* scr = bullet->AddComponent<FightSabreBulletScr>();
+		scr->Initalize();
+		scr->shootingBullet(angle, playerHand->GetComponent<Transform>()->GetPosition());
+
+		fss = FightSabreState::SabreActive;
+	}
+
+	void FightSabreScr::angleFind()
+	{
+		Vector3 handPosition = playerHand->GetComponent<Transform>()->GetPosition();
+		Vector3 mousePos = Input::GetMousPosition();
+
+		Vector3 characterPos = playerHand->GetComponent<Transform>()->GetPosition();
+
+		Vector3 mouseRelative = (mousePos / 100.f);
+		mouseRelative += characterPos;
+
+		// Calculate the angle between the mouse cursor position and the character position
+		float angle2 = atan2(mouseRelative.y - characterPos.y, mouseRelative.x - characterPos.x);
+
+		float rotationZ = angle2 * (180.0f / XM_PI);
+
+		angle = rotationZ;
+	}
+
+	void FightSabreScr::GunLookCursor()
+	{
+
+		if (playerHand->IsHandLeft()) //왼손
+		{
+			gunTransform->SetScale(Vector3(4.28f, 4.23f, 1.0f));
+			gunObj->SetLeft();
+			gunObj->SetRotation(Vector3(0.0f, 0.f, 0.f));
+			gunObj->GetComponent<Transform>()->SetOffset(Vector3(-0.85f, -0.9f, 0.f));
+		}
+		else //오른손
+		{
+			gunTransform->SetScale(Vector3(4.28f, 4.23f, 1.0f));
+			gunObj->SetLeft();
+			gunObj->SetRotation(Vector3(180.0f, 0.0f, 0.f));
+			gunObj->GetComponent<Transform>()->SetOffset(Vector3(-0.85f, -1.1f, 0.f));
+		}
 	}
 
 	

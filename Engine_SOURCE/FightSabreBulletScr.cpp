@@ -1,30 +1,25 @@
-#include "MonsterBulletScr.h"
-#include "chScene.h"
-#include "chSceneManager.h"
+#include "FightSabreBulletScr.h"
+#include "chGameObject.h"
 #include "chLight.h"
 #include "chSpriteRenderer.h"
 #include "chResources.h"
 #include "chTime.h"
-#include "chLayer.h"
 namespace ch 
 {
-	MonsterBulletScr::MonsterBulletScr()
+	FightSabreBulletScr::FightSabreBulletScr()
+		:  Script()
 	{
 	}
 
-	MonsterBulletScr::~MonsterBulletScr()
+	FightSabreBulletScr::~FightSabreBulletScr()
 	{
 	}
 
-	void MonsterBulletScr::Initalize()
+	void FightSabreBulletScr::Initalize()
 	{
-		/*Scene* playScene = SceneManager::GetActiveScene();
-		playScene->AddGameObject(GetOwner(), eLayerType::MonsterBullet);*/
-
-
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-		tr->SetScale(Vector3(0.3f,0.3f,1.f));
-
+		tr->SetScale(Vector3(0.5f, 0.3f, 1.f));
+		
 		Light* lightComp = GetOwner()->AddComponent<Light>();
 		lightComp->SetType(eLightType::Point);
 		lightComp->SetRadius(2.5f);
@@ -36,16 +31,17 @@ namespace ch
 		bulletColl->SetSize(Vector2(1.f, 1.f));
 
 		SpriteRenderer* bulletSr = GetOwner()->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Material> bodyMateiral = Resources::Find<Material>(L"Enemy_Bullet_material");
+		std::shared_ptr<Material> bodyMateiral = Resources::Find<Material>(L"W_BulletMaterial2");
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		bulletSr->SetMaterial(bodyMateiral);
 		bulletSr->SetMesh(mesh);
+		
 
+		bulletTime = 0.f;
 	}
 
-	void MonsterBulletScr::Update()
+	void FightSabreBulletScr::Update()
 	{
-		
 		bulletTime += Time::DeltaTime();
 		MoveBullet();
 		if (bulletTime >= 1.5f)
@@ -54,52 +50,41 @@ namespace ch
 		}
 	}
 
-	void MonsterBulletScr::FixedUpdate()
+	void FightSabreBulletScr::FixedUpdate()
 	{
 	}
 
-	void MonsterBulletScr::Render()
+	void FightSabreBulletScr::Render()
 	{
 	}
 
-	void MonsterBulletScr::OnCollisionEnter(Collider2D* oppo)
+	void FightSabreBulletScr::OnCollisionEnter(Collider2D* collider)
 	{
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Wall || oppo->GetOwner()->GetLayerType() == eLayerType::Player)
+		if (collider->GetOwner()->GetLayerType() == eLayerType::Wall /* || collider->GetOwner()->GetLayerType() == eLayerType::Monster || collider->GetOwner()->GetLayerType() == eLayerType::Object*/)
 		{
 			Reset();
 		}
 	}
 
-	void MonsterBulletScr::OnCollision(Collider2D* oppo)
+	void FightSabreBulletScr::OnCollisionStay(Collider2D* collider)
 	{
 	}
 
-	void MonsterBulletScr::OnCollisionExit(Collider2D* oppo)
+	void FightSabreBulletScr::OnCollisionExit(Collider2D* collider)
 	{
 	}
 
-	void MonsterBulletScr::OnTriggerEnter(Collider2D* oppo)
-	{
-	}
-
-	void MonsterBulletScr::OnTrigger(Collider2D* oppo)
-	{
-	}
-
-	void MonsterBulletScr::OnTriggerExit(Collider2D* oppo)
-	{
-	}
-
-	void MonsterBulletScr::shootingBullet(float Gunangle, Vector3 pos)
+	void FightSabreBulletScr::shootingBullet(float Gunangle, Vector3 pos)
 	{
 		Transform* mTr = GetOwner()->GetComponent<Transform>();
 		bulletDirectionX = cos(Gunangle * (XM_PI / 180.0f));
 		bulletDirectionY = sin(Gunangle * (XM_PI / 180.0f));
 
+		mTr->SetRotation(Vector3(0.f,180.f, Gunangle));
 		mTr->SetPosition(pos);
 	}
 
-	void MonsterBulletScr::MoveBullet()
+	void FightSabreBulletScr::MoveBullet()
 	{
 		float speed = 10.0f; // Bullet's movement speed
 		float bulletDistance = speed * Time::DeltaTime();
@@ -110,12 +95,12 @@ namespace ch
 
 		GetOwner()->GetComponent<Transform>()->SetPosition(bulletPos);
 	}
-	void MonsterBulletScr::Reset()
-	{
 
+	void FightSabreBulletScr::Reset()
+	{
 	
-		
+
 		GetOwner()->Death();
-		
 	}
+
 }
