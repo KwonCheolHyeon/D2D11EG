@@ -1,22 +1,16 @@
 #pragma once
 #include "chScript.h"
-#include "chPlayerHand.h"
-#include "chBullet.h"
-#include "chBulletPool.h"
-#include "chAnimator.h"
-#include "chCollider2D.h"
-#include "chGenericAnimator.h"
-#include "mainPlayer.h"
+#include "chGun.h"
 
 namespace ch
 {
 	enum FightSabreState
 	{
-		ItemBox,
-		Active,//idle
-		nonActive,//pistol상태
-		Reload,
-		Shot,
+		SabreItemBox,
+		SabreActive,//idle
+		SabrenonActive,//pistol상태
+		SabreReload,
+		SabreShot,
 	};
 
 	class FightSabreScr : public Script
@@ -30,10 +24,8 @@ namespace ch
 		virtual void FixedUpdate();
 		virtual void Render();
 
-		virtual void OnCollisionEnter(Collider2D* oppo);
-		virtual void OnCollision(Collider2D* oppo);
-		virtual void OnCollisionExit(Collider2D* oppo);
-
+		void FightSabreOn() { fss = FightSabreState::SabreActive; }
+		void FightSabreOff() { fss = FightSabreState::SabrenonActive; }
 
 		void ItemBox();
 		void Idle();

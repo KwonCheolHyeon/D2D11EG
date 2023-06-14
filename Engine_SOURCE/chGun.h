@@ -3,6 +3,7 @@
 #include "chPlayerHand.h"
 #include "chBullet.h"
 #include "chBulletPool.h"
+#include "chAnimator.h"
 #include "chGenericAnimator.h"
 
 namespace ch
@@ -28,7 +29,6 @@ namespace ch
 
 		void SwapGun();
 
-		//void SetPlayer(GameObject* _player) { player = _player; }
 		void SetHand(PlayerHand* hand) { playerHand = hand; }
 		PlayerHand* GetHand() { return playerHand; }
 
@@ -69,7 +69,7 @@ namespace ch
 		bool CollectAcces;
 
 
-		std::vector<Gun*> Guns;
+	
 
 		GenericAnimator genericAnimator;
 	};

@@ -480,6 +480,9 @@
     <ClInclude Include="ItemBoxScr.h">
       <Filter>GameObject\Object\ItemBox</Filter>
     </ClInclude>
+    <ClInclude Include="BasicGunScript.h">
+      <Filter>GameObject\Weapone\Pistol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -746,6 +749,9 @@
     </ClCompile>
     <ClCompile Include="ItemBoxScr.cpp">
       <Filter>GameObject\Object\ItemBox</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicGunScript.cpp">
+      <Filter>GameObject\Weapone\Pistol</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

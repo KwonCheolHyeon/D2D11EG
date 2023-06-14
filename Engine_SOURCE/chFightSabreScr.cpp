@@ -22,14 +22,14 @@ namespace ch
 	void FightSabreScr::Initalize()
 	{
 
-		SpriteRenderer* sprite = GetOwner()->AddComponent<SpriteRenderer>();
+		SpriteRenderer* sprite = GetOwner()->GetComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"W_FightSabre_Material");
 		sprite->SetMaterial(mateiral);
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
 
 #pragma region 애니메이터
-		anima = GetOwner()->AddComponent<Animator>();
+		anima = GetOwner()->GetComponent<Animator>();
 
 		{//기본
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"FightSabre_Idle", L"enterthe/Waepone/FightSabre/idle/idle.png");
@@ -51,8 +51,8 @@ namespace ch
 #pragma endregion
 
 		
-		fss = FightSabreState::ItemBox;
-		prevFss = FightSabreState::nonActive;
+		fss = FightSabreState::SabreItemBox;
+		prevFss = FightSabreState::SabrenonActive;
 		touchGun = false;
 		prevTouchGun = true;
 	}
@@ -62,19 +62,19 @@ namespace ch
 
 		switch (fss)
 		{
-		case FightSabreState::ItemBox:
+		case FightSabreState::SabreItemBox:
 			ItemBox();
 			break;
-		case FightSabreState::Active:
+		case FightSabreState::SabreActive:
 			Idle();
 			break;
-		case FightSabreState::nonActive:
+		case FightSabreState::SabrenonActive:
 			nonActiveGun();
 			break;
-		case FightSabreState::Reload:
+		case FightSabreState::SabreReload:
 			Reload();
 			break;
-		case FightSabreState::Shot:
+		case FightSabreState::SabreShot:
 			Shot();
 			break;
 		default:
@@ -92,44 +92,8 @@ namespace ch
 	{
 	}
 
-	void FightSabreScr::OnCollisionEnter(Collider2D* oppo)
-	{
-		if (oppo->GetOwner()->GetName() == L"Player") 
-		{
-			touchGun = true;
-		}
-	}
-
-	void FightSabreScr::OnCollision(Collider2D* oppo)
-	{
-	}
-
-	void FightSabreScr::OnCollisionExit(Collider2D* oppo)
-	{
-		if (oppo->GetOwner()->GetName() == L"Player")
-		{
-			touchGun = false;
-		}
-	}
-
 	void FightSabreScr::ItemBox()//아이템 박스에 튀어나와서 플레이어가 줍기전
 	{
-		if (prevTouchGun != touchGun)
-		{
-			prevTouchGun = touchGun;
-			if (touchGun == true) 
-			{
-			
-				anima->Play(L"W_FightSabre_Idle");
-			}
-			else 
-			{
-				anima->Play(L"W_FightSabre_Item", false);
-			}
-		
-		}
-	
-			
 		
 		
 	}

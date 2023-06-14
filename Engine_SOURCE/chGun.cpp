@@ -2,17 +2,16 @@
 #include "chSpriteRenderer.h"
 #include "chResources.h"
 #include "chInput.h"
-#include "chPistol.h"
+
 #include "chPistolScr.h"
+#include "BasicGunScript.h"
 #include "chFightSabreObject.h"
 #include "chFightSabreScr.h"
 #include "chBullet.h"
 #include "chBulletScr.h"
 #include "chtestBulletscr.h"
 #include "chTime.h"
-#include "chScene.h"
-#include "chSceneManager.h"
-#include "chPlayScene.h"
+
 
 namespace ch 
 {
@@ -28,27 +27,19 @@ namespace ch
 	void Gun::Initalize()
 	{
 
-		Pistol* pis = new Pistol();
-		pis->AddComponent<PistolScr>();
-		pis->GetComponent<PistolScr>()->SetpistolHand(GetHand());
-		pis->GetComponent<PistolScr>()->SetpistolPool(GetPool());
-		pis->GetComponent<PistolScr>()->SetGunBox(GetGunBox());
+
+		SpriteRenderer* sprite = this->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"EmptyMaterial");
+		sprite->SetMaterial(mateiral);
+		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+		sprite->SetMesh(mesh);
 
 
-		Scene* playScene = SceneManager::GetPlayScene();
-		playScene->AddGameObject(pis, eLayerType::Weapone);
-		Guns.push_back(pis);//Guns[0] == 피스톨;
-
-
-		//FightSabreObject* fightsabre = new FightSabreObject();
-		//fightsabre->AddComponent<FightSabreScr>();
-		//fightsabre->GetComponent<FightSabreScr>()->SetPlayer(GetPlayer());
-		//fightsabre->GetComponent<FightSabreScr>()->SetpistolPool(GetPool());
-		//fightsabre->GetComponent<FightSabreScr>()->SetGunBox(GetGunBox());
-		//fightsabre->GetComponent<FightSabreScr>()->Initalize();
-		//Guns.push_back(fightsabre);//Guns[1] == 파이트 사브레
-
-
+		BasicGunScript* Scr1 = this->AddComponent<BasicGunScript>();
+		Scr1->SetpistolHand(GetHand());
+		Scr1->SetpistolPool(GetPool());
+		Scr1->SetGunBox(GetGunBox());
+		
 		GameObject::Initalize();
 	}
 	void Gun::Update()
@@ -74,14 +65,13 @@ namespace ch
 	{
 		if (Input::GetKeyDown(eKeyCode::NUM_1)) 
 		{
-			Guns[0]->GetComponent<PistolScr>()->pistolState.active = true;
-			//Guns[1]->GetComponent<FightSabreScr>()->pistolState.active = false;
+			this->GetComponent<BasicGunScript>()->PistolOn();
 		
 		}
 		if (Input::GetKeyDown(eKeyCode::NUM_2))
 		{
-			Guns[0]->GetComponent<PistolScr>()->pistolState.active = false;
-			//Guns[1]->GetComponent<FightSabreScr>()->pistolState.active = true;
+			this->GetComponent<BasicGunScript>()->PistolOff();
+			
 		}
 		if (Input::GetKeyDown(eKeyCode::NUM_3))
 		{

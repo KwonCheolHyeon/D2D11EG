@@ -91,10 +91,10 @@ namespace ch
 			oneOpen = true;
 			bAnimator->Play(L"D_itemBox_open",false);
 
-			GameObject* fightsa = object::Instantiate<GameObject>(eLayerType::Object);
-			
+			FightSabreObject* fightsa = object::Instantiate<FightSabreObject>(eLayerType::Object);
+			fightsa->Initalize();
 			Transform* tr = fightsa->GetComponent<Transform>();
-			tr->SetScale(Vector3(1.f, 1.f, 0.1f));
+			tr->SetScale(Vector3(5.f, 5.f, 0.1f));
 			tr->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 		} 
 
