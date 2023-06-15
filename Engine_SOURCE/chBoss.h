@@ -72,7 +72,12 @@ namespace ch
         MonsterBase* thisMonster;
         chasePlayerOBJ* thisMosterCollider;
         MonsterBulletObj* monsBullet;
+
+    private:
         int monsterHp;
+        bool oneDeath;
+
+
         int first;
         bool hit;
 

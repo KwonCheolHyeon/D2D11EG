@@ -34,6 +34,11 @@ namespace ch
 
 
 	#pragma region ¾Ö´Ï
+		{//Death
+			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Boss_Down_Attack", L"enterthe/enemy/Boss/Death.png");
+			mBossAni->Create(L"Boss_Death", texture, Vector2(0.0f, 0.0f), Vector2(68.0f, 43.0f), Vector2::Zero, 6, 0.2f);
+		}
+
 		{//Down
 
 			{//Attack
@@ -191,10 +196,11 @@ namespace ch
 		mBtr->SetPosition(Vector3(26.f, 19.f, 1.f));
 		mBtr->SetScale(Vector3(5.f, 6.f, 1.f));
 		mBossAni->Play(L"Boss_LeftDown_Idle");
-		monsterHp = 100;
+		monsterHp = 10;
 		first = 1;
 		player = thisMonster->GetPlayer();
 		hit = false;
+		oneDeath = false;
 	}
 	void Boss::Update()
 	{
@@ -430,7 +436,11 @@ namespace ch
 	}
 	void Boss::BossDeath()
 	{
-
+		if (oneDeath == false) 
+		{
+			oneDeath = true;
+			mBossAni->Play(L"Boss_Death",false);
+		}
 	}
 	void Boss::SetMd()
 	{

@@ -1,6 +1,7 @@
 #pragma once
 #include "chGameObject.h"
 #include "chAnimator.h"
+#include "chCameraScript.h"
 namespace ch
 {
 
@@ -29,6 +30,7 @@ namespace ch
 
 		PlayerDirections GetPD() { return pD; }
 		void SetPD(PlayerDirections _a) { pD = _a; };
+
 		void reset();
 
 	public:// 01   : 마우스플레이어 사이 각도 관련
@@ -45,6 +47,7 @@ namespace ch
 	private://보류
 		Animator* pAnima;
 		GameObject* playerOBJ;
+		
 	};
 }
 

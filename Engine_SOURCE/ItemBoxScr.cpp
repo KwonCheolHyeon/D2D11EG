@@ -96,6 +96,8 @@ namespace ch
 			Transform* tr = fightsa->GetComponent<Transform>();
 			tr->SetScale(Vector3(5.f, 5.f, 0.1f));
 			tr->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+
+
 		} 
 
 

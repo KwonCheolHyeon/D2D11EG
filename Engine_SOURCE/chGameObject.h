@@ -3,6 +3,7 @@
 #include "chScript.h"
 #include "chEntity.h"
 #include "chMeshRenderer.h"
+#include "chCameraScript.h"
 namespace ch
 {
 	class GameObject : public Entity
@@ -115,6 +116,9 @@ namespace ch
 
 		Vector3 GetCenterPos() { return GetPos() + Vector3(GetComponent<Transform>()->GetScale().x / 2, GetComponent<Transform>()->GetScale().y, GetComponent<Transform>()->GetScale().z); }
 
+
+		void setCameraScr(CameraScript* _a) { cs = _a; }
+		CameraScript* getCameraScr() { return cs; }
 	public:
 		void SetLeft() { mbIsLeft = true; }
 		void SetRight() { mbIsLeft = false; }
@@ -125,6 +129,7 @@ namespace ch
 		void setHand() { mHand = true; }
 		void setNoHand() { mHand = false; }
 		bool GetHand() { return mHand; }
+
 	private:
 		bool mbIsLeft;//flip¿ë
 		bool prevIsLeft;
@@ -139,7 +144,7 @@ namespace ch
 		std::vector<Script*> mScripts;
 		bool mbDontDestroy;
 		//Scene* mScene;
-
+		CameraScript* cs;
 
 		
 		

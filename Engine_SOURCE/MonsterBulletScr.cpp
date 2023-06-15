@@ -21,7 +21,7 @@ namespace ch
 		/*Scene* playScene = SceneManager::GetActiveScene();
 		playScene->AddGameObject(GetOwner(), eLayerType::MonsterBullet);*/
 
-
+	 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		tr->SetScale(Vector3(0.3f,0.3f,1.f));
 
@@ -41,6 +41,7 @@ namespace ch
 		bulletSr->SetMaterial(bodyMateiral);
 		bulletSr->SetMesh(mesh);
 
+		this->GetOwner()->SetName(L"MonsterBullet");
 	}
 
 	void MonsterBulletScr::Update()
@@ -64,7 +65,7 @@ namespace ch
 
 	void MonsterBulletScr::OnCollisionEnter(Collider2D* oppo)
 	{
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Wall || oppo->GetOwner()->GetLayerType() == eLayerType::Player)
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Wall || oppo->GetOwner()->GetLayerType() == eLayerType::Player || oppo->GetOwner()->GetName() == L"ConvictBlankcolider")
 		{
 			Reset();
 		}

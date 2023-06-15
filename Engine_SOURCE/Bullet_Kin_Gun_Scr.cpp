@@ -100,6 +100,7 @@ namespace ch
 		monsBullet = object::Instantiate<MonsterBulletObj>(eLayerType::MonsterBullet);
 		MonsterBulletScr* bulletScript = monsBullet->AddComponent<MonsterBulletScr>();
 		bulletScript->Initalize();
+		
 		float angle = Owner->GetP2Gangle();
 		bulletScript->shootingBullet(angle, Owner->GetOwnerMonster()->GetComponent<Transform>()->GetPosition());
 		afterShotCalled = false;

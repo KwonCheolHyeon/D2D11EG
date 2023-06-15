@@ -17,11 +17,10 @@ namespace ch
 
 	void HeartScr::Initalize()
 	{
-		Light* lightComp = GetOwner()->AddComponent<Light>();
-		lightComp->SetType(eLightType::Point);
-		lightComp->SetRadius(2.5f);
-		lightComp->SetDiffuse(Vector4(1.0f, 0.0f, 0.0f, 1.0f));
-
+		Collider2D* col = GetOwner()->AddComponent<Collider2D>();
+		col->SetType(eColliderType::Rect);
+		col->SetSize(Vector2(1.f, 1.0f));
+		
 
 		SpriteRenderer* bulletSr = GetOwner()->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> bodyMateiral = Resources::Find<Material>(L"FullHeartMaterial");
@@ -30,13 +29,16 @@ namespace ch
 		bulletSr->SetMesh(mesh);
 
 		Transform* mTr = GetOwner()->GetComponent<Transform>();
-		mTr->SetPosition(Vector3(-16.1f, -3.23f, -9.f));
+		
 		mTr->SetScale(Vector3(0.5f, 0.5f, 0.1f));
 	}
 	
 
 	void HeartScr::Update()
 	{
+
+
+
 	}
 
 	void HeartScr::FixedUpdate()

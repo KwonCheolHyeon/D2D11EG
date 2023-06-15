@@ -10,7 +10,7 @@ namespace ch
 	}
 	void MonsterBulletObj::Initalize()
 	{
-
+		
 		GameObject::Initalize();
 	}
 	void MonsterBulletObj::Update()

@@ -22,8 +22,16 @@ namespace ch
 			return min + static_cast<float>(rand()) / static_cast<float>(RAND_MAX / (max - min));
 		}
 
-	private: //수학
+		Vector3 weakShake(Vector3 pos);
+		Vector3 strongShake(Vector3 pos);
 
+		void weakEffectOn() { weakOn = true; }
+		void strongEffectOn() { strongOn = true; }
+	
+	private: //수학
+		bool weakOn;
+		bool strongOn;
+		float shaketime;
 	private:
 		class Camera* mCameraObject;
 		GameObject* target;

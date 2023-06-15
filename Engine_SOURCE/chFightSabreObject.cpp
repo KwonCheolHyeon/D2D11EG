@@ -23,7 +23,7 @@ namespace ch
 	
 		obRigid = this->AddComponent<Rigidbody>();
 		obCollider = this->AddComponent<Collider2D>();
-		obCollider->SetName(L"FightSabre");
+		obCollider->SetName(L"FightSabreCol");
 		obCollider->SetType(eColliderType::Rect);
 		obCollider->SetSize(Vector2(0.15f, 0.1f));
 

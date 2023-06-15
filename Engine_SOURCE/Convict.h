@@ -5,6 +5,8 @@
 #include "chCollider2D.h"
 #include "ConvictMove.h"
 #include "chHeart_UI.h"
+#include "BlankBulletObj.h"
+#include "ConvictBlankBulletScr.h"
 namespace ch
 {
 	class Convict : public Script
@@ -19,7 +21,7 @@ namespace ch
         virtual void Render() override;
 
         virtual void OnCollisionEnter(Collider2D* oppo);
-        virtual void OnCollision(Collider2D* oppo);
+        virtual void OnCollisionStay(Collider2D* oppo);
         virtual void OnCollisionExit(Collider2D* oppo);
 
     public:// 01   : 마우스플레이어 사이 각도 관련
@@ -37,7 +39,11 @@ namespace ch
     public: //체력관련 함수
         void SetHeart_UI(std::vector<Heart_UI*> a) { pHeartControl = a; }
         void SetHeart();
+    public:
+        void SetBlankBullet_UI(std::vector<BlankBulletObj*> a) { pBlankBullet = a; }
+        void SetBlankBullet();
 
+        void SetBlankBulletscr(ConvictBlankBulletScr* _a) { cbb = _a; }
 
     private:
         bool isDodgeAnimationing();
@@ -60,8 +66,16 @@ namespace ch
         bool playWalking;
 
         std::vector<Heart_UI*> pHeartControl;
+        std::vector<BlankBulletObj*> pBlankBullet;
+        ConvictBlankBulletScr* cbb;
+        //HP
         int pHp;
         int prevHp;
+
+        //공포탄
+        int pBB;
+        int prevBB;
+
 
     private:
         bool isOneHand;

@@ -45,14 +45,11 @@ namespace ch
 	
 		this->GetComponent<FightSabreScr>()->FightSabreOff();
 
-
-
-		
 		GameObject::Initalize();
 	}
 	void Gun::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::E)) //아이템 먹는 키 e
+		if (Input::GetKeyDown(eKeyCode::E))
 		{
 		
 		}
@@ -83,10 +80,7 @@ namespace ch
 			this->GetComponent<FightSabreScr>()->FightSabreOn();
 			
 		}
-		if (Input::GetKeyDown(eKeyCode::NUM_3))
-		{
-			
-		}
+		
 	
 	}
 	void Gun::angleFind()

@@ -2,6 +2,7 @@
 #include "chScene.h"
 #include "chBulletPool.h"
 #include "chHeart_UI.h"
+#include "BlankBulletObj.h"
 #include "DoorObj.h"
 
 namespace ch
@@ -30,6 +31,7 @@ namespace ch
 	private:
 		GameObject* chCameraOBJ;
 		GameObject* chUiCursor;
+		CameraScript* cameraScr;
 		Transform* chUiCursorTR;
 		GameObject* player;
 		GameObject* player2;
@@ -39,6 +41,7 @@ namespace ch
 		Transform* mapTr;
 
 		std::vector<Heart_UI*> HeartControl;
+		std::vector<BlankBulletObj*> BlankBulletControl;
 		//저장할 공간
 		std::vector<Bullet*> containBullets;
 		

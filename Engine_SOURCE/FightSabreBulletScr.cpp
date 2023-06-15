@@ -60,7 +60,7 @@ namespace ch
 
 	void FightSabreBulletScr::OnCollisionEnter(Collider2D* collider)
 	{
-		if (collider->GetOwner()->GetLayerType() == eLayerType::Wall /* || collider->GetOwner()->GetLayerType() == eLayerType::Monster || collider->GetOwner()->GetLayerType() == eLayerType::Object*/)
+		if (collider->GetOwner()->GetLayerType() == eLayerType::Wall  || collider->GetOwner()->GetLayerType() == eLayerType::Monster || collider->GetOwner()->GetLayerType() == eLayerType::Object)
 		{
 			Reset();
 		}

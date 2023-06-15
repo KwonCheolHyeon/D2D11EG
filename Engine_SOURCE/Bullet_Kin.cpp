@@ -328,7 +328,7 @@ namespace ch
 
 	void Bullet_Kin::Move()
 	{
-		static std::random_device rd;
+		/*static std::random_device rd;
 		static std::mt19937 gen(rd());
 		static std::uniform_int_distribution<int> dist(1, 8);
 		
@@ -345,7 +345,11 @@ namespace ch
 		}
 
 		
-		GenericMoveAnimator(dir);
+		GenericMoveAnimator(dir);*/
+		if (thisMosterCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true)
+		{
+			mS = monsterState::chase;
+		}
 	}
 
 	void Bullet_Kin::Attack()

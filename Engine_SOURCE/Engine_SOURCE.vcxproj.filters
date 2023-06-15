@@ -200,6 +200,12 @@
     <Filter Include="GameObject\Object\Heart">
       <UniqueIdentifier>{dfe4b465-4537-4f62-a059-55b889d72d4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\BlankBullets">
+      <UniqueIdentifier>{399e2ba8-21c0-4466-aff1-d4362259236a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Money">
+      <UniqueIdentifier>{7449af8c-1ce9-4ab7-8876-46f3bc9f6759}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -498,6 +504,27 @@
     <ClInclude Include="HeartScr.h">
       <Filter>GameObject\Object\Heart</Filter>
     </ClInclude>
+    <ClInclude Include="BlankBulletObj.h">
+      <Filter>GameObject\Object\BlankBullets</Filter>
+    </ClInclude>
+    <ClInclude Include="BlankBulletScr.h">
+      <Filter>GameObject\Object\BlankBullets</Filter>
+    </ClInclude>
+    <ClInclude Include="BlankBullet_UI.h">
+      <Filter>GameObject\Object\BlankBullets</Filter>
+    </ClInclude>
+    <ClInclude Include="MoneyObj.h">
+      <Filter>GameObject\Object\Money</Filter>
+    </ClInclude>
+    <ClInclude Include="MoneyScr.h">
+      <Filter>GameObject\Object\Money</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvictBlankBulletScr.h">
+      <Filter>GameObject\chPlayer\Player\Convict</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvictBlankBulletObj.h">
+      <Filter>GameObject\chPlayer\Player\Convict</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -779,6 +806,27 @@
     </ClCompile>
     <ClCompile Include="HeartScr.cpp">
       <Filter>GameObject\Object\Heart</Filter>
+    </ClCompile>
+    <ClCompile Include="BlankBulletObj.cpp">
+      <Filter>GameObject\Object\BlankBullets</Filter>
+    </ClCompile>
+    <ClCompile Include="BlankBulletScr.cpp">
+      <Filter>GameObject\Object\BlankBullets</Filter>
+    </ClCompile>
+    <ClCompile Include="BlankBullet_UI.cpp">
+      <Filter>GameObject\Object\BlankBullets</Filter>
+    </ClCompile>
+    <ClCompile Include="MoneyObj.cpp">
+      <Filter>GameObject\Object\Money</Filter>
+    </ClCompile>
+    <ClCompile Include="MoneyScr.cpp">
+      <Filter>GameObject\Object\Money</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvictBlankBulletScr.cpp">
+      <Filter>GameObject\chPlayer\Player\Convict</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvictBlankBulletObj.cpp">
+      <Filter>GameObject\chPlayer\Player\Convict</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

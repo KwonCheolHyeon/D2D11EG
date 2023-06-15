@@ -32,6 +32,11 @@
 #include "DoorScr.h"
 #include "DoorColliderObj.h"
 #include "HeartObj.h"
+#include "BlankBulletObj.h"
+#include "BlankBulletScr.h"
+#include "BlankBullet_UI.h"
+#include "ConvictBlankBulletObj.h"
+#include "ConvictBlankBulletScr.h"
 
 
 namespace ch
@@ -75,7 +80,7 @@ namespace ch
 			cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 			//cameraComp->RegisterCameraInRenderer();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			chCameraOBJ->AddComponent<CameraScript>();
+			cameraScr = chCameraOBJ->AddComponent<CameraScript>();
 			mainCamera = cameraComp;
 		}
 
@@ -89,7 +94,38 @@ namespace ch
 #pragma region UI모음
 		{
 			{
-			
+				BlankBulletObj* blank0 = object::Instantiate<BlankBulletObj>(eLayerType::UI, this);
+				blank0->SetName(L"BlankBulletUI");
+				blank0->AddComponent<BlankBullet_UI>();
+				Transform* htr0 = blank0->GetComponent<Transform>();
+				htr0->SetPosition(Vector3(-6.5f, 3.9f, 0.f));
+				htr0->SetScale(Vector3(0.7f, 0.65f, 0.f));
+
+				BlankBulletObj* blank1 = object::Instantiate<BlankBulletObj>(eLayerType::UI, this);
+				blank1->SetName(L"BlankBulletUI");
+				blank1->AddComponent<BlankBullet_UI>();
+				Transform* htr1 = blank1->GetComponent<Transform>();
+				htr1->SetPosition(Vector3(-5.7f, 3.9f, 0.f));
+				htr1->SetScale(Vector3(0.7f, 0.65f, 0.f));
+
+				BlankBulletObj* blank2 = object::Instantiate<BlankBulletObj>(eLayerType::UI, this);
+				blank2->SetName(L"BlankBulletUI");
+				blank2->AddComponent<BlankBullet_UI>();
+				Transform* htr2 = blank2->GetComponent<Transform>();
+				htr2->SetPosition(Vector3(-4.9f, 3.9f, 0.f));
+				htr2->SetScale(Vector3(0.7f, 0.65f, 0.f));
+
+				BlankBulletObj* blank3 = object::Instantiate<BlankBulletObj>(eLayerType::UI, this);
+				blank3->SetName(L"BlankBulletUI");
+				blank3->AddComponent<BlankBullet_UI>();
+				Transform* htr3 = blank3->GetComponent<Transform>();
+				htr3->SetPosition(Vector3(-4.1f, 3.9f, 0.f));
+				htr3->SetScale(Vector3(0.7f, 0.65f, 0.f));
+
+				BlankBulletControl.push_back(blank0);
+				BlankBulletControl.push_back(blank1);
+				BlankBulletControl.push_back(blank2);
+				BlankBulletControl.push_back(blank3);
 
 			}
 			{
@@ -134,6 +170,14 @@ namespace ch
 				player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
 				player->SetName(L"Player");
 				player->GetComponent<Convict>()->SetHeart_UI(HeartControl);
+				player->GetComponent<Convict>()->SetBlankBullet_UI(BlankBulletControl);
+				player->setCameraScr(cameraScr);
+
+				GameObject* ConvictBlankcol = object::Instantiate<ConvictBlankBulletObj>(eLayerType::Player, this);
+				ConvictBlankcol->SetName(L"ConvictBlankcolider");
+				ConvictBlankBulletScr* ConBlankscr = ConvictBlankcol->AddComponent<ConvictBlankBulletScr>();
+				ConBlankscr->SetConvit(player);
+				player->GetComponent<Convict>()->SetBlankBulletscr(ConBlankscr);
 
 				GameObject* gunBox = object::Instantiate<GameObject>(eLayerType::Weapone, this);
 				gunBox->SetName(L"GunBox");
@@ -156,8 +200,29 @@ namespace ch
 		}
 
 		{
-			GameObject* Heart = object::Instantiate<HeartObj>(eLayerType::Weapone, this);
-		
+			GameObject* Heart = object::Instantiate<HeartObj>(eLayerType::Object, this);
+			Heart->SetName(L"heartObj");
+			Heart->AddComponent<Heart_Scr>();
+			Transform* tr1 = Heart->GetComponent<Transform>();
+			tr1->SetPosition(Vector3(-0.5f, -14.9f, 0.1f));
+
+			GameObject* shopBullet = object::Instantiate<BlankBulletObj>(eLayerType::Object, this);
+			shopBullet->SetName(L"BlankBulletObj");
+			shopBullet->AddComponent<BlankBulletScr>();
+			Transform* tr2 = shopBullet->GetComponent<Transform>();
+			tr2->SetPosition(Vector3(4.78f, -22.88f, 0.1f));
+
+			GameObject* shopHeart = object::Instantiate<HeartObj>(eLayerType::Object, this);
+			shopHeart->SetName(L"heartObj");
+			shopHeart->AddComponent<Heart_Scr>();
+			Transform* tr3 = shopHeart->GetComponent<Transform>();
+			tr3->SetPosition(Vector3(7.27f, -22.88f, 0.1f));
+
+			GameObject* BulletBlank = object::Instantiate<BlankBulletObj>(eLayerType::Object, this);
+			BulletBlank->SetName(L"BlankBulletObj");
+			BulletBlank->AddComponent<BlankBulletScr>();
+			Transform* tr4 = BulletBlank->GetComponent<Transform>();
+			tr4->SetPosition(Vector3(0.374f, -3.23f, 0.1f));
 		}
 #pragma region 스테이지1 몬스터
 		{// 스테이지1 몬스터1

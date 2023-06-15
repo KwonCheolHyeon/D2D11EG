@@ -23,8 +23,9 @@ namespace ch
 		mCameraObject = GetOwner()->GetComponent<Camera>();
 		target = mCameraObject->GetTarget();
 
-
-
+		weakOn = false;
+		strongOn = false;
+		shaketime = 0.f;
 	}
 
 	void CameraScript::Update()
@@ -57,15 +58,14 @@ namespace ch
 
 			pos = targetPos + distance;
 			
-			if (Input::GetKey(eKeyCode::V))
+			if (weakOn == true)
 			{
-				pos = CameraWeakShakeeffect(pos);
+				pos = weakShake(pos);
 			}
-			if (Input::GetKey(eKeyCode::C))
+			if (strongOn == true)
 			{
-				pos = CameraStrongShakeeffect(pos);
+				pos = strongShake(pos);
 			}
-			
 			
 
 			tr->SetPosition(pos);
@@ -122,6 +122,38 @@ namespace ch
 		float shakeAmount = 0.5f; // Change this value to adjust the camera shake intensity
 		Vector3 shakeOffset = Vector3(RandomRange(-shakeAmount, shakeAmount), RandomRange(-shakeAmount, shakeAmount), 0.0f);
 		return pos += shakeOffset;
+	}
+
+	Vector3 CameraScript::weakShake(Vector3 pos)
+	{
+		shaketime += Time::DeltaTime();
+		pos = CameraWeakShakeeffect(pos);
+		
+		if (shaketime >= 0.2f) 
+		{
+			weakOn = false;
+			shaketime = 0.f;
+			return pos;
+		}
+		
+		return pos;
+		
+	}
+
+	Vector3 CameraScript::strongShake(Vector3 pos)
+	{
+		shaketime += Time::DeltaTime();
+		pos = CameraStrongShakeeffect(pos);
+
+		if (shaketime >= 0.1f)//∏Ó√ ∞£ 
+		{
+			strongOn = false;
+			shaketime = 0.f;
+			return pos;
+		}
+
+		return pos;
+
 	}
 
 

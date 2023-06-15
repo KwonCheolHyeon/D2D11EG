@@ -5,6 +5,7 @@
 #include "chSpriteRenderer.h"
 #include "chInput.h"
 #include "Heart_Scr.h"
+#include "BlankBullet_UI.h"
 namespace ch
 {
 	Convict::Convict()
@@ -159,6 +160,10 @@ namespace ch
 		prevHp = 6;
 		playWalking = false;
 		isOneHand = true;
+
+		pBB = 2;
+		prevBB = 0;
+
 	}
 
 	void Convict::Update()
@@ -186,6 +191,10 @@ namespace ch
 		{
 			SetHeart();
 		}
+		if (prevBB != pBB) 
+		{
+			SetBlankBullet();
+		}
 
 		if (Input::GetKeyDown(eKeyCode::NUM_1))
 		{
@@ -194,6 +203,12 @@ namespace ch
 		if (Input::GetKeyDown(eKeyCode::NUM_2))
 		{
 			isOneHand = false;
+		}
+		if (Input::GetKeyDown(eKeyCode::Q))
+		{
+			pBB -= 1;
+			cbb->onBlankBulletEffect();
+			GetOwner()->getCameraScr()->strongEffectOn();
 		}
 	}
 
@@ -207,14 +222,42 @@ namespace ch
 
 	void Convict::OnCollisionEnter(Collider2D* oppo)
 	{
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet )
+		eLayerType type = oppo->GetOwner()->GetLayerType();
+
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet || oppo->GetOwner()->GetName() == L"MonsterBullet")
 		{
 			pHp -= 1;
+			GetOwner()->getCameraScr()->weakEffectOn();
 		}
+	
+
 	}
 
-	void Convict::OnCollision(Collider2D* oppo)
+	void Convict::OnCollisionStay(Collider2D* oppo)
 	{
+		if (oppo->GetOwner()->GetName() == L"heartObj")
+		{
+			if (Input::GetKeyDown(eKeyCode::E))
+			{
+				oppo->GetOwner()->Death();
+				pHp += 1;
+			}
+		}
+		if (oppo->GetOwner()->GetName() == L"BlankBulletObj")
+		{
+			if (Input::GetKeyDown(eKeyCode::E))
+			{
+				oppo->GetOwner()->Death();
+				pBB += 1;
+			}
+		}
+		if (oppo->GetName() == L"FightSabreCol")
+		{
+			if (Input::GetKeyDown(eKeyCode::E))
+			{
+				oppo->GetOwner()->Death();
+			}
+		}
 	}
 
 	void Convict::OnCollisionExit(Collider2D* oppo)
@@ -634,6 +677,45 @@ namespace ch
 			{
 				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(0);
 			}
+		}
+	}
+
+	void Convict::SetBlankBullet()
+	{
+		if (pBlankBullet.size() != 0) 
+		{
+			prevBB = pBB;
+
+			if (pBB == 4)
+			{
+				pBlankBullet[3]->GetComponent<BlankBullet_UI>()->onBlankBullet();
+
+			}
+			else if (pBB == 3)
+			{
+
+				pBlankBullet[3]->GetComponent<BlankBullet_UI>()->offBlankBullet();
+				pBlankBullet[2]->GetComponent<BlankBullet_UI>()->onBlankBullet();
+				pBlankBullet[1]->GetComponent<BlankBullet_UI>()->onBlankBullet();
+				pBlankBullet[0]->GetComponent<BlankBullet_UI>()->onBlankBullet();
+			}
+			else if (pBB == 2)
+			{
+				pBlankBullet[3]->GetComponent<BlankBullet_UI>()->offBlankBullet();
+				pBlankBullet[2]->GetComponent<BlankBullet_UI>()->offBlankBullet();
+				pBlankBullet[1]->GetComponent<BlankBullet_UI>()->onBlankBullet();
+				pBlankBullet[0]->GetComponent<BlankBullet_UI>()->onBlankBullet();
+			}
+			else if (pBB == 1)
+			{
+				pBlankBullet[1]->GetComponent<BlankBullet_UI>()->offBlankBullet();
+				pBlankBullet[0]->GetComponent<BlankBullet_UI>()->onBlankBullet();
+			}
+			else if (pBB == 0)
+			{
+				pBlankBullet[0]->GetComponent<BlankBullet_UI>()->offBlankBullet();
+			}
+
 		}
 	}
 	
