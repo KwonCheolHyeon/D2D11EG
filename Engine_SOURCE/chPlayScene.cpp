@@ -37,7 +37,7 @@
 #include "BlankBullet_UI.h"
 #include "ConvictBlankBulletObj.h"
 #include "ConvictBlankBulletScr.h"
-
+#include "LampObj.h"
 
 namespace ch
 {
@@ -975,6 +975,64 @@ namespace ch
 			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
 			mapColliderTr->SetPosition(Vector3(-12.5f, -13.0f, 0.0f));
 			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
+		}
+
+		{//램프
+			GameObject* LmpObj = object::Instantiate<LampObj>(eLayerType::Dummy, this);
+			LmpObj->SetName(L"Lingh01");
+
+			Transform* mapColliderTr = LmpObj->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-20.64f, 19.38f, -2.f));
+			mapColliderTr->SetScale(Vector3(5.f,5.3f, 0.1f));
+		
+		}
+		{//램프
+			GameObject* LmpObj = object::Instantiate<LampObj>(eLayerType::Dummy, this);
+			LmpObj->SetName(L"Lingh02");
+
+			Transform* mapColliderTr = LmpObj->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-17.37f, 19.38f, -2.f));
+			mapColliderTr->SetScale(Vector3(5.f, 5.3f, 0.1f));
+
+		}
+		{//램프
+			GameObject* LmpObj = object::Instantiate<LampObj>(eLayerType::Dummy, this);
+			LmpObj->SetName(L"Lingh03");
+
+			Transform* mapColliderTr = LmpObj->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-18.81f, 19.38f, -2.f));
+			mapColliderTr->SetScale(Vector3(5.f, 5.3f, 0.1f));
+
+		}
+
+		{//램프
+			GameObject* LmpObj = object::Instantiate<LampObj>(eLayerType::Dummy, this);
+			LmpObj->SetName(L"Lingh02");
+
+			Transform* mapColliderTr = LmpObj->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-7.21f, 15.04f, -2.f));
+			mapColliderTr->SetScale(Vector3(5.f, 5.3f, 0.1f));
+
+		}
+
+		{//램프
+			GameObject* LmpObj = object::Instantiate<LampObj>(eLayerType::Dummy, this);
+			LmpObj->SetName(L"Lingh02");
+
+			Transform* mapColliderTr = LmpObj->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-3.779f, 15.04f, -2.f));
+			mapColliderTr->SetScale(Vector3(5.f, 5.3f, 0.1f));
+
+		}
+
+		{//램프
+			GameObject* LmpObj = object::Instantiate<LampObj>(eLayerType::Dummy, this);
+			LmpObj->SetName(L"Lingh03");
+
+			Transform* mapColliderTr = LmpObj->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(1.33f, -1.18f, -2.f));
+			mapColliderTr->SetScale(Vector3(5.f, 5.3f, 0.1f));
+
 		}
 
 

@@ -251,6 +251,8 @@
     <ClInclude Include="Heart_Scr.h" />
     <ClInclude Include="ItemBox.h" />
     <ClInclude Include="ItemBoxScr.h" />
+    <ClInclude Include="LampObj.h" />
+    <ClInclude Include="LampScr.h" />
     <ClInclude Include="mainPlayer.h" />
     <ClInclude Include="MapObject.h" />
     <ClInclude Include="MoneyObj.h" />
@@ -355,6 +357,8 @@
     <ClCompile Include="Heart_Scr.cpp" />
     <ClCompile Include="ItemBox.cpp" />
     <ClCompile Include="ItemBoxScr.cpp" />
+    <ClCompile Include="LampObj.cpp" />
+    <ClCompile Include="LampScr.cpp" />
     <ClCompile Include="mainPlayer.cpp" />
     <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="MoneyObj.cpp" />
