@@ -38,6 +38,7 @@
 #include "ConvictBlankBulletObj.h"
 #include "ConvictBlankBulletScr.h"
 #include "LampObj.h"
+#include "BullatScr.h"
 
 namespace ch
 {
@@ -303,7 +304,7 @@ namespace ch
 		{//스테이지1 몬스터3
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
-			kinMonster->AddComponent<Bullet_Kin>();
+			kinMonster->AddComponent<BullatScr>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
 			kinTransform->SetPosition(Vector3(-21.14f,5.77f, 0.1f));
 			kinMonster->SetPlayer(player);
@@ -312,17 +313,16 @@ namespace ch
 			chaseCollier->SetName(L"most");
 
 			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
-			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetName(L"ChaseCollider");
 			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(10.f, 10.f));
+			mCollider->SetSize(Vector2(8.f, 8.f));
 
 			chaseCollier->SetOwnerTransform(kinTransform);
 			kinMonster->SetMonsterChaseCollider(chaseCollier);
 
-			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
-			gun->SetOwnerMoster(kinMonster);
-
 			mainDoor2->SetMonsterBases(kinMonster);
+
+
 		}
 #pragma endregion
 

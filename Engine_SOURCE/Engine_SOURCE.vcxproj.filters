@@ -209,6 +209,15 @@
     <Filter Include="GameObject\Object\Lamp">
       <UniqueIdentifier>{e0239344-31fa-441e-8bec-578d4be35a97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\BossDoor">
+      <UniqueIdentifier>{da6a534f-2b12-49b2-96d2-d766b15b0dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\chMonster\Bullat">
+      <UniqueIdentifier>{e72df1a2-6741-4559-a972-93f996ad7772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\chMonster\Cube">
+      <UniqueIdentifier>{bcd4f083-bf28-4303-88c3-02d966698590}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -534,6 +543,18 @@
     <ClInclude Include="LampScr.h">
       <Filter>GameObject\Object\Lamp</Filter>
     </ClInclude>
+    <ClInclude Include="BullatScr.h">
+      <Filter>GameObject\chMonster\Bullat</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeScr.h">
+      <Filter>GameObject\chMonster\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBullet2Obj.h">
+      <Filter>GameObject\chMonster\MonsterBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBullet2Scr.h">
+      <Filter>GameObject\chMonster\MonsterBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -842,6 +863,18 @@
     </ClCompile>
     <ClCompile Include="LampScr.cpp">
       <Filter>GameObject\Object\Lamp</Filter>
+    </ClCompile>
+    <ClCompile Include="BullatScr.cpp">
+      <Filter>GameObject\chMonster\Bullat</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeScr.cpp">
+      <Filter>GameObject\chMonster\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBullet2Obj.cpp">
+      <Filter>GameObject\chMonster\MonsterBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBullet2Scr.cpp">
+      <Filter>GameObject\chMonster\MonsterBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

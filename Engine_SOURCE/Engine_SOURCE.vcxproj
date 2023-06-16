@@ -158,6 +158,7 @@
     <ClInclude Include="BlankBulletObj.h" />
     <ClInclude Include="BlankBulletScr.h" />
     <ClInclude Include="BlankBullet_UI.h" />
+    <ClInclude Include="BullatScr.h" />
     <ClInclude Include="Bullet_Kin.h" />
     <ClInclude Include="Bullet_Kin_Gun.h" />
     <ClInclude Include="Bullet_Kin_Gun_Scr.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="ConvictBlankBulletObj.h" />
     <ClInclude Include="ConvictBlankBulletScr.h" />
     <ClInclude Include="ConvictMove.h" />
+    <ClInclude Include="CubeScr.h" />
     <ClInclude Include="DoorColliderObj.h" />
     <ClInclude Include="DoorColliderScr.h" />
     <ClInclude Include="DoorObj.h" />
@@ -258,6 +260,8 @@
     <ClInclude Include="MoneyObj.h" />
     <ClInclude Include="MoneyScr.h" />
     <ClInclude Include="MonsterBase.h" />
+    <ClInclude Include="MonsterBullet2Obj.h" />
+    <ClInclude Include="MonsterBullet2Scr.h" />
     <ClInclude Include="MonsterBulletObj.h" />
     <ClInclude Include="MonsterBulletScr.h" />
     <ClInclude Include="resource.h" />
@@ -269,6 +273,7 @@
     <ClCompile Include="BlankBulletObj.cpp" />
     <ClCompile Include="BlankBulletScr.cpp" />
     <ClCompile Include="BlankBullet_UI.cpp" />
+    <ClCompile Include="BullatScr.cpp" />
     <ClCompile Include="Bullet_Kin.cpp" />
     <ClCompile Include="Bullet_Kin_Gun.cpp" />
     <ClCompile Include="Bullet_Kin_Gun_Scr.cpp" />
@@ -343,6 +348,7 @@
     <ClCompile Include="ConvictBlankBulletObj.cpp" />
     <ClCompile Include="ConvictBlankBulletScr.cpp" />
     <ClCompile Include="ConvictMove.cpp" />
+    <ClCompile Include="CubeScr.cpp" />
     <ClCompile Include="DoorColliderObj.cpp" />
     <ClCompile Include="DoorColliderScr.cpp" />
     <ClCompile Include="DoorObj.cpp" />
@@ -364,6 +370,8 @@
     <ClCompile Include="MoneyObj.cpp" />
     <ClCompile Include="MoneyScr.cpp" />
     <ClCompile Include="MonsterBase.cpp" />
+    <ClCompile Include="MonsterBullet2Obj.cpp" />
+    <ClCompile Include="MonsterBullet2Scr.cpp" />
     <ClCompile Include="MonsterBulletObj.cpp" />
     <ClCompile Include="MonsterBulletScr.cpp" />
     <ClCompile Include="TableObject.cpp" />

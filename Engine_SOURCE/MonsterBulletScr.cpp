@@ -102,7 +102,7 @@ namespace ch
 
 	void MonsterBulletScr::MoveBullet()
 	{
-		float speed = 10.0f; // Bullet's movement speed
+		float speed = 5.0f; // Bullet's movement speed
 		float bulletDistance = speed * Time::DeltaTime();
 		Vector3 bulletPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
@@ -114,8 +114,6 @@ namespace ch
 	void MonsterBulletScr::Reset()
 	{
 
-	
-		
 		GetOwner()->Death();
 		
 	}

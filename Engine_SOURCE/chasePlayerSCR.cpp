@@ -33,7 +33,7 @@ namespace ch
 
 	void chasePlayerSCR::OnCollisionEnter(Collider2D* oppo)
 	{
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Player)
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Player || oppo->GetOwner()->GetName() == L"Player")
 		{
 			findPlayer = true;
 		}
@@ -45,7 +45,7 @@ namespace ch
 
 	void chasePlayerSCR::OnCollisionExit(Collider2D* oppo)
 	{
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Player)
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Player|| oppo->GetOwner()->GetName() == L"Player" )
 		{
 			findPlayer = false;
 		}
