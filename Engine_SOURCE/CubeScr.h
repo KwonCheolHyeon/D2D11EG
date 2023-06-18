@@ -2,6 +2,8 @@
 #include "chScript.h"
 #include "MonsterBase.h"
 #include "chAnimator.h"
+#include "MonsterBullet2Obj.h"
+#include "MonsterBullet2Scr.h"
 namespace ch
 {
 
@@ -32,9 +34,17 @@ namespace ch
         MonsterBase* thisMonster;
         monsterState ms;
         Transform* mTr;
+
     private:
+        MonsterBullet2Obj* Mbobj[8];
+        MonsterBullet2Scr* Mbscr[8];
+    private:
+        float nullbulletTime;
+        bool moveOn;
         float bulletMakeTime;
+        int bulletMakeCount;
         int monsterHp;
+        
     };
 
 

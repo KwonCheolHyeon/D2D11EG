@@ -190,17 +190,34 @@ namespace ch
 				mBossAni->Create(L"Boss_LeftUp_Move", texture, Vector2(0.0f, 0.0f), Vector2(60.0f, 43.0f), Vector2::Zero, 3, 0.15f);
 			}
 		}
+		{
+			{//Move
+				std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Boss_fly", L"enterthe/enemy/Boss/fly.png");
+				mBossAni->Create(L"B_Boss_fly", texture, Vector2(0.0f, 0.0f), Vector2(39.0f, 86.0f), Vector2::Zero, 4, 0.15f);
+			}
+			{//Move
+				std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Boss_flying", L"enterthe/enemy/Boss/flying.png");
+				mBossAni->Create(L"B_Boss_flying", texture, Vector2(0.0f, 0.0f), Vector2(17.0f, 51.0f), Vector2::Zero, 1, 0.15f);
+			}
+			{//Move
+				std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Boss_skyBomb", L"enterthe/enemy/Boss/skyBomb.png");
+				mBossAni->Create(L"B_Boss_skyBomb", texture, Vector2(0.0f, 0.0f), Vector2(48.0f, 74.0f), Vector2::Zero, 5, 0.2f);
+			}
+		}
+
 
 
 	#pragma endregion
-		mBtr->SetPosition(Vector3(26.f, 19.f, 1.f));
+		mBtr->SetPosition(Vector3(15.28f, 23.28f, 1.f));
 		mBtr->SetScale(Vector3(5.f, 6.f, 1.f));
 		mBossAni->Play(L"Boss_LeftDown_Idle");
 		monsterHp = 10;
+		prevMonsterHp = 50;
 		first = 1;
 		player = thisMonster->GetPlayer();
 		hit = false;
 		oneDeath = false;
+		prevbombCount = 6;
 	}
 	void Boss::Update()
 	{
@@ -209,7 +226,20 @@ namespace ch
 			first *= -1;
 			mS = monsterState::mIdle;
 		}
+		if (prevMonsterHp != monsterHp)
+		{
+			prevMonsterHp = monsterHp;
 
+			switch (monsterHp)
+			{
+			case 5:
+				mS = monsterState::BossFlyAni;
+				break;
+			default:
+				break;
+			}
+
+		}
 
 		SetMd();
 
@@ -235,6 +265,12 @@ namespace ch
 			break;
 		case monsterState::SkyBomb:
 			BossSkyBomb();
+			break;
+		case monsterState::BossFlyAni:
+			BossFlyAni();
+			break;
+		case monsterState::BossGoMid:
+			BossGoMid();
 			break;
 		case monsterState::Death:
 			BossDeath();
@@ -299,6 +335,8 @@ namespace ch
 		{
 			mS = monsterState::Move;
 		}
+		
+		
 	}
 	void Boss::BossChase()
 	{
@@ -425,10 +463,109 @@ namespace ch
 
 		
 	}
+	void Boss::BossFlyAni()
+	{
+		BossFlyAniTimer += Time::DeltaTime();
+		if (mBossAni->IsAnimationRunning(L"B_Boss_fly") == false) 
+		{
+			mBossAni->Play(L"B_Boss_fly",false);
+		}
+
+		if(BossFlyAniTimer >= 0.6f)
+		{
+			mS = monsterState::BossGoMid;
+		}
+		
+
+		
+
+	}
+	void Boss::BossGoMid()
+	{
+		mBossAni->Play(L"B_Boss_flying");
+		Vector3 a = mBtr->GetPosition();
+		float bossDuration = 2.0f;  // Duration in seconds
+		float bossSpeed = 0.0f;  // Speed (vertical movement distance per second)
+
+		bossFly +=  Time::DeltaTime();
+
+		mBtr->SetPosition(a + Vector3(0.f, bossFly * 0.5f, 0.f));
+
+		if (bossFly >= 2.f)
+		{
+			// Boss has reached the desired height
+			mBtr->SetPosition(Vector3(15.28f, 43.28f, -1.f));
+			mS = monsterState::SkyBomb;
+		}
+	}
 	void Boss::BossSkyBomb()
 	{
+		bossSkyBomb += Time::DeltaTime();
+		Vector3 a = mBtr->GetPosition();
 
+		if (a.y >= 24.6) 
+		{
+			BossDown.y += bossSkyBomb * 0.05;
+			mBtr->SetPosition(a - Vector3(0.f, BossDown.y, 0.f));
+		}
+		else 
+		{
+			boosSkyBombAttackTime += Time::DeltaTime();
 
+			if (boosSkyBombAttackTime >= 1.1f) 
+			{
+				bombCount += 1;
+				boosSkyBombAttackTime = 0;
+			}
+			if (mBossAni->IsAnimationRunning(L"B_Boss_skyBomb") == false)
+			{
+				mBossAni->Play(L"B_Boss_skyBomb", true);
+			}
+
+			if (prevbombCount != bombCount) {
+				prevbombCount = bombCount;
+				switch (bombCount)
+				{
+				case 0:
+					
+
+					break;
+				case 1:
+				
+
+					break;
+				case 2:
+					
+
+					break;
+				case 3:
+					
+
+					break;
+				case 4:
+					
+
+					break;
+				case 5:
+					
+
+					break;
+				case 6:
+					bombCount = 0;
+					boosSkyBombAttackTime = 0;
+					bossSkyBomb = 0;
+					mS = monsterState::mIdle;
+					break;
+				default:
+					break;
+				}
+
+			}
+		
+
+		
+		}
+		
 
 
 

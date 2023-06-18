@@ -39,6 +39,7 @@
 #include "ConvictBlankBulletScr.h"
 #include "LampObj.h"
 #include "BullatScr.h"
+#include "CubeScr.h"
 
 namespace ch
 {
@@ -277,7 +278,7 @@ namespace ch
 		{//스테이지1 몬스터3
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
-			kinMonster->AddComponent<Bullet_Kin>();
+			kinMonster->AddComponent<CubeScr>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
 			kinTransform->SetPosition(Vector3(-6.86f, 9.44f, 0.1f));
 			kinMonster->SetPlayer(player);
@@ -292,9 +293,6 @@ namespace ch
 
 			chaseCollier->SetOwnerTransform(kinTransform);
 			kinMonster->SetMonsterChaseCollider(chaseCollier);
-
-			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
-			gun->SetOwnerMoster(kinMonster);
 
 			mainDoor1->SetMonsterBases(kinMonster);
 		}

@@ -32,7 +32,11 @@ namespace ch
         void BossHit();
         void BossMove();
         void BossAttack();
+
+        void BossFlyAni();
+        void BossGoMid();
         void BossSkyBomb();
+    
         void BossDeath();
 
         void SetMd();
@@ -75,6 +79,7 @@ namespace ch
 
     private:
         int monsterHp;
+        int prevMonsterHp;
         bool oneDeath;
 
 
@@ -84,7 +89,20 @@ namespace ch
     private://≈∏¿Ã∏”
         float attackTimer;
         float hitAniTimer;
+        float BossFlyAniTimer;
+
         GenericAnimator GenericAnimator;
+    private:
+        float BossUpY;
+        Vector3 Bossup;
+        float bossFly;
+
+        float bossSkyBomb;
+        float boosSkyBombAttackTime;
+        Vector3 BossDown;
+
+        int bombCount;
+        int prevbombCount;
 	};
 }
 

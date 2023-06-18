@@ -13,6 +13,8 @@ namespace ch
 		Move,
 		Attack,
 		SkyBomb,
+		BossFlyAni,
+		BossGoMid,
 		Death
 	};
 	enum monsterDir 
