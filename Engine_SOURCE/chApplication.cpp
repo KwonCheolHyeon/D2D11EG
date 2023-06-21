@@ -5,7 +5,7 @@
 #include "chSceneManager.h"
 #include "chResources.h"
 #include "chCollisionManager.h"
-
+#include "chFmod.h"
 namespace ch
 {
 	using namespace graphics;
@@ -25,8 +25,10 @@ namespace ch
 		Time::Initialize();
 		Input::Initialize();
 		CollisionManager::Initialize();
+		Fmod::Initialize();
 		renderer::Initialize();
 		SceneManager::Initalize();
+		
 	}
 
 	// 게임 로직 캐릭터 이동 등등 

@@ -17,6 +17,8 @@ namespace ch
 
 	void FightSabreBulletScr::Initalize()
 	{
+		GetOwner()->SetLayerType(eLayerType::Weapone);
+
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		tr->SetScale(Vector3(0.5f, 0.3f, 1.f));
 		

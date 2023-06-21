@@ -1,5 +1,5 @@
 #include "ConvictBlankBulletScr.h"
-
+#include "chInput.h"
 #include "chTime.h"
 namespace ch 
 {
@@ -20,6 +20,7 @@ namespace ch
 		col->SetSize(Vector2(0.1f, 0.1f));
 
 		time = 0.f;
+		reloadOn = false;
 	}
 
 	void ConvictBlankBulletScr::Update()
@@ -39,6 +40,31 @@ namespace ch
 			}
 		
 		}
+
+		
+		if (Input::GetKeyDown(eKeyCode::R))
+		{
+			reloadOn = true;
+		}
+
+
+		if (reloadOn == true) 
+		{
+			reloadTime += Time::DeltaTime();
+			col->SetSize(Vector2(1.5f, 1.f));
+			col->GetOwner()->SetName(L"FightSabreCollider");
+			if (reloadTime >= 1.96f) 
+			{
+				reloadTime = 0;
+				reloadOn = false;
+				col->SetSize(Vector2(0.1f, 0.1f));
+				col->GetOwner()->SetName(L"ConvictBlankcolider");
+			}
+		}
+
+
+
+
 
 	}
 

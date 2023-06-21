@@ -15,7 +15,7 @@ namespace ch
 	{
 
 		thisMonster = dynamic_cast<MonsterBase*>(GetOwner());
-
+		
 		anima = GetOwner()->AddComponent<Animator>();
 		{
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Cube_Idle", L"enterthe/enemy/Cube/Idle.png");
@@ -57,10 +57,14 @@ namespace ch
 		bulletMakeCount = 0;
 		bulletMakeTime = 0.f;
 		monsterHp = 8;
-
+		DeathTIME = 0.f;
 	}
 	void CubeScr::Update()
 	{
+		if (monsterHp == 0) 
+		{
+			ms = monsterState::Death;
+		}
 		switch (ms)
 		{
 		case monsterState::Move:
@@ -90,6 +94,10 @@ namespace ch
 	}
 	void CubeScr::OnCollisionEnter(Collider2D* oppo)
 	{
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone) 
+		{
+			monsterHp -= 1;
+		}
 	}
 	void CubeScr::OnCollision(Collider2D* oppo)
 	{
@@ -144,7 +152,16 @@ namespace ch
 	
 	void CubeScr::Death()
 	{
-
+		if (anima->IsAnimationRunning(L"M_Cube_death") == false)
+		{
+			anima->Play(L"M_Cube_death", false);
+		}
+		DeathTIME += Time::DeltaTime();
+		if (DeathTIME >= 1.25f) 
+		{
+			
+			GetOwner()->Death();
+		}
 	}
 	void CubeScr::BulletMake()
 	{

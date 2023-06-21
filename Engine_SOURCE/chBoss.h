@@ -4,6 +4,7 @@
 #include "MonsterBase.h"
 #include "MonsterBulletObj.h"
 #include "chGenericAnimator.h"
+#include "BossBulletObj.h"
 namespace ch
 {
 	class Boss : public Script
@@ -77,6 +78,19 @@ namespace ch
         chasePlayerOBJ* thisMosterCollider;
         MonsterBulletObj* monsBullet;
 
+        BossBulletObj* monsterBullet1;
+        BossBulletObj* monsterBullet2;
+        BossBulletObj* monsterBullet3;
+        BossBulletObj* monsterBullet4;
+        BossBulletObj* monsterBullet5;
+        BossBulletObj* monsterBullet6;
+
+        BossBulletScr* monsterBulletScr1;
+        BossBulletScr* monsterBulletScr2;
+        BossBulletScr* monsterBulletScr3;
+        BossBulletScr* monsterBulletScr4;
+        BossBulletScr* monsterBulletScr5;
+        BossBulletScr* monsterBulletScr6;
     private:
         int monsterHp;
         int prevMonsterHp;
@@ -103,6 +117,9 @@ namespace ch
 
         int bombCount;
         int prevbombCount;
+    private:
+        float deathTime;
+
 	};
 }
 

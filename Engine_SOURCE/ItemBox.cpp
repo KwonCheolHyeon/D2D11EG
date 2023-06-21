@@ -12,7 +12,7 @@ namespace ch
 
 	void ItemBox::Initalize()
 	{
-		this->AddComponent<ItemBoxScr>();
+		
 		GameObject::Initalize();
 	}
 

@@ -60,6 +60,8 @@ namespace ch
 		endRoomKey = 0;
 		deathCol = false;
 		monsterBases.clear();
+
+		
 	}
 	
 	DoorObj::~DoorObj()
@@ -74,6 +76,7 @@ namespace ch
 	}
 	void DoorObj::Update()
 	{
+
 		if (endRoom == true && endRoomKey == 1)
 		{
 			endRoomKey += 1;
@@ -82,40 +85,22 @@ namespace ch
 			deathCol = true;
 		}
 
+#pragma region ÁÖ¼®
 		if (!monsterBases.empty())
 		{
-			int numMonsters = monsterBases.size();
+			
 
 			bool allMonstersDead = false;
-			
-			switch (numMonsters)
+		
+			if (monsterBases[0]->IsDead() || monsterBases[1]->IsDead() || monsterBases[2]->IsDead()) 
 			{
-			case 1:
-				if (monsterBases[0]->IsDead() == true) 
-				{
-					allMonstersDead = true;
-				}
-				break;
-			case 2:
-				if (monsterBases[0]->IsDead() == true && monsterBases[1]->IsDead() == true)
-				{
-					allMonstersDead = true;
-				}
-				break;
-			case 3:
-				if (monsterBases[0]->IsDead() == true && monsterBases[1]->IsDead() == true && monsterBases[2]->IsDead() == true)
-				{
-					allMonstersDead = true;
-				}
-				break;
-			case 4:
-				if (monsterBases[0]->IsDead() == true && monsterBases[1]->IsDead() == true && monsterBases[2]->IsDead() == true && monsterBases[3]->IsDead() == true)
-				{
-					allMonstersDead = true;
-				}
-				break;
-			default:
-				break;
+				doorOpenCount += 1;
+			}
+
+			if(doorOpenCount  == 3)
+			{
+				allMonstersDead = true;
+			
 			}
 
 
@@ -126,7 +111,7 @@ namespace ch
 			}
 
 		}
-
+#pragma endregion
 
 		GameObject::Update();
 	}

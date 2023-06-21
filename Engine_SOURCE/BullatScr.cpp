@@ -56,9 +56,10 @@ namespace ch
 
 
 		anima->Play(L"M_Bullat_Fly");
-
+		DeathTIME = 0.f;
 		ms = monsterState::Move;
 		setAttackTime = 0.f;
+		goToDeathTime = 0.f;
 	}
 	void BullatScr::Update()
 	{
@@ -92,7 +93,19 @@ namespace ch
 	}
 	void BullatScr::OnCollisionEnter(Collider2D* oppo)
 	{
+
+		
+		if (oppo->GetName() == L"PlayerCollider")
+		{
+			ms = monsterState::Death;;
+
+		}
 		if (oppo->GetOwner()->GetName() == L"Player" || oppo->GetOwner()->GetName() == L"MapWall")
+		{
+			ms = monsterState::Death;
+		}
+
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Player )
 		{
 			ms = monsterState::Death;
 		}
@@ -101,10 +114,13 @@ namespace ch
 		{
 			ms = monsterState::Death;
 		}
+
+	
 	}
-	void BullatScr::OnCollision(Collider2D* oppo)
+	void BullatScr::OnCollisionStay(Collider2D* collider)
 	{
 	}
+
 	void BullatScr::OnCollisionExit(Collider2D* oppo)
 	{
 
@@ -114,6 +130,7 @@ namespace ch
 		if (thisMonster->GetMonsterChaseCollider()->GetComponent<chasePlayerSCR>()->isFindPlayer() == true) 
 		{
 			ms = monsterState::Attack;
+			thisMonster->GetMonsterChaseCollider()->Death();
 		}
 	}
 	void BullatScr::Attack()
@@ -150,7 +167,13 @@ namespace ch
 			anima->Play(L"M_Bullat_death", false);
 		}
 		
-		anima->GetCompleteEvent(L"M_Bullat_death") = std::bind(&BullatScr::afterDeath, this);
+		DeathTIME += Time::DeltaTime();
+		if (DeathTIME >= 1.25f)
+		{
+			//thisMonster->GetDoor()->SetDeathCount();
+			
+			GetOwner()->Death();
+		}
 	}
 
 	void BullatScr::afterDeath()
@@ -188,5 +211,12 @@ namespace ch
 		bulletPos += Vector3(bulletDirectionX, bulletDirectionY, 0.0f) * bulletDistance;
 
 		GetOwner()->GetComponent<Transform>()->SetPosition(bulletPos);
+
+
+		goToDeathTime += Time::DeltaTime();
+		if (goToDeathTime >= 3.f) 
+		{
+			ms = monsterState::Death;
+		}
 	}
 }

@@ -4,6 +4,15 @@
 #include "chSpriteRenderer.h"
 #include "MonsterBulletScr.h"
 #include "chasePlayerSCR.h"
+#include "BossBulletObj.h"
+#include "BossBulletScr.h"
+#include "chObject.h"
+
+#include "chAudioListener.h"
+#include "chAudioClip.h"
+#include "chFmod.h"
+#include "chAudioSource.h"
+
 namespace ch
 {
 	Boss::Boss()
@@ -17,13 +26,35 @@ namespace ch
 		thisMonster = dynamic_cast<MonsterBase*>(GetOwner());
 		thisMosterCollider = thisMonster->GetMonsterChaseCollider();
 
+
 		mBoss = GetOwner();
+		mBoss->SetLayerType(eLayerType::Monster);
 		mBossAni = GetOwner()->AddComponent<Animator>();
 		mBtr = GetOwner()->GetComponent<Transform>();
 		mBcol = GetOwner()->AddComponent<Collider2D>();
 		mBcol->SetName(L"BossCollider");
 		mBcol->SetType(eColliderType::Rect);
 		mBcol->SetSize(Vector2(0.3f, 0.3f));
+
+		
+		
+		AudioSource* aaa = GetOwner()->AddComponent<AudioSource>();
+
+		std::shared_ptr<AudioClip> myAudioClip =  Resources::Load<AudioClip>(L"DeathSound",L"gull_death.mp3");
+		//std::shared_ptr<AudioClip> myAudioClip =  Resources::Load<AudioClip>(L"DeathSound",L"gull_death.mp3");
+
+		
+		aaa->SetClip(myAudioClip);
+		aaa->SetLoop(true);
+		aaa->Play();
+		
+		/*myAudioClip->Set3DAttributes(mBtr->GetPosition(), Vector3(1.f, 1.f, 1.f));
+		
+		aaa->SetClip(myAudioClip);
+		aaa->Play();*/
+
+		
+		
 
 
 		SpriteRenderer* sprite = GetOwner()->AddComponent<SpriteRenderer>();
@@ -218,6 +249,7 @@ namespace ch
 		hit = false;
 		oneDeath = false;
 		prevbombCount = 6;
+		deathTime = 0.f;
 	}
 	void Boss::Update()
 	{
@@ -232,7 +264,10 @@ namespace ch
 
 			switch (monsterHp)
 			{
-			case 5:
+			case 8:
+				mS = monsterState::BossFlyAni;
+				break;
+			case 2:
 				mS = monsterState::BossFlyAni;
 				break;
 			default:
@@ -267,6 +302,7 @@ namespace ch
 			BossSkyBomb();
 			break;
 		case monsterState::BossFlyAni:
+			
 			BossFlyAni();
 			break;
 		case monsterState::BossGoMid:
@@ -473,6 +509,7 @@ namespace ch
 
 		if(BossFlyAniTimer >= 0.6f)
 		{
+			BossFlyAniTimer = 0;
 			mS = monsterState::BossGoMid;
 		}
 		
@@ -494,6 +531,7 @@ namespace ch
 		if (bossFly >= 2.f)
 		{
 			// Boss has reached the desired height
+			bossFly = 0.f;
 			mBtr->SetPosition(Vector3(15.28f, 43.28f, -1.f));
 			mS = monsterState::SkyBomb;
 		}
@@ -528,32 +566,57 @@ namespace ch
 				{
 				case 0:
 					
+					monsterBullet1 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
+					monsterBullet1->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+					monsterBulletScr1 = monsterBullet1->AddComponent<BossBulletScr>();
+					monsterBulletScr1->Initalize();
 
+					
 					break;
 				case 1:
-				
+					monsterBullet2 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
+					monsterBullet2->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+					monsterBulletScr2 = monsterBullet2->AddComponent<BossBulletScr>();
+					monsterBulletScr2->Initalize();
+					player->getCameraScr()->strongEffectOn();
 
 					break;
 				case 2:
-					
-
+					monsterBullet3 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
+					monsterBullet3->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+					monsterBulletScr3 = monsterBullet3->AddComponent<BossBulletScr>();
+					monsterBulletScr3->Initalize();
+					player->getCameraScr()->strongEffectOn();
 					break;
 				case 3:
-					
-
+					monsterBullet4 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
+					monsterBullet4->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+					monsterBulletScr4 = monsterBullet4->AddComponent<BossBulletScr>();
+					monsterBulletScr4->Initalize();
+					player->getCameraScr()->strongEffectOn();
 					break;
 				case 4:
-					
-
+					monsterBullet5= object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
+					monsterBullet5->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+					monsterBulletScr5 = monsterBullet5->AddComponent<BossBulletScr>();
+					monsterBulletScr5->Initalize();
+					player->getCameraScr()->strongEffectOn();
 					break;
 				case 5:
 					
-
+					monsterBullet6 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
+					monsterBullet6->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+					monsterBulletScr6 = monsterBullet6->AddComponent<BossBulletScr>();
+					monsterBulletScr6->Initalize();
+					player->getCameraScr()->strongEffectOn();
 					break;
 				case 6:
+					player->getCameraScr()->strongEffectOn();
 					bombCount = 0;
 					boosSkyBombAttackTime = 0;
 					bossSkyBomb = 0;
+					BossDown = Vector3::Zero;
+					prevbombCount = 7;
 					mS = monsterState::mIdle;
 					break;
 				default:
@@ -573,11 +636,19 @@ namespace ch
 	}
 	void Boss::BossDeath()
 	{
+		deathTime += Time::DeltaTime();
 		if (oneDeath == false) 
 		{
 			oneDeath = true;
 			mBossAni->Play(L"Boss_Death",false);
 		}
+
+		if (deathTime >= 8.f) 
+		{
+
+		SceneManager::LoadScene(eSceneType::Test);
+		}
+		
 	}
 	void Boss::SetMd()
 	{

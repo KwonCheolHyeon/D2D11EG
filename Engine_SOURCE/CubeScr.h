@@ -44,6 +44,7 @@ namespace ch
         float bulletMakeTime;
         int bulletMakeCount;
         int monsterHp;
+        float DeathTIME;
         
     };
 

@@ -218,6 +218,21 @@
     <Filter Include="GameObject\chMonster\Cube">
       <UniqueIdentifier>{bcd4f083-bf28-4303-88c3-02d966698590}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Audio">
+      <UniqueIdentifier>{8c753950-029d-4d72-b6d1-e579975e644c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Audio">
+      <UniqueIdentifier>{c61acdf5-3c7a-4317-989e-5882ce2c9048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\Ending">
+      <UniqueIdentifier>{18b7c849-dce0-4cda-bc1b-2bcb4faa0cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\BossHp">
+      <UniqueIdentifier>{c1f79003-9030-45bf-bb1d-c222495280ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\Reload">
+      <UniqueIdentifier>{ab358060-7f24-4987-9ed9-5ccc53dc8157}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -555,6 +570,69 @@
     <ClInclude Include="MonsterBullet2Scr.h">
       <Filter>GameObject\chMonster\MonsterBullet</Filter>
     </ClInclude>
+    <ClInclude Include="BossBulletObj.h">
+      <Filter>GameObject\chMonster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossBulletScr.h">
+      <Filter>GameObject\chMonster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BoosDoorObj.h">
+      <Filter>GameObject\Object\BossDoor</Filter>
+    </ClInclude>
+    <ClInclude Include="BoosDoorScr.h">
+      <Filter>GameObject\Object\BossDoor</Filter>
+    </ClInclude>
+    <ClInclude Include="chAudioClip.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="chAudioListener.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="chAudioSource.h">
+      <Filter>Resource\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="chFmod.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackMapObj.h">
+      <Filter>GameObject\Object\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackMapScr.h">
+      <Filter>GameObject\Object\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingObj.h">
+      <Filter>GameObject\UI\Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingScr.h">
+      <Filter>GameObject\UI\Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="FightSabreBoxScr.h">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHpBarObj.h">
+      <Filter>GameObject\UI\BossHp</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHpScr.h">
+      <Filter>GameObject\UI\BossHp</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHpUIObj.h">
+      <Filter>GameObject\UI\BossHp</Filter>
+    </ClInclude>
+    <ClInclude Include="BossUIScr.h">
+      <Filter>GameObject\UI\BossHp</Filter>
+    </ClInclude>
+    <ClInclude Include="ReloadBarObj.h">
+      <Filter>GameObject\UI\Reload</Filter>
+    </ClInclude>
+    <ClInclude Include="ReloadBarScr.h">
+      <Filter>GameObject\UI\Reload</Filter>
+    </ClInclude>
+    <ClInclude Include="ReloadButtonObj.h">
+      <Filter>GameObject\UI\Reload</Filter>
+    </ClInclude>
+    <ClInclude Include="ReloadButtonScr.h">
+      <Filter>GameObject\UI\Reload</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -875,6 +953,69 @@
     </ClCompile>
     <ClCompile Include="MonsterBullet2Scr.cpp">
       <Filter>GameObject\chMonster\MonsterBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BossBulletObj.cpp">
+      <Filter>GameObject\chMonster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossBulletScr.cpp">
+      <Filter>GameObject\chMonster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BoosDoorObj.cpp">
+      <Filter>GameObject\Object\BossDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="BoosDoorScr.cpp">
+      <Filter>GameObject\Object\BossDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="chAudioClip.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="chAudioListener.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="chAudioSource.cpp">
+      <Filter>Resource\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="chFmod.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackMapObj.cpp">
+      <Filter>GameObject\Object\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackMapScr.cpp">
+      <Filter>GameObject\Object\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingObj.cpp">
+      <Filter>GameObject\UI\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingScr.cpp">
+      <Filter>GameObject\UI\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="FightSabreBoxScr.cpp">
+      <Filter>GameObject\Weapone\FightSabre</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHpBarObj.cpp">
+      <Filter>GameObject\UI\BossHp</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHpScr.cpp">
+      <Filter>GameObject\UI\BossHp</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHpUIObj.cpp">
+      <Filter>GameObject\UI\BossHp</Filter>
+    </ClCompile>
+    <ClCompile Include="BossUIScr.cpp">
+      <Filter>GameObject\UI\BossHp</Filter>
+    </ClCompile>
+    <ClCompile Include="ReloadBarObj.cpp">
+      <Filter>GameObject\UI\Reload</Filter>
+    </ClCompile>
+    <ClCompile Include="ReloadBarScr.cpp">
+      <Filter>GameObject\UI\Reload</Filter>
+    </ClCompile>
+    <ClCompile Include="ReloadButtonObj.cpp">
+      <Filter>GameObject\UI\Reload</Filter>
+    </ClCompile>
+    <ClCompile Include="ReloadButtonScr.cpp">
+      <Filter>GameObject\UI\Reload</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

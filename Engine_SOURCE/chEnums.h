@@ -45,6 +45,8 @@ namespace ch::enums
 		SpriteRenderer,
 		Animator,
 		ParticleSystem,
+		AudioListener,
+		AudioSource,
 		Light,
 		UI,
 		//FadeOut,FadeIn
@@ -63,6 +65,7 @@ namespace ch::enums
 		MeshData,
 		GraphicShader,
 		ComputeShader,
+		AudioClip,
 		Script,
 		End,
 	};

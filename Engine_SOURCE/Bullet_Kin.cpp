@@ -99,6 +99,7 @@ namespace ch
 
 		GetOwner()->AddComponent<Rigidbody>();
 
+		DeathTIME = 0.f;
 		term = 1;
 		player = thisMonster->GetPlayer(); // 플레이어 
 		mS = monsterState::mIdle;
@@ -186,6 +187,10 @@ namespace ch
 		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone)
 		{
 			monsterHp -= 1;
+			if (monsterHp <= 0) 
+			{
+				monsterHp = 0;
+			}
 			if(monsterHp == 0)
 			{
 				mS = monsterState::Death;
@@ -360,8 +365,16 @@ namespace ch
 
 	void Bullet_Kin::Death()
 	{
-		monsAnimator->Play(L"M_Death", false);
-		this->GetOwner()->Death();
+		if (monsAnimator->IsAnimationRunning(L"M_Death") == false)
+		{
+			monsAnimator->Play(L"M_Death", false);
+		}
+		DeathTIME += Time::DeltaTime();
+		if (DeathTIME >= 1.25f)
+		{
+			
+			GetOwner()->Death();
+		}
 	}
 
 	void Bullet_Kin::GetP2Mangle()

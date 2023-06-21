@@ -506,6 +506,7 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"Map_horizontal_Texture", L"enterthe\\Map\\map\\horizontal_map.png");
 		Resources::Load<Texture>(L"Map_sample_Texture", L"enterthe\\Map\\map\\map_sample.png");
 		Resources::Load<Texture>(L"Map_sample_Texture2", L"enterthe\\Map\\map\\map_sample2.png");
+		Resources::Load<Texture>(L"Black_Texture", L"black.jpg");
 #pragma endregion
 #pragma region 오브젝트
 		Resources::Load<Texture>(L"Table_Default", L"enterthe\\object\\table\\table_default.png"); //기본 책상
@@ -562,6 +563,9 @@ namespace ch::renderer
 		#pragma endregion
 
 #pragma endregion
+		Resources::Load<Texture>(L"ReloadBarSprite", L"enterthe\\UI\\Reload\\ReloadBar.png");
+		Resources::Load<Texture>(L"ReloadButtonSprite", L"enterthe\\UI\\Reload\\ReloadButton.png");
+
 		//UITest
 		Resources::Load<Texture>(L"CircleSprite", L"enterthe\\circle.png");
 	}
@@ -744,6 +748,25 @@ namespace ch::renderer
 				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
 				Resources::Insert<Material>(L"Blank_bulletsMaterial", uiMaterial);
 			}
+			{//ReloadBar
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"ReloadBarSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"ReloadBarMaterial", uiMaterial);
+			}
+
+			{//ReloadButton
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"ReloadButtonSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"ReloadButtonMaterial", uiMaterial);
+			}
 #pragma region remain Bullet
 			{//left bullet  5
 				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"bulletFiveSprite");
@@ -841,6 +864,17 @@ namespace ch::renderer
 				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"MapSample_Material2", material);
 			}
+
+			{//검정 화면
+				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Black_Texture");
+				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+				std::shared_ptr<Material> material = std::make_shared<Material>();
+				material->SetRenderingMode(eRenderingMode::Transparent);
+				material->SetShader(shader);
+				material->SetTexture(eTextureSlot::T0, texture);
+				Resources::Insert<Material>(L"Black_Material", material);
+			}
+
 
 
 #pragma endregion

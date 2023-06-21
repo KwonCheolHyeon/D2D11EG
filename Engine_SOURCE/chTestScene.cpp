@@ -9,16 +9,9 @@
 #include "chMeshRenderer.h"
 #include "chResources.h"
 #include "chSpriteRenderer.h"
-#include "MapObject.h"
-#include "CharacterBase.h"
-#include "MonsterBase.h"
-#include "Bullet_Kin.h"
-#include "chasePlayerOBJ.h"
-#include "chasePlayerSCR.h"
-#include "chBoss.h"
-#include "chCollisionManager.h"
-#include "Bullet_Kin_Gun.h"
 #include "chCollider2D.h"
+#include "EndingObj.h"
+#include "EndingScr.h"
 namespace ch 
 {
 	TestScene::TestScene()
@@ -50,53 +43,30 @@ namespace ch
 		//	chCameraOBJ->AddComponent<CameraScript>();
 		//	mainCamera = cameraComp;
 		//}
-		//{
-		//	player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
-		//	player->SetName(L"TestPlayer");
-
-		//	//SetPlayerData(player);
+		//{ //Camera UI
+		//	GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
+		//	Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
+		//	cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
+		//	cameraUIComp->DisableLayerMasks();
+		//	cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		//}
+	
 		//{
-		//	MonsterBase* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
-		//	BossMonster->AddComponent<Boss>();
-		//	Transform* bossTr = BossMonster->GetComponent<Transform>();
-		//	BossMonster->SetPlayer(player);
+		//	GameObject* ending = object::Instantiate<EndingObj>(eLayerType::UI, this);
 
-		//	chasePlayerOBJ* chaseCol = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
-		//	chaseCol->SetName(L"Boss");
 
-		//	Collider2D* mCollider = chaseCol->AddComponent<Collider2D>(); //오류 걸림
-		//	mCollider->SetName(L"BossChaseCollider");
-		//	mCollider->SetType(eColliderType::Rect);
-		//	mCollider->SetSize(Vector2(15.f, 15.f));
 
-		//	chaseCol->SetOwnerTransform(bossTr);
-		//	BossMonster->SetMonsterChaseCollider(chaseCol);
+		//	Transform* endingtr = ending->GetComponent<Transform>();
+		//	endingtr->SetPosition(Vector3(1.f, 1.f, 0.f));
+		//	endingtr->SetScale(Vector3(17.0862f, 9.f, 5.f));
+
+
+
+		//	chCameraOBJ->GetComponent<Camera>()->SetTarget(ending);
 		//}
-		//{
-		//	kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
-		//	kinMonster->AddComponent<Bullet_Kin>();
-		//	Transform* kinTransform = kinMonster->GetComponent<Transform>();
-		//	kinMonster->SetPlayer(player);
-
-		//	chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
-		//	chaseCollier->SetName(L"most");
-
-		//	Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
-		//	mCollider->SetName(L"BossChaseCollider");
-		//	mCollider->SetType(eColliderType::Rect);
-		//	mCollider->SetSize(Vector2(10.f, 10.f));
-
-		//	chaseCollier->SetOwnerTransform(kinTransform);
-		//	kinMonster->SetMonsterChaseCollider(chaseCollier);
-
-		//	Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
-		//	gun->SetOwnerMoster(kinMonster);
-		//}
-
-
 		//
-		//chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
+		
+	
 		Scene::Initalize();
 	}
 
@@ -122,7 +92,6 @@ namespace ch
 	void TestScene::OnEnter()
 	{
 
-		CollisionManager::CollisionLayerCheck(eLayerType::MonsterCollider, eLayerType::Player); // 책상과 플레이어
 		Scene::OnEnter();
 	}
 

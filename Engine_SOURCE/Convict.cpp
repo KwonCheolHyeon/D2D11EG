@@ -6,6 +6,7 @@
 #include "chInput.h"
 #include "Heart_Scr.h"
 #include "BlankBullet_UI.h"
+#include "chAudioListener.h"
 namespace ch
 {
 	Convict::Convict()
@@ -22,6 +23,7 @@ namespace ch
 		pTr = GetOwner()->GetComponent<Transform>();
 		pAnimator = GetOwner()->GetComponent<Animator>();
 		pCollider = GetOwner()->GetComponent<Collider2D>();
+		pCollider->SetName(L"PlayerCollider");
 #pragma region Animator
 		#pragma region 한손무기
 		#pragma region 기본 상태
@@ -164,6 +166,8 @@ namespace ch
 		pBB = 2;
 		prevBB = 0;
 
+
+		
 	}
 
 	void Convict::Update()
@@ -224,7 +228,13 @@ namespace ch
 	{
 		eLayerType type = oppo->GetOwner()->GetLayerType();
 
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet || oppo->GetOwner()->GetName() == L"MonsterBullet")
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet || /*oppo->GetOwner()->GetName() == L"MonsterBullet"*/  oppo->GetOwner()->GetLayerType() == eLayerType::Monster)
+		{
+			pHp -= 1;
+			GetOwner()->getCameraScr()->weakEffectOn();
+		}
+
+		if (oppo->GetOwner()->GetName() == L"Bullat") 
 		{
 			pHp -= 1;
 			GetOwner()->getCameraScr()->weakEffectOn();

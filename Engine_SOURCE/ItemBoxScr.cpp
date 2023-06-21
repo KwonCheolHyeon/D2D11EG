@@ -4,6 +4,7 @@
 #include "chInput.h"
 #include "chObject.h"
 #include "chFightSabreObject.h"
+#include "FightSabreBoxScr.h"
 #include "chRigidbody.h"
 #include "chTransform.h"
 namespace ch 
@@ -16,6 +17,7 @@ namespace ch
 	}
 	void ItemBoxScr::Initalize()
 	{
+		GetOwner()->SetLayerType(eLayerType::Object);
 		bAnimator = GetOwner()->AddComponent<Animator>();
 		{//front
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"itemBox", L"enterthe/object/itemBox/itemBox.png");
@@ -68,13 +70,19 @@ namespace ch
 	{
 		if (oppo->GetOwner()->GetName() == L"Player")
 		{
-			p2bOn = true;
+			//p2bOn = true;
 		}
 
 	}
-	void ItemBoxScr::OnCollision(Collider2D* oppo)
+	void ItemBoxScr::OnCollisionStay(Collider2D* oppo)
 	{
-	
+		if (oppo->GetOwner()->GetName() == L"Player")
+		{
+			if (Input::GetKeyDown(eKeyCode::E))
+			{
+				ibs = itemBoxState::OpenBox;
+			}
+		}
 
 	}
 	void ItemBoxScr::OnCollisionExit(Collider2D* oppo)
@@ -91,13 +99,12 @@ namespace ch
 			oneOpen = true;
 			bAnimator->Play(L"D_itemBox_open",false);
 
-			FightSabreObject* fightsa = object::Instantiate<FightSabreObject>(eLayerType::Object);
-			fightsa->Initalize();
 			Transform* tr = fightsa->GetComponent<Transform>();
 			tr->SetScale(Vector3(5.f, 5.f, 0.1f));
 			tr->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 
-
+			fightsa->GetComponent<FightSabreBoxScr>()->LifeOn();
+			
 		} 
 
 
@@ -106,6 +113,7 @@ namespace ch
 	{
 		if (p2bOn == true) 
 		{
+			p2bOn = false;
 			if (Input::GetKeyDown(eKeyCode::E))
 			{
 				ibs = itemBoxState::OpenBox;

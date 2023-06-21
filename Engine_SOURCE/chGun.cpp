@@ -25,6 +25,7 @@ namespace ch
 	}
 	void Gun::Initalize()
 	{
+		SetLayerType(eLayerType::Weapone);
 
 		this->AddComponent<Animator>();
 
@@ -45,14 +46,16 @@ namespace ch
 	
 		this->GetComponent<FightSabreScr>()->FightSabreOff();
 
+		Transform* tr = this->GetComponent<Transform>();
+		tr->SetScale(Vector3(1.f,1.f,1.f));
+
+	
+
 		GameObject::Initalize();
 	}
 	void Gun::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::E))
-		{
 		
-		}
 		SwapGun();
 
 		GameObject::Update();
@@ -70,18 +73,20 @@ namespace ch
 	{
 		if (Input::GetKeyDown(eKeyCode::NUM_1)) 
 		{
+		
 			this->GetComponent<FightSabreScr>()->FightSabreOff();
 			this->GetComponent<BasicGunScript>()->PistolOn();
 			
 		}
 		if (Input::GetKeyDown(eKeyCode::NUM_2))
 		{
+			
 			this->GetComponent<BasicGunScript>()->PistolOff();
 			this->GetComponent<FightSabreScr>()->FightSabreOn();
 			
 		}
 		
-	
+		
 	}
 	void Gun::angleFind()
 	{

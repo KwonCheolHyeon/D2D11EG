@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #include "chScript.h"
 #include "chAnimator.h"
 #include "MonsterBulletObj.h"

@@ -31,7 +31,7 @@ namespace ch
 		virtual void OnTriggerStay(Collider2D* collider);
 		virtual void OnTriggerExit(Collider2D* collider);
 
-		void shootingBullet(float Gunangle, Vector3 pos); //{ angles = Gunangle, GunPos = pos , mState[(UINT)eBulletState::wait] = false, mState[(UINT)eBulletState::live] = true, mState[(UINT)eBulletState::Dead] = false;}
+		void shootingBullet(float Gunangle, Vector3 pos);
 		void MoveBullet();
 		void Reset();
 		bool isReset();

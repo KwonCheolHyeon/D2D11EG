@@ -67,6 +67,7 @@ namespace ch
 		Bullet* bulletOBJ;
 		std::vector<Bullet*> bullets;
 		bool CollectAcces;
+		Collider2D* col;
 
 
 	

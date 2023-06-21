@@ -4,7 +4,7 @@
 #include "chGameObject.h"
 #include "chInput.h"
 #include "chTime.h"
-
+#include "chAudioListener.h"
 
 
 namespace ch
@@ -26,6 +26,9 @@ namespace ch
 		weakOn = false;
 		strongOn = false;
 		shaketime = 0.f;
+		verystrongOn = false;
+
+		AudioListener* cccc = GetOwner()->AddComponent<AudioListener>();
 	}
 
 	void CameraScript::Update()
@@ -65,6 +68,10 @@ namespace ch
 			if (strongOn == true)
 			{
 				pos = strongShake(pos);
+			}
+			if (verystrongOn == true)
+			{
+				pos = verystrongShake(pos);
 			}
 			
 
@@ -154,6 +161,21 @@ namespace ch
 
 		return pos;
 
+	}
+
+	Vector3 CameraScript::verystrongShake(Vector3 pos)
+	{
+		shaketime += Time::DeltaTime();
+		pos = CameraStrongShakeeffect(pos);
+
+		if (shaketime >= 1.f)//∏Ó√ ∞£ 
+		{
+			verystrongOn = false;
+			shaketime = 0.f;
+			return pos;
+		}
+
+		return pos;
 	}
 
 

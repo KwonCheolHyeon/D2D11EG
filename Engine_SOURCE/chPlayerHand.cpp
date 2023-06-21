@@ -31,11 +31,30 @@ namespace ch
 		sprite->SetMesh(mesh);
 		
 		isPistol = true;
+		reloadOn = false;
 		GameObject::Initalize();
 	}
 	void PlayerHand::Update()
 	{
-		HandLookCursor();
+		if (Input::GetKeyDown(eKeyCode::R))
+		{
+			reloadOn = true;
+		}
+		if (reloadOn == true) 
+		{
+			reloadtime += Time::DeltaTime();
+			
+			if (reloadtime >= 1.96f) 
+			{
+				reloadtime = 0;
+				reloadOn = false;
+			}
+		}
+		else 
+		{
+			HandLookCursor();
+		}
+		
 		HandPosition();
 
 		if (Input::GetKeyDown(eKeyCode::NUM_1))

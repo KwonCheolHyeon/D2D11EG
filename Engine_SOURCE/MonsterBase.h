@@ -4,6 +4,7 @@
 
 namespace ch 
 {
+	class DoorObj;
 	enum monsterState 
 	{
 		Spawn,
@@ -44,14 +45,16 @@ namespace ch
 		virtual void Render();
 
 	public:
-		void SetMonsterChaseCollider(chasePlayerOBJ* _a);
+		void SetMonsterChaseCollider(chasePlayerOBJ* _a) { monsterChaseCollider = _a; }
 		chasePlayerOBJ* GetMonsterChaseCollider() { return monsterChaseCollider; }
 
 		void SetPlayer(GameObject* _a) { player = _a; }
 		GameObject* GetPlayer() { return player; }
+
 	private:
-		class chasePlayerOBJ* monsterChaseCollider; // Declare the member variable
+		chasePlayerOBJ* monsterChaseCollider; // Declare the member variable
 		GameObject* player;
+		
 		
 	};
 }

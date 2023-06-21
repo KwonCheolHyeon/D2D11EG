@@ -126,19 +126,21 @@ namespace ch
 
 	void DoorScr::setState()
 	{
-		if (prevDoorState != door->GetisOpen()) 
+		bool currentDoorState = door->GetisOpen();
+
+		if (prevDoorState != currentDoorState)
 		{
-			prevDoorState = door->GetisOpen();
-			if (door->GetisOpen() == true)
+			prevDoorState = currentDoorState;
+
+			if (currentDoorState)
 			{
 				oc = OpenClose::Open;
 			}
-			else if (door->GetisOpen() == false)
+			else
 			{
 				oc = OpenClose::Close;
 			}
 		}
-		
 	}
 
 }

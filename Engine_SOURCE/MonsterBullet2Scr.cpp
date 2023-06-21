@@ -66,6 +66,11 @@ namespace ch
 		{
 			Reset();
 		}
+		if (oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"DoorSide" || oppo->GetOwner()->GetName() == L"DoorFront")
+		{
+			Reset();
+		}
+		//FightSabreCollider
 	}
 	void MonsterBullet2Scr::OnCollision(Collider2D* oppo)
 	{

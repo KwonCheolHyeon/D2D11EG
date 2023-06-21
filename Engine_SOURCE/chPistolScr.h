@@ -63,6 +63,12 @@ namespace ch
 		GenericAnimator genericAnimator;
 	private:
 		float shotTimer = 0.0f;
+
+	private://재장전
+		float reloadTime;//재장전 시간
+		int magazine;//탄창
+
+
 	};
 }
 

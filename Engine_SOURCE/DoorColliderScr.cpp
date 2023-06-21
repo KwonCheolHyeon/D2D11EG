@@ -1,5 +1,5 @@
 #include "DoorColliderScr.h"
-namespace ch 
+namespace ch
 {
 	DoorColliderScr::DoorColliderScr()
 	{
@@ -43,22 +43,20 @@ namespace ch
 	}
 	void DoorColliderScr::OnCollision(Collider2D* oppo)
 	{
-		if (oppo->GetOwner()->GetName() == L"Player") 
-		{
-			isInCollider = true;
-		}
+
 
 	}
 	void DoorColliderScr::OnCollisionExit(Collider2D* oppo)
 	{
 		if (oppo->GetOwner()->GetName() == L"Player")
 		{
-			if (isInCollider == true) 
-			{
-				doorObj = DCO->GetDoor();
-				doorObj->isOpenFalse(); //close
-				col->SetSize(Vector2(0.f, 0.f));
-			}
+			if (isInCollider == true)
+
+			isInCollider = false;
+			doorObj = DCO->GetDoor();
+			doorObj->isOpenFalse(); //close
+			col->SetSize(Vector2(0.f, 0.f));
+			GetOwner()->Death();
 		}
 	}
 }

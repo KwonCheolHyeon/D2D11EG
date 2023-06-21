@@ -5,6 +5,7 @@
 #include "chResources.h"
 namespace ch 
 {
+	
 	TableScr::TableScr()
 	{
 	}
@@ -179,7 +180,7 @@ namespace ch
 			}
 		}
 
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone)
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet)
 		{
 			tableCount -= 1;
 		}

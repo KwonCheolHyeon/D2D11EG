@@ -31,7 +31,8 @@ namespace ch
 	private:
 		bool on;
 		float time;
-
+		float reloadTime;
+		bool reloadOn;
 	};
 
 }

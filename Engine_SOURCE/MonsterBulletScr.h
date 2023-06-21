@@ -25,6 +25,7 @@ namespace ch
         void shootingBullet(float Gunangle, Vector3 pos);
         void MoveBullet();
         void Reset();
+        void Reflect();
     private: //¼öÄ¡
         float speed;
         float bulletDirectionX;
@@ -33,6 +34,9 @@ namespace ch
         Vector3 GunPos;
 
         float bulletTime;
+
+    private:
+        bool reflectOn;
 
 	};
 

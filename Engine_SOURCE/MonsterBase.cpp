@@ -5,7 +5,7 @@ namespace ch
 {
 	MonsterBase::MonsterBase()
 	{
-		GameObject* monsterOBJ = dynamic_cast<GameObject*>(this);
+		
 
 	
 	}
@@ -28,8 +28,5 @@ namespace ch
 	{
 		GameObject::Render();
 	}
-	void MonsterBase::SetMonsterChaseCollider(chasePlayerOBJ* _a)
-	{
-		monsterChaseCollider  =_a;
-	}
+	
 }

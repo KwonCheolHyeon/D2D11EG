@@ -24,13 +24,15 @@ namespace ch
 
 		Vector3 weakShake(Vector3 pos);
 		Vector3 strongShake(Vector3 pos);
+		Vector3 verystrongShake(Vector3 pos);
 
 		void weakEffectOn() { weakOn = true; }
 		void strongEffectOn() { strongOn = true; }
-	
+		void vecrstrongEffectOn() { verystrongOn = true; }
 	private: //¼öÇÐ
 		bool weakOn;
 		bool strongOn;
+		bool verystrongOn;
 		float shaketime;
 	private:
 		class Camera* mCameraObject;

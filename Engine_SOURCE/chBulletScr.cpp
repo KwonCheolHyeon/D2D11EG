@@ -61,7 +61,7 @@ namespace ch
 		{
 			Reset();
 		}
-		if (collider->GetOwner()->GetLayerType() == eLayerType::Wall)
+		if (collider->GetOwner()->GetLayerType() == eLayerType::Wall || collider->GetOwner()->GetName() == L"MapWall" || collider->GetOwner()->GetName() == L"DoorSide" || collider->GetOwner()->GetName() == L"DoorFront" )
 		{
 			Reset();
 		}

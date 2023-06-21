@@ -53,7 +53,7 @@ namespace ch
 		}
 		{//장전
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"FightSabre_reload", L"enterthe/Waepone/FightSabre/reload.png");
-			anima->Create(L"W_FightSabre_reload", texture, Vector2(0.0f, 0.0f), Vector2(70.0f, 41.0f), Vector2::Zero, 14, 0.2f);
+			anima->Create(L"W_FightSabre_reload", texture, Vector2(0.0f, 0.0f), Vector2(70.0f, 41.0f), Vector2::Zero, 14, 0.14f);
 		}
 		{//아이템
 			std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"FightSabre_Item", L"enterthe/Waepone/FightSabre/Item.png");
@@ -68,6 +68,14 @@ namespace ch
 #pragma endregion
 
 		
+	
+
+		col = GetOwner()->AddComponent<Collider2D>();
+		col->SetType(eColliderType::Rect);
+		col->SetSize(Vector2(0.f, 0.f));
+		col->SetCenter(Vector2(0.f, 0.f));
+		
+
 		fss = FightSabreState::SabreItemBox;
 		prevFss = FightSabreState::SabrenonActive;
 		touchGun = false;
@@ -132,6 +140,10 @@ namespace ch
 		{
 			fss = FightSabreState::SabreShot;
 		}
+		if (Input::GetKeyDown(eKeyCode::R))
+		{
+			fss = FightSabreState::SabreReload;
+		}
 
 	}
 
@@ -144,6 +156,20 @@ namespace ch
 	
 	void FightSabreScr::Reload() // 장전
 	{
+		prevFss = fss;
+		reloadTime += Time::DeltaTime();
+		
+	
+		if (anima->IsAnimationRunning(L"W_FightSabre_reload") == false)
+		{
+			anima->Play(L"W_FightSabre_reload", false);
+		}
+		if (reloadTime >= 1.96f) 
+		{
+			
+			reloadTime = 0;
+			fss = FightSabreState::SabreActive;
+		}
 
 
 	}
@@ -152,7 +178,11 @@ namespace ch
 	{
 		prevFss = fss;
 		
-		anima->Play(L"W_FightSabre_shot", false);
+		if (anima->IsAnimationRunning(L"W_FightSabre_shot") == false)
+		{
+			anima->Play(L"W_FightSabre_shot", false);
+		}
+		
 
 		FightSabreBullet* bullet = object::Instantiate<FightSabreBullet>(eLayerType::Weapone);
 		FightSabreBulletScr* scr = bullet->AddComponent<FightSabreBulletScr>();

@@ -94,8 +94,19 @@ namespace ch
 
 			return false;
 		}
+
+		bool IsPause()
+		{
+			if (mState == eState::Paused)
+				return true;
+
+			return false;
+		}
+
+
 		void Pause() { mState = eState::Paused; }
 		void Death() { mState = eState::Dead; }
+		void ActiveOn() { mState = eState::Active; }
 		eState GetState() { return mState; }
 
 		bool IsDontDestroy() { return mbDontDestroy; }

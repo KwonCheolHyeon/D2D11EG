@@ -53,9 +53,14 @@ namespace ch
 		FightSabreState fss;
 		FightSabreState prevFss;
 		Transform* gunTransform;
+		Collider2D* col;
 	private:
 		float angle;
 		float shotTimer = 0.0f;
+
+	private:
+		int agazine;
+		float reloadTime;
 
 	};
 

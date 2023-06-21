@@ -2,6 +2,7 @@
 #include "chScript.h"
 #include "MonsterBase.h"
 #include "chAnimator.h"
+
 namespace ch 
 {
 
@@ -16,9 +17,11 @@ namespace ch
         virtual void FixedUpdate() override;
         virtual void Render() override;
 
-        virtual void OnCollisionEnter(Collider2D* oppo);
-        virtual void OnCollision(Collider2D* oppo);
-        virtual void OnCollisionExit(Collider2D* oppo);
+        virtual void OnCollisionEnter(Collider2D* collider) override;
+        virtual void OnCollisionStay(Collider2D* collider) override;
+        virtual void OnCollisionExit(Collider2D* collider) override;
+
+     
 
     public:
         void Fly();
@@ -45,7 +48,9 @@ namespace ch
         float bulletDirectionY;
         float angles;
         Vector3 GunPos;
-        
+        float DeathTIME;
+        float goToDeathTime;
+
 
 	};
 

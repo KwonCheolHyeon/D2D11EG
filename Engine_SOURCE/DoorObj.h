@@ -4,6 +4,7 @@
 #include "MonsterBase.h"
 namespace ch 
 {
+
 	enum dir
 	{
 		Side,
@@ -42,6 +43,8 @@ namespace ch
 		bool GetdeathCol() { return deathCol; }
 		void TrueDeathCol() { deathCol = true; }
 
+	
+
 	public:
 		static bool isOpen;
 		bool mainDoor;
@@ -54,7 +57,12 @@ namespace ch
 		OpenClose oc;
 		std::vector<DoorObj*> doorObjs;
 		std::vector<MonsterBase*> monsterBases;
+		
+		
 
+	private:
+		int doorOpenCount;
+		
 	};
 
 

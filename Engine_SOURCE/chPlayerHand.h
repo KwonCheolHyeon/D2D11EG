@@ -28,6 +28,9 @@ namespace ch
 		float handDistance;
 		bool chHandLeft;
 		bool isPistol;
+	private:
+		float reloadtime;
+		bool reloadOn;
 	};
 }
 

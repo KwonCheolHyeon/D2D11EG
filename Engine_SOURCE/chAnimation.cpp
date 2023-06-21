@@ -53,6 +53,8 @@ namespace ch
 	{
 	}
 
+	
+
 	void Animation::Create(const std::wstring& name
 		, std::shared_ptr<Texture> atlas
 		, Vector2 leftTop, Vector2 size, Vector2 offset
@@ -68,8 +70,7 @@ namespace ch
 		{
 			// API 와는 다르게 0~1 사이의 비율좌표로 위치를 표현해야한다.
 			Sprite sprite = {};
-			sprite.leftTop = Vector2((leftTop.x + (size.x * (float)i)) / width
-				, (leftTop.y) / height);
+			sprite.leftTop = Vector2((leftTop.x + (size.x * (float)i)) / width, (leftTop.y) / height);
 			sprite.size = Vector2(size.x / width, size.y / height);
 			sprite.offset = offset;
 			sprite.duration = duration;
