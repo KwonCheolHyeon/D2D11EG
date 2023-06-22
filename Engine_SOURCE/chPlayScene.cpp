@@ -51,6 +51,13 @@
 #include "BossHpBarScr.h"
 #include "EventObj.h"
 #include "EventScr.h"
+#include "BossSceneObj.h"
+#include "BossSceneScr.h"
+#include "ReloadButtonObj.h"
+#include "ReloadButtonScr.h"
+#include "ReloadBarObj.h"
+#include "ReloadBarScr.h"
+
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -213,6 +220,24 @@ namespace ch
 
 
 		}
+			//재장전 바
+		{
+			ReloadBarObj* reloadBar = object::Instantiate<ReloadBarObj>(eLayerType::Dummy, this);
+			Transform* reloadBarTr = reloadBar->GetComponent<Transform>();
+			reloadBarTr->SetScale(Vector3(1.f, 0.2f, 1.f));
+			ReloadBarScr* reloadBarScr = reloadBar->AddComponent<ReloadBarScr>();
+			reloadBarScr->SetPlayer(player);
+
+			ReloadButtonObj* reloadButton = object::Instantiate<ReloadButtonObj>(eLayerType::Dummy, this);
+			Transform* reloadButtonTr = reloadButton->GetComponent<Transform>();
+			
+			
+			reloadButtonTr->SetScale(Vector3(0.05f, 0.15f, 1.f));
+			ReloadButtonScr* reloadbuttonScr = reloadButton->AddComponent<ReloadButtonScr>();
+			reloadbuttonScr->SetPlayer(player);
+
+		}
+
 
 		{//보스 문
 			GameObject* BoosDoor = object::Instantiate<BoosDoorObj>(eLayerType::Object, this);
@@ -651,7 +676,7 @@ namespace ch
 			Collider2D* mCollider = chaseCol->AddComponent<Collider2D>(); //오류 걸림
 			mCollider->SetName(L"BossChaseCollider");
 			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(12.f, 12.f));
+			mCollider->SetSize(Vector2(14.f, 12.f));
 
 			chaseCol->SetOwnerTransform(bossTr);
 			bossObj->SetMonsterChaseCollider(chaseCol);
@@ -686,6 +711,14 @@ namespace ch
 			htr->SetPosition(Vector3(1.f, -3.f, 0.f));
 			htr->SetScale(Vector3(10.f, 10.f, 0.f));
 
+
+			BossSceneObj* bossScene = object::Instantiate<BossSceneObj>(eLayerType::UI, this);
+			bossScene->SetName(L"BossScene");
+			BossSceneScr* bsc = bossScene->AddComponent<BossSceneScr>();
+			bsc->SetEvent(eventobj);
+			Transform* ht = bossScene->GetComponent<Transform>();
+			ht->SetPosition(Vector3(0.f, 1.f, -20.f));
+			ht->SetScale(Vector3(35.f, 35.f, 0.f));
 		}
 		
 		generateMap();

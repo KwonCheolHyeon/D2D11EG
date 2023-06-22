@@ -33,11 +33,11 @@ float4 main(VSOut In) : SV_Target
             || UV.y > leftTop.y + spriteSize.y)
             discard;
         
-        color = atlasTexture.Sample(anisotropicSampler, UV);
+        color = atlasTexture.Sample(pointSampler, UV);
     }
     else
     {
-        color = defaultTexture.Sample(anisotropicSampler, In.UV);
+        color = defaultTexture.Sample(pointSampler, In.UV);
     }
      
     // noise, paper burn effect

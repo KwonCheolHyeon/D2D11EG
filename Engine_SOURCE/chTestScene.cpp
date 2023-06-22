@@ -26,45 +26,43 @@ namespace ch
 
 	void TestScene::Initalize()
 	{
-		//{
-		//	GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
-		//	directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
-		//	Light* lightComp = directionalLight->AddComponent<Light>();
-		//	lightComp->SetType(eLightType::Directional);
-		//	lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-		//}
+		{
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
+			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
+			Light* lightComp = directionalLight->AddComponent<Light>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		}
 
-		//{ //Main Camera 
-		//	chCameraOBJ = object::Instantiate<GameObject>(eLayerType::Camera, this);
-		//	Camera* cameraComp = chCameraOBJ->AddComponent<Camera>();
-		//	cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
-		//	//cameraComp->RegisterCameraInRenderer();
-		//	cameraComp->TurnLayerMask(eLayerType::UI, false);
-		//	chCameraOBJ->AddComponent<CameraScript>();
-		//	mainCamera = cameraComp;
-		//}
-		//{ //Camera UI
-		//	GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
-		//	Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
-		//	cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
-		//	cameraUIComp->DisableLayerMasks();
-		//	cameraUIComp->TurnLayerMask(eLayerType::UI, true);
-		//}
+		{ //Main Camera 
+			chCameraOBJ = object::Instantiate<GameObject>(eLayerType::Camera, this);
+			Camera* cameraComp = chCameraOBJ->AddComponent<Camera>();
+			cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
+			//cameraComp->RegisterCameraInRenderer();
+			cameraComp->TurnLayerMask(eLayerType::UI, false);
+			chCameraOBJ->AddComponent<CameraScript>();
+			mainCamera = cameraComp;
+		}
+		{ //Camera UI
+			GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
+			Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
+			cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
+			cameraUIComp->DisableLayerMasks();
+			cameraUIComp->TurnLayerMask(eLayerType::UI, true);
+		}
 	
-		//{
-		//	GameObject* ending = object::Instantiate<EndingObj>(eLayerType::UI, this);
+		{
+			GameObject* ending = object::Instantiate<EndingObj>(eLayerType::UI, this);
+
+			Transform* endingtr = ending->GetComponent<Transform>();
+			endingtr->SetPosition(Vector3(1.f, 1.f, 0.f));
+			endingtr->SetScale(Vector3(50.f, 50.f, 0.f));
 
 
 
-		//	Transform* endingtr = ending->GetComponent<Transform>();
-		//	endingtr->SetPosition(Vector3(1.f, 1.f, 0.f));
-		//	endingtr->SetScale(Vector3(17.0862f, 9.f, 5.f));
-
-
-
-		//	chCameraOBJ->GetComponent<Camera>()->SetTarget(ending);
-		//}
-		//
+			chCameraOBJ->GetComponent<Camera>()->SetTarget(ending);
+		}
+		
 		
 	
 		Scene::Initalize();

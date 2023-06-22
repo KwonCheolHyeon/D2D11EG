@@ -66,18 +66,41 @@ namespace ch
 		float width = (float)atlas->GetWidth();
 		float height = (float)atlas->GetHeight();
 
-		for (size_t i = 0; i < spriteLegth; i++)
+		if (name == L"boss_Scene" || name == L"Ending")
 		{
-			// API 와는 다르게 0~1 사이의 비율좌표로 위치를 표현해야한다.
-			Sprite sprite = {};
-			sprite.leftTop = Vector2((leftTop.x + (size.x * (float)i)) / width, (leftTop.y) / height);
-			sprite.size = Vector2(size.x / width, size.y / height);
-			sprite.offset = offset;
-			sprite.duration = duration;
-			sprite.atlasSize = Vector2(200.0f / width, 200.0f / height);
+		
+			for (size_t i = 0; i < spriteLegth; i++)
+			{
+				// API 와는 다르게 0~1 사이의 비율좌표로 위치를 표현해야한다.
+				Sprite sprite = {};
+				sprite.leftTop = Vector2((leftTop.x + (size.x * (float)i)) / width, (leftTop.y) / height);
+				sprite.size = Vector2(size.x / width, size.y / height);
+				sprite.offset = offset;
+				sprite.duration = duration;
+				sprite.atlasSize = Vector2(900.0f / width, 900.0f / height);
 
-			mSpriteSheet.push_back(sprite);
+				mSpriteSheet.push_back(sprite);
+			}
+		
 		}
+		else 
+		{
+			for (size_t i = 0; i < spriteLegth; i++)
+			{
+				// API 와는 다르게 0~1 사이의 비율좌표로 위치를 표현해야한다.
+				Sprite sprite = {};
+				sprite.leftTop = Vector2((leftTop.x + (size.x * (float)i)) / width, (leftTop.y) / height);
+				sprite.size = Vector2(size.x / width, size.y / height);
+				sprite.offset = offset;
+				sprite.duration = duration;
+				sprite.atlasSize = Vector2(200.0f / width, 200.0f / height);
+
+				mSpriteSheet.push_back(sprite);
+			}
+		
+		}
+
+		
 
 	}
 
