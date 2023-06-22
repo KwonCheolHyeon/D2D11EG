@@ -177,9 +177,11 @@ copy "$(SolutionDir)fmodstudio.dll" "$(SolutionDir)\x64\Release\"</Command>
     <ClInclude Include="BossBulletObj.h" />
     <ClInclude Include="BossBulletScr.h" />
     <ClInclude Include="BossHpBarObj.h" />
-    <ClInclude Include="BossHpScr.h" />
+    <ClInclude Include="BossHpBarScr.h" />
     <ClInclude Include="BossHpUIObj.h" />
-    <ClInclude Include="BossUIScr.h" />
+    <ClInclude Include="BossHpUIScr.h" />
+    <ClInclude Include="BossSceneObj.h" />
+    <ClInclude Include="BossSceneScr.h" />
     <ClInclude Include="BullatScr.h" />
     <ClInclude Include="Bullet_Kin.h" />
     <ClInclude Include="Bullet_Kin_Gun.h" />
@@ -271,6 +273,8 @@ copy "$(SolutionDir)fmodstudio.dll" "$(SolutionDir)\x64\Release\"</Command>
     <ClInclude Include="DoorScr.h" />
     <ClInclude Include="EndingObj.h" />
     <ClInclude Include="EndingScr.h" />
+    <ClInclude Include="EventObj.h" />
+    <ClInclude Include="EventScr.h" />
     <ClInclude Include="FightSabreBoxScr.h" />
     <ClInclude Include="FightSabreBullet.h" />
     <ClInclude Include="FightSabreBulletScr.h" />
@@ -313,9 +317,11 @@ copy "$(SolutionDir)fmodstudio.dll" "$(SolutionDir)\x64\Release\"</Command>
     <ClCompile Include="BossBulletObj.cpp" />
     <ClCompile Include="BossBulletScr.cpp" />
     <ClCompile Include="BossHpBarObj.cpp" />
-    <ClCompile Include="BossHpScr.cpp" />
+    <ClCompile Include="BossHpBarScr.cpp" />
     <ClCompile Include="BossHpUIObj.cpp" />
-    <ClCompile Include="BossUIScr.cpp" />
+    <ClCompile Include="BossHpUIScr.cpp" />
+    <ClCompile Include="BossSceneObj.cpp" />
+    <ClCompile Include="BossSceneScr.cpp" />
     <ClCompile Include="BullatScr.cpp" />
     <ClCompile Include="Bullet_Kin.cpp" />
     <ClCompile Include="Bullet_Kin_Gun.cpp" />
@@ -405,6 +411,8 @@ copy "$(SolutionDir)fmodstudio.dll" "$(SolutionDir)\x64\Release\"</Command>
     <ClCompile Include="EndingScr.cpp" />
     <ClCompile Include="Engine_SOURCE.cpp" />
     <ClCompile Include="chSpriteRenderer.cpp" />
+    <ClCompile Include="EventObj.cpp" />
+    <ClCompile Include="EventScr.cpp" />
     <ClCompile Include="FightSabreBoxScr.cpp" />
     <ClCompile Include="FightSabreBullet.cpp" />
     <ClCompile Include="FightSabreBulletScr.cpp" />

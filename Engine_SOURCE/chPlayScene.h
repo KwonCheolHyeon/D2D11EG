@@ -35,6 +35,8 @@ namespace ch
 		Transform* chUiCursorTR;
 		GameObject* player;
 		GameObject* player2;
+		MonsterBase* bossObj;
+
 
 		BulletPool* pool;
 		

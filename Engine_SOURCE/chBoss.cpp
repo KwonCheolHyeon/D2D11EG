@@ -242,7 +242,7 @@ namespace ch
 		mBtr->SetPosition(Vector3(15.28f, 23.28f, 1.f));
 		mBtr->SetScale(Vector3(5.f, 6.f, 1.f));
 		mBossAni->Play(L"Boss_LeftDown_Idle");
-		monsterHp = 10;
+		monsterHp = 140;
 		prevMonsterHp = 50;
 		first = 1;
 		player = thisMonster->GetPlayer();
@@ -264,10 +264,16 @@ namespace ch
 
 			switch (monsterHp)
 			{
-			case 8:
+			case 120:
 				mS = monsterState::BossFlyAni;
 				break;
-			case 2:
+			case 90:
+				mS = monsterState::BossFlyAni;
+				break;
+			case 60:
+				mS = monsterState::BossFlyAni;
+				break;
+			case 30:
 				mS = monsterState::BossFlyAni;
 				break;
 			default:

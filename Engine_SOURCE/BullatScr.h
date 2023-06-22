@@ -51,7 +51,8 @@ namespace ch
         float DeathTIME;
         float goToDeathTime;
 
-
+    private:
+        bool reflectOn;
 	};
 
 

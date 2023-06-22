@@ -37,6 +37,8 @@ namespace ch
 
         bool moveOn;
 
+    private:
+        bool reflectOn;
 	};
 }
 

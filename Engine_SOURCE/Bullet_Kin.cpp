@@ -184,7 +184,7 @@ namespace ch
 	void Bullet_Kin::OnCollisionEnter(Collider2D* oppo)
 	{
 		
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone)
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetName() == L"Bullet")
 		{
 			monsterHp -= 1;
 			if (monsterHp <= 0) 
@@ -333,24 +333,7 @@ namespace ch
 
 	void Bullet_Kin::Move()
 	{
-		/*static std::random_device rd;
-		static std::mt19937 gen(rd());
-		static std::uniform_int_distribution<int> dist(1, 8);
 		
-
-		int dir = dist(gen);
-		if (term == 1) 
-		{
-			term *= -1;
-		}
-		else if (term == -1) 
-		{
-			term *= -1;
-			dir = 9;
-		}
-
-		
-		GenericMoveAnimator(dir);*/
 		if (thisMosterCollider->GetComponent<chasePlayerSCR>()->isFindPlayer() == true)
 		{
 			mS = monsterState::chase;

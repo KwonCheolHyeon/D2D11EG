@@ -73,7 +73,7 @@ namespace ch
 			
 		}
 		
-		if (oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"DoorSide" || oppo->GetOwner()->GetName() == L"DoorFront")
+		if (oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"DoorSide" || oppo->GetOwner()->GetName() == L"DoorFront" || oppo->GetOwner()->GetName() == L"table1")
 		{
 			Reset();
 		}
@@ -125,11 +125,13 @@ namespace ch
 
 		if (reflectOn == true)
 		{
+			GetOwner()->SetLayerType(eLayerType::Weapone);
 			// Reverse the direction of the bullet
 			bulletDirectionX = -bulletDirectionX;
 			bulletDirectionY = -bulletDirectionY;
 
-			GetOwner()->SetLayerType(eLayerType::Weapone);
+		
+			GetOwner()->SetName(L"Bullet");
 			bulletTime = 0;
 			// Reset the reflection state to prevent continuous reflection
 			reflectOn = false;

@@ -94,7 +94,7 @@ namespace ch
 	}
 	void CubeScr::OnCollisionEnter(Collider2D* oppo)
 	{
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone) 
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetName() == L"Bullet")
 		{
 			monsterHp -= 1;
 		}

@@ -3,11 +3,11 @@
 
 namespace ch
 {
-	class BossHpUIObj :public GameObject
+	class BossSceneObj :public GameObject
 	{
 	public:
-		BossHpUIObj();
-		virtual ~BossHpUIObj();
+		BossSceneObj();
+		virtual ~BossSceneObj();
 
 		virtual void Initalize();
 		virtual void Update();

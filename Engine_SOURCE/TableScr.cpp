@@ -180,7 +180,7 @@ namespace ch
 			}
 		}
 
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet)
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet || oppo->GetOwner()->GetName() == L"Bullat")
 		{
 			tableCount -= 1;
 		}

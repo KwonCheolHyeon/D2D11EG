@@ -228,7 +228,7 @@ namespace ch
 	{
 		eLayerType type = oppo->GetOwner()->GetLayerType();
 
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet || /*oppo->GetOwner()->GetName() == L"MonsterBullet"*/  oppo->GetOwner()->GetLayerType() == eLayerType::Monster)
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet || oppo->GetOwner()->GetLayerType() == eLayerType::Monster)
 		{
 			pHp -= 1;
 			GetOwner()->getCameraScr()->weakEffectOn();

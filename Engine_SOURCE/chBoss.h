@@ -5,6 +5,7 @@
 #include "MonsterBulletObj.h"
 #include "chGenericAnimator.h"
 #include "BossBulletObj.h"
+#include "BossBulletScr.h"
 namespace ch
 {
 	class Boss : public Script
@@ -25,6 +26,8 @@ namespace ch
         virtual void OnTriggerEnter(Collider2D* oppo);
         virtual void OnTrigger(Collider2D* oppo);
         virtual void OnTriggerExit(Collider2D* oppo);
+
+        int GetHp() { return monsterHp; }
 
     private:
         void BossSpawn();

@@ -233,6 +233,12 @@
     <Filter Include="GameObject\UI\Reload">
       <UniqueIdentifier>{ab358060-7f24-4987-9ed9-5ccc53dc8157}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UI\EventObj">
+      <UniqueIdentifier>{5d506428-5dbe-4928-9cab-1d666c4bfe91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\BossScene">
+      <UniqueIdentifier>{1a9e313b-9615-4c6f-b07c-8ca28a69feb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -612,13 +618,13 @@
     <ClInclude Include="BossHpBarObj.h">
       <Filter>GameObject\UI\BossHp</Filter>
     </ClInclude>
-    <ClInclude Include="BossHpScr.h">
+    <ClInclude Include="BossHpBarScr.h">
       <Filter>GameObject\UI\BossHp</Filter>
     </ClInclude>
     <ClInclude Include="BossHpUIObj.h">
       <Filter>GameObject\UI\BossHp</Filter>
     </ClInclude>
-    <ClInclude Include="BossUIScr.h">
+    <ClInclude Include="BossHpUIScr.h">
       <Filter>GameObject\UI\BossHp</Filter>
     </ClInclude>
     <ClInclude Include="ReloadBarObj.h">
@@ -632,6 +638,18 @@
     </ClInclude>
     <ClInclude Include="ReloadButtonScr.h">
       <Filter>GameObject\UI\Reload</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObj.h">
+      <Filter>GameObject\UI\EventObj</Filter>
+    </ClInclude>
+    <ClInclude Include="EventScr.h">
+      <Filter>GameObject\UI\EventObj</Filter>
+    </ClInclude>
+    <ClInclude Include="BossSceneObj.h">
+      <Filter>GameObject\UI\BossScene</Filter>
+    </ClInclude>
+    <ClInclude Include="BossSceneScr.h">
+      <Filter>GameObject\UI\BossScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -996,13 +1014,13 @@
     <ClCompile Include="BossHpBarObj.cpp">
       <Filter>GameObject\UI\BossHp</Filter>
     </ClCompile>
-    <ClCompile Include="BossHpScr.cpp">
+    <ClCompile Include="BossHpBarScr.cpp">
       <Filter>GameObject\UI\BossHp</Filter>
     </ClCompile>
     <ClCompile Include="BossHpUIObj.cpp">
       <Filter>GameObject\UI\BossHp</Filter>
     </ClCompile>
-    <ClCompile Include="BossUIScr.cpp">
+    <ClCompile Include="BossHpUIScr.cpp">
       <Filter>GameObject\UI\BossHp</Filter>
     </ClCompile>
     <ClCompile Include="ReloadBarObj.cpp">
@@ -1016,6 +1034,18 @@
     </ClCompile>
     <ClCompile Include="ReloadButtonScr.cpp">
       <Filter>GameObject\UI\Reload</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObj.cpp">
+      <Filter>GameObject\UI\EventObj</Filter>
+    </ClCompile>
+    <ClCompile Include="EventScr.cpp">
+      <Filter>GameObject\UI\EventObj</Filter>
+    </ClCompile>
+    <ClCompile Include="BossSceneObj.cpp">
+      <Filter>GameObject\UI\BossScene</Filter>
+    </ClCompile>
+    <ClCompile Include="BossSceneScr.cpp">
+      <Filter>GameObject\UI\BossScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

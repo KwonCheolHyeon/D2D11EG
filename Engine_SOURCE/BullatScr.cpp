@@ -60,6 +60,7 @@ namespace ch
 		ms = monsterState::Move;
 		setAttackTime = 0.f;
 		goToDeathTime = 0.f;
+		reflectOn = false;
 	}
 	void BullatScr::Update()
 	{
@@ -115,6 +116,10 @@ namespace ch
 			ms = monsterState::Death;
 		}
 
+		if (oppo->GetOwner()->GetName() == L"FightSabreCollider")
+		{
+			reflectOn = true;
+		}
 	
 	}
 	void BullatScr::OnCollisionStay(Collider2D* collider)
@@ -209,6 +214,22 @@ namespace ch
 
 		// Update bullet position based on direction and distance
 		bulletPos += Vector3(bulletDirectionX, bulletDirectionY, 0.0f) * bulletDistance;
+
+
+		if (reflectOn == true)
+		{
+			GetOwner()->SetLayerType(eLayerType::Weapone);
+			// Reverse the direction of the bullet
+			bulletDirectionX = -bulletDirectionX;
+			bulletDirectionY = -bulletDirectionY;
+
+
+			GetOwner()->SetName(L"Bullet");
+			goToDeathTime = 0;
+			// Reset the reflection state to prevent continuous reflection
+			reflectOn = false;
+		}
+
 
 		GetOwner()->GetComponent<Transform>()->SetPosition(bulletPos);
 

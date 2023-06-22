@@ -45,6 +45,12 @@
 #include "BlackMapObj.h"
 #include "chFightSabreObject.h"
 #include "FightSabreBoxScr.h"
+#include "BossHpUIObj.h"
+#include "BossHpUIScr.h"
+#include "BossHpBarObj.h"
+#include "BossHpBarScr.h"
+#include "EventObj.h"
+#include "EventScr.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -162,6 +168,9 @@ namespace ch
 				HeartControl.push_back(heart1); //두번째
 				HeartControl.push_back(heart2); //세번째
 			}
+
+			
+
 		}
 #pragma endregion
 
@@ -251,7 +260,7 @@ namespace ch
 			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
 			mCollider->SetName(L"BossChaseCollider");
 			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(10.f, 10.f));
+			mCollider->SetSize(Vector2(7.f, 7.f));
 
 			chaseCollier->SetOwnerTransform(kinTransform);
 			kinMonster->SetMonsterChaseCollider(chaseCollier);
@@ -631,10 +640,10 @@ namespace ch
 
 		{ //보스
 
-			MonsterBase* BossMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
-			BossMonster->AddComponent<Boss>();
-			Transform* bossTr = BossMonster->GetComponent<Transform>();
-			BossMonster->SetPlayer(player);
+			bossObj = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			bossObj->AddComponent<Boss>();
+			Transform* bossTr = bossObj->GetComponent<Transform>();
+			bossObj->SetPlayer(player);
 
 			chasePlayerOBJ* chaseCol = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
 			chaseCol->SetName(L"Boss");
@@ -642,13 +651,42 @@ namespace ch
 			Collider2D* mCollider = chaseCol->AddComponent<Collider2D>(); //오류 걸림
 			mCollider->SetName(L"BossChaseCollider");
 			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(15.f, 15.f));
+			mCollider->SetSize(Vector2(12.f, 12.f));
 
 			chaseCol->SetOwnerTransform(bossTr);
-			BossMonster->SetMonsterChaseCollider(chaseCol);
+			bossObj->SetMonsterChaseCollider(chaseCol);
 		}
 
+		{
+			EventObj* eventobj = object::Instantiate<EventObj>(eLayerType::Object, this);
+			eventobj->AddComponent<EventScr>();
+			Transform* tr = eventobj->GetComponent<Transform>();
+			tr->SetPosition(Vector3(15.26f, 16.511f, 0.f));
+			tr->SetScale(Vector3(1.f, 1.f, 0.1f));
 
+			Collider2D* col = eventobj->AddComponent<Collider2D>();
+			col->SetName(L"eventCol");
+			col->SetType(eColliderType::Rect);
+			col->SetSize(Vector2(1.f, 1.f));
+
+			BossHpUIObj* blank = object::Instantiate<BossHpUIObj>(eLayerType::UI, this);
+			blank->SetName(L"BossHpUIObj");
+			BossHpUIScr* bb = blank->AddComponent<BossHpUIScr>();
+			bb->SetEvent(eventobj);
+			Transform* htr0 = blank->GetComponent<Transform>();
+			htr0->SetPosition(Vector3(1.f, -3.f, 0.f));
+			htr0->SetScale(Vector3(10.f, 10.f, 0.f));
+
+			BossHpBarObj* blank0 = object::Instantiate<BossHpBarObj>(eLayerType::UI, this);
+			blank0->SetName(L"BossHpBarObj");
+			BossHpBarScr* aa = blank0->AddComponent<BossHpBarScr>();
+			aa->SetBossMonster(bossObj);
+			aa->SetEvent(eventobj);
+			Transform* htr = blank0->GetComponent<Transform>();
+			htr->SetPosition(Vector3(1.f, -3.f, 0.f));
+			htr->SetScale(Vector3(10.f, 10.f, 0.f));
+
+		}
 		
 		generateMap();
 		
@@ -706,6 +744,9 @@ namespace ch
 		CollisionManager::CollisionLayerCheck(eLayerType::Wall, eLayerType::MonsterBullet);
 		CollisionManager::CollisionLayerCheck(eLayerType::Wall, eLayerType::Weapone);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::MonsterCollider);
+		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::MonsterBullet);
+		CollisionManager::CollisionLayerCheck(eLayerType::Object, eLayerType::MonsterBullet);
+		CollisionManager::CollisionLayerCheck(eLayerType::Wall, eLayerType::Monster);
 		
 
 		Scene::OnEnter();
@@ -1120,7 +1161,7 @@ namespace ch
 			tableObject->SetName(L"table1");
 
 			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-16.52f, -12.79f, 0.0f));
+			mapColliderTr->SetPosition(Vector3(-16.52f, -12.79f, -10.0f));
 			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
 		}
 
@@ -1129,7 +1170,7 @@ namespace ch
 			tableObject->SetName(L"table1");
 
 			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-21.19f, 17.58f, 0.0f));
+			mapColliderTr->SetPosition(Vector3(-21.19f, 17.58f, -10.0f));
 			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
 		}
 
@@ -1138,7 +1179,7 @@ namespace ch
 			tableObject->SetName(L"table1");
 
 			Transform* mapColliderTr = tableObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-12.5f, -13.0f, 0.0f));
+			mapColliderTr->SetPosition(Vector3(-12.5f, -13.0f, -10.0f));
 			mapColliderTr->SetScale(Vector3(1.2f, 0.75f, 0.1f));
 		}
 

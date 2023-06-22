@@ -38,7 +38,7 @@ namespace ch
 		bulletSr->SetMesh(mesh);
 
 		this->GetOwner()->SetName(L"MonsterBullet");
-
+		reflectOn = false;
 		moveOn = false;
 	}
 	void MonsterBullet2Scr::Update()
@@ -66,11 +66,15 @@ namespace ch
 		{
 			Reset();
 		}
-		if (oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"DoorSide" || oppo->GetOwner()->GetName() == L"DoorFront")
+		if (oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"DoorSide" || oppo->GetOwner()->GetName() == L"DoorFront" || oppo->GetOwner()->GetName() == L"table1")
 		{
 			Reset();
 		}
-		//FightSabreCollider
+		if (oppo->GetOwner()->GetName() == L"FightSabreCollider")
+		{
+			reflectOn = true;
+		}
+
 	}
 	void MonsterBullet2Scr::OnCollision(Collider2D* oppo)
 	{
@@ -105,6 +109,20 @@ namespace ch
 
 		// Update bullet position based on direction and distance
 		bulletPos += Vector3(bulletDirectionX, bulletDirectionY, 0.0f) * bulletDistance;
+
+		if (reflectOn == true)
+		{
+			GetOwner()->SetLayerType(eLayerType::Weapone);
+			// Reverse the direction of the bullet
+			bulletDirectionX = -bulletDirectionX;
+			bulletDirectionY = -bulletDirectionY;
+
+
+			GetOwner()->SetName(L"Bullet");
+			bulletTime = 0;
+			// Reset the reflection state to prevent continuous reflection
+			reflectOn = false;
+		}
 
 		GetOwner()->GetComponent<Transform>()->SetPosition(bulletPos);
 	}

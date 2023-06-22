@@ -1,31 +1,30 @@
 #pragma once
 #include "chScript.h"
 #include "chAnimator.h"
-#include "BossHpBarObj.h"
-#include "chTexture.h"
+#include "EventObj.h"
 namespace ch
 {
-	class BossHpScr : public Script
+	class BossHpUIScr : public Script
 	{
 	public:
-		BossHpScr();
-		virtual ~BossHpScr();
+		BossHpUIScr();
+		virtual ~BossHpUIScr();
 
 		virtual void Initalize() override;
 		virtual void Update() override;
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
 
-		
-	private:
 
+
+		void SetEvent(EventObj* _a) { eventObj = _a; }
+
+	private:
 		Animator* ani;
-		std::shared_ptr<Texture> hpTexture;
+		
+		EventObj* eventObj;
 
-	private:
-		float health;
-		float bossHp;
-		float maxHp;
+
 
 	};
 }
