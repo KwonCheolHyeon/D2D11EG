@@ -87,6 +87,7 @@ namespace ch
 
     private:
         bool isOneHand;
+        bool dodging;
 	};
 }
 

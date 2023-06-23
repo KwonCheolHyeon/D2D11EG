@@ -191,7 +191,7 @@ namespace ch
 
 		walk = false;
 
-		
+		dodging = false;
 	}
 
 	void Convict::Update()
@@ -202,6 +202,7 @@ namespace ch
 		switch (cPS)
 		{
 		case PlayerState::Idle:
+			dodging = false;
 			IdleAni();
 			break;
 		case PlayerState::Walk:
@@ -211,6 +212,7 @@ namespace ch
 				audioObj[2]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 				boss_audio[2]->SetLoop(true);
 				boss_audio[2]->Play();
+				dodging = false;
 			}
 			RunAni();
 			break;
@@ -255,6 +257,12 @@ namespace ch
 			cbb->onBlankBulletEffect();
 			GetOwner()->getCameraScr()->strongEffectOn();
 		}
+		if (Input::GetKeyDown(eKeyCode::H))
+		{
+			pHp += 1;
+			pBB += 1;
+		}
+		
 	}
 
 	void Convict::FixedUpdate()
@@ -272,8 +280,16 @@ namespace ch
 		
 		if (oppo->GetOwner()->GetName() == L"Bullat"|| oppo->GetOwner()->GetName() == L"MonsterBullet") 
 		{
-			pHp -= 1;
-			GetOwner()->getCameraScr()->weakEffectOn();
+			if (dodging == true)
+			{
+			
+			}
+			else
+			{
+				pHp -= 1;
+				GetOwner()->getCameraScr()->weakEffectOn();
+			}
+			
 		}
 	
 
@@ -608,6 +624,7 @@ namespace ch
 
 	void Convict::RollingAni()
 	{
+		dodging = true; 
 		boss_audio[2]->Stop();
 		walk = false;
 		audioObj[0]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
@@ -685,6 +702,11 @@ namespace ch
 		if (pHeartControl.size() != 0) //왜 두번 되는거지?
 		{
 			prevHp = pHp;
+
+			if (pHp >= 6) 
+			{
+				pHp = 6;
+			}
 			if (pHp == 6)
 			{
 			
@@ -731,14 +753,20 @@ namespace ch
 
 	void Convict::SetBlankBullet()
 	{
-		if (pBlankBullet.size() != 0) 
+		if (pBlankBullet.size() != 0)
 		{
 			prevBB = pBB;
-			if (pBB <= 0) 
+			if (pBB <= 0)
 			{
 				pBB = 0;
 				prevBB = 10;
 			}
+			if (pBB >= 4) 
+			{
+				pBB = 4;
+			}
+		
+		
 			if (pBB == 4)
 			{
 				pBlankBullet[3]->GetComponent<BlankBullet_UI>()->onBlankBullet();

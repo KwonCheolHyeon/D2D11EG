@@ -1126,14 +1126,8 @@ namespace ch
 		{
 			SceneManager::LoadScene(eSceneType::Main);
 		}
-		if (Input::GetKeyDown(eKeyCode::H))
-		{
-			mapTr->SetPosition(Vector3(1000.0f, 1000.0f, 0.1f));
-		}
-		if (Input::GetKeyDown(eKeyCode::G))
-		{
-			mapTr->SetPosition(Vector3(0.0f, 0.0f, 0.1f));
-		}
+		
+		
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
 			Vector3 mouse = Input::GetWorldMousPosition();
@@ -1211,7 +1205,7 @@ namespace ch
 			containBullets.push_back(bulletobj);
 			containBullets[i]->SetLayerType(eLayerType::Weapone);
 			containBullets[i]->SetName(L"Bullet");
-			containBullets[i]->GetComponent<Transform>()->SetPosition(Vector3(100.0f,100.0f, 0.0f));
+			containBullets[i]->GetComponent<Transform>()->SetPosition(Vector3(-1000.0f,-1000.0f, 0.0f));
 			containBullets[i]->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
 
 			Collider2D* mCollider = bulletobj->AddComponent<Collider2D>();
@@ -1978,7 +1972,7 @@ namespace ch
 			//2น๘รั
 			FightSabreObject* item = object::Instantiate<FightSabreObject>(eLayerType::Object, this);
 			item->AddComponent<FightSabreBoxScr>();
-
+			item->GetComponent<Transform>()->SetPosition(Vector3(-1000.f,-1000.f,0.f));
 			abc->SetFightSabreObject(item);
 
 		}

@@ -117,7 +117,7 @@ namespace ch
 		speed = 0;
 		bulletDirectionX = 0;
 		bulletDirectionY = 0;
-		mTr->SetPosition(Vector3(0.f, 0.f, 0.f));
+		mTr->SetPosition(Vector3(-1000.f,-1000.f, 0.f));
 		mTr->SetRotation(Vector3(0.f, 0.f, 0.f));
 		mState[(UINT)eBulletState::Dead] = true;
 		mState[(UINT)eBulletState::live] = false;
