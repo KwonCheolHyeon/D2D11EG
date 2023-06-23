@@ -3,6 +3,8 @@
 #include "chScript.h"
 #include "chAnimator.h"
 #include "BoosDoorObj.h"
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch
 {
 	class BoosDoorScr : public Script
@@ -20,7 +22,10 @@ namespace ch
 		virtual void OnCollisionStay(Collider2D* collider) override;
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
-	
+	private:
+		std::shared_ptr<AudioClip> audioClip;
+		AudioSource* audio;
+		GameObject* audioObj;
 	private:
 		Collider2D* col;
 		Animator* anima;
@@ -28,7 +33,7 @@ namespace ch
 	private:
 		float timer;
 		bool doorOn;
-
+		bool doorSound;
 
 	};
 }

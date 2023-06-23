@@ -2,6 +2,7 @@
 #include "Bullet_Kin_Gun.h"
 #include "Bullet_Kin.h"
 #include "chScene.h"
+#include "chResources.h"
 #include "chObject.h"
 namespace ch 
 {
@@ -19,6 +20,12 @@ namespace ch
 
 		thisTrans = GetOwner()->GetComponent<Transform>();
 
+
+		audioObj = object::Instantiate<GameObject>(eLayerType::UI);
+		audioClip = Resources::Load<AudioClip>(L"shot", L"music\\enemy\\bulletkin\\shot.mp3");
+		boss_audio = audioObj->AddComponent<AudioSource>();
+		boss_audio->SetClip(audioClip);
+
 		Owner = dynamic_cast<Bullet_Kin_Gun*>(GetOwner());
 		allowShot = true;
 		ShotTime = 0.f;
@@ -35,6 +42,7 @@ namespace ch
 			allowShot = false;
 			Owner->GetOwnerMonster()->GetComponent<Bullet_Kin>()->SetShot(false);
 			Shot();
+			boss_audio->Play();
 		}
 		if (allowShot == false) 
 		{
@@ -76,6 +84,7 @@ namespace ch
 	}
 	void Bullet_Kin_Gun_Scr::Shot()
 	{
+
 		Animator* monsterGunAni = GetOwner()->GetComponent<Animator>();
 		monsterGunAni->Play(L"WGun_Shot",false);
 		afterShotCalled = true;
@@ -98,6 +107,7 @@ namespace ch
 	{
 		
 		monsBullet = object::Instantiate<MonsterBulletObj>(eLayerType::MonsterBullet);
+		
 		MonsterBulletScr* bulletScript = monsBullet->AddComponent<MonsterBulletScr>();
 		bulletScript->Initalize();
 		

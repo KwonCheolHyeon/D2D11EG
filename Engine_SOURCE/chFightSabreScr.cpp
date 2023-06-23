@@ -68,7 +68,17 @@ namespace ch
 #pragma endregion
 
 		
-	
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI);
+
+		audioClip[0] = Resources::Load<AudioClip>(L"magnum_reload", L"music\\gun\\magnum_reload.mp3");
+		audioClip[1] = Resources::Load<AudioClip>(L"magnum_shot01", L"music\\gun\\magnum_shot01.mp3");
+
+		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
+		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
+
+		boss_audio[0]->SetClip(audioClip[0]);
+		boss_audio[1]->SetClip(audioClip[1]);
 
 		col = GetOwner()->AddComponent<Collider2D>();
 		col->SetType(eColliderType::Rect);
@@ -163,6 +173,8 @@ namespace ch
 		if (anima->IsAnimationRunning(L"W_FightSabre_reload") == false)
 		{
 			anima->Play(L"W_FightSabre_reload", false);
+			audioObj[0]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+			boss_audio[0]->Play();
 		}
 		if (reloadTime >= 1.96f) 
 		{
@@ -178,6 +190,9 @@ namespace ch
 	{
 		prevFss = fss;
 		
+		audioObj[1]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+		boss_audio[1]->Play();
+
 		if (anima->IsAnimationRunning(L"W_FightSabre_shot") == false)
 		{
 			anima->Play(L"W_FightSabre_shot", false);

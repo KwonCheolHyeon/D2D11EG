@@ -1,6 +1,8 @@
 #pragma once
 #include "chScript.h"
 #include "chAnimator.h"
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch
 {
 
@@ -24,8 +26,12 @@ namespace ch
         virtual void OnTriggerExit(Collider2D* oppo);
 
         int GetClosestDirection(Collider2D* collider);
-
     private:
+        std::shared_ptr<AudioClip> audioClip;
+        AudioSource* boss_audio;
+        GameObject* audioObj;
+    private:
+        bool tableOn;
         int directionNumber; // 1 = ╩С , 2 = ©Л , 3 = го , 4 = аб
         int prevDN;
         int once2;

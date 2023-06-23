@@ -38,6 +38,7 @@ namespace ch
         bool moveOn;
 
     private:
+        int twoHit;
         bool reflectOn;
 	};
 }

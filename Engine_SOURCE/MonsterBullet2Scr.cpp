@@ -40,6 +40,7 @@ namespace ch
 		this->GetOwner()->SetName(L"MonsterBullet");
 		reflectOn = false;
 		moveOn = false;
+		twoHit = 0;
 	}
 	void MonsterBullet2Scr::Update()
 	{
@@ -66,9 +67,16 @@ namespace ch
 		{
 			Reset();
 		}
-		if (oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"DoorSide" || oppo->GetOwner()->GetName() == L"DoorFront" || oppo->GetOwner()->GetName() == L"table1")
+		if (oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"DoorSide" || oppo->GetOwner()->GetName() == L"DoorFront" || oppo->GetOwner()->GetName() == L"table1" )
 		{
 			Reset();
+		}
+		if (oppo->GetOwner()->GetName() == L"Cube" || oppo->GetOwner()->GetName() == L"BulletKin" || oppo->GetOwner()->GetName() == L"cBoss" || oppo->GetOwner()->GetName() == L"Bullat")
+		{
+			if (GetOwner()->GetName() == L"reflectBullet") 
+			{
+				Reset();
+			}
 		}
 		if (oppo->GetOwner()->GetName() == L"FightSabreCollider")
 		{
@@ -118,7 +126,7 @@ namespace ch
 			bulletDirectionY = -bulletDirectionY;
 
 
-			GetOwner()->SetName(L"Bullet");
+			GetOwner()->SetName(L"reflectBullet");
 			bulletTime = 0;
 			// Reset the reflection state to prevent continuous reflection
 			reflectOn = false;
@@ -128,6 +136,6 @@ namespace ch
 	}
 	void MonsterBullet2Scr::Reset()
 	{
-		GetOwner()->Death();
+		GetOwner()->Pause();
 	}
 }

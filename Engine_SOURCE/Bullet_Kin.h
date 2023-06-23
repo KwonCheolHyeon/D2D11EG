@@ -5,7 +5,8 @@
 #include "MonsterBase.h"
 #include "chasePlayerOBJ.h"
 #include "chGenericAnimator.h"
-
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch
 {
 	class Bullet_Kin : public Script
@@ -72,7 +73,10 @@ namespace ch
                 return Vector3(0.0f, 0.0f, 0.0f); 
             }
         }
-
+    private:
+        std::shared_ptr<AudioClip> audioClip[3];
+        AudioSource* boss_audio[3];
+        GameObject* audioObj[3];
     private:
         void GenericMoveAnimator(int dire);
         GenericAnimator GenericAnimator;

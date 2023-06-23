@@ -37,6 +37,7 @@ namespace ch
 
     private:
         bool reflectOn;
+        int twoHit;
 
 	};
 

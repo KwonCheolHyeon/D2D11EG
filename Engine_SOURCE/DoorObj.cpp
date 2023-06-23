@@ -92,13 +92,14 @@ namespace ch
 
 			bool allMonstersDead = false;
 		
-			if (monsterBases[0]->IsDead() || monsterBases[1]->IsDead() || monsterBases[2]->IsDead()) 
+			if (monsterBases[0]->IsDead() || monsterBases[1]->IsDead() || monsterBases[2]->IsDead() || monsterBases[3]->IsDead() || monsterBases[4]->IsDead() || monsterBases[5]->IsDead())
 			{
 				doorOpenCount += 1;
 			}
 
-			if(doorOpenCount  == 3)
+			if(doorOpenCount  == 6)
 			{
+				doorOpenCount = 0;
 				allMonstersDead = true;
 			
 			}

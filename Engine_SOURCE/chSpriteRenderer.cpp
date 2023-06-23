@@ -30,6 +30,17 @@ namespace ch
 
 	void SpriteRenderer::Render()
 	{
+		if (GetOwner() == nullptr) 
+		{
+			return;
+			
+
+		}
+		if(GetOwner()->GetState() != GameObject::eState::Active )
+		{
+			return;
+		
+		}
 		GetOwner()->GetComponent<Transform>()->SetConstantBuffer();
 
 		GetMesh()->BindBuffer();

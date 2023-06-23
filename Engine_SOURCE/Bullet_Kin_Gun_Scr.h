@@ -29,6 +29,10 @@ namespace ch
         void ShotTerm();
         void afterShot();
     private:
+        std::shared_ptr<AudioClip> audioClip;
+        AudioSource* boss_audio;
+        GameObject* audioObj;
+    private:
         Animator* anima;
         Transform* thisTrans;
         Bullet_Kin_Gun* Owner;

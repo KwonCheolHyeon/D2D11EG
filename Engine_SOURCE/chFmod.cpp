@@ -75,6 +75,7 @@ namespace ch
 	{
 		mCoreSystem->release();
 		mCoreSystem = nullptr;
+		//혹시터지면 지우기
 
 		mSystem->release();
 		mSystem = nullptr;

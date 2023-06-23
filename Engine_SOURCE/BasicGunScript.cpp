@@ -4,6 +4,7 @@
 #include "chResources.h"
 #include "chTime.h"
 #include "chBulletScr.h"
+#include "chObject.h"
 namespace ch 
 {
 	BasicGunScript::BasicGunScript()
@@ -38,6 +39,18 @@ namespace ch
 			gunani->Create(L"W_pistol_Idle", texture, Vector2(0.0f, 0.0f), Vector2(15.0f, 11.0f), Vector2::Zero, 1, 0.1f);
 		}
 		
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI);
+
+		audioClip[0] = Resources::Load<AudioClip>(L"pistol_reload", L"music\\gun\\pistol_reload.mp3");
+		audioClip[1] = Resources::Load<AudioClip>(L"pistol_shot", L"music\\gun\\pistol_shot.mp3");
+
+		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
+		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
+
+		boss_audio[0]->SetClip(audioClip[0]);
+		boss_audio[1]->SetClip(audioClip[1]);
+
 
 		ps = PistolState::PistolActive;
 		reboundTrue = false;
@@ -109,6 +122,10 @@ namespace ch
 	void BasicGunScript::Shot()
 	{
 		bulletOBJ = bulletpool->GetBullet();
+
+		audioObj[1]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+		boss_audio[1]->Play();
+		
 		if (bulletOBJ != nullptr)
 		{
 			bullets.push_back(bulletOBJ);

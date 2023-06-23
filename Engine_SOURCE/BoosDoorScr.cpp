@@ -1,6 +1,7 @@
 #include "BoosDoorScr.h"
 #include "chSpriteRenderer.h"
 #include "chResources.h"
+#include "chObject.h"
 namespace ch 
 {
 
@@ -44,9 +45,14 @@ namespace ch
 		lightComp->SetRadius(2.5f);
 		lightComp->SetDiffuse(Vector4(0.0f, 0.0f, 0.0f, 1.0f));
 
+		audioObj = object::Instantiate<GameObject>(eLayerType::UI);
+		audioClip = Resources::Load<AudioClip>(L"bossdoor_open", L"music\\object\\bossdoor_open.mp3");
+		audio = audioObj->AddComponent<AudioSource>();
+		audio->SetClip(audioClip);
 
 		anima->Play(L"m_BossDoor");
 		doorOn = false;
+		doorSound = false;
 	}
 
 	void BoosDoorScr::Update()
@@ -58,7 +64,12 @@ namespace ch
 			timer += Time::DeltaTime();
 			Transform* mTr = GetOwner()->GetComponent<Transform>();
 			Vector3 a = mTr->GetPosition();
-
+			if (doorSound == false) 
+			{
+				doorSound = true;
+				audio->Play();
+			}
+		
 			if (timer >= 1.f) 
 			{
 				anima->Play(L"m_BossDoorOpen");

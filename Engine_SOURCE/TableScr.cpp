@@ -3,6 +3,7 @@
 #include "chInput.h"
 #include "chSpriteRenderer.h"
 #include "chResources.h"
+#include "chObject.h"
 namespace ch 
 {
 	
@@ -17,21 +18,30 @@ namespace ch
 
 	void TableScr::Initalize()
 	{
-		directionNumber = 0;
+		audioObj = object::Instantiate<GameObject>(eLayerType::UI);
+		audioClip = Resources::Load<AudioClip>(L"table_flip", L"music\\object\\table_flip.mp3");
+		boss_audio = audioObj->AddComponent<AudioSource>();
+		boss_audio->SetClip(audioClip);
+
+
+		directionNumber = 10;
 		prevDN = 5;
 		tAnimator = this->GetOwner()->GetComponent<Animator>();
 		tableCount = 3;
 		once0 = 0;
 		once1 = 0;
 		once2 = 0;
+		tableOn = false;
 	}
 
 	void TableScr::Update()
 	{
 		if (directionNumber != 0 && prevDN != 1)
 		{
-			if (Input::GetKeyDown(eKeyCode::E)) 
+			if (Input::GetKeyDown(eKeyCode::E) && tableOn == true)
 			{
+				audioObj->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+				boss_audio->Play();
 				if (directionNumber == 1)//»ó
 				{
 					this->GetOwner()->GetComponent<Transform>()->SetScale(Vector3(8.f, 6.f, 1.f));
@@ -180,10 +190,18 @@ namespace ch
 			}
 		}
 
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet || oppo->GetOwner()->GetName() == L"Bullat")
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet || oppo->GetOwner()->GetName() == L"Bullat" || oppo->GetOwner()->GetName() == L"MonsterBullet")
 		{
+			
 			tableCount -= 1;
 		}
+	
+		if (oppo->GetOwner()->GetName() == L"Player")
+		{
+			tableOn = true;
+			
+		}
+
 	}
 
 	void TableScr::OnCollision(Collider2D* oppo)
@@ -194,7 +212,11 @@ namespace ch
 
 	void TableScr::OnCollisionExit(Collider2D* oppo)
 	{
-		
+		if (oppo->GetOwner()->GetName() == L"Player")
+		{
+			tableOn = false;
+
+		}
 	}
 
 	void TableScr::OnTriggerEnter(Collider2D* oppo)

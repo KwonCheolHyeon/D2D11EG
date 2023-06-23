@@ -36,26 +36,6 @@ namespace ch
 		mBcol->SetType(eColliderType::Rect);
 		mBcol->SetSize(Vector2(0.3f, 0.3f));
 
-		
-		
-		AudioSource* aaa = GetOwner()->AddComponent<AudioSource>();
-
-		std::shared_ptr<AudioClip> myAudioClip =  Resources::Load<AudioClip>(L"DeathSound",L"gull_death.mp3");
-		//std::shared_ptr<AudioClip> myAudioClip =  Resources::Load<AudioClip>(L"DeathSound",L"gull_death.mp3");
-
-		
-		aaa->SetClip(myAudioClip);
-		aaa->SetLoop(true);
-		aaa->Play();
-		
-		/*myAudioClip->Set3DAttributes(mBtr->GetPosition(), Vector3(1.f, 1.f, 1.f));
-		
-		aaa->SetClip(myAudioClip);
-		aaa->Play();*/
-
-		
-		
-
 
 		SpriteRenderer* sprite = GetOwner()->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"pIdleMaterial");
@@ -236,9 +216,46 @@ namespace ch
 			}
 		}
 
-
-
 	#pragma endregion
+
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[2] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[3] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[4] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[5] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[6] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[7] = object::Instantiate<GameObject>(eLayerType::UI);
+	
+		audioClip[0] = Resources::Load<AudioClip>(L"gull_death", L"music\\boss\\gull_death.mp3");
+		audioClip[1] = Resources::Load<AudioClip>(L"gull_leap", L"music\\boss\\gull_leap.mp3");
+		audioClip[2] = Resources::Load<AudioClip>(L"gull_descend", L"music\\boss\\gull_descend.mp3");
+		audioClip[3] = Resources::Load<AudioClip>(L"gull_rocket", L"music\\boss\\gull_rocket.mp3");
+		audioClip[4] = Resources::Load<AudioClip>(L"gull_gatling", L"music\\boss\\gull_gatling.mp3");
+		audioClip[5] = Resources::Load<AudioClip>(L"gull_gatlingloop", L"music\\boss\\gull_gatlingloop.mp3");
+		audioClip[6] = Resources::Load<AudioClip>(L"gull_shoot01", L"music\\boss\\gull_shoot01.mp3");
+		audioClip[7] = Resources::Load<AudioClip>(L"gull_shoot02", L"music\\boss\\gull_shoot02.mp3");
+
+		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
+		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
+		boss_audio[2] = audioObj[2]->AddComponent<AudioSource>();
+		boss_audio[3] = audioObj[3]->AddComponent<AudioSource>();
+		boss_audio[4] = audioObj[4]->AddComponent<AudioSource>();
+		boss_audio[5] = audioObj[5]->AddComponent<AudioSource>();
+		boss_audio[6] = audioObj[6]->AddComponent<AudioSource>();
+		boss_audio[7] = audioObj[7]->AddComponent<AudioSource>();
+
+		boss_audio[0]->SetClip(audioClip[0]);
+		boss_audio[1]->SetClip(audioClip[1]);
+		boss_audio[2]->SetClip(audioClip[2]);
+		boss_audio[3]->SetClip(audioClip[3]);
+		boss_audio[4]->SetClip(audioClip[4]);
+		boss_audio[5]->SetClip(audioClip[5]);
+		boss_audio[6]->SetClip(audioClip[6]);
+		boss_audio[7]->SetClip(audioClip[7]);
+
+
+
 		mBtr->SetPosition(Vector3(15.28f, 23.28f, 1.f));
 		mBtr->SetScale(Vector3(5.f, 6.f, 1.f));
 		mBossAni->Play(L"Boss_LeftDown_Idle");
@@ -250,6 +267,9 @@ namespace ch
 		oneDeath = false;
 		prevbombCount = 6;
 		deathTime = 0.f;
+
+		oneDescend = true;
+		beforeAttack = true;
 	}
 	void Boss::Update()
 	{
@@ -330,7 +350,7 @@ namespace ch
 	}
 	void Boss::OnCollisionEnter(Collider2D* oppo)
 	{
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone)
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetName() == L"reflectBullet")
 		{
 			monsterHp -= 1;
 			if (monsterHp == 0)
@@ -442,12 +462,16 @@ namespace ch
 			Vector3 newPosition = monsterPosition + direction * moveDistance;
 			mBoss->GetComponent<Transform>()->SetPosition(newPosition);
 		}
-		else if (distanceToPlayer < 3.0f) //플레이어와 보스 사이의 거리가 너무 가까우면 피함
+
+		if (distanceToPlayer < 3.0f) //플레이어와 보스 사이의 거리가 너무 가까우면 피함
 		{
-			int a = 0;
+			mS = monsterState::BossFlyAni;
+		}
+		else 
+		{
+			mS = monsterState::mIdle;
 		}
 
-		mS = monsterState::mIdle;
 	}
 
 	void Boss::BossAttack()
@@ -493,10 +517,17 @@ namespace ch
 
 		}
 
+		if(beforeAttack == true)
+		{
+			beforeAttack = false;
+			boss_audio[4]->Play();
+		}
+
 		attackTimer -= Time::DeltaTime(); // attackTimer 값을 감소
 
 		if (attackTimer <= 0.0f)
 		{
+			boss_audio[5]->Play();
 			Attack();
 			attackTimer = 0.07f; // 0.2초로 타이머 재설정
 		}
@@ -511,6 +542,10 @@ namespace ch
 		if (mBossAni->IsAnimationRunning(L"B_Boss_fly") == false) 
 		{
 			mBossAni->Play(L"B_Boss_fly",false);
+		
+			
+			boss_audio[1]->Play();
+
 		}
 
 		if(BossFlyAniTimer >= 0.6f)
@@ -525,6 +560,7 @@ namespace ch
 	}
 	void Boss::BossGoMid()
 	{
+	
 		mBossAni->Play(L"B_Boss_flying");
 		Vector3 a = mBtr->GetPosition();
 		float bossDuration = 2.0f;  // Duration in seconds
@@ -536,14 +572,22 @@ namespace ch
 
 		if (bossFly >= 2.f)
 		{
+			if (oneDescend == true)
+			{
+				oneDescend = false;
+
+				boss_audio[2]->Play();
+			}
 			// Boss has reached the desired height
 			bossFly = 0.f;
 			mBtr->SetPosition(Vector3(15.28f, 43.28f, -1.f));
+			oneDescend = true;
 			mS = monsterState::SkyBomb;
 		}
 	}
 	void Boss::BossSkyBomb()
 	{
+		beforeAttack = true;
 		bossSkyBomb += Time::DeltaTime();
 		Vector3 a = mBtr->GetPosition();
 
@@ -564,6 +608,7 @@ namespace ch
 			if (mBossAni->IsAnimationRunning(L"B_Boss_skyBomb") == false)
 			{
 				mBossAni->Play(L"B_Boss_skyBomb", true);
+				
 			}
 
 			if (prevbombCount != bombCount) {
@@ -571,7 +616,7 @@ namespace ch
 				switch (bombCount)
 				{
 				case 0:
-					
+					boss_audio[3]->Play();
 					monsterBullet1 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
 					monsterBullet1->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 					monsterBulletScr1 = monsterBullet1->AddComponent<BossBulletScr>();
@@ -580,6 +625,7 @@ namespace ch
 					
 					break;
 				case 1:
+					boss_audio[3]->Play();
 					monsterBullet2 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
 					monsterBullet2->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 					monsterBulletScr2 = monsterBullet2->AddComponent<BossBulletScr>();
@@ -588,6 +634,7 @@ namespace ch
 
 					break;
 				case 2:
+					boss_audio[3]->Play();
 					monsterBullet3 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
 					monsterBullet3->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 					monsterBulletScr3 = monsterBullet3->AddComponent<BossBulletScr>();
@@ -595,6 +642,7 @@ namespace ch
 					player->getCameraScr()->strongEffectOn();
 					break;
 				case 3:
+					boss_audio[3]->Play();
 					monsterBullet4 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
 					monsterBullet4->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 					monsterBulletScr4 = monsterBullet4->AddComponent<BossBulletScr>();
@@ -602,6 +650,7 @@ namespace ch
 					player->getCameraScr()->strongEffectOn();
 					break;
 				case 4:
+					boss_audio[3]->Play();
 					monsterBullet5= object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
 					monsterBullet5->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 					monsterBulletScr5 = monsterBullet5->AddComponent<BossBulletScr>();
@@ -609,7 +658,7 @@ namespace ch
 					player->getCameraScr()->strongEffectOn();
 					break;
 				case 5:
-					
+					boss_audio[3]->Play();
 					monsterBullet6 = object::Instantiate<BossBulletObj>(eLayerType::MonsterBullet);
 					monsterBullet6->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 					monsterBulletScr6 = monsterBullet6->AddComponent<BossBulletScr>();
@@ -617,6 +666,7 @@ namespace ch
 					player->getCameraScr()->strongEffectOn();
 					break;
 				case 6:
+					
 					player->getCameraScr()->strongEffectOn();
 					bombCount = 0;
 					boosSkyBombAttackTime = 0;
@@ -647,12 +697,13 @@ namespace ch
 		{
 			oneDeath = true;
 			mBossAni->Play(L"Boss_Death",false);
+			boss_audio[0]->Play();
 		}
 
-		if (deathTime >= 8.f) 
+		if (deathTime >= 6.f) 
 		{
 
-		SceneManager::LoadScene(eSceneType::Test);
+			SceneManager::LoadScene(eSceneType::Test);
 		}
 		
 	}
@@ -707,7 +758,7 @@ namespace ch
 		bulletScript->Initalize();
 		float angle = 0;
 		Vector3 boss = mBoss->GetComponent<Transform>()->GetPosition();
-
+		audioClip[6]->Play();
 		switch (mD)
 		{
 		case monsterDir::mNorth:
@@ -751,6 +802,6 @@ namespace ch
 		float finalAngle = angle + angleVariation;
 
 		bulletScript->shootingBullet(finalAngle, boss);
-
+		boss_audio[7]->Play();
 	}
 }

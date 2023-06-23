@@ -1,7 +1,7 @@
 #include "BossBulletScr.h"
 #include "chResources.h"
 #include "chSpriteRenderer.h"
-
+#include "chObject.h"
 namespace ch 
 {
 	BossBulletScr::BossBulletScr()
@@ -42,6 +42,14 @@ namespace ch
 		col->SetSize(Vector2(0.01f, 0.01f));
 		col->SetCenter(Vector2(10.f, 10.f));
 
+
+
+		audioObj = object::Instantiate<GameObject>(eLayerType::UI);
+		audioClip = Resources::Load<AudioClip>(L"bombsound", L"music\\boss\\bombsound.mp3");
+		boss_audio = audioObj->AddComponent<AudioSource>();
+		boss_audio->SetClip(audioClip);
+
+
 		bossBullet->Play(L"Boss_SpawnBullet");
 		bombTimer = 0.f;
 		bombCollder = 0.f;
@@ -58,6 +66,7 @@ namespace ch
 			if (bossBullet->IsAnimationRunning(L"Boss_bossBombEffect") == false)
 			{
 				bossBullet->Play(L"Boss_bossBombEffect", false);
+				boss_audio->Play();
 			}
 			
 			bombCollderEffect();

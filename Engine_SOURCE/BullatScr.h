@@ -2,7 +2,8 @@
 #include "chScript.h"
 #include "MonsterBase.h"
 #include "chAnimator.h"
-
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch 
 {
 
@@ -38,7 +39,10 @@ namespace ch
         MonsterBase* thisMonster;
         monsterState ms;
         Transform* mTr;
-
+    private:
+        std::shared_ptr<AudioClip> audioClip[2];
+        AudioSource* boss_audio[2];
+        GameObject* audioObj[2];
     private:
         float P2Mangle;
         int monsterHp;

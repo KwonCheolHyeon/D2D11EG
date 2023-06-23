@@ -52,6 +52,23 @@ namespace ch
 		mCollider->SetSize(Vector2(0.1f, 0.1f));
 
 
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[2] = object::Instantiate<GameObject>(eLayerType::UI);
+
+		audioClip[0] = Resources::Load<AudioClip>(L"charge_01", L"music\\enemy\\cube\\charge_01.wav");
+		audioClip[1] = Resources::Load<AudioClip>(L"attack", L"music\\enemy\\cube\\attack.mp3");
+		audioClip[2] = Resources::Load<AudioClip>(L"death_01", L"music\\enemy\\cube\\death_01.wav");
+
+		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
+		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
+		boss_audio[2] = audioObj[2]->AddComponent<AudioSource>();
+
+		boss_audio[0]->SetClip(audioClip[0]);
+		boss_audio[1]->SetClip(audioClip[1]);
+		boss_audio[2]->SetClip(audioClip[2]);
+		
+
 		ms = monsterState::Move;
 
 		bulletMakeCount = 0;
@@ -94,7 +111,7 @@ namespace ch
 	}
 	void CubeScr::OnCollisionEnter(Collider2D* oppo)
 	{
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetName() == L"Bullet")
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetName() == L"Bullet" || oppo->GetOwner()->GetName() == L"reflectBullet")
 		{
 			monsterHp -= 1;
 		}
@@ -125,15 +142,41 @@ namespace ch
 		if (moveOn == true) 
 		{
 			moveOn = false;
-			Mbscr[0]->moveOns();
-			Mbscr[1]->moveOns();
-			Mbscr[2]->moveOns();
-			Mbscr[3]->moveOns();
-			Mbscr[4]->moveOns();
-			Mbscr[5]->moveOns();
-			Mbscr[6]->moveOns();
-			Mbscr[7]->moveOns();
-			
+
+			if(Mbscr[0] != nullptr)
+			{		
+				Mbscr[0]->moveOns();
+			}
+			if (Mbscr[1] != nullptr)
+			{
+				Mbscr[1]->moveOns();
+			}
+			if (Mbscr[2] != nullptr)
+			{
+				Mbscr[2]->moveOns();
+			}
+			if (Mbscr[3] != nullptr)
+			{
+				Mbscr[3]->moveOns();
+			}
+			if (Mbscr[4] != nullptr)
+			{
+				Mbscr[4]->moveOns();
+			}
+			if (Mbscr[5] != nullptr)
+			{
+				Mbscr[5]->moveOns();
+			}
+			if (Mbscr[6] != nullptr)
+			{
+				Mbscr[6]->moveOns();
+			}
+			if (Mbscr[7] != nullptr)
+			{
+				Mbscr[7]->moveOns();
+			}
+
+			boss_audio[1]->Play();
 		}
 		
 
@@ -141,6 +184,8 @@ namespace ch
 
 			for (int i = 0; i < 8; i++)
 			{
+				Mbobj[i]->Death();
+
 				Mbobj[i] = nullptr;
 				Mbscr[i] = nullptr;
 			}
@@ -155,12 +200,13 @@ namespace ch
 		if (anima->IsAnimationRunning(L"M_Cube_death") == false)
 		{
 			anima->Play(L"M_Cube_death", false);
+			boss_audio[2]->Play();
 		}
 		DeathTIME += Time::DeltaTime();
 		if (DeathTIME >= 1.25f) 
 		{
-			
 			GetOwner()->Death();
+		
 		}
 	}
 	void CubeScr::BulletMake()
@@ -168,6 +214,7 @@ namespace ch
 		if (anima->IsAnimationRunning(L"M_Cube_Attack") == false) 
 		{
 			anima->Play(L"M_Cube_Attack", false);
+			boss_audio[0]->Play();
 		}
 
 		Vector3 a = mTr->GetPosition();

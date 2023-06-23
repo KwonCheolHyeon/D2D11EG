@@ -73,9 +73,29 @@ namespace ch
 			
 		}
 		
-		if (oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"DoorSide" || oppo->GetOwner()->GetName() == L"DoorFront" || oppo->GetOwner()->GetName() == L"table1")
+		if (oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"DoorSide" || oppo->GetOwner()->GetName() == L"DoorFront" || oppo->GetOwner()->GetName() == L"table1" || oppo->GetOwner()->GetName() == L"cBoss")
 		{
 			Reset();
+		}
+
+		if (oppo->GetOwner()->GetName() == L"Cube")
+		{
+			
+			twoHit += 1;
+			if (twoHit == 2)
+			{
+				Reset();
+			}
+			
+			
+		}
+		if (oppo->GetOwner()->GetName() == L"BulletKin")
+		{
+			twoHit += 1;
+			if (twoHit == 2)
+			{
+				Reset();
+			}
 		}
 
 		if (oppo->GetOwner()->GetName() == L"FightSabreCollider" )
@@ -131,7 +151,7 @@ namespace ch
 			bulletDirectionY = -bulletDirectionY;
 
 		
-			GetOwner()->SetName(L"Bullet");
+			GetOwner()->SetName(L"reflectBullet");
 			bulletTime = 0;
 			// Reset the reflection state to prevent continuous reflection
 			reflectOn = false;

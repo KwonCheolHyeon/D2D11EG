@@ -65,6 +65,10 @@ namespace ch
 		{
 			Reset();
 		}
+		if (collider->GetOwner()->GetName() == L"Bullat" || collider->GetOwner()->GetName() == L"cBoss" || collider->GetOwner()->GetName() == L"Cube" || collider->GetOwner()->GetName() == L"BulletKin" )
+		{
+			Reset();
+		}
 	}
 	void BulletScr::OnCollisionStay(Collider2D* collider)
 	{

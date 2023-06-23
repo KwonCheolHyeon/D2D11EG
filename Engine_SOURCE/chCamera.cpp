@@ -149,6 +149,22 @@ namespace ch
 
 				for (GameObject* obj : gameObjects)
 				{
+
+					Transform* tr = obj->GetComponent<Transform>();
+					Vector3 pos = tr->GetPosition();
+
+					Transform* camerTr = GetOwner()->GetComponent<Transform>();
+					Vector3 cameraPos = camerTr->GetPosition();
+					Vector2 windowSize = Vector2(1600.f, 900.f);
+					windowSize += Vector2(400.f, 400.f);
+
+
+					if (pos.x < cameraPos.x - (windowSize.x * 0.5f) || pos.x > cameraPos.x + (windowSize.x * 0.5f))
+						continue;
+
+					if (pos.y < cameraPos.y - (windowSize.y * 0.5f) || pos.y > cameraPos.y + (windowSize.y * 0.5f))
+						continue;
+
 					pushGameObjectToRenderingModes(obj);
 				}
 			}

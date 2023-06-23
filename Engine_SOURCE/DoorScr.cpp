@@ -1,6 +1,7 @@
 #include "DoorScr.h"
 #include "chResources.h"
 #include "chSpriteRenderer.h"
+#include "chObject.h"
 namespace ch
 {
 	DoorScr::DoorScr()
@@ -40,6 +41,19 @@ namespace ch
 			int a = 0;
 		}
 		door = dynamic_cast<DoorObj*>(GetOwner());
+
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI);
+
+		audioClip[0] = Resources::Load<AudioClip>(L"gate_open", L"music\\object\\gate_open.mp3");
+		audioClip[1] = Resources::Load<AudioClip>(L"gate_slam", L"music\\object\\gate_slam.mp3");
+
+		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
+		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
+
+		boss_audio[0]->SetClip(audioClip[0]);
+		boss_audio[1]->SetClip(audioClip[1]);
+
 
 		doorKey = 0;
 
@@ -104,6 +118,7 @@ namespace ch
 			GetOwner()->SetLayerType(eLayerType::BackGround);
 			tAnimator->Play(L"D_door_side_open", false);
 		}
+		boss_audio[0]->Play();
 		oc = OpenClose::Defa;
 	}
 
@@ -121,6 +136,7 @@ namespace ch
 			tAnimator->Play(L"D_door_side_close", false);
 			GetOwner()->SetLayerType(eLayerType::Wall);
 		}
+		boss_audio[1]->Play();
 		oc = OpenClose::Defa;
 	}
 

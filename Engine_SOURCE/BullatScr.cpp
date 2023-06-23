@@ -4,6 +4,7 @@
 #include "chLight.h"
 #include "chCollider2D.h"
 #include "chasePlayerSCR.h"
+#include "chObject.h"
 namespace ch
 {
 	BullatScr::BullatScr()
@@ -34,7 +35,7 @@ namespace ch
 			anima->Create(L"M_Bullat_death", texture, Vector2(0.0f, 0.0f), Vector2(40.0f, 38.0f), Vector2::Zero, 4, 0.2f);
 		}
 
-		GetOwner()->SetLayerType(eLayerType::Monster);
+	
 		mTr = GetOwner()->GetComponent<Transform>();
 		mTr->SetScale(Vector3(5.3f, 5.6f, 0.0f));
 
@@ -53,6 +54,19 @@ namespace ch
 		lightComp->SetType(eLightType::Point);
 		lightComp->SetRadius(2.5f);
 		lightComp->SetDiffuse(Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+
+
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI);
+
+		audioClip[0] = Resources::Load<AudioClip>(L"beforeAttack", L"music\\enemy\\bullat\\beforeAttack.wav");
+		audioClip[1] = Resources::Load<AudioClip>(L"death", L"music\\enemy\\bullat\\death.mp3");
+
+		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
+		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
+
+		boss_audio[0]->SetClip(audioClip[0]);
+		boss_audio[1]->SetClip(audioClip[1]);
 
 
 		anima->Play(L"M_Bullat_Fly");
@@ -96,12 +110,12 @@ namespace ch
 	{
 
 		
-		if (oppo->GetName() == L"PlayerCollider")
+		if (oppo->GetName() == L"PlayerCollider" || oppo->GetOwner()->GetName() == L"reflectBullet" )
 		{
 			ms = monsterState::Death;;
 
 		}
-		if (oppo->GetOwner()->GetName() == L"Player" || oppo->GetOwner()->GetName() == L"MapWall")
+		if (oppo->GetOwner()->GetName() == L"Player" || oppo->GetOwner()->GetName() == L"MapWall" || oppo->GetOwner()->GetName() == L"Bullet"  )
 		{
 			ms = monsterState::Death;
 		}
@@ -145,6 +159,8 @@ namespace ch
 		if (anima->IsAnimationRunning(L"M_Bullat_Attack") == false)
 		{
 			anima->Play(L"M_Bullat_Attack", false);
+			audioObj[0]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+			boss_audio[0]->Play();
 		}
 
 		if (setAttackTime >= 1.4f) 
@@ -170,6 +186,8 @@ namespace ch
 		if (anima->IsAnimationRunning(L"M_Bullat_death") == false )
 		{
 			anima->Play(L"M_Bullat_death", false);
+			audioObj[1]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+			boss_audio[1]->Play();
 		}
 		
 		DeathTIME += Time::DeltaTime();
@@ -224,7 +242,7 @@ namespace ch
 			bulletDirectionY = -bulletDirectionY;
 
 
-			GetOwner()->SetName(L"Bullet");
+			GetOwner()->SetName(L"reflectBullet");
 			goToDeathTime = 0;
 			// Reset the reflection state to prevent continuous reflection
 			reflectOn = false;

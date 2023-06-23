@@ -274,9 +274,10 @@ namespace ch
 		{// 스테이지1 몬스터1
 			
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
 			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
-			kinTransform->SetPosition(Vector3(-4.86f, 11.44f, 0.1f));
+			kinTransform->SetPosition(Vector3(-1.63f, 6.02f, 0.1f));
 			kinMonster->SetPlayer(player);
 
 			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
@@ -299,9 +300,10 @@ namespace ch
 		{//스테이지1 몬스터2
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
-			kinMonster->AddComponent<BullatScr>();
+			kinMonster->SetName(L"BulletKin");
+			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
-			kinTransform->SetPosition(Vector3(-7.86f, 5.44f, 0.1f));
+			kinTransform->SetPosition(Vector3(-5.011f, 6.56f, 0.1f));
 			kinMonster->SetPlayer(player);
 
 			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
@@ -310,22 +312,50 @@ namespace ch
 			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
 			mCollider->SetName(L"BossChaseCollider");
 			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(10.f, 10.f));
+			mCollider->SetSize(Vector2(7.f, 7.f));
 
 			chaseCollier->SetOwnerTransform(kinTransform);
 			kinMonster->SetMonsterChaseCollider(chaseCollier);
 
+			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
+			gun->SetOwnerMoster(kinMonster);
 
-		
 
 			mainDoor1->SetMonsterBases(kinMonster);
 		}
 		{//스테이지1 몬스터3
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
+			kinMonster->AddComponent<Bullet_Kin>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-4.86f, 11.44f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(7.f, 7.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
+			gun->SetOwnerMoster(kinMonster);
+
+
+			mainDoor1->SetMonsterBases(kinMonster);
+		}
+		{//스테이지1 몬스터4
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
 			kinMonster->AddComponent<CubeScr>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
-			kinTransform->SetPosition(Vector3(-6.86f, 9.44f, 0.1f));
+			kinTransform->SetPosition(Vector3(-7.87f, 5.52f, 0.1f));
 			kinMonster->SetPlayer(player);
 
 			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
@@ -339,7 +369,55 @@ namespace ch
 			chaseCollier->SetOwnerTransform(kinTransform);
 			kinMonster->SetMonsterChaseCollider(chaseCollier);
 
-			
+
+
+			mainDoor1->SetMonsterBases(kinMonster);
+		}
+		{//스테이지1 몬스터5
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-6.65f, 6.77f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+
+
+			mainDoor1->SetMonsterBases(kinMonster);
+		}
+		{//스테이지1 몬스터6
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-2.078f, 12.66f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+
 
 			mainDoor1->SetMonsterBases(kinMonster);
 		}
@@ -348,87 +426,165 @@ namespace ch
 #pragma region 스테이지2 몬스터
 		{//스테이지2 몬스터1
 
-			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::MonsterBullet, this);
-			kinMonster->SetName(L"Bullat");
-			kinMonster->AddComponent<BullatScr>();
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
+			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
-			kinTransform->SetPosition(Vector3(-21.14f,6.77f, 0.1f));
+			kinTransform->SetPosition(Vector3(-19.44f, 8.32f, 0.1f));
 			kinMonster->SetPlayer(player);
-
-
 
 			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
 			chaseCollier->SetName(L"most");
+
 			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
-			mCollider->SetName(L"ChaseCollider");
+			mCollider->SetName(L"BossChaseCollider");
 			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(8.f, 8.f));
+			mCollider->SetSize(Vector2(6.f, 6.f));
 
 			chaseCollier->SetOwnerTransform(kinTransform);
 			kinMonster->SetMonsterChaseCollider(chaseCollier);
 
-			
+			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
+			gun->SetOwnerMoster(kinMonster);
+
+
 
 			mainDoor2->SetMonsterBases(kinMonster);
-
-
 		}
-
 		{//스테이지2 몬스터2
 
-			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::MonsterBullet, this);
-			kinMonster->AddComponent<BullatScr>();
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
+			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
-			kinTransform->SetPosition(Vector3(-22.14f, 5.77f, 0.1f));
+			kinTransform->SetPosition(Vector3(-19.44f, 6.26f, 0.1f));
 			kinMonster->SetPlayer(player);
 
 			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
 			chaseCollier->SetName(L"most");
 
 			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
-			mCollider->SetName(L"ChaseCollider");
+			mCollider->SetName(L"BossChaseCollider");
 			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(8.f, 8.f));
+			mCollider->SetSize(Vector2(6.f, 6.f));
 
 			chaseCollier->SetOwnerTransform(kinTransform);
 			kinMonster->SetMonsterChaseCollider(chaseCollier);
 
+			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
+			gun->SetOwnerMoster(kinMonster);
+
 
 
 			mainDoor2->SetMonsterBases(kinMonster);
-
-
 		}
-
 		{//스테이지2 몬스터3
 
-			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::MonsterBullet, this);
-			kinMonster->AddComponent<BullatScr>();
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
+			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
-			kinTransform->SetPosition(Vector3(-21.14f, 5.77f, 0.1f));
+			kinTransform->SetPosition(Vector3(-19.45f, 4.24f, 0.1f));
 			kinMonster->SetPlayer(player);
 
 			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
 			chaseCollier->SetName(L"most");
 
 			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
-			mCollider->SetName(L"ChaseCollider");
+			mCollider->SetName(L"BossChaseCollider");
 			mCollider->SetType(eColliderType::Rect);
-			mCollider->SetSize(Vector2(8.f, 8.f));
+			mCollider->SetSize(Vector2(6.f, 6.f));
 
 			chaseCollier->SetOwnerTransform(kinTransform);
 			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
+			gun->SetOwnerMoster(kinMonster);
 
 
 
 			mainDoor2->SetMonsterBases(kinMonster);
 		}
+	
+		{//스테이지2 몬스터4
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-22.92f, 8.55f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			mainDoor2->SetMonsterBases(kinMonster);
+		}
+		{//스테이지2 몬스터5
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-22.92f, 3.73f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			mainDoor2->SetMonsterBases(kinMonster);
+		}
+		{//스테이지2 몬스터6
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-22.92f, 6.23f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			mainDoor2->SetMonsterBases(kinMonster);
+
+		}
+
+
+		
+
+
 #pragma endregion
 
 #pragma region 스테이지3 몬스터
 		{//스테이지3 몬스터1
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
 			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
 			kinTransform->SetPosition(Vector3(11.45f, 1.86f, 0.1f));
@@ -455,6 +611,7 @@ namespace ch
 		{//스테이지3 몬스터2
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
 			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
 			kinTransform->SetPosition(Vector3(13.05f, -0.15f, 0.1f));
@@ -481,6 +638,7 @@ namespace ch
 		{//스테이지3 몬스터3
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
 			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
 			kinTransform->SetPosition(Vector3(15.9f, 2.f, 0.1f));
@@ -505,6 +663,80 @@ namespace ch
 			mainDoor3->SetMonsterBases(kinMonster);
 		}
 
+		{//스테이지3 몬스터4
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Bullat");
+			kinMonster->AddComponent<BullatScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(13.43f, 3.25f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"ChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(8.f, 8.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+
+
+			mainDoor3->SetMonsterBases(kinMonster);
+		}
+		{//스테이지3 몬스터5
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Bullat");
+			kinMonster->AddComponent<BullatScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(10.57f, 2.6f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"ChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(8.f, 8.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+
+
+			mainDoor3->SetMonsterBases(kinMonster);
+		}
+		{//스테이지3 몬스터6
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(15.2f, 0.31f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			mainDoor3->SetMonsterBases(kinMonster);
+
+		}
+
+		
+
 #pragma endregion
 
 
@@ -512,6 +744,7 @@ namespace ch
 		{//스테이지4 몬스터1
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
 			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
 			kinTransform->SetPosition(Vector3(12.45f, -11.23f, 0.1f));
@@ -535,12 +768,13 @@ namespace ch
 
 			mainDoor4->SetMonsterBases(kinMonster);
 		}
-		{//스테이지3 몬스터2
+		{//스테이지4 몬스터2
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
 			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
-			kinTransform->SetPosition(Vector3(12.45f, -11.53f, 0.1f));
+			kinTransform->SetPosition(Vector3(10.483f, -9.476f, 0.1f));
 			kinMonster->SetPlayer(player);
 
 			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
@@ -561,12 +795,34 @@ namespace ch
 
 			mainDoor4->SetMonsterBases(kinMonster);
 		}
-		{//스테이지3 몬스터2
+		{//스테이지4 몬스터3
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
 			kinMonster->AddComponent<CubeScr>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
-			kinTransform->SetPosition(Vector3(12.45f, -11.53f, 0.1f));
+			kinTransform->SetPosition(Vector3(14.94f, -14.08f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			mainDoor4->SetMonsterBases(kinMonster);
+		}
+		{//스테이지4 몬스터4
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(11.01f, -13.68f, 0.1f));
 			kinMonster->SetPlayer(player);
 
 			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
@@ -583,12 +839,57 @@ namespace ch
 			mainDoor4->SetMonsterBases(kinMonster);
 		}
 
+		{//스테이지4 몬스터5
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(10.42f, -11.16f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(10.f, 10.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			mainDoor4->SetMonsterBases(kinMonster);
+		}
+
+		{//스테이지4 몬스터6
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Bullat");
+			kinMonster->AddComponent<BullatScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(14.61f, -11.16f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"ChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(8.f, 8.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+
+			mainDoor4->SetMonsterBases(kinMonster);
+		}
 #pragma endregion
 
 #pragma region 스테이지5 몬스터
-		{//스테이지5 몬스터3
+		{//스테이지5 몬스터1
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
 			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
 			kinTransform->SetPosition(Vector3(-13.7f, -12.046f, 0.1f));
@@ -612,9 +913,10 @@ namespace ch
 
 			mainDoor5->SetMonsterBases(kinMonster);
 		}
-		{//스테이지5 몬스터3
+		{//스테이지5 몬스터2
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"BulletKin");
 			kinMonster->AddComponent<Bullet_Kin>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
 			kinTransform->SetPosition(Vector3(-14.7f, -15.046f, 0.1f));
@@ -641,6 +943,7 @@ namespace ch
 		{//스테이지5 몬스터3
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
 			kinMonster->AddComponent<CubeScr>();
 			Transform* kinTransform = kinMonster->GetComponent<Transform>();
 			kinTransform->SetPosition(Vector3(-13.7f, -15.046f, 0.1f));
@@ -660,12 +963,80 @@ namespace ch
 			mainDoor5->SetMonsterBases(kinMonster);
 		}
 
+		{//스테이지5 몬스터4
 
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-12.1f, -16.97f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(6.f, 6.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			mainDoor5->SetMonsterBases(kinMonster);
+		}
+
+		{//스테이지5 몬스터5
+
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Cube");
+			kinMonster->AddComponent<CubeScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-16.27f, -16.97f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"BossChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(6.f, 6.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+			mainDoor5->SetMonsterBases(kinMonster);
+		}
+
+		{//스테이지5 몬스터6
+			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			kinMonster->SetName(L"Bullat");
+			kinMonster->AddComponent<BullatScr>();
+			Transform* kinTransform = kinMonster->GetComponent<Transform>();
+			kinTransform->SetPosition(Vector3(-16.53f, -13.91f, 0.1f));
+			kinMonster->SetPlayer(player);
+
+			chasePlayerOBJ* chaseCollier = object::Instantiate<chasePlayerOBJ>(eLayerType::MonsterCollider, this);
+			chaseCollier->SetName(L"most");
+
+			Collider2D* mCollider = chaseCollier->AddComponent<Collider2D>(); //오류 걸림
+			mCollider->SetName(L"ChaseCollider");
+			mCollider->SetType(eColliderType::Rect);
+			mCollider->SetSize(Vector2(8.f, 8.f));
+
+			chaseCollier->SetOwnerTransform(kinTransform);
+			kinMonster->SetMonsterChaseCollider(chaseCollier);
+
+
+			mainDoor5->SetMonsterBases(kinMonster);
+		}
 #pragma endregion
 
 		{ //보스
 
 			bossObj = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
+			bossObj->SetName(L"cBoss");
 			bossObj->AddComponent<Boss>();
 			Transform* bossTr = bossObj->GetComponent<Transform>();
 			bossObj->SetPlayer(player);
@@ -680,10 +1051,11 @@ namespace ch
 
 			chaseCol->SetOwnerTransform(bossTr);
 			bossObj->SetMonsterChaseCollider(chaseCol);
+			bossdeath = false;
 		}
 
 		{
-			EventObj* eventobj = object::Instantiate<EventObj>(eLayerType::Object, this);
+			eventobj = object::Instantiate<EventObj>(eLayerType::Object, this);
 			eventobj->AddComponent<EventScr>();
 			Transform* tr = eventobj->GetComponent<Transform>();
 			tr->SetPosition(Vector3(15.26f, 16.511f, 0.f));
@@ -723,6 +1095,23 @@ namespace ch
 		
 		generateMap();
 		
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI,this);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI,this);
+		audioObj[2] = object::Instantiate<GameObject>(eLayerType::UI);
+
+		audioClip[0] = Resources::Load<AudioClip>(L"gamestart", L"music\\ost\\gamestart.mp3");
+		audioClip[1] = Resources::Load<AudioClip>(L"bossfinding", L"music\\ost\\bossfind.mp3");
+		audioClip[2] = Resources::Load<AudioClip>(L"bossend", L"music\\ost\\bossend.mp3");
+
+		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
+		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
+		boss_audio[2] = audioObj[1]->AddComponent<AudioSource>();
+
+		boss_audio[0]->SetClip(audioClip[0]);
+		boss_audio[1]->SetClip(audioClip[1]);
+		boss_audio[2]->SetClip(audioClip[2]);
+
+		evnetOnce = false;
 
 
 		chCameraOBJ->GetComponent<Camera>()->SetTarget(player);
@@ -751,8 +1140,26 @@ namespace ch
 			Vector2 mouse2 = Input::GetWorldMousPosition2();
 			Vector3 chara = player->GetComponent<Transform>()->GetPosition();
 
-			int b = 0;
+			int b = 0;   
 		}
+
+		if (eventobj->GetComponent<EventScr>()->GetEventState() == true && evnetOnce== false)
+		{
+			evnetOnce = true;
+			boss_audio[0]->Stop();
+			boss_audio[1]->Play();
+
+		}
+		if (bossObj->GetComponent<Boss>()->GetHp() == 0 && bossdeath == false)
+		{
+			bossdeath = true;
+			boss_audio[1]->Stop();
+			boss_audio[2]->Play();
+		}
+		
+		audioObj[0]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+		audioObj[1]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+		audioObj[2]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 
 		Scene::Update();
 	}
@@ -780,7 +1187,10 @@ namespace ch
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::MonsterBullet);
 		CollisionManager::CollisionLayerCheck(eLayerType::Object, eLayerType::MonsterBullet);
 		CollisionManager::CollisionLayerCheck(eLayerType::Wall, eLayerType::Monster);
-		
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Monster);
+
+		boss_audio[0]->SetLoop(true);
+		boss_audio[0]->Play();
 
 		Scene::OnEnter();
 	}
@@ -800,7 +1210,7 @@ namespace ch
 			Bullet* bulletobj = object::Instantiate<Bullet>(eLayerType::Weapone, this);
 			containBullets.push_back(bulletobj);
 			containBullets[i]->SetLayerType(eLayerType::Weapone);
-			containBullets[i]->SetName(L"Bullet" + i);
+			containBullets[i]->SetName(L"Bullet");
 			containBullets[i]->GetComponent<Transform>()->SetPosition(Vector3(100.0f,100.0f, 0.0f));
 			containBullets[i]->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
 
@@ -1176,9 +1586,110 @@ namespace ch
 			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
 			mapCollider->SetType(eColliderType::Rect);
 		}
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
 
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-20.f, 10.4f, 0.0f));
+			mapColliderTr->SetScale(Vector3(10.072f, 1.829f, 1.0f));
 
-		
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-12.304f, 9.67025f, 0.0f));
+			mapColliderTr->SetScale(Vector3(5.682f, 6.0795f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-18.4508f, -0.3238f, 0.0f));
+			mapColliderTr->SetScale(Vector3(13.1396f, 4.3608f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-12.324f, 3.48119f, 0.0f));
+			mapColliderTr->SetScale(Vector3(5.684f, 4.19662f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-5.72845f, 0.809f, 0.0f));
+			mapColliderTr->SetScale(Vector3(8.7271f, 4.73911f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(2.973f, 16.6012f, 0.0f));
+			mapColliderTr->SetScale(Vector3(5.908f, 27.2576f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(-4.9445f, 15.3185f, 0.0f));
+			mapColliderTr->SetScale(Vector3(9.839f, 1.297f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(25.7005f, 23.876f, 0.0f));
+			mapColliderTr->SetScale(Vector3(2.195f, 14.422f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+
+		{
+			GameObject* mapColliderObject = object::Instantiate<GameObject>(eLayerType::Wall, this);
+			mapColliderObject->SetName(L"MapWall");
+
+			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
+			mapColliderTr->SetPosition(Vector3(15.341f, 31.971f, 0.0f));
+			mapColliderTr->SetScale(Vector3(19.278f, 3.696f, 1.0f));
+
+			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();
+			mapCollider->SetType(eColliderType::Rect);
+		}
+
 
 		
 		

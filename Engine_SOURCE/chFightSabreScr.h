@@ -2,6 +2,8 @@
 #include "chScript.h"
 #include "chGun.h"
 #include "chPlayerHand.h"
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch
 {
 	enum FightSabreState
@@ -54,6 +56,11 @@ namespace ch
 		FightSabreState prevFss;
 		Transform* gunTransform;
 		Collider2D* col;
+	private:
+		std::shared_ptr<AudioClip> audioClip[2];
+		AudioSource* boss_audio[2];
+		GameObject* audioObj[2];
+
 	private:
 		float angle;
 		float shotTimer = 0.0f;

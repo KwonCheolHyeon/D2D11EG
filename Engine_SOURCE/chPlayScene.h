@@ -4,7 +4,9 @@
 #include "chHeart_UI.h"
 #include "BlankBulletObj.h"
 #include "DoorObj.h"
-
+#include "chAudioClip.h"
+#include "chAudioSource.h"
+#include "EventObj.h"
 namespace ch
 {
 	
@@ -55,7 +57,14 @@ namespace ch
 		DoorObj* mainDoor6;
 		DoorObj* mainDoor7;
 		DoorObj* mainDoor8;
+	private:
+		std::shared_ptr<AudioClip> audioClip[3];
+		AudioSource* boss_audio[3];
+		GameObject* audioObj[3];
 
+		EventObj* eventobj;
+		bool bossdeath;
+		bool evnetOnce;
 	
 		
 	};

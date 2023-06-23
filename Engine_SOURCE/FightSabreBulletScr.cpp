@@ -66,6 +66,10 @@ namespace ch
 		{
 			Reset();
 		}
+		if (collider->GetOwner()->GetName() == L"Bullat" || collider->GetOwner()->GetName() == L"cBoss" || collider->GetOwner()->GetName() == L"Cube" || collider->GetOwner()->GetName() == L"BulletKin" || collider->GetOwner()->GetName() == L"MapWall")
+		{
+			Reset();
+		}
 	}
 
 	void FightSabreBulletScr::OnCollisionStay(Collider2D* collider)

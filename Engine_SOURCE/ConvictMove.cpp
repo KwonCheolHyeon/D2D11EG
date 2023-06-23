@@ -39,7 +39,7 @@ namespace ch
 			pS = PlayerState::Rolling;
 		}
 
-		if (Input::GetKeyDown(eKeyCode::R))
+		if (Input::GetKeyDown(eKeyCode::T))
 		{
 			speed = 1.f;
 

@@ -2,6 +2,8 @@
 #include "chScript.h"
 #include "chGun.h"
 #include "chPlayerHand.h"
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch 
 {
 	enum PistolState
@@ -52,6 +54,13 @@ namespace ch
 		void HandUpPos(float cur);
 
 		bool reboundTrue;
+
+	private:
+		std::shared_ptr<AudioClip> audioClip[2];
+		AudioSource* boss_audio[2];
+		GameObject* audioObj[2];
+
+
 	private:
 		Gun* gunObj;
 		GameObject* gunBox;

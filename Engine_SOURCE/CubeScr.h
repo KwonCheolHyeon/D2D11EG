@@ -4,6 +4,8 @@
 #include "chAnimator.h"
 #include "MonsterBullet2Obj.h"
 #include "MonsterBullet2Scr.h"
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch
 {
 
@@ -34,6 +36,10 @@ namespace ch
         MonsterBase* thisMonster;
         monsterState ms;
         Transform* mTr;
+    private:
+        std::shared_ptr<AudioClip> audioClip[3];
+        AudioSource* boss_audio[3];
+        GameObject* audioObj[3];
 
     private:
         MonsterBullet2Obj* Mbobj[8];

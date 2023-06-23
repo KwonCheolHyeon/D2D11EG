@@ -38,6 +38,11 @@ namespace ch
 		col->SetType(eColliderType::Rect);
 		col->SetSize(Vector2(0.1f, 0.1f));
 
+		audioObj = object::Instantiate<GameObject>(eLayerType::UI);
+		audioClip = Resources::Load<AudioClip>(L"chest_open", L"music\\object\\chest_open.mp3");
+		boss_audio = audioObj->AddComponent<AudioSource>();
+		boss_audio->SetClip(audioClip);
+
 		bAnimator->Play(L"D_itemBox", false);
 		ibs = itemBoxState::CloseBox;
 		oneOpen = false;
@@ -96,6 +101,7 @@ namespace ch
 	{
 		if(oneOpen == false)
 		{
+			boss_audio->Play();
 			oneOpen = true;
 			bAnimator->Play(L"D_itemBox_open",false);
 

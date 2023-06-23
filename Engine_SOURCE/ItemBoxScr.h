@@ -3,6 +3,8 @@
 #include "chAnimator.h"
 #include "ItemBox.h"
 #include "chFightSabreObject.h"
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch 
 {
     enum itemBoxState 
@@ -29,7 +31,10 @@ namespace ch
         void closeBox();
 
         void SetFightSabreObject(FightSabreObject* _a) { fightsa = _a; }
-
+    private:
+        std::shared_ptr<AudioClip> audioClip;
+        AudioSource* boss_audio;
+        GameObject* audioObj;
     private:
         Animator* bAnimator;
         itemBoxState ibs;

@@ -10,6 +10,7 @@
 #include "chTestScene.h"
 #include "chasePlayerOBJ.h"
 #include "chasePlayerSCR.h"
+#include "chObject.h"
 namespace ch 
 {
 	Bullet_Kin::Bullet_Kin()
@@ -99,6 +100,25 @@ namespace ch
 
 		GetOwner()->AddComponent<Rigidbody>();
 
+
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[2] = object::Instantiate<GameObject>(eLayerType::UI);
+
+		audioClip[0] = Resources::Load<AudioClip>(L"shot", L"music\\enemy\\bulletkin\\shot.mp3");
+		audioClip[1] = Resources::Load<AudioClip>(L"hurt", L"music\\enemy\\bulletkin\\hurt.wav");
+		audioClip[2] = Resources::Load<AudioClip>(L"death", L"music\\enemy\\bulletkin\\death.wav");
+
+		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
+		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
+		boss_audio[2] = audioObj[2]->AddComponent<AudioSource>();
+
+		boss_audio[0]->SetClip(audioClip[0]);
+		boss_audio[1]->SetClip(audioClip[1]);
+		boss_audio[2]->SetClip(audioClip[2]);
+
+
+
 		DeathTIME = 0.f;
 		term = 1;
 		player = thisMonster->GetPlayer(); // 플레이어 
@@ -184,7 +204,7 @@ namespace ch
 	void Bullet_Kin::OnCollisionEnter(Collider2D* oppo)
 	{
 		
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetName() == L"Bullet")
+		if (oppo->GetOwner()->GetLayerType() == eLayerType::Weapone || oppo->GetOwner()->GetName() == L"Bullet" || oppo->GetOwner()->GetName() == L"reflectBullet")
 		{
 			monsterHp -= 1;
 			if (monsterHp <= 0) 
@@ -193,15 +213,17 @@ namespace ch
 			}
 			if(monsterHp == 0)
 			{
+				boss_audio[2]->Play();
 				mS = monsterState::Death;
 			}
 			else 
 			{
+				audioClip[1]->Play();
 				mS = monsterState::Hit;
 			}
 		}
 
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::Wall) 
+		if (oppo->GetOwner()->GetName() == L"MapWall")
 		{
 			
 		}
@@ -342,6 +364,7 @@ namespace ch
 
 	void Bullet_Kin::Attack()
 	{
+		
 		Shot = true;
 		mS = monsterState::mIdle;
 	}

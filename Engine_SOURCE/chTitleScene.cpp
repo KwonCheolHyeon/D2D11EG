@@ -144,6 +144,13 @@ namespace ch
 			mr->SetMesh(mesh);
 		}
 
+		audioObj = object::Instantiate<GameObject>(eLayerType::UI,this);
+		audioClip = Resources::Load<AudioClip>(L"intro", L"music\\ost\\intro.mp3");
+		boss_audio = audioObj->AddComponent<AudioSource>();
+		boss_audio->SetClip(audioClip);
+
+		
+		boss_audio->Play();
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Player, true);
 		Scene::Initalize();
@@ -153,6 +160,7 @@ namespace ch
 		
 		if (Input::GetKeyDown(eKeyCode::N)) 
 		{
+			boss_audio->Stop();
 			SceneManager::LoadScene(eSceneType::Main);
 		}
 		Scene::Update();

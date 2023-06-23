@@ -7,6 +7,7 @@
 #include "Heart_Scr.h"
 #include "BlankBullet_UI.h"
 #include "chAudioListener.h"
+#include "chObject.h"
 namespace ch
 {
 	Convict::Convict()
@@ -149,7 +150,29 @@ namespace ch
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
 		sprite->SetMesh(mesh);
 
-	
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[2] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[3] = object::Instantiate<GameObject>(eLayerType::UI);
+		audioObj[4] = object::Instantiate<GameObject>(eLayerType::UI);
+		
+		audioClip[0] = Resources::Load<AudioClip>(L"convict_leap", L"music\\player\\convict_leap.mp3");
+		audioClip[1] = Resources::Load<AudioClip>(L"convict_roll", L"music\\player\\convict_roll.mp3");
+		audioClip[2] = Resources::Load<AudioClip>(L"step", L"music\\player\\step.mp3");
+		audioClip[3] = Resources::Load<AudioClip>(L"blank", L"music\\player\\blank.mp3");
+		audioClip[4] = Resources::Load<AudioClip>(L"item_pickup2", L"music\\player\\item_pickup.mp3");
+
+		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
+		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
+		boss_audio[2] = audioObj[2]->AddComponent<AudioSource>();
+		boss_audio[3] = audioObj[3]->AddComponent<AudioSource>();
+		boss_audio[4] = audioObj[4]->AddComponent<AudioSource>();
+
+		boss_audio[0]->SetClip(audioClip[0]);
+		boss_audio[1]->SetClip(audioClip[1]);
+		boss_audio[2]->SetClip(audioClip[2]);
+		boss_audio[3]->SetClip(audioClip[3]);
+		boss_audio[4]->SetClip(audioClip[4]);
 
 
 		player = dynamic_cast<CharacterBase*>(GetOwner());
@@ -159,13 +182,14 @@ namespace ch
 		prevIdleDirection = 7;
 		prevWalkDirection = 12;
 		pHp = 6;
-		prevHp = 6;
+		prevHp = 5;
 		playWalking = false;
 		isOneHand = true;
 
 		pBB = 2;
 		prevBB = 0;
 
+		walk = false;
 
 		
 	}
@@ -181,6 +205,13 @@ namespace ch
 			IdleAni();
 			break;
 		case PlayerState::Walk:
+			if (walk == false) 
+			{
+				walk = true;
+				audioObj[2]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+				boss_audio[2]->SetLoop(true);
+				boss_audio[2]->Play();
+			}
 			RunAni();
 			break;
 		case PlayerState::Rolling:
@@ -193,6 +224,14 @@ namespace ch
 		
 		if (prevHp != pHp)
 		{
+			if (pHp > 6) 
+			{
+				pHp = 6;
+			}
+			if (pHp < 0) 
+			{
+				pHp = 0;
+			}
 			SetHeart();
 		}
 		if (prevBB != pBB) 
@@ -210,6 +249,8 @@ namespace ch
 		}
 		if (Input::GetKeyDown(eKeyCode::Q))
 		{
+			audioObj[3]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+			boss_audio[3]->Play();
 			pBB -= 1;
 			cbb->onBlankBulletEffect();
 			GetOwner()->getCameraScr()->strongEffectOn();
@@ -228,13 +269,8 @@ namespace ch
 	{
 		eLayerType type = oppo->GetOwner()->GetLayerType();
 
-		if (oppo->GetOwner()->GetLayerType() == eLayerType::MonsterBullet || oppo->GetOwner()->GetLayerType() == eLayerType::Monster)
-		{
-			pHp -= 1;
-			GetOwner()->getCameraScr()->weakEffectOn();
-		}
-
-		if (oppo->GetOwner()->GetName() == L"Bullat") 
+		
+		if (oppo->GetOwner()->GetName() == L"Bullat"|| oppo->GetOwner()->GetName() == L"MonsterBullet") 
 		{
 			pHp -= 1;
 			GetOwner()->getCameraScr()->weakEffectOn();
@@ -249,6 +285,8 @@ namespace ch
 		{
 			if (Input::GetKeyDown(eKeyCode::E))
 			{
+				audioObj[4]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+				boss_audio[4]->Play();
 				oppo->GetOwner()->Death();
 				pHp += 1;
 			}
@@ -257,6 +295,8 @@ namespace ch
 		{
 			if (Input::GetKeyDown(eKeyCode::E))
 			{
+				audioObj[4]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+				boss_audio[4]->Play();
 				oppo->GetOwner()->Death();
 				pBB += 1;
 			}
@@ -265,6 +305,8 @@ namespace ch
 		{
 			if (Input::GetKeyDown(eKeyCode::E))
 			{
+				audioObj[4]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+				boss_audio[4]->Play();
 				oppo->GetOwner()->Death();
 			}
 		}
@@ -417,6 +459,8 @@ namespace ch
 
 	void Convict::IdleAni()
 	{
+		boss_audio[2]->Stop();
+		walk = false;
 		if (isOneHand) 
 		{
 			switch (CPD)
@@ -496,26 +540,32 @@ namespace ch
 			case PlayerDirections::North:
 				if (pAnimator->IsAnimationRunning(L"P_O_WalkingBack") == false)
 					pAnimator->Play(L"P_O_WalkingBack");
+					
 				break;
 			case PlayerDirections::South:
 				if (pAnimator->IsAnimationRunning(L"P_O_WalkingFront") == false)
 					pAnimator->Play(L"P_O_WalkingFront");
+					
 				break;
 			case PlayerDirections::East:
 				if (pAnimator->IsAnimationRunning(L"P_O_WalkingRight") == false)
 					pAnimator->Play(L"P_O_WalkingRight");
+					
 				break;
 			case PlayerDirections::West:
 				if (pAnimator->IsAnimationRunning(L"P_O_WalkingRight") == false)
 					pAnimator->Play(L"P_O_WalkingRight");
+					
 				break;
 			case PlayerDirections::NE:
 				if (pAnimator->IsAnimationRunning(L"P_O_WalkingBackRight") == false)
 					pAnimator->Play(L"P_O_WalkingBackRight");
+					
 				break;
 			case PlayerDirections::NW:
 				if (pAnimator->IsAnimationRunning(L"P_O_WalkingBackRight") == false)
 					pAnimator->Play(L"P_O_WalkingBackRight");
+					
 				break;
 			default:
 				break;
@@ -558,6 +608,10 @@ namespace ch
 
 	void Convict::RollingAni()
 	{
+		boss_audio[2]->Stop();
+		walk = false;
+		audioObj[0]->GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+		boss_audio[0]->Play();
 		cPDD = GetOwner()->GetComponent<ConvictMove>()->GetPDD();
 		switch (cPDD)
 		{
@@ -618,6 +672,7 @@ namespace ch
 		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeBackRight") = std::bind(&Convict::playWalkingAin, this);
 		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeFront") = std::bind(&Convict::playWalkingAin, this);
 		GetOwner()->GetComponent<Animator>()->GetCompleteEvent(L"P_DodgeBack") = std::bind(&Convict::playWalkingAin, this);
+	
 	}
 
 	void Convict::playWalkingAin()
@@ -630,23 +685,9 @@ namespace ch
 		if (pHeartControl.size() != 0) //왜 두번 되는거지?
 		{
 			prevHp = pHp;
-			if (pHp == 8)
+			if (pHp == 6)
 			{
-				/*pHeartControl[3]->GetComponent<Heart_Scr>()->setCountHeart(2);
-				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(2);
-				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
-				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);*/
-			}
-			else if (pHp == 7)
-			{
-				/*pHeartControl[3]->GetComponent<Heart_Scr>()->setCountHeart(1);*/
-			}
-			else if (pHp == 6)
-			{
-				/*if (pHeartControl[3] != nullptr)
-				{
-					pHeartControl[3]->GetComponent<Heart_Scr>()->setCountHeart(0);
-				}*/
+			
 				pHeartControl[2]->GetComponent<Heart_Scr>()->setCountHeart(2);
 				pHeartControl[1]->GetComponent<Heart_Scr>()->setCountHeart(2);
 				pHeartControl[0]->GetComponent<Heart_Scr>()->setCountHeart(2);
@@ -693,7 +734,11 @@ namespace ch
 		if (pBlankBullet.size() != 0) 
 		{
 			prevBB = pBB;
-
+			if (pBB <= 0) 
+			{
+				pBB = 0;
+				prevBB = 10;
+			}
 			if (pBB == 4)
 			{
 				pBlankBullet[3]->GetComponent<BlankBullet_UI>()->onBlankBullet();

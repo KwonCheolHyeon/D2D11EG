@@ -6,6 +6,8 @@
 #include "chGenericAnimator.h"
 #include "BossBulletObj.h"
 #include "BossBulletScr.h"
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch
 {
 	class Boss : public Script
@@ -99,6 +101,10 @@ namespace ch
         int prevMonsterHp;
         bool oneDeath;
 
+        std::shared_ptr<AudioClip> audioClip[8];
+        AudioSource* boss_audio[8];
+        GameObject* audioObj[8];
+
 
         int first;
         bool hit;
@@ -122,6 +128,9 @@ namespace ch
         int prevbombCount;
     private:
         float deathTime;
+
+        bool oneDescend;
+        bool beforeAttack;
 
 	};
 }

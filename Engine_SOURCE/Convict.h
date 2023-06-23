@@ -7,6 +7,8 @@
 #include "chHeart_UI.h"
 #include "BlankBulletObj.h"
 #include "ConvictBlankBulletScr.h"
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch
 {
 	class Convict : public Script
@@ -58,6 +60,12 @@ namespace ch
         PlayerState cPS;
         PlayerDodgeDirections cPDD;
         PlayerDirections CPD;
+    private:
+        std::shared_ptr<AudioClip> audioClip[5];
+        AudioSource* boss_audio[5];
+        GameObject* audioObj[5];
+        bool walk;
+
     private://01
         float c2mAngle;
         int prevIdleDirection;//
