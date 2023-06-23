@@ -62,7 +62,12 @@ namespace ch
 
 	private:
 		int doorOpenCount;
-		
+		bool one;
+		bool two;
+		bool three;
+		bool four;
+		bool five;
+		bool six;
 	};
 
 

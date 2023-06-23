@@ -61,6 +61,13 @@ namespace ch
 		deathCol = false;
 		monsterBases.clear();
 
+		one = true;
+		two = true;
+		three = true;
+		four = true;
+		five = true;
+		six = true;
+
 		
 	}
 	
@@ -92,8 +99,34 @@ namespace ch
 
 			bool allMonstersDead = false;
 		
-			if (monsterBases[0]->IsDead() || monsterBases[1]->IsDead() || monsterBases[2]->IsDead() || monsterBases[3]->IsDead() || monsterBases[4]->IsDead() || monsterBases[5]->IsDead())
+			if (monsterBases[0]->IsDead() && one == true)
 			{
+				one = false;
+				doorOpenCount += 1;
+			}
+			if (monsterBases[1]->IsDead() && two == true)
+			{
+				two = false;
+				doorOpenCount += 1;
+			}
+			if (monsterBases[2]->IsDead() && three == true)
+			{
+				three = false;
+				doorOpenCount += 1;
+			}
+			if (monsterBases[3]->IsDead() && four == true)
+			{
+				four = false;
+				doorOpenCount += 1;
+			}
+			if (monsterBases[4]->IsDead() && five == true)
+			{
+				five = false;
+				doorOpenCount += 1;
+			}
+			if (monsterBases[5]->IsDead() && six == true)
+			{
+				six = false;
 				doorOpenCount += 1;
 			}
 
