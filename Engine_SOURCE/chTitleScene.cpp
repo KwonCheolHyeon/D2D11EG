@@ -161,6 +161,7 @@ namespace ch
 		if (Input::GetKeyDown(eKeyCode::N)) 
 		{
 			boss_audio->Stop();
+			audioObj->Death();
 			SceneManager::LoadScene(eSceneType::Main);
 		}
 		Scene::Update();
