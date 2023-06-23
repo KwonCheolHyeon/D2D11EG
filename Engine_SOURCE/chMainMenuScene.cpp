@@ -17,7 +17,8 @@
 #include "chCollisionManager.h"
 #include "chAnimator.h"
 #include "chResources.h"
-
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 namespace ch
 {
 	MainMenu::MainMenu()
@@ -94,12 +95,26 @@ namespace ch
 			}
 		}
 
+
+		audioObj = object::Instantiate<GameObject>(eLayerType::UI, this);
+		audioClip = Resources::Load<AudioClip>(L"intro", L"music\\ost\\intro.mp3");
+		boss_audio = audioObj->AddComponent<AudioSource>();
+		boss_audio->SetClip(audioClip);
+
+
+		boss_audio->Play();
+
 		Scene::Initalize();
 	}
 	void MainMenu::Update()
 	{
 		if (Input::GetKeyDown(eKeyCode::N))
 		{
+
+			boss_audio->Stop();
+			audioObj->GetComponent<Transform>()->SetPosition(Vector3(-10000.f, -10000.f, 0.f));
+			
+
 			SceneManager::LoadScene(eSceneType::Play);
 		}
 		Scene::Update();

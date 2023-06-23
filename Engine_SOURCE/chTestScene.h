@@ -1,5 +1,7 @@
 #pragma once
 #include "chScene.h"
+#include "chAudioClip.h"
+#include "chAudioSource.h"
 
 namespace ch
 {

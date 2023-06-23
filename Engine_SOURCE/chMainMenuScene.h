@@ -22,6 +22,11 @@ namespace ch
 		GameObject* chCamera;
 		GameObject* chUiCamera;
 		GameObject* chUiCursor;
+
+	private:
+		std::shared_ptr<AudioClip> audioClip;
+		AudioSource* boss_audio;
+		GameObject* audioObj;
 	};
 
 

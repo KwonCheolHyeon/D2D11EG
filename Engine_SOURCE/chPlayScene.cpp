@@ -1151,9 +1151,9 @@ namespace ch
 			boss_audio[2]->Play();
 		}
 		
-		audioObj[0]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
-		audioObj[1]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
-		audioObj[2]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+		audioObj[0]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition() + Vector3(0.f,0.f,10.f));
+		audioObj[1]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition() + Vector3(0.f, 0.f, 10.f));
+		audioObj[2]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition() + Vector3(0.f, 0.f, 10.f));
 
 		Scene::Update();
 	}

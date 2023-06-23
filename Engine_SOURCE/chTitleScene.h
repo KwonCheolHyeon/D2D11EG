@@ -1,7 +1,6 @@
 #pragma once
 #include "chScene.h"
-#include "chAudioClip.h"
-#include "chAudioSource.h"
+
 
 namespace ch 
 {
@@ -19,10 +18,7 @@ namespace ch
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
-	private:
-		std::shared_ptr<AudioClip> audioClip;
-		AudioSource* boss_audio;
-		GameObject* audioObj;
+
 
 	};
 
