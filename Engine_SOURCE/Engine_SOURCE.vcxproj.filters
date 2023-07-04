@@ -239,6 +239,18 @@
     <Filter Include="GameObject\UI\BossScene">
       <UniqueIdentifier>{1a9e313b-9615-4c6f-b07c-8ca28a69feb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UI\MiniMap">
+      <UniqueIdentifier>{fdf6a0f5-0819-4dd4-9c7d-90f2c61fac4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\TelePort">
+      <UniqueIdentifier>{778dc698-8485-40e9-a890-6bf643e3747f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\MiniMap\MiniPlayer">
+      <UniqueIdentifier>{50c3225e-8a59-462f-beea-8c6a888aacb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\MiniMap\TelePortMini">
+      <UniqueIdentifier>{3e586cc2-9160-4435-b78b-034739d45ba1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -651,6 +663,30 @@
     <ClInclude Include="BossSceneScr.h">
       <Filter>GameObject\UI\BossScene</Filter>
     </ClInclude>
+    <ClInclude Include="MiniMapObj.h">
+      <Filter>GameObject\UI\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMapScr.h">
+      <Filter>GameObject\UI\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TelePortObj.h">
+      <Filter>GameObject\Object\TelePort</Filter>
+    </ClInclude>
+    <ClInclude Include="TelePortScr.h">
+      <Filter>GameObject\Object\TelePort</Filter>
+    </ClInclude>
+    <ClInclude Include="TelePortMiniObj.h">
+      <Filter>GameObject\UI\MiniMap\TelePortMini</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMapPlayerObj.h">
+      <Filter>GameObject\UI\MiniMap\MiniPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="TelePortMiniScr.h">
+      <Filter>GameObject\UI\MiniMap\TelePortMini</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMapPlayerScr.h">
+      <Filter>GameObject\UI\MiniMap\MiniPlayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -1046,6 +1082,30 @@
     </ClCompile>
     <ClCompile Include="BossSceneScr.cpp">
       <Filter>GameObject\UI\BossScene</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMapObj.cpp">
+      <Filter>GameObject\UI\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMapScr.cpp">
+      <Filter>GameObject\UI\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TelePortObj.cpp">
+      <Filter>GameObject\Object\TelePort</Filter>
+    </ClCompile>
+    <ClCompile Include="TelePortScr.cpp">
+      <Filter>GameObject\Object\TelePort</Filter>
+    </ClCompile>
+    <ClCompile Include="TelePortMiniObj.cpp">
+      <Filter>GameObject\UI\MiniMap\TelePortMini</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMapPlayerObj.cpp">
+      <Filter>GameObject\UI\MiniMap\MiniPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="TelePortMiniScr.cpp">
+      <Filter>GameObject\UI\MiniMap\TelePortMini</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMapPlayerScr.cpp">
+      <Filter>GameObject\UI\MiniMap\MiniPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

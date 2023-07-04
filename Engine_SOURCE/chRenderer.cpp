@@ -562,6 +562,10 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"bulletFiveSprite", L"enterthe\\UI\\bullet\\five.png");
 		#pragma endregion
 
+		#pragma region ¹Ì´Ï¸Ê °ü·Ã
+		Resources::Load<Texture>(L"bulletZeroSprite", L"enterthe\\UI\\MiniMapBase\\MiniMap.png");
+
+		#pragma endregion
 #pragma endregion
 		Resources::Load<Texture>(L"ReloadBarSprite", L"enterthe\\UI\\Reload\\ReloadBar.png");
 		Resources::Load<Texture>(L"ReloadButtonSprite", L"enterthe\\UI\\Reload\\ReloadButton.png");
@@ -690,6 +694,18 @@ namespace ch::renderer
 
 		{//UI	
 		#pragma region UI
+
+		#pragma region ¹Ì´Ï¸Ê 
+			{//¹Ì´Ï¸Ê
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"FullHeartSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"FullHeartMaterial", uiMaterial);
+			}
+		#pragma endregion
 			#pragma region UI_HEART
 			{//FHeart
 				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"FullHeartSprite");

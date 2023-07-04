@@ -290,6 +290,10 @@ copy "$(SolutionDir)fmodstudio.dll" "$(SolutionDir)\x64\Release\"</Command>
     <ClInclude Include="LampScr.h" />
     <ClInclude Include="mainPlayer.h" />
     <ClInclude Include="MapObject.h" />
+    <ClInclude Include="MiniMapPlayerObj.h" />
+    <ClInclude Include="MiniMapObj.h" />
+    <ClInclude Include="MiniMapPlayerScr.h" />
+    <ClInclude Include="MiniMapScr.h" />
     <ClInclude Include="MoneyObj.h" />
     <ClInclude Include="MoneyScr.h" />
     <ClInclude Include="MonsterBase.h" />
@@ -304,6 +308,10 @@ copy "$(SolutionDir)fmodstudio.dll" "$(SolutionDir)\x64\Release\"</Command>
     <ClInclude Include="resource.h" />
     <ClInclude Include="TableObject.h" />
     <ClInclude Include="TableScr.h" />
+    <ClInclude Include="TelePortMiniObj.h" />
+    <ClInclude Include="TelePortMiniScr.h" />
+    <ClInclude Include="TelePortObj.h" />
+    <ClInclude Include="TelePortScr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicGunScript.cpp" />
@@ -425,6 +433,10 @@ copy "$(SolutionDir)fmodstudio.dll" "$(SolutionDir)\x64\Release\"</Command>
     <ClCompile Include="LampScr.cpp" />
     <ClCompile Include="mainPlayer.cpp" />
     <ClCompile Include="MapObject.cpp" />
+    <ClCompile Include="MiniMapPlayerObj.cpp" />
+    <ClCompile Include="MiniMapObj.cpp" />
+    <ClCompile Include="MiniMapPlayerScr.cpp" />
+    <ClCompile Include="MiniMapScr.cpp" />
     <ClCompile Include="MoneyObj.cpp" />
     <ClCompile Include="MoneyScr.cpp" />
     <ClCompile Include="MonsterBase.cpp" />
@@ -438,6 +450,10 @@ copy "$(SolutionDir)fmodstudio.dll" "$(SolutionDir)\x64\Release\"</Command>
     <ClCompile Include="ReloadButtonScr.cpp" />
     <ClCompile Include="TableObject.cpp" />
     <ClCompile Include="TableScr.cpp" />
+    <ClCompile Include="TelePortMiniObj.cpp" />
+    <ClCompile Include="TelePortMiniScr.cpp" />
+    <ClCompile Include="TelePortObj.cpp" />
+    <ClCompile Include="TelePortScr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="chMath.inl" />
