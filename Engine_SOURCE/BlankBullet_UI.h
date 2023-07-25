@@ -19,7 +19,7 @@ namespace ch
 		void offBlankBullet() { on = false; }
 
 	private:
-		SpriteRenderer* sprite;
+		class SpriteRenderer* sprite;
 		bool on;
 	};
 

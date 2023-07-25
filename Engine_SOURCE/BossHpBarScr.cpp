@@ -3,9 +3,25 @@
 #include "chSpriteRenderer.h"
 #include "chBoss.h"
 #include "EventScr.h"
+
+//Animator* ani;
+//MonsterBase* boss;
+//EventObj* eventObj;
+//	private:
+//		float health;
+//		float bossHp;
+//		float prevBossHp;
+//		float maxHp;
 namespace ch
 {
 	BossHpBarScr::BossHpBarScr()
+		:ani(nullptr)
+		,boss(nullptr)
+		,eventObj(nullptr)
+		,health(0.f)
+		,bossHp(0.f)
+		,prevBossHp(0.f)
+		,maxHp(0.f)
 	{
 	}
 	BossHpBarScr::~BossHpBarScr()
@@ -101,7 +117,7 @@ namespace ch
 		{
 			int hp = boss->GetComponent<Boss>()->GetHp();
 		
-			bossHp = hp / 10;
+			bossHp = static_cast<float>(hp) / 10.f;
 		
 			if (bossHp > 13 && bossHp <= 14)
 			{

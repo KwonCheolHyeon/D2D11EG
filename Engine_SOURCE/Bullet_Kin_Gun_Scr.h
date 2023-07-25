@@ -29,8 +29,8 @@ namespace ch
         void ShotTerm();
         void afterShot();
     private:
-        std::shared_ptr<AudioClip> audioClip;
-        AudioSource* boss_audio;
+        std::shared_ptr<class AudioClip> audioClip;
+        class AudioSource* boss_audio;
         GameObject* audioObj;
     private:
         Animator* anima;

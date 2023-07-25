@@ -54,7 +54,7 @@ namespace ch::graphics
 
     void Material::Bind()
     {
-        for (size_t i = 0; i < (UINT)eTextureSlot::End; i++)
+        for (UINT i = 0; i < (UINT)eTextureSlot::End; i++)
         {
             if (mTexture[i] == nullptr)
                 continue;

@@ -27,7 +27,7 @@ namespace ch
 		if (Input::GetKeyDown(eKeyCode::T) )
 		{
 			Vector3 target = posi + Vector3(0.f, 2.f, 0.f);
-			posi = Vector3::Lerp(posi, target, 0.1);
+			posi = Vector3::Lerp(posi, target, 0.1f);
 			GetComponent<Transform>()->SetPosition(posi);
 		}
 

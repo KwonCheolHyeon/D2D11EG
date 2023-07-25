@@ -16,6 +16,13 @@
 namespace ch
 {
 	Boss::Boss()
+		: mBossAni(nullptr)
+		, mBoss(nullptr)
+		, mBtr()
+		, mBcol(nullptr)
+		, mS(Spawn)
+		, mD(mNorth)
+		, prevmD(mNorth)
 	{
 	}
 	Boss::~Boss()
@@ -593,7 +600,7 @@ namespace ch
 
 		if (a.y >= 24.6) 
 		{
-			BossDown.y += bossSkyBomb * 0.05;
+			BossDown.y += static_cast<float>(bossSkyBomb) * 0.05f;
 			mBtr->SetPosition(a - Vector3(0.f, BossDown.y, 0.f));
 		}
 		else 
@@ -797,7 +804,7 @@ namespace ch
 			break;
 		}
 
-		float angleVariation = (rand() % 45) - 22;
+		float angleVariation = static_cast<float>((rand() % 45) - 22);
 
 		float finalAngle = angle + angleVariation;
 

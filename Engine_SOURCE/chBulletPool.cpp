@@ -23,7 +23,7 @@ namespace ch
 	}
 	void BulletPool::Update()
 	{
-		bulletCont = availableBullets.size();
+		bulletCont = static_cast<int>(availableBullets.size());
 		GameObject::Update();
 	}
 	void BulletPool::FixedUpdate()

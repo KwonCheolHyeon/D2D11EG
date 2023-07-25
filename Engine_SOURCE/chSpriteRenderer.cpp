@@ -30,6 +30,8 @@ namespace ch
 
 	void SpriteRenderer::Render()
 	{
+
+		//오브젝트 상태가 pause나 death일때 상태가 보이는걸 지움
 		if (GetOwner() == nullptr) 
 		{
 			return;
@@ -41,6 +43,8 @@ namespace ch
 			return;
 		
 		}
+
+
 		GetOwner()->GetComponent<Transform>()->SetConstantBuffer();
 
 		GetMesh()->BindBuffer();

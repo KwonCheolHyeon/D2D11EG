@@ -1105,7 +1105,7 @@ namespace ch
 
 		boss_audio[0] = audioObj[0]->AddComponent<AudioSource>();
 		boss_audio[1] = audioObj[1]->AddComponent<AudioSource>();
-		boss_audio[2] = audioObj[1]->AddComponent<AudioSource>();
+		boss_audio[2] = audioObj[2]->AddComponent<AudioSource>();
 
 		boss_audio[0]->SetClip(audioClip[0]);
 		boss_audio[1]->SetClip(audioClip[1]);
@@ -1574,7 +1574,7 @@ namespace ch
 			mapColliderObject->SetName(L"MapWall");
 
 			Transform* mapColliderTr = mapColliderObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(-12.459f, 17.373, 0.0f));
+			mapColliderTr->SetPosition(Vector3(-12.459f, 17.373f, 0.0f));
 			mapColliderTr->SetScale(Vector3(5.25f, 7.226f, 1.0f));
 
 			Collider2D* mapCollider = mapColliderObject->AddComponent<Collider2D>();

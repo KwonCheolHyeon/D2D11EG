@@ -6,7 +6,9 @@ namespace ch
 {
 	Animation::Animation()
 		: mAnimator(nullptr)
+		, mCurrentFrame(NULL)
 		, mAtlas(nullptr)
+		, mAnimationName(L"")
 		, mSpriteSheet{}
 		, mIndex(-1)
 		, mTime(0.0f)
@@ -35,7 +37,7 @@ namespace ch
 			if (mSpriteSheet.size() <= mIndex)
 			{
 				mbComplete = true;
-				mIndex = mSpriteSheet.size() - 1;
+				mIndex = static_cast<int>(mSpriteSheet.size()) - 1;
 			}
 
 			return mIndex;

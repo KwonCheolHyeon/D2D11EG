@@ -24,8 +24,8 @@ namespace ch
 		GameObject* chUiCursor;
 
 	private:
-		std::shared_ptr<AudioClip> audioClip;
-		AudioSource* boss_audio;
+		std::shared_ptr<class AudioClip> audioClip;
+		class AudioSource* boss_audio;
 		GameObject* audioObj;
 	};
 

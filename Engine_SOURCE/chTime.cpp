@@ -29,6 +29,12 @@ namespace ch
 
         mDeltaTime = differenceInFrequancy / static_cast<float>(mCpuFrequency.QuadPart);
         mPrevFrequency.QuadPart = mCurFrequency.QuadPart;
+
+    #ifdef _DEBUG
+        if (mDeltaTime > (1. / 60.)) {
+            mDeltaTime = (1. / 60.);
+        }
+    #endif
     }
 
     void Time::Render(HDC hdc)
