@@ -205,6 +205,15 @@ namespace ch::renderer
 		postProcessShader->SetDSState(eDSType::NoWrite);
 		Resources::Insert<Shader>(L"PostProcessShader", postProcessShader);
 #pragma endregion
+
+		// BOSS HP
+#pragma region BOSSHP SHADER
+		std::shared_ptr<Shader> bossHpShader = std::make_shared<Shader>();
+		bossHpShader->Create(eShaderStage::VS, L"UserInterfaceVS.hlsl", "main");
+		bossHpShader->Create(eShaderStage::PS, L"GuagePS.hlsl", "main");
+		//bossHpShader->SetRSState(eRSType::SolidNone);
+		Resources::Insert<Shader>(L"BossHpShader", bossHpShader);
+#pragma endregion
 	}
 
 	void SetUpState()
@@ -277,6 +286,12 @@ namespace ch::renderer
 			, postProcessShader->GetVSBlobBufferSize()
 			, postProcessShader->GetInputLayoutAddressOf());
 
+		// BOSS HP
+		std::shared_ptr<Shader> bossHpShader = Resources::Find<Shader>(L"BossHpShader");
+		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
+			, bossHpShader->GetVSBlobBufferPointer()
+			, bossHpShader->GetVSBlobBufferSize()
+			, bossHpShader->GetInputLayoutAddressOf());
 #pragma endregion
 #pragma region sampler state
 		D3D11_SAMPLER_DESC samplerDesc = {};
@@ -431,7 +446,9 @@ namespace ch::renderer
 
 		constantBuffers[(UINT)eCBType::Noise] = new ConstantBuffer(eCBType::Noise);
 		constantBuffers[(UINT)eCBType::Noise]->Create(sizeof(NoiseCB));
-
+		// BOSS HP
+		constantBuffers[(UINT)eCBType::BossHp] = new ConstantBuffer(eCBType::BossHp);
+		constantBuffers[(UINT)eCBType::BossHp]->Create(sizeof(BossHpCB));
 #pragma endregion
 #pragma region STRUCTED BUFFER
 		lightsBuffer = new StructedBuffer();
@@ -473,6 +490,9 @@ namespace ch::renderer
 		Resources::Load<Texture>(L"Fullheart", L"enterthe\\UI\\hp\\FullHeart.png");
 		Resources::Load<Texture>(L"HalfHeart", L"enterthe\\UI\\hp\\HalfHeart.png");
 		Resources::Load<Texture>(L"NoHeart", L"enterthe\\UI\\hp\\NoHeart.png");
+
+		// BOSS HP
+		Resources::Load<Texture>(L"BossHp", L"enterthe\\UI\\BossHp\\bossHpAni.png");
 
 		// UI\\CrossHead
 		Resources::Load<Texture>(L"Crosshead", L"enterthe\\UI\\crossHead\\crosshair.png");
@@ -837,6 +857,19 @@ namespace ch::renderer
 				uiMaterial->SetShader(uiShader);
 				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
 				Resources::Insert<Material>(L"bulletZeroMaterial", uiMaterial);
+			}
+
+			{
+
+				// BOSS HP
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"BossHp");
+				std::shared_ptr<Shader> bossHPShader = Resources::Find<Shader>(L"BossHpShader");
+				std::shared_ptr<Material> BossHPMaterial = std::make_shared<Material>();
+				BossHPMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				BossHPMaterial->SetShader(bossHPShader);
+				BossHPMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"BossHPMaterial", BossHPMaterial);
+
 			}
 #pragma endregion
 #pragma endregion

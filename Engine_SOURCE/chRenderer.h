@@ -85,6 +85,13 @@ namespace ch::renderer
 		float noiseTime;
 	};
 
+	CBUFFER(BossHpCB, CBSLOT_BOSSHP)
+	{
+		float bossHpCB;
+		float bossHpCB1;
+		float bossHpCB2;
+		float bossHpCB3;
+	};
 	extern Vertex vertexes[4];
 	extern Camera* mainCamera;
 	extern ConstantBuffer* constantBuffers[];

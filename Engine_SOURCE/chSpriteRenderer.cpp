@@ -35,13 +35,10 @@ namespace ch
 		if (GetOwner() == nullptr) 
 		{
 			return;
-			
-
 		}
 		if(GetOwner()->GetState() != GameObject::eState::Active )
 		{
 			return;
-		
 		}
 
 

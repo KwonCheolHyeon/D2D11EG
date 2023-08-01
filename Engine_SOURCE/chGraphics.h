@@ -20,7 +20,7 @@
 #define CBSLOT_NUMBEROFLIGHT	4
 #define CBSLOT_PARTICLESYSTEM	5
 #define CBSLOT_NOISE			6
-
+#define CBSLOT_BOSSHP			7
 using namespace ch::math;
 
 namespace ch::graphics
@@ -113,6 +113,7 @@ namespace ch::graphics
 		Light,
 		ParticleSystem,
 		Noise,
+		BossHp,
 		End,
 	};
 

@@ -57,7 +57,8 @@
 #include "ReloadButtonScr.h"
 #include "ReloadBarObj.h"
 #include "ReloadBarScr.h"
-
+#include "BossHpUIObj.h"
+#include "BossHpUIScr.h"
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -90,8 +91,8 @@ namespace ch
 				lightComp->SetRadius(10.0f);
 				lightComp->SetDiffuse(Vector4(1.0f, 0.0f, 0.0f, 1.0f));*/
 			}
-		
-		
+
+
 		}
 		{ //Main Camera 
 			chCameraOBJ = object::Instantiate<GameObject>(eLayerType::Camera, this);
@@ -176,7 +177,24 @@ namespace ch
 				HeartControl.push_back(heart2); //세번째
 			}
 
-			
+			{
+				BossHpUIObj* bossHp = object::Instantiate<BossHpUIObj>(eLayerType::UI, this);
+				bossHp->SetName(L"BossHpUIObj");
+				bossHp->AddComponent<BossHpUIScr>();
+				Transform* htr2 = bossHp->GetComponent<Transform>();
+				htr2->SetPosition(Vector3(1.f, -1.f, 0.f));
+				htr2->SetScale(Vector3(16.f, 0.5f, 0.f));
+			}
+
+			{
+				/*BossHpUIObj* blank = object::Instantiate<BossHpUIObj>(eLayerType::UI, this);
+				blank->SetName(L"BossHpUIObj");
+				BossHpUIScr* bb = blank->AddComponent<BossHpUIScr>();
+				bb->SetEvent(eventobj);
+				Transform* htr0 = blank->GetComponent<Transform>();
+				htr0->SetPosition(Vector3(1.f, -3.f, 0.f));
+				htr0->SetScale(Vector3(10.f, 10.f, 0.f));*/
+			}
 
 		}
 #pragma endregion
@@ -189,38 +207,38 @@ namespace ch
 		generateObject();
 
 		{
-				player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
-				player->SetName(L"Player");
-				player->GetComponent<Convict>()->SetHeart_UI(HeartControl);
-				player->GetComponent<Convict>()->SetBlankBullet_UI(BlankBulletControl);
-				player->setCameraScr(cameraScr);
+			player = object::Instantiate<CharacterBase>(eLayerType::Player, this);
+			player->SetName(L"Player");
+			player->GetComponent<Convict>()->SetHeart_UI(HeartControl);
+			player->GetComponent<Convict>()->SetBlankBullet_UI(BlankBulletControl);
+			player->setCameraScr(cameraScr);
 
-				GameObject* ConvictBlankcol = object::Instantiate<ConvictBlankBulletObj>(eLayerType::Player, this);
-				ConvictBlankcol->SetName(L"ConvictBlankcolider");
-				ConvictBlankBulletScr* ConBlankscr = ConvictBlankcol->AddComponent<ConvictBlankBulletScr>();
-				ConBlankscr->SetConvit(player);
-				player->GetComponent<Convict>()->SetBlankBulletscr(ConBlankscr);
+			GameObject* ConvictBlankcol = object::Instantiate<ConvictBlankBulletObj>(eLayerType::Player, this);
+			ConvictBlankcol->SetName(L"ConvictBlankcolider");
+			ConvictBlankBulletScr* ConBlankscr = ConvictBlankcol->AddComponent<ConvictBlankBulletScr>();
+			ConBlankscr->SetConvit(player);
+			player->GetComponent<Convict>()->SetBlankBulletscr(ConBlankscr);
 
-				GameObject* gunBox = object::Instantiate<GameObject>(eLayerType::Weapone, this);
-				gunBox->SetName(L"GunBox");
-				gunBox->GetComponent<Transform>()->SetPosition(Vector3(-16.1f, -3.23f, 0.f));
-				gunBox->GetComponent<Transform>()->SetScale(Vector3(0.1f, 0.1f,0.f));
+			GameObject* gunBox = object::Instantiate<GameObject>(eLayerType::Weapone, this);
+			gunBox->SetName(L"GunBox");
+			gunBox->GetComponent<Transform>()->SetPosition(Vector3(-16.1f, -3.23f, 0.f));
+			gunBox->GetComponent<Transform>()->SetScale(Vector3(0.1f, 0.1f, 0.f));
 
 
-				PlayerHand* hand = object::Instantiate<PlayerHand>(eLayerType::Hand, this);
-				hand->SetName(L"PHand");
-				hand->SetPlayer(player);
+			PlayerHand* hand = object::Instantiate<PlayerHand>(eLayerType::Hand, this);
+			hand->SetName(L"PHand");
+			hand->SetPlayer(player);
 
-				Gun *gun = object::Instantiate<Gun>(eLayerType::Hand, this);
-				gun->SetName(L"PGun");
-				gun->SetHand(hand);
-				gun->SetPool(pool);
-				gun->SetGunBox(gunBox);
-				gun->SetPlayer(player);
+			Gun* gun = object::Instantiate<Gun>(eLayerType::Hand, this);
+			gun->SetName(L"PGun");
+			gun->SetHand(hand);
+			gun->SetPool(pool);
+			gun->SetGunBox(gunBox);
+			gun->SetPlayer(player);
 
 
 		}
-			//재장전 바
+		//재장전 바
 		{
 			ReloadBarObj* reloadBar = object::Instantiate<ReloadBarObj>(eLayerType::Dummy, this);
 			Transform* reloadBarTr = reloadBar->GetComponent<Transform>();
@@ -230,8 +248,8 @@ namespace ch
 
 			ReloadButtonObj* reloadButton = object::Instantiate<ReloadButtonObj>(eLayerType::Dummy, this);
 			Transform* reloadButtonTr = reloadButton->GetComponent<Transform>();
-			
-			
+
+
 			reloadButtonTr->SetScale(Vector3(0.05f, 0.15f, 1.f));
 			ReloadButtonScr* reloadbuttonScr = reloadButton->AddComponent<ReloadButtonScr>();
 			reloadbuttonScr->SetPlayer(player);
@@ -248,7 +266,7 @@ namespace ch
 		{
 			GameObject* Heart = object::Instantiate<HeartObj>(eLayerType::Object, this);
 			Heart->SetName(L"heartObj");
-			
+
 			Transform* tr1 = Heart->GetComponent<Transform>();
 			tr1->SetPosition(Vector3(-0.5f, -14.9f, 0.1f));
 
@@ -260,7 +278,7 @@ namespace ch
 
 			GameObject* shopHeart = object::Instantiate<HeartObj>(eLayerType::Object, this);
 			shopHeart->SetName(L"heartObj");
-			
+
 			Transform* tr3 = shopHeart->GetComponent<Transform>();
 			tr3->SetPosition(Vector3(7.27f, -22.88f, 0.1f));
 
@@ -272,7 +290,7 @@ namespace ch
 		}
 #pragma region 스테이지1 몬스터
 		{// 스테이지1 몬스터1
-			
+
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
 			kinMonster->SetName(L"BulletKin");
 			kinMonster->AddComponent<Bullet_Kin>();
@@ -293,7 +311,7 @@ namespace ch
 
 			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
 			gun->SetOwnerMoster(kinMonster);
-			
+
 
 			mainDoor1->SetMonsterBases(kinMonster);
 		}
@@ -505,7 +523,7 @@ namespace ch
 
 			mainDoor2->SetMonsterBases(kinMonster);
 		}
-	
+
 		{//스테이지2 몬스터4
 
 			MonsterBase* kinMonster = object::Instantiate<MonsterBase>(eLayerType::Monster, this);
@@ -575,7 +593,7 @@ namespace ch
 		}
 
 
-		
+
 
 
 #pragma endregion
@@ -604,7 +622,7 @@ namespace ch
 			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
 			gun->SetOwnerMoster(kinMonster);
 
-			
+
 
 			mainDoor3->SetMonsterBases(kinMonster);
 		}
@@ -631,7 +649,7 @@ namespace ch
 			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
 			gun->SetOwnerMoster(kinMonster);
 
-			
+
 
 			mainDoor3->SetMonsterBases(kinMonster);
 		}
@@ -658,7 +676,7 @@ namespace ch
 			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
 			gun->SetOwnerMoster(kinMonster);
 
-			
+
 
 			mainDoor3->SetMonsterBases(kinMonster);
 		}
@@ -735,7 +753,7 @@ namespace ch
 
 		}
 
-		
+
 
 #pragma endregion
 
@@ -764,7 +782,7 @@ namespace ch
 			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
 			gun->SetOwnerMoster(kinMonster);
 
-			
+
 
 			mainDoor4->SetMonsterBases(kinMonster);
 		}
@@ -791,7 +809,7 @@ namespace ch
 			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
 			gun->SetOwnerMoster(kinMonster);
 
-			
+
 
 			mainDoor4->SetMonsterBases(kinMonster);
 		}
@@ -909,7 +927,7 @@ namespace ch
 			Bullet_Kin_Gun* gun = object::Instantiate<Bullet_Kin_Gun>(eLayerType::Dummy, this);
 			gun->SetOwnerMoster(kinMonster);
 
-			
+
 
 			mainDoor5->SetMonsterBases(kinMonster);
 		}
@@ -1066,13 +1084,13 @@ namespace ch
 			col->SetType(eColliderType::Rect);
 			col->SetSize(Vector2(1.f, 1.f));
 
-			BossHpUIObj* blank = object::Instantiate<BossHpUIObj>(eLayerType::UI, this);
+			/*BossHpUIObj* blank = object::Instantiate<BossHpUIObj>(eLayerType::UI, this);
 			blank->SetName(L"BossHpUIObj");
 			BossHpUIScr* bb = blank->AddComponent<BossHpUIScr>();
 			bb->SetEvent(eventobj);
 			Transform* htr0 = blank->GetComponent<Transform>();
 			htr0->SetPosition(Vector3(1.f, -3.f, 0.f));
-			htr0->SetScale(Vector3(10.f, 10.f, 0.f));
+			htr0->SetScale(Vector3(10.f, 10.f, 0.f));*/
 
 			BossHpBarObj* blank0 = object::Instantiate<BossHpBarObj>(eLayerType::UI, this);
 			blank0->SetName(L"BossHpBarObj");
@@ -1092,11 +1110,11 @@ namespace ch
 			ht->SetPosition(Vector3(0.f, 1.f, -20.f));
 			ht->SetScale(Vector3(35.f, 35.f, 0.f));
 		}
-		
+
 		generateMap();
-		
-		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI,this);
-		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI,this);
+
+		audioObj[0] = object::Instantiate<GameObject>(eLayerType::UI, this);
+		audioObj[1] = object::Instantiate<GameObject>(eLayerType::UI, this);
 		audioObj[2] = object::Instantiate<GameObject>(eLayerType::UI);
 
 		audioClip[0] = Resources::Load<AudioClip>(L"gamestart", L"music\\ost\\gamestart.mp3");
@@ -1126,18 +1144,18 @@ namespace ch
 		{
 			SceneManager::LoadScene(eSceneType::Main);
 		}
-		
-		
+
+
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
 			Vector3 mouse = Input::GetWorldMousPosition();
 			Vector2 mouse2 = Input::GetWorldMousPosition2();
 			Vector3 chara = player->GetComponent<Transform>()->GetPosition();
 
-			int b = 0;   
+			int b = 0;
 		}
 
-		if (eventobj->GetComponent<EventScr>()->GetEventState() == true && evnetOnce== false)
+		if (eventobj->GetComponent<EventScr>()->GetEventState() == true && evnetOnce == false)
 		{
 			evnetOnce = true;
 			boss_audio[0]->Stop();
@@ -1150,8 +1168,8 @@ namespace ch
 			boss_audio[1]->Stop();
 			boss_audio[2]->Play();
 		}
-		
-		audioObj[0]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition() + Vector3(0.f,0.f,10.f));
+
+		audioObj[0]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition() + Vector3(0.f, 0.f, 10.f));
 		audioObj[1]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition() + Vector3(0.f, 0.f, 10.f));
 		audioObj[2]->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition() + Vector3(0.f, 0.f, 10.f));
 
@@ -1205,7 +1223,7 @@ namespace ch
 			containBullets.push_back(bulletobj);
 			containBullets[i]->SetLayerType(eLayerType::Weapone);
 			containBullets[i]->SetName(L"Bullet");
-			containBullets[i]->GetComponent<Transform>()->SetPosition(Vector3(-1000.0f,-1000.0f, 0.0f));
+			containBullets[i]->GetComponent<Transform>()->SetPosition(Vector3(-1000.0f, -1000.0f, 0.0f));
 			containBullets[i]->GetComponent<Transform>()->SetScale(Vector3(0.3f, 0.3f, 0.2f));
 
 			Collider2D* mCollider = bulletobj->AddComponent<Collider2D>();
@@ -1685,8 +1703,8 @@ namespace ch
 		}
 
 
-		
-		
+
+
 
 #pragma endregion
 
@@ -1727,8 +1745,8 @@ namespace ch
 
 			Transform* mapColliderTr = LmpObj->GetComponent<Transform>();
 			mapColliderTr->SetPosition(Vector3(-20.64f, 19.38f, -2.f));
-			mapColliderTr->SetScale(Vector3(5.f,5.3f, 0.1f));
-		
+			mapColliderTr->SetScale(Vector3(5.f, 5.3f, 0.1f));
+
 		}
 		{//램프
 			GameObject* LmpObj = object::Instantiate<LampObj>(eLayerType::Dummy, this);
@@ -1780,7 +1798,7 @@ namespace ch
 		}
 
 
-		
+
 
 
 		{//스테이지 1 문
@@ -1796,7 +1814,7 @@ namespace ch
 			DoorColliderObj* DoorColObject = object::Instantiate<DoorColliderObj>(eLayerType::MonsterCollider, this);
 			DoorColObject->SetName(L"DoorSideCol11");
 			DoorColObject->SetDoor(mainDoor1);
-			
+
 
 			mainDoor1->isMainDoorTrue();
 		}
@@ -1821,7 +1839,7 @@ namespace ch
 			mapColliderTr->SetPosition(Vector3(-9.6f, 7.2f, -1.0f));
 			mapColliderTr->SetScale(Vector3(5.f, 5.f, 0.1f));
 		}
-		
+
 		{//스테이지2 문
 			mainDoor2 = object::Instantiate<DoorObj>(eLayerType::Wall, this);
 			mainDoor2->SetName(L"DoorSide");
@@ -1835,7 +1853,7 @@ namespace ch
 			DoorColliderObj* DoorColObject = object::Instantiate<DoorColliderObj>(eLayerType::MonsterCollider, this);
 			DoorColObject->SetName(L"DoorSideCol");
 			DoorColObject->SetDoor(mainDoor2);
-			
+
 
 			mainDoor2->isMainDoorTrue();
 		}
@@ -1854,7 +1872,7 @@ namespace ch
 			DoorColObject->SetName(L"DoorSideCol");
 			DoorColObject->SetDoor(mainDoor3);
 
-			
+
 
 			mainDoor3->isMainDoorTrue();
 		}
@@ -1893,7 +1911,7 @@ namespace ch
 			DoorColObject->SetName(L"DoorSideCol");
 			DoorColObject->SetDoor(mainDoor4);
 
-			
+
 
 			mainDoor4->isMainDoorTrue();
 		}
@@ -1916,7 +1934,7 @@ namespace ch
 			DoorObject->AddComponent<DoorScr>();
 
 			Transform* mapColliderTr = DoorObject->GetComponent<Transform>();
-			mapColliderTr->SetPosition(Vector3(8.471f,-13.73f, -1.0f));
+			mapColliderTr->SetPosition(Vector3(8.471f, -13.73f, -1.0f));
 			mapColliderTr->SetScale(Vector3(5.f, 5.f, 0.1f));
 		}
 
@@ -1935,7 +1953,7 @@ namespace ch
 			DoorColliderObj* DoorColObject = object::Instantiate<DoorColliderObj>(eLayerType::MonsterCollider, this);
 			DoorColObject->SetName(L"DoorSideCol");
 			DoorColObject->SetDoor(mainDoor5);
-		
+
 			mainDoor5->isMainDoorTrue();
 		}
 		{//스테이지5 문
@@ -1960,7 +1978,7 @@ namespace ch
 		}
 
 
-		
+
 		{//itemBox
 			GameObject* itemGunBox = object::Instantiate<GameObject>(eLayerType::Object, this);
 			ItemBoxScr* abc = itemGunBox->AddComponent<ItemBoxScr>();
@@ -1972,11 +1990,11 @@ namespace ch
 			//2번총
 			FightSabreObject* item = object::Instantiate<FightSabreObject>(eLayerType::Object, this);
 			item->AddComponent<FightSabreBoxScr>();
-			item->GetComponent<Transform>()->SetPosition(Vector3(-1000.f,-1000.f,0.f));
+			item->GetComponent<Transform>()->SetPosition(Vector3(-1000.f, -1000.f, 0.f));
 			abc->SetFightSabreObject(item);
 
 		}
-	
+
 
 	}
 

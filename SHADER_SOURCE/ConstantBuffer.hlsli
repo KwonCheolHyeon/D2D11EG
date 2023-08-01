@@ -54,6 +54,16 @@ cbuffer ParticleSystem : register(b5)
     int padding;
 }
 
+cbuffer BossHp : register(b7)
+{
+    float bossHpCB;
+    float bossHpCB1;
+    float bossHpCB2;
+    float bossHpCB3;
+
+}
+
+
 //cbuffer Noise : register(b6)
 //{
 //    float4 NoiseSize;
