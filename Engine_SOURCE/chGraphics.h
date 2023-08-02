@@ -21,6 +21,7 @@
 #define CBSLOT_PARTICLESYSTEM	5
 #define CBSLOT_NOISE			6
 #define CBSLOT_BOSSHP			7
+#define CBSLOT_BRIGHTENEFFECT	8
 using namespace ch::math;
 
 namespace ch::graphics
@@ -114,6 +115,7 @@ namespace ch::graphics
 		ParticleSystem,
 		Noise,
 		BossHp,
+		BrightenEffect,
 		End,
 	};
 

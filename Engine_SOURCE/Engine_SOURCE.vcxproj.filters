@@ -251,6 +251,9 @@
     <Filter Include="GameObject\UI\MiniMap\TelePortMini">
       <UniqueIdentifier>{3e586cc2-9160-4435-b78b-034739d45ba1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UI\MouseCursor">
+      <UniqueIdentifier>{f7bc9ec4-3d14-40ba-b4b6-41c751bfb1fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chMath.h">
@@ -687,6 +690,9 @@
     <ClInclude Include="MiniMapPlayerScr.h">
       <Filter>GameObject\UI\MiniMap\MiniPlayer</Filter>
     </ClInclude>
+    <ClInclude Include="FireFly.h">
+      <Filter>GameObject\UI\MouseCursor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chMath.cpp">
@@ -1106,6 +1112,9 @@
     </ClCompile>
     <ClCompile Include="MiniMapPlayerScr.cpp">
       <Filter>GameObject\UI\MiniMap\MiniPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="FireFly.cpp">
+      <Filter>GameObject\UI\MouseCursor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

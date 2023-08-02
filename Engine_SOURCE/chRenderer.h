@@ -92,6 +92,16 @@ namespace ch::renderer
 		float bossHpCB2;
 		float bossHpCB3;
 	};
+
+	CBUFFER(BrightEffectCB, CBSLOT_BRIGHTENEFFECT)
+	{
+		float brightnessCB1;
+		float brightnessCB2;
+		float brightnessCB3;
+		float brightnessCB4;
+	};
+
+
 	extern Vertex vertexes[4];
 	extern Camera* mainCamera;
 	extern ConstantBuffer* constantBuffers[];

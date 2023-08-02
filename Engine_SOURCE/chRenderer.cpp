@@ -214,6 +214,15 @@ namespace ch::renderer
 		//bossHpShader->SetRSState(eRSType::SolidNone);
 		Resources::Insert<Shader>(L"BossHpShader", bossHpShader);
 #pragma endregion
+		// brighten effect
+#pragma region BrightenEffect SHADER
+		std::shared_ptr<Shader> brightenEffect = std::make_shared<Shader>();
+		brightenEffect->Create(eShaderStage::VS, L"UserInterfaceVS.hlsl", "main");
+		brightenEffect->Create(eShaderStage::PS, L"FireFlyPS.hlsl", "main");
+		//bossHpShader->SetRSState(eRSType::SolidNone);
+		Resources::Insert<Shader>(L"BrightenEffectShader", brightenEffect);
+#pragma endregion
+
 	}
 
 	void SetUpState()
@@ -292,6 +301,13 @@ namespace ch::renderer
 			, bossHpShader->GetVSBlobBufferPointer()
 			, bossHpShader->GetVSBlobBufferSize()
 			, bossHpShader->GetInputLayoutAddressOf());
+
+		//  brightenEffect
+		std::shared_ptr<Shader> brightenEffectShader = Resources::Find<Shader>(L"BrightenEffectShader");
+		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
+			, brightenEffectShader->GetVSBlobBufferPointer()
+			, brightenEffectShader->GetVSBlobBufferSize()
+			, brightenEffectShader->GetInputLayoutAddressOf());
 #pragma endregion
 #pragma region sampler state
 		D3D11_SAMPLER_DESC samplerDesc = {};
@@ -449,6 +465,10 @@ namespace ch::renderer
 		// BOSS HP
 		constantBuffers[(UINT)eCBType::BossHp] = new ConstantBuffer(eCBType::BossHp);
 		constantBuffers[(UINT)eCBType::BossHp]->Create(sizeof(BossHpCB));
+
+		// BOSS HP
+		constantBuffers[(UINT)eCBType::BrightenEffect] = new ConstantBuffer(eCBType::BrightenEffect);
+		constantBuffers[(UINT)eCBType::BrightenEffect]->Create(sizeof(BrightEffectCB));
 #pragma endregion
 #pragma region STRUCTED BUFFER
 		lightsBuffer = new StructedBuffer();
@@ -494,6 +514,9 @@ namespace ch::renderer
 		// BOSS HP
 		Resources::Load<Texture>(L"BossHp", L"enterthe\\UI\\BossHp\\bossHpAni.png");
 
+		// Brighren Effect
+		Resources::Load<Texture>(L"Firefly", L"Firefly.png");
+
 		// UI\\CrossHead
 		Resources::Load<Texture>(L"Crosshead", L"enterthe\\UI\\crossHead\\crosshair.png");
 
@@ -533,7 +556,7 @@ namespace ch::renderer
 
 		Resources::Load<Texture>(L"Table_Front_01", L"enterthe\\object\\table\\front\\table_front_01.png"); //
 		Resources::Load<Texture>(L"Table_Front_02", L"enterthe\\object\\table\\front\\table_front_02.png"); //
-		
+
 		Resources::Load<Texture>(L"Table_Back_01", L"enterthe\\object\\table\\back\\table_back_01.png"); //
 		Resources::Load<Texture>(L"Table_Back_02", L"enterthe\\object\\table\\back\\table_back_02.png"); //
 
@@ -561,31 +584,31 @@ namespace ch::renderer
 		//UI
 #pragma region UI
 		Resources::Load<Texture>(L"CrossHairSprite", L"enterthe\\UI\\crossHair\\crosshair.png");
-		#pragma region UI_Heart
+#pragma region UI_Heart
 		Resources::Load<Texture>(L"FullHeartSprite", L"enterthe\\UI\\hp\\FullHeart.png");
 		Resources::Load<Texture>(L"HalfHeartSprite", L"enterthe\\UI\\hp\\HalfHeart.png");
 		Resources::Load<Texture>(L"NoHeartSprite", L"enterthe\\UI\\hp\\NoHeart.png");
-		#pragma endregion
+#pragma endregion
 
-		#pragma region KEY + BLANK_BULLET + MONEY (etc)
+#pragma region KEY + BLANK_BULLET + MONEY (etc)
 		Resources::Load<Texture>(L"Blank_bulletsSprite", L"enterthe\\UI\\blank_bullets\\blank_bullets.png");
 		Resources::Load<Texture>(L"KeySprite", L"enterthe\\UI\\key\\key.png");
 		Resources::Load<Texture>(L"MoneySprite", L"enterthe\\UI\\money\\money.png");
-		#pragma endregion
+#pragma endregion
 
-		#pragma region ³²ÀºÃÑ¾Ë 
+#pragma region ³²ÀºÃÑ¾Ë 
 		Resources::Load<Texture>(L"bulletZeroSprite", L"enterthe\\UI\\bullet\\zero.png");
 		Resources::Load<Texture>(L"bulletOneSprite", L"enterthe\\UI\\bullet\\one.png");
 		Resources::Load<Texture>(L"bulletTwoSprite", L"enterthe\\UI\\bullet\\two.png");
 		Resources::Load<Texture>(L"bulletThreeSprite", L"enterthe\\UI\\bullet\\three.png");
 		Resources::Load<Texture>(L"bulletFourSprite", L"enterthe\\UI\\bullet\\four.png");
 		Resources::Load<Texture>(L"bulletFiveSprite", L"enterthe\\UI\\bullet\\five.png");
-		#pragma endregion
+#pragma endregion
 
-		#pragma region ¹Ì´Ï¸Ê °ü·Ã
+#pragma region ¹Ì´Ï¸Ê °ü·Ã
 		Resources::Load<Texture>(L"bulletZeroSprite", L"enterthe\\UI\\MiniMapBase\\MiniMap.png");
 
-		#pragma endregion
+#pragma endregion
 #pragma endregion
 		Resources::Load<Texture>(L"ReloadBarSprite", L"enterthe\\UI\\Reload\\ReloadBar.png");
 		Resources::Load<Texture>(L"ReloadButtonSprite", L"enterthe\\UI\\Reload\\ReloadButton.png");
@@ -596,7 +619,7 @@ namespace ch::renderer
 
 	void LoadMaterial()
 	{
-		
+
 		{//mainmenu
 			{//background
 				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"mainBG");
@@ -619,7 +642,7 @@ namespace ch::renderer
 				Resources::Insert<Material>(L"mainMenuMaterial", material);
 			}
 		}
-		
+
 
 		{// player
 
@@ -630,7 +653,7 @@ namespace ch::renderer
 			material->SetShader(shader);
 			material->SetTexture(eTextureSlot::T0, texture);
 			Resources::Insert<Material>(L"pIdleMaterial", material);
-			
+
 		}
 
 		{
@@ -687,7 +710,7 @@ namespace ch::renderer
 				material->SetShader(shader);
 				material->SetTexture(eTextureSlot::T0, texture);
 				Resources::Insert<Material>(L"W_BulletMaterial", material);
-			
+
 			}
 
 			{//ÃÑ¾Ë2
@@ -713,9 +736,9 @@ namespace ch::renderer
 		}
 
 		{//UI	
-		#pragma region UI
+#pragma region UI
 
-		#pragma region ¹Ì´Ï¸Ê 
+#pragma region ¹Ì´Ï¸Ê 
 			{//¹Ì´Ï¸Ê
 				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"FullHeartSprite");
 				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
@@ -725,8 +748,8 @@ namespace ch::renderer
 				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
 				Resources::Insert<Material>(L"FullHeartMaterial", uiMaterial);
 			}
-		#pragma endregion
-			#pragma region UI_HEART
+#pragma endregion
+#pragma region UI_HEART
 			{//FHeart
 				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"FullHeartSprite");
 				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
@@ -748,13 +771,13 @@ namespace ch::renderer
 			}
 
 			{//NHeart
-			std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"NoHeartSprite");
-			std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
-			std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
-			uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
-			uiMaterial->SetShader(uiShader);
-			uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
-			Resources::Insert<Material>(L"NoHeartMaterial", uiMaterial);
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"NoHeartSprite");
+				std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
+				std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();
+				uiMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				uiMaterial->SetShader(uiShader);
+				uiMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"NoHeartMaterial", uiMaterial);
 			}
 #pragma endregion
 			{//key
@@ -871,12 +894,25 @@ namespace ch::renderer
 				Resources::Insert<Material>(L"BossHPMaterial", BossHPMaterial);
 
 			}
+
+			{
+
+				// BrightenEffect
+				std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"Firefly");
+				std::shared_ptr<Shader> brigtenEffectShader = Resources::Find<Shader>(L"BrightenEffectShader");
+				std::shared_ptr<Material> brigtenEffectMaterial = std::make_shared<Material>();
+				brigtenEffectMaterial->SetRenderingMode(eRenderingMode::Transparent);
+				brigtenEffectMaterial->SetShader(brigtenEffectShader);
+				brigtenEffectMaterial->SetTexture(eTextureSlot::T0, uiTexture);
+				Resources::Insert<Material>(L"BrightenEffectMaterial", brigtenEffectMaterial);
+
+			}
 #pragma endregion
 #pragma endregion
 		}
 		{//¸Ê
-		#pragma region ¸Ê
-			
+#pragma region ¸Ê
+
 			{//map ¼¼·Î
 				std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"Map_vertical_Texture");
 				std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
@@ -1075,7 +1111,7 @@ namespace ch::renderer
 		//fadeMaterial->SetShader(fadeShader);
 		//fadeMaterial->SetTexture(fadeTexture);
 		//Resources::Insert<Material>(L"FadeEffectMaterial", fadeMaterial);
-		
+
 		{//Åõ¸í
 			std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"EmptyTexture");
 			std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
@@ -1129,7 +1165,7 @@ namespace ch::renderer
 		lightsBuffer = nullptr;
 	}
 
-	
+
 
 	void Render()
 	{

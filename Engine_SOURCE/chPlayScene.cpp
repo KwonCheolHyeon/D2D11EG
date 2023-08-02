@@ -59,6 +59,8 @@
 #include "ReloadBarScr.h"
 #include "BossHpUIObj.h"
 #include "BossHpUIScr.h"
+#include "FireFly.h"
+
 namespace ch
 {
 	PlayScene::PlayScene()
@@ -194,6 +196,13 @@ namespace ch
 				Transform* htr0 = blank->GetComponent<Transform>();
 				htr0->SetPosition(Vector3(1.f, -3.f, 0.f));
 				htr0->SetScale(Vector3(10.f, 10.f, 0.f));*/
+			}
+			{// 마우스 따라다님
+				GameObject* fireFly = object::Instantiate<GameObject>(eLayerType::UI, this);
+				fireFly->SetName(L"FireFlyUI");
+				fireFly->AddComponent<FireFly>();
+
+
 			}
 
 		}

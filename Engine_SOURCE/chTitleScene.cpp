@@ -41,7 +41,7 @@ namespace ch
 		paintShader->OnExcute();
 
 		{
-			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player,this);
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player, this);
 			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
 			Light* lightComp = directionalLight->AddComponent<Light>();
 			lightComp->SetType(eLightType::Directional);
@@ -93,7 +93,7 @@ namespace ch
 			obj->AddComponent<PlayerScript>();
 			object::DontDestroyOnLoad(obj);
 		}
-		
+
 		//SMILE RECT
 		{
 			Player* obj = object::Instantiate<Player>(eLayerType::Player, this);
@@ -127,7 +127,7 @@ namespace ch
 
 		//post process object
 		{
-			GameObject* obj = object::Instantiate<GameObject>(eLayerType::PostProcess,this);
+			GameObject* obj = object::Instantiate<GameObject>(eLayerType::PostProcess, this);
 			obj->SetName(L"PostProcessGameObject");
 			zeldaTr = obj->GetComponent<Transform>();
 			zeldaTr->SetPosition(Vector3(0.0f, 0.0f, 19.0f));
@@ -149,10 +149,10 @@ namespace ch
 	}
 	void TitleScene::Update()
 	{
-		
-		if (Input::GetKeyDown(eKeyCode::N)) 
+
+		if (Input::GetKeyDown(eKeyCode::N))
 		{
-			
+
 			SceneManager::LoadScene(eSceneType::Main);
 		}
 		Scene::Update();
@@ -173,5 +173,5 @@ namespace ch
 	{
 		Scene::OnExit();
 	}
-	
+
 }

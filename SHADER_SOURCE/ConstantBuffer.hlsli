@@ -63,6 +63,14 @@ cbuffer BossHp : register(b7)
 
 }
 
+cbuffer BrightenEffect : register(b8)
+{
+    float brightnessCB1;
+    float brightnessCB2;
+    float brightnessCB3;
+    float brightnessCB4;
+}
+
 
 //cbuffer Noise : register(b6)
 //{
